@@ -1,7 +1,11 @@
+import SubNav from "@/components/SubNav";
+
 export default function Home() {
 	return (
 		<>
-			<div>MainContent</div>
+			<div>
+                <SubNav/>                
+                </div>
 		</>
 	)
 }
