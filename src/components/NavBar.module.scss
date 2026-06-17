@@ -1,0 +1,20 @@
+.flex {
+	display: flex;
+	justify-content: space-between;
+    width: 100%;
+}
+
+.flexMainNav {
+    display: flex;
+    justify-content: space-between;
+        
+    & li {
+        border: 1px solid red;
+        list-style:none;
+    }
+
+	& li  a {
+		text-decoration: none;
+	}
+
+}

@@ -1,6 +1,6 @@
 export default function PinnedPayment() {
 	return (
-		<div>
+		<section id="pinned">
 			<div>
 				<h4>Pinned Title</h4>
 				<p>$600</p>
@@ -15,6 +15,6 @@ export default function PinnedPayment() {
 				<button>Paid</button>
 				<button>Delete</button>
 			</div>
-		</div>
+		</section>
 	)
 }

@@ -1,29 +1,27 @@
-import Link from 'next/link'
+import styles from './NavBar.module.scss'
 
 export default function NavBar() {
 	return (
-		<nav>
+		<nav className={styles.flex}>
 			<ul>
-				<Link href="/">Logo</Link>
+				<a>Logo</a>
+			</ul>
+			<ul className={styles.flexMainNav}>
+				<li>
+					<a href="#dashboard">Dashboard</a>
+				</li>
+				<li>
+					<a href="#pinned">Pinned</a>
+				</li>
+				<li>
+					<a href="#assets">Assets</a>
+				</li>
+				<li>
+					<a href="#ledger">Ledger</a>
+				</li>
 			</ul>
 			<ul>
-				<li>
-					<Link href="#dashboard">Dashboard</Link>
-				</li>
-				<li>
-					<Link href="#pinned">Pinned</Link>
-				</li>
-				<li>
-					<Link href="#assets">Assets</Link>
-				</li>
-				<li>
-					<Link href="#ledger">Ledger</Link>
-				</li>
-			</ul>
-			<ul>
-				<li>
-					<button href="/newentry">New Entry</button>
-				</li>
+				<button href="/newentry">New Entry</button>
 			</ul>
 		</nav>
 	)
