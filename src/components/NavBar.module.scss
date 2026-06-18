@@ -1,20 +1,24 @@
 .flex {
 	display: flex;
 	justify-content: space-between;
+    // border: 1px solid red;
     width: 100%;
 }
 
 .flexMainNav {
     display: flex;
-    justify-content: space-between;
+    gap: 20px;
+    // border: 1px solid red;
         
     & li {
-        border: 1px solid red;
+        // border: 1px solid red;
         list-style:none;
+        cursor: pointer;
     }
 
 	& li  a {
 		text-decoration: none;
+
 	}
 
 }

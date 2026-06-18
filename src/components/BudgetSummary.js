@@ -1,6 +1,8 @@
+import styles from "./BudgetSummary.module.scss"
+
 export default function BudgetSummary() {
 	return (
-		<>
+		<section className={styles.container}>
 			<div>
 				<h6>All Time Income</h6>
 				<h1>$600</h1>
@@ -17,6 +19,6 @@ export default function BudgetSummary() {
 				<h6>Net Assets</h6>
 				<h1>$600</h1>
 			</div>
-		</>
+		</section>
 	)
 }

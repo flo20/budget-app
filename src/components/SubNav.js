@@ -1,24 +1,39 @@
+'use client'
+
+import { useState } from 'react'
+import styles from './SubNav.module.scss'
+
 export default function SubNav() {
+	const [period, setPeriod] = useState('Monthly')
+
+	const updatePeriod = (period) => {
+		setPeriod(period)
+	}
+
+	const today = new Date()
+	const month = today.toLocaleString('default', { month: 'long' })
+	const year = today.getFullYear()
+
+	console.log('month', month)
 	return (
-		<>
+		<div className={styles.flex}>
 			<div>
-				<h2>JUNE 2026</h2>
-				<h1>HOUSEHOLD</h1>
+				<h5>
+					{month} {year}
+				</h5>
+				<h5>HOUSEHOLD</h5>
+				<h2>{period} Pulse</h2>
 			</div>
 			<div>
-				<h3>Monthly Pulse</h3>
-				<div>
-					<div>Monthly Pulse</div>
+				<div className={styles.period}>
 					<div>
-						<div>
-							<button>month</button>
-							<button>year</button>
-							<button>all</button>
-						</div>
-						<button>Calendar pill</button>
+						<button onClick={() => updatePeriod('Monthly')}>Month</button>
+						<button onClick={() => updatePeriod('Yearly')}>Year</button>
+						<button onClick={() => updatePeriod('Lifetime')}>All</button>
 					</div>
+					<button>Calendar pill</button>
 				</div>
 			</div>
-		</>
+		</div>
 	)
 }
