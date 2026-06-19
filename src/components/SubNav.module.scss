@@ -5,6 +5,18 @@
 }
 
 .period{
-    border: 1px solid red;
+    // border: 1px solid red;
     display: flex;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.active {
+    background-color: blue;
 }
