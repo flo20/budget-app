@@ -3,6 +3,8 @@ import AssetInventory from '@/components/AssetInventory'
 import BudgetSummary from '@/components/BudgetSummary'
 import Graph from '@/components/Graph'
 import LedgerStream from '@/components/LedgerStream'
+import NavBar from '@/components/NavBar'
+import NewEntryModal from '@/components/NewEntryModal'
 import PinnedPayment from '@/components/PinnedPayment'
 import QuickEntryButton from '@/components/QuickEntryButton'
 import SubNav from '@/components/SubNav'
@@ -11,6 +13,7 @@ export default function Home() {
 	return (
 		<>
 			<div>
+                <NavBar/>
 				<SubNav />
 				<BudgetSummary />
 				<PinnedPayment />
@@ -19,6 +22,7 @@ export default function Home() {
 				<AssetInventory />
 				<LedgerStream />
 				<QuickEntryButton />
+                <NewEntryModal/>
 			</div>
 		</>
 	)

@@ -1,6 +1,11 @@
+'use client'
+
+import { useTheme } from '@/app/providers/ThemeProvider'
 import styles from './NavBar.module.scss'
 
 export default function NavBar() {
+	const { theme, toggleTheme } = useTheme()
+
 	return (
 		<nav className={styles.flex}>
 			<ul>
@@ -21,6 +26,9 @@ export default function NavBar() {
 				</li>
 			</ul>
 			<ul>
+				<button onClick={toggleTheme}>
+					{theme === 'light' ? 'Dark Mode' : 'Light Mode'}{' '}
+				</button>
 				<button href="/newentry">New Entry</button>
 			</ul>
 		</nav>
