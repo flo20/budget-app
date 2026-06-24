@@ -29,7 +29,7 @@ export default function NavBar() {
 				<button onClick={toggleTheme}>
 					{theme === 'light' ? 'Dark Mode' : 'Light Mode'}{' '}
 				</button>
-				<button href="/newentry">New Entry</button>
+				<button>New Entry</button>
 			</ul>
 		</nav>
 	)

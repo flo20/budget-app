@@ -8,19 +8,21 @@ import {
 	createContext,
 } from 'react'
 
-import "./ThemeProvider.module.scss"
+// import "./ThemeProvider.module.scss"
 
 const ThemeContext = createContext(undefined)
 
 function getInitialTheme() {
-	try {
-		if (typeof document === 'undefined') {
-			return light
+
+    if (typeof window === 'undefined') {
+			return 'light'
 		}
-		const theme = documentElement.getAttribute('data-theme')
+	try {
+		const theme = document.documentElement.getAttribute('data-theme')
 		return theme === 'dark' ? 'dark' : 'light'
-	} catch (_) {}
-	return 'light' 
+	} catch (_) {
+		return 'light'
+	}
 }
 
 export default function ThemeProvider({ children }) {
@@ -33,6 +35,8 @@ export default function ThemeProvider({ children }) {
 			localStorage.setItem('theme', theme)
 		} catch (_) {}
 	}, [theme])
+
+    
 
 	const callbackTheme = useCallback((next) => setTheme(next), [])
 

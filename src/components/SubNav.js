@@ -3,55 +3,55 @@
 import { useState } from 'react'
 import styles from './SubNav.module.scss'
 
+
+const PERIODS = {
+	MONTHLY: 'Monthly',
+	YEARLY: 'Yearly',
+	LIFETIME: 'Lifetime',
+}
+
+const periodButtons = [
+	{ label: 'Month', value: PERIODS.MONTHLY },
+	{ label: 'Year', value: PERIODS.YEARLY },
+	{ label: 'All', value: PERIODS.LIFETIME },
+]
+
 export default function SubNav() {
-    const PERIODS = {
-			MONTHLY: 'Monthly',
-			YEARLY: 'Yearly',
-			LIFETIME: 'Lifetime',
-		}
+	const [period, setPeriod] = useState(PERIODS.MONTHLY)
+	const [viewMode, setViewMode] = useState(PERIODS.MONTHLY)
 
-		const periodButtons = [
-			{ label: 'Month', value: PERIODS.MONTHLY },
-			{ label: 'Year', value: PERIODS.YEARLY },
-			{ label: 'All', value: PERIODS.LIFETIME },
-		]
+	const [date, setDate] = useState(() => new Date())
 
-        const today = new Date()
-				const month = new Intl.DateTimeFormat('en-US', {
-					month: 'long',
-				}).format(today)
-				const year = today.getFullYear()
+	const month = new Intl.DateTimeFormat('en-US', {
+		month: 'long',
+	}).format(date)
+	const year = date.getFullYear()
 
-		const [period, setPeriod] = useState(PERIODS.MONTHLY)
-        const [date, setDate] = useState(today)
-				const [viewMode, setViewMode] = useState(PERIODS.MONTHLY)
-				const isMonthly = period === PERIODS.MONTHLY
-				const isYearly = period === PERIODS.YEARLY
-		const isLifetime = period === PERIODS.LIFETIME
+	const isMonthly = period === PERIODS.MONTHLY
+	const isYearly = period === PERIODS.YEARLY
+	const isLifetime = period === PERIODS.LIFETIME
 
+	const updatePeriod = (newPeriod) => {
+		setPeriod(newPeriod)
+		setViewMode(newPeriod)
+	}
 
-		const updatePeriod = (period) => {
-			setPeriod(period)
-			setViewMode(period)
-		}
+	const changeMonth = (delta) => {
+		setDate((prev) => {
+			const next = new Date(prev)
+			next.setMonth(next.getMonth() + delta)
 
-		const changeMonth = (delta) => {
-			setDate((prev) => {
-				const next = new Date(prev)
-				next.setMonth(next.getMonth() + delta)
+			return next
+		})
+	}
 
-				return next
-			})
-		}
-
-		const changeYear = (delta) => {
-			setDate((prev) => {
-				const next = new Date(prev)
-				next.setFullYear(next.getFullYear() + delta)
-				return next
-			})
-		}
-
+	const changeYear = (delta) => {
+		setDate((prev) => {
+			const next = new Date(prev)
+			next.setFullYear(next.getFullYear() + delta)
+			return next
+		})
+	}
 
 	return (
 		<div className={styles.flex}>
@@ -73,8 +73,8 @@ export default function SubNav() {
 								className={
 									viewMode === periodButton.value ? styles.active : ' '
 								}
-								aria-pressed={period === viewMode}
 								onClick={() => updatePeriod(periodButton.value)}
+								aria-pressed={viewMode === periodButton.value}
 								key={periodButton.value}>
 								{periodButton.label}
 							</button>

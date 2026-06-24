@@ -6,19 +6,21 @@ export const metadata = {
 	description: 'Household budgeting app',
 }
 
+
 const themeScript = `
 ( function(){
- try { const saved = localStorage.getItem("theme")
- if(saved === "light" || saved === "dark"){
+    try { 
+    const saved = localStorage.getItem("theme")
+    if(saved === "light" || saved === "dark"){
     document.documentElement.setAttribute("data-theme", saved)
     return
- }  
+    }
 
- const prefersDark = window.matchMedia('(prefers-color-scheme:dark)').matches
+    const prefersDark = window.matchMedia('(prefers-color-scheme:dark)').matches
 
- document.documentElement.setAttribute("data-theme", prefersDark ? "dark":"light")
- 
- }catch(_){}
+    document.documentElement.setAttribute("data-theme", prefersDark ? "dark":"light")
+
+    } catch(_){}
 })()`
 
 export default function RootLayout({ children }) {
@@ -27,7 +29,9 @@ export default function RootLayout({ children }) {
 			lang="en"
 			suppressHydrationWarning>
 			<head>
-				<script dangerouslySetInnerHTML={{ __html: themeScript }} />
+				<script
+					dangerouslySetInnerHTML={{ __html: themeScript }}
+				/>
 			</head>
 			<body>
 				<ThemeProvider>{children}</ThemeProvider>
