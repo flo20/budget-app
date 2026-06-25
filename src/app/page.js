@@ -22,7 +22,7 @@ export default function Home() {
 				<AssetInventory />
 				<LedgerStream />
 				<QuickEntryButton />
-                <NewEntryModal/>
+                {/* <NewEntryModal/> */}
 			</div>
 		</>
 	)
