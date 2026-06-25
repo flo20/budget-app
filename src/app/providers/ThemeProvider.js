@@ -8,8 +8,6 @@ import {
 	createContext,
 } from 'react'
 
-// import "./ThemeProvider.module.scss"
-
 const ThemeContext = createContext(undefined)
 
 function getInitialTheme() {
