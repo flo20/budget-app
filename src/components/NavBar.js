@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react'
 import { useTheme } from '@/app/providers/ThemeProvider'
 import styles from './NavBar.module.scss'
-import NewEntryModal from './NewEntryModal'
+import NewEntryForm from './NewEntryForm'
+import Modal from './Modal/Modal'
 
 export default function NavBar() {
 	const { theme, toggleTheme } = useTheme()
@@ -12,10 +13,6 @@ export default function NavBar() {
 
 	// eslint-disable-next-line react-hooks/set-state-in-effect
 	useEffect(() => setMounted(true), [])
-
-    const showNewEntryModal = () => {
-			setShowModal((prev) => !prev)
-		}
 
 	return (
 		<>
@@ -41,10 +38,16 @@ export default function NavBar() {
 					<button onClick={toggleTheme}>
 						{mounted ? (theme === 'light' ? 'Dark Mode' : 'Light Mode') : null}
 					</button>
-					<button onClick={showNewEntryModal}>New Entry</button>
+					<button onClick={() => setShowModal((prev) => !prev)}>
+						New Entry
+					</button>
 				</ul>
 			</nav>
-			{showModal && <NewEntryModal />}
+			<Modal
+				showModal={showModal}
+				closeModal={() => setShowModal(false)}>
+				<NewEntryForm />
+			</Modal>
 		</>
 	)
 }
