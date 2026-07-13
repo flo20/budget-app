@@ -9,9 +9,9 @@ import styles from "./Modal.module.scss"
 export default function Modal({ showModal, closeModal, mounted, children }) {
 	useEffect(() => {
 		const OriginalOverflow = document.body.style.overflow
-		document.documentElement.style.overflow = 'hidden'
+		document.body.style.overflow = 'hidden'
 		return () => {
-			document.documentElement.style.overflow = OriginalOverflow
+			document.body.style.overflow = OriginalOverflow
 		}
 	}, [])
 
