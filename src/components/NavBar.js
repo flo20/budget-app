@@ -18,7 +18,7 @@ export default function NavBar() {
 		<>
 			<nav className={styles.flex}>
 				<ul>
-					<a>Logo</a>
+					<a className="text-3xl font-bold">Logo</a>
 				</ul>
 				<ul className={styles.flexMainNav}>
 					<li>

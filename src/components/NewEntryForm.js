@@ -43,7 +43,7 @@ import { useState } from 'react'
 					<p>Record an income or expense</p>
 					{/* Expense Form */}
 					<button onClick={() => setEntryType('expense')}>EXPENSE</button>
-					<button onClick={() => setEntryType('income')}>INCOME</button>(
+					<button onClick={() => setEntryType('income')}>INCOME</button>
 					<form onSubmit={handleSubmit(onSubmit)}>
 						<p>Record an income or expense. </p>
 						<label>

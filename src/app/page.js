@@ -16,43 +16,9 @@ export default function Home() {
                 <NavBar/>
 				<SubNav />
 				<BudgetSummary />
-				<BudgetSummary />
-				<BudgetSummary />
-				<BudgetSummary />
-				<BudgetSummary />
-				<BudgetSummary />
-				<BudgetSummary />
-				<BudgetSummary />
-				<BudgetSummary />
-				<BudgetSummary />
-				<BudgetSummary />
-				<BudgetSummary />
-				<BudgetSummary />
-				<BudgetSummary />
-				<BudgetSummary />
-				<PinnedPayment />
 				<Graph />
 				<AllocatedBudget />
 				<AssetInventory />
-				<AssetInventory />
-				<AssetInventory />
-				<AssetInventory />
-				<AssetInventory />
-				<AssetInventory />
-				<AssetInventory />
-				<AssetInventory />
-				<AssetInventory />
-				<AssetInventory />
-				<AssetInventory />
-				<AssetInventory />
-				<AssetInventory />
-				<AssetInventory />
-				<AssetInventory />
-				<LedgerStream />
-				<LedgerStream />
-				<LedgerStream />
-				<LedgerStream />
-				<LedgerStream />
 				<LedgerStream />
 				<QuickEntryButton />
                 {/* <NewEntryModal/> */}
