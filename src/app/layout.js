@@ -6,7 +6,6 @@ export const metadata = {
 	description: 'Household budgeting app',
 }
 
-
 const themeScript = `
 ( function(){
     try { 
@@ -23,7 +22,7 @@ const themeScript = `
     } catch(_){}
 })()`
 
-export default function RootLayout({children}) {
+export default function RootLayout({ children }) {
 	return (
 		<html
 			lang="en"

@@ -1,7 +1,7 @@
 import AllocatedBudget from '@/components/AllocatedBudget'
 import AssetInventory from '@/components/AssetInventory'
 import BudgetSummary from '@/components/BudgetSummary'
-import Graph from '@/components/Graph'
+import {Chart} from '@/components/Chart'
 import LedgerStream from '@/components/LedgerStream'
 import NavBar from '@/components/NavBar'
 import NewEntryModal from '@/components/NewEntryForm'
@@ -13,15 +13,15 @@ export default function Home() {
 	return (
 		<>
 			<div>
-                <NavBar/>
+				<NavBar />
 				<SubNav />
 				<BudgetSummary />
-				<Graph />
+				<Chart />
 				<AllocatedBudget />
 				<AssetInventory />
 				<LedgerStream />
 				<QuickEntryButton />
-                {/* <NewEntryModal/> */}
+				{/* <NewEntryModal/> */}
 			</div>
 		</>
 	)
