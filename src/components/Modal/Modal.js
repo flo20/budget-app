@@ -1,44 +1,50 @@
 "use client"
 
 import { useEffect } from "react"
+import { createPortal } from 'react-dom'
 
 import styles from "./Modal.module.scss"
 
 
-export default function Modal({ showModal, closeModal, children }) {
-
-    useEffect(() => {
+export default function Modal({ showModal, closeModal, mounted, children }) {
+	useEffect(() => {
 		const OriginalOverflow = document.body.style.overflow
 		document.documentElement.style.overflow = 'hidden'
 		return () => {
-		document.documentElement.style.overflow = OriginalOverflow
+			document.documentElement.style.overflow = OriginalOverflow
 		}
 	}, [])
 
-    useEffect(() => {
-        document.body.style.overflow ="hidden"
-        function handleKeydown(e){
-            if(e.key === "Escape"){
-                closeModal()
-            }
-        }
+	useEffect(() => {
+		document.body.style.overflow = 'hidden'
+		function handleKeydown(e) {
+			if (e.key === 'Escape') {
+				closeModal()
+			}
+		}
 
-        window.addEventListener("keydown", handleKeydown)
-        return () => {
-                document.body.style.overflow = " "
-                window.removeEventListener('keydown', handleKeydown)
+		window.addEventListener('keydown', handleKeydown)
+		return () => {
+			document.body.style.overflow = ' '
+			window.removeEventListener('keydown', handleKeydown)
+		}
+	}, [closeModal])
 
-        };
-    }, [closeModal]);
-
-
-
-    if (!showModal) return null
-	return (
-		<div onClick={closeModal} className={styles.overlay}>
-			<div onClick={(e)=> e.stopPropagation()} className={styles.dialog}>{children}</div>
-		</div>
-	) 
-
+	if (!showModal || !mounted) return null
+	return createPortal(
+		<div
+			onClick={closeModal}
+			className={styles.overlay}>
+			<div
+				onClick={(e) => e.stopPropagation()}
+				className={styles.dialog}
+				role="dialog"
+				aria-labelledby="modal-title"
+				aria-modal="true">
+				{children}
+			</div>
+		</div>,
+		document.body,
+	)
 }
 

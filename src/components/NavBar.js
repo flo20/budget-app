@@ -38,15 +38,18 @@ export default function NavBar() {
 					<button onClick={toggleTheme}>
 						{mounted ? (theme === 'light' ? 'Dark Mode' : 'Light Mode') : null}
 					</button>
-					<button onClick={() => setShowModal((prev) => !prev)}>
+					<button
+						onClick={() => setShowModal((prev) => !prev)}
+						id="modal-title">
 						New Entry
 					</button>
 				</ul>
 			</nav>
 			<Modal
 				showModal={showModal}
+				mounted={mounted}
 				closeModal={() => setShowModal(false)}>
-				<NewEntryForm />
+				<NewEntryForm closeModal={() => setShowModal(false)} />
 			</Modal>
 		</>
 	)
