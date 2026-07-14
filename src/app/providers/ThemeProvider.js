@@ -25,6 +25,7 @@ function getInitialTheme() {
 
 export default function ThemeProvider({ children }) {
 	const [theme, setTheme] = useState(getInitialTheme)
+	const [showModal, setShowModal] = useState(false)
 
 	useEffect(() => {
 		document.documentElement.setAttribute('data-theme', theme)
@@ -34,8 +35,6 @@ export default function ThemeProvider({ children }) {
 		} catch (_) {}
 	}, [theme])
 
-    
-
 	const callbackTheme = useCallback((next) => setTheme(next), [])
 
 	const toggleTheme = useCallback(
@@ -43,8 +42,20 @@ export default function ThemeProvider({ children }) {
 		[],
 	)
 
+	//Modal
+	const showEntryModal = () => setShowModal((prev) => !prev)
+	const closeEntryModal = () => setShowModal(false)
+
 	return (
-		<ThemeContext.Provider value={{ theme, callbackTheme, toggleTheme }}>
+		<ThemeContext.Provider
+			value={{
+				theme,
+				callbackTheme,
+				toggleTheme,
+				showEntryModal,
+				showModal,
+				closeEntryModal,
+			}}>
 			{children}
 		</ThemeContext.Provider>
 	)
@@ -54,4 +65,9 @@ export function useTheme() {
 	const themeContext = useContext(ThemeContext)
 	if (!themeContext) throw new Error('useTheme must be inside <ThemeProvider>')
 	return themeContext
+}
+export function useModal() {
+	const modalContext = useContext(ThemeContext)
+	if (!modalContext) throw new Error('useModal must be inside <ThemeProvider>')
+	return modalContext
 }
