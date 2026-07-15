@@ -11,22 +11,29 @@ import QuickEntryButton from '@/components/QuickEntryButton'
 import SubNav from '@/components/SubNav'
 import Target from '@/components/Target'
 
+import './globals.css'
+
 export default function Home() {
 	return (
 		<>
 			<div>
 				<NavBar />
 				<SubNav />
-				<BudgetSummary />
-				<PinnedPayment />
-				<AllocatedBudget />
-				<Target />
-				<Notes />
-				<Chart />
-				<BudgetAllocation />
-				<Notes />
-				<AssetInventory />
-				<LedgerStream />
+				<div className="contentWrapper">
+					<div className="leftCol">
+						<BudgetSummary />
+						<PinnedPayment />
+						<AllocatedBudget />
+						<Target />
+						<Notes />
+					</div>
+					<div className="rightCol">
+						<Chart />
+						<BudgetAllocation />
+						<AssetInventory />
+						<LedgerStream />
+					</div>
+				</div>
 				<QuickEntryButton />
 			</div>
 		</>

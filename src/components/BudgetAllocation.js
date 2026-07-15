@@ -1,7 +1,9 @@
+import styles from "./BudgetAllocation.module.scss"
+
 export default function BudgetAllocation() {
 	return (
-		<section>
-			<div>
+		<section className={styles.wrapper}>
+			<div className={styles.container}>
 				<h5>FIXED VS VARIABLE</h5>
 				<h1>$0.00</h1>
 				<div>Progress bar goes here</div>
@@ -18,7 +20,7 @@ export default function BudgetAllocation() {
 					</span>
 				</div>
 			</div>
-			<div>
+			<div className={styles.container}>
 				<h5>ASSET ALLOCATION</h5>
 				<h1>$0.00</h1>
 				<div>Progress bar goes here</div>

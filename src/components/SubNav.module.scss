@@ -5,8 +5,16 @@
 }
 
 .period{
-    // border: 1px solid red;
     display: flex;
+}
+
+.periodHeader{
+    display: flex;
+
+    h5{
+        margin-right: 0.2rem;
+        // border: 1px solid red;
+    }
 }
 
 .hide {

@@ -23,10 +23,12 @@ const assets = [
 
 export default function AssetInventory() {
 	return (
-		<section id="assets">
+		<section
+			id="assets"
+			className={styles.container}>
 			<header>
 				<h2 id="asset-inventory-title">Asset Inventory</h2>
-				<span>{assets.length} items</span>
+				<h2>{assets.length} items</h2>
 			</header>
 			<table>
 				<thead className={styles.visuallyHidden}>

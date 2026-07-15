@@ -1,0 +1,9 @@
+.container {
+        border: 1px solid #29292C;
+}
+
+.wrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 0.5rem;
+}

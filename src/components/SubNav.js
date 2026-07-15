@@ -55,16 +55,15 @@ export default function SubNav() {
 
 	return (
 		<div className={styles.flex}>
-			<div>
-				<header>
+			<header>
+				<div className={styles.periodHeader}>
 					{isLifetime && <h5>ALL TIME</h5>}
 					{period === PERIODS.MONTHLY && <h5>{month}</h5>}
 					{!isLifetime && <h5>{year}</h5>}
-				</header>
-
-				<h5>HOUSEHOLD</h5>
+					<h5>HOUSEHOLD</h5>
+				</div>
 				<h2>{period} Pulse</h2>
-			</div>
+			</header>
 			<div>
 				<div className={styles.period}>
 					<div>

@@ -260,3 +260,21 @@ body {
     @apply font-sans;
 	}
 }
+
+
+/* Dashboard */
+
+/* leftAside */
+
+.contentWrapper{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    justify-content: center;
+    column-gap: 1rem;
+    
+}
+
+.leftCol, .rightCol{
+    display: grid;
+    row-gap: 0.5rem;
+}

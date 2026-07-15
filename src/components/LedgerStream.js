@@ -1,4 +1,4 @@
-
+import styles from './LedgerStream.module.scss'
 
 const transactions = [
 	{
@@ -79,23 +79,26 @@ export default function LedgerStream() {
 			: `-${formattedAmount}`
 	}
 	return (
-		<section id="ledger">
-			
-
-			<section aria-labelledby="asset-inventory-title">
-				<table>
-					<tbody>
-						{transactions.map((transaction) => (
-							<tr key={transaction.id}>
-								<td>{transaction.date}</td>
-								<td>{transaction.description}</td>
-								<td>{transaction.category}</td>
-								<td>{formatAmount(transaction)}</td>
-							</tr>
-						))}
-					</tbody>
-				</table>
-			</section>
+		<section
+			aria-labelledby="asset-inventory-title"
+			id="ledger"
+			className={styles.container}>
+			<header>
+				<h2 id="asset-inventory-title">Ledger Stream</h2>
+				<h2>Recency sort</h2>
+			</header>
+			<table>
+				<tbody>
+					{transactions.map((transaction) => (
+						<tr key={transaction.id}>
+							<td>{transaction.date}</td>
+							<td>{transaction.description}</td>
+							<td>{transaction.category}</td>
+							<td>{formatAmount(transaction)}</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
 		</section>
 	)
 }
