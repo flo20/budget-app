@@ -5,11 +5,11 @@ import BudgetSummary from '@/components/BudgetSummary'
 import {Chart} from '@/components/Chart'
 import LedgerStream from '@/components/LedgerStream'
 import NavBar from '@/components/NavBar'
-import NewEntryModal from '@/components/NewEntryForm'
-import { Notes } from '@/components/Notes'
+import Notes from '@/components/Notes'
 import PinnedPayment from '@/components/PinnedPayment'
 import QuickEntryButton from '@/components/QuickEntryButton'
 import SubNav from '@/components/SubNav'
+import Target from '@/components/Target'
 
 export default function Home() {
 	return (
@@ -18,14 +18,16 @@ export default function Home() {
 				<NavBar />
 				<SubNav />
 				<BudgetSummary />
-				<Chart />
-                <BudgetAllocation/>
-                <PinnedPayment/>
+				<PinnedPayment />
 				<AllocatedBudget />
-                <Notes/>
+				<Target />
+				<Notes />
+				<Chart />
+				<BudgetAllocation />
+				<Notes />
 				<AssetInventory />
 				<LedgerStream />
-                <QuickEntryButton/>
+				<QuickEntryButton />
 			</div>
 		</>
 	)
