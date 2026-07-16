@@ -2,17 +2,33 @@
 
 import { useState, useEffect } from 'react'
 import { useTheme, useModal } from '@/app/providers/ThemeProvider'
-import styles from './NavBar.module.scss'
 import NewEntryForm from './NewEntryForm'
 import Modal from './Modal/Modal'
+
+import {useRouter} from "next/navigation"
+import {createClient} from "@/lib/supabase/client"
+
+import styles from './NavBar.module.scss'
+
 
 export default function NavBar() {
 	const { theme, toggleTheme } = useTheme()
 	const { showModal, showEntryModal, closeEntryModal } = useModal()
 	const [mounted, setMounted] = useState(false)
 
+    const router = useRouter()
+    const supabase = createClient()
+
+    async function handleLogout(){
+        await supabase.auth.signOut()
+        router.push('/login')
+        router.refresh()
+    }
+
 	// eslint-disable-next-line react-hooks/set-state-in-effect
 	useEffect(() => setMounted(true), [])
+
+    
 
 	return (
 		<>
@@ -44,6 +60,9 @@ export default function NavBar() {
 						New Entry
 					</button>
 				</ul>
+                <ul>
+                    <button onClick={handleLogout}>Log out</button>
+                </ul>
 			</nav>
 			<Modal
 				showModal={showModal}
