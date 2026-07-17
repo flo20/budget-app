@@ -1,7 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse } from "next/server";
 
-export async function middleware(request) {
+export async function proxy(request) {
 let supabaseResponse = NextResponse.next({ request });
 
 const supabase = createServerClient(
@@ -21,12 +21,12 @@ cookiesToSet.forEach(({ name, value, options }) =>
             supabaseResponse.cookies.set(name, value, options)
 );
         },
-      },
+    },
     }
 );
 
   // Refreshes the session if expired
-await supabase.auth.getUser();
+await  supabase.auth.getClaims();
 
 return supabaseResponse;
 }
