@@ -7,13 +7,10 @@ import { signIn } from '../actions/auth'
 			error: null,
 		}
 
-
-export default function SignInPage({ searchParams }) {
+export default function SignInForm() {
     const [state, formAction, isPending] = useActionState(signIn, initialState)
 
 	return (
-		<main className="flex min-h-screen items-center justify-center">
-			<div className="w-full max-w-sm space-y-6">
 				<form
 					action={formAction}
 					className="space-y-4">
@@ -55,7 +52,5 @@ export default function SignInPage({ searchParams }) {
 						</button>
 					</div>
 				</form>
-			</div>
-		</main>
 	)
 }

@@ -4,7 +4,38 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 
-export async function signIn(previousState,formData) {
+export async function signUp(formData) {
+	const email = formData.get('email')?.trim()
+	const password = formData.get('password')
+	const confirmPassword = formData.get('confirmPassword')
+
+	if (!email || !password || !confirmPassword) {
+		redirect(`/sign-up?error=${encodeURIComponent('All fields are required')}`)
+	}
+
+	if (password !== confirmPassword) {
+		redirect(`/sign-up?error=${encodeURIComponent('Passwords do not match')}`)
+	}
+
+	const supabase = await createClient()
+
+	const { error } = await supabase.auth.signUp({
+		email,
+		password,
+	})
+
+	if (error) {
+		redirect(`/sign-up?error=${encodeURIComponent(error.message)}`)
+	}
+
+	redirect(
+		`/login?message=${encodeURIComponent(
+			'Account created. You can now sign in.',
+		)}`,
+	)
+}
+
+export async function signIn(_previousState,formData) {
 	const email = formData.get('email')?.trim()
 	const password = formData.get('password')
 
@@ -59,3 +90,4 @@ export async function signInAsDemo() {
   revalidatePath("/", "layout");
   redirect("/");
 }
+
