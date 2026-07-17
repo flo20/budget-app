@@ -10,11 +10,11 @@ export async function signUp(formData) {
 	const confirmPassword = formData.get('confirmPassword')
 
 	if (!email || !password || !confirmPassword) {
-		redirect(`/sign-up?error=${encodeURIComponent('All fields are required')}`)
+		redirect(`/signup?error=${encodeURIComponent('All fields are required')}`)
 	}
 
 	if (password !== confirmPassword) {
-		redirect(`/sign-up?error=${encodeURIComponent('Passwords do not match')}`)
+		redirect(`/signup?error=${encodeURIComponent('Passwords do not match')}`)
 	}
 
 	const supabase = await createClient()
@@ -25,7 +25,7 @@ export async function signUp(formData) {
 	})
 
 	if (error) {
-		redirect(`/sign-up?error=${encodeURIComponent(error.message)}`)
+		redirect(`/signup?error=${encodeURIComponent(error.message)}`)
 	}
 
 	redirect(
