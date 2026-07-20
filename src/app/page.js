@@ -11,7 +11,6 @@ import SubNav from '@/components/SubNav'
 import Target from '@/components/Target'
 import {Chart} from '@/components/Chart'
 
-import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 
 import './globals.css'
@@ -20,9 +19,9 @@ export default async function Home() {
     const supabase = await createClient()
     const {data:{user}} = await supabase.auth.getUser();
 
-    // if(!user){
-    //     redirect("/login")
-    // }
+    if(!user){
+        redirect("/login")
+    }
     
 	return (
 		<>
