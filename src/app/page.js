@@ -10,6 +10,7 @@ import QuickEntryButton from '@/components/QuickEntryButton'
 import SubNav from '@/components/SubNav'
 import Target from '@/components/Target'
 import {Chart} from '@/components/Chart'
+import { redirect } from 'next/navigation'
 
 import { createClient } from '@/lib/supabase/server'
 
@@ -20,7 +21,7 @@ export default async function Home() {
     const {data:{user}} = await supabase.auth.getUser();
 
     if(!user){
-        redirect("/login")
+        redirect("/signup")
     }
     
 	return (
