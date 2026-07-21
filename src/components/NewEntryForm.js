@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import { createTransactions } from '@/app/actions/transactions'
 
+import styles from './NewEntryForm.module.scss'
+
 const EXPENSE_CATEGORIES = [
 	'Housing',
 	'Groceries',
@@ -35,19 +37,21 @@ export default function NewEntryForm({ closeModal }) {
 
 	return (
 		<>
-			<header>
+			<header className={styles.dialogHeading}>
 				<h3>New Ledger Entry</h3>
 				<button
 					type="button"
 					onClick={closeModal}>
 					X
 				</button>
-				<p>Record an income or expense</p>
 			</header>
+				<p>Record an income or expense</p>
 
 			{/* Expense Form */}
-			<form action={createTransactions}>
-				<div>
+			<form
+				action={createTransactions}
+				className={styles.form}>
+				<div className={styles.typeSelector}>
 					<input
 						type="hidden"
 						name="transactionType"
@@ -55,11 +59,13 @@ export default function NewEntryForm({ closeModal }) {
 					/>
 					<button
 						type="button"
+						className={isExpense ? styles.activeType : styles.typeButton}
 						aria-pressed={isExpense}
 						onClick={() => setEntryType('expense')}>
 						EXPENSE
 					</button>
 					<button
+						className={!isExpense ? styles.activeType : styles.typeButton}
 						type="button"
 						aria-pressed={!isExpense}
 						onClick={() => setEntryType('income')}>
@@ -68,9 +74,13 @@ export default function NewEntryForm({ closeModal }) {
 				</div>
 
 				<p>Record an income or expense. </p>
-				<label htmlFor="source">
-					{isExpense ? 'Merchant' : 'Income Source'}
-				</label>
+
+				<div className={styles.field}>
+					<label htmlFor="source">
+						{isExpense ? 'Merchant' : 'Income Source'}
+					</label>
+				</div>
+
 				<input
 					id="source"
 					type="text"

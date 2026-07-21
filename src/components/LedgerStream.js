@@ -1,5 +1,3 @@
-'use server'
-
 import { getTransactions } from '@/lib/queries/transactions'
 
 import styles from './LedgerStream.module.scss'

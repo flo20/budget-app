@@ -1,0 +1,49 @@
+
+.dialogHeading{
+    display: flex;
+    justify-content: space-between;
+}
+.form {
+	display: grid;
+	gap: 1.25rem;
+}
+
+.typeSelector {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	padding: 0.25rem;
+	border: 1px solid var(--border-color);
+	border-radius: 0.5rem;
+}
+
+.typeButton,
+.activeType {
+	padding: 0.75rem 1rem;
+	border: 0;
+	border-radius: 0.375rem;
+	font: inherit;
+	cursor: pointer;
+}
+
+.typeButton {
+	color: var(--muted-text);
+	background: transparent;
+}
+
+.activeType {
+	color: var(--button-text);
+	background: var(--accent-color);
+}
+
+.field {
+	display: grid;
+	gap: 0.5rem;
+
+	label {
+		color: var(--muted-text);
+		font-size: 0.75rem;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+}
