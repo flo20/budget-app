@@ -50,13 +50,9 @@ export async function createTransactions(formData) {
 		throw new Error('Select a fixed or variable expense.')
 	}
 
-
-    if (transactionDate && !/^\d{4}-\d{2}-\d{2}$/.test(transactionDate)) {
-			throw new Error('Enter a valid transaction date.')
-		}
-    
-
-
+	if (transactionDate && !/^\d{4}-\d{2}-\d{2}$/.test(transactionDate)) {
+		throw new Error('Enter a valid transaction date.')
+	}
 
 	const transaction = {
 		user_id: user.id,
@@ -74,7 +70,7 @@ export async function createTransactions(formData) {
 	}
 
 
-
+	//Instructs the Supabase client to send an HTTP request to Supabase’s REST API.
 	const { error } = await supabase.from('transactions').insert(transaction)
 
 	if (error) {
