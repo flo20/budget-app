@@ -1,83 +1,31 @@
+'use server'
+
+import { getTransactions } from '@/lib/queries/transactions'
+
 import styles from './LedgerStream.module.scss'
 
-const transactions = [
-	{
-		id: 1,
-		date: '2026-01-03',
-		description: 'Monthly Salary',
-		category: 'Income',
-		type: 'income',
-		amount: 8500,
-	},
-	{
-		id: 2,
-		date: '2026-01-05',
-		description: 'Apartment Rent',
-		category: 'Housing',
-		type: 'expense',
-		amount: 2400,
-	},
-	{
-		id: 3,
-		date: '2026-01-08',
-		description: 'Carrefour Groceries',
-		category: 'Groceries',
-		type: 'expense',
-		amount: 385.75,
-	},
-	{
-		id: 4,
-		date: '2026-01-12',
-		description: 'DEWA Bill',
-		category: 'Utilities',
-		type: 'expense',
-		amount: 420.5,
-	},
-	{
-		id: 5,
-		date: '2026-01-15',
-		description: 'Freelance Project',
-		category: 'Income',
-		type: 'income',
-		amount: 1800,
-	},
-	{
-		id: 6,
-		date: '2026-01-18',
-		description: 'Fuel',
-		category: 'Transport',
-		type: 'expense',
-		amount: 210,
-	},
-	{
-		id: 7,
-		date: '2026-01-22',
-		description: 'Restaurant',
-		category: 'Dining',
-		type: 'expense',
-		amount: 275.25,
-	},
-	{
-		id: 8,
-		date: '2026-01-25',
-		description: 'Internet Bill',
-		category: 'Utilities',
-		type: 'expense',
-		amount: 349,
-	},
-]
+const formatCurrency = (transaction) => {
+	const formattedAmount = new Intl.NumberFormat('en-US', {
+		style: 'currency',
+		currency: 'USD',
+	}).format(Number(transaction?.amount))
 
-export default function LedgerStream() {
-	const formatAmount = (transaction) => {
-		const formattedAmount = transaction.amount.toLocaleString('en-US', {
-			style: 'currency',
-			currency: 'USD',
-		})
+	return transaction?.transaction_type === 'income'
+		? `+${formattedAmount}`
+		: `-${formattedAmount}`
+}
 
-		return transaction.type === 'income'
-			? `+${formattedAmount}`
-			: `-${formattedAmount}`
-	}
+const formatDate = (date) => {
+	return new Intl.DateTimeFormat('en-US', {
+		year: 'numeric',
+		month: 'short',
+		day: 'numeric',
+	}).format(new Date(`${date}T00:00:00`))
+}
+
+export default async function LedgerStream() {
+	const transactions = await getTransactions()
+
 	return (
 		<section
 			aria-labelledby="asset-inventory-title"
@@ -87,18 +35,27 @@ export default function LedgerStream() {
 				<h2 id="asset-inventory-title">Ledger Stream</h2>
 				<h2>Recency sort</h2>
 			</header>
-			<table>
-				<tbody>
-					{transactions.map((transaction) => (
-						<tr key={transaction.id}>
-							<td>{transaction.date}</td>
-							<td>{transaction.description}</td>
-							<td>{transaction.category}</td>
-							<td>{formatAmount(transaction)}</td>
-						</tr>
-					))}
-				</tbody>
-			</table>
+			{transactions.length === 0 ? (
+				<section>
+					<h2>Ledger Stream</h2>
+					<p>No transactions recorded yet.</p>
+				</section>
+			) : (
+				<table>
+					<tbody>
+						{transactions.map((transaction) => (
+							<tr key={transaction.id}>
+								<td>{transaction.source}</td>
+								<td>{formatDate(transaction.transaction_date)}</td>
+								<td>{transaction.transaction_type}</td>
+								<td>{transaction.category}</td>
+								<td>{transaction.notes}</td>
+								<td>{formatCurrency(transaction)}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			)}
 		</section>
 	)
 }

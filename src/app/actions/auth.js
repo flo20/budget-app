@@ -1,8 +1,8 @@
-"use server";
+'use server'
 
-import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
+import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
+import { createClient } from '@/lib/supabase/server'
 
 export async function signUp(formData) {
 	const email = formData.get('email')?.trim()
@@ -35,7 +35,7 @@ export async function signUp(formData) {
 	)
 }
 
-export async function signIn(_previousState,formData) {
+export async function signIn(_previousState, formData) {
 	const email = formData.get('email')?.trim()
 	const password = formData.get('password')
 
@@ -47,9 +47,15 @@ export async function signIn(_previousState,formData) {
 
 	const supabase = await createClient()
 
-	const { error } = await supabase.auth.signInWithPassword({
+	const { data, error } = await supabase.auth.signInWithPassword({
 		email,
 		password,
+	})
+
+	console.log('Sign-in result:', {
+		userId: data.user?.id,
+		hasSession: Boolean(data.session),
+		error: error?.message,
 	})
 
 	if (error) {
@@ -63,31 +69,26 @@ export async function signIn(_previousState,formData) {
 }
 
 export async function signInAsDemo() {
-  const demoEmail = process.env.DEMO_EMAIL;
-  const demoPassword = process.env.DEMO_PASSWORD;
+	const supabase = await createClient()
 
-  if (!demoEmail || !demoPassword) {
-    return {
+	const demoEmail = process.env.DEMO_EMAIL
+	const demoPassword = process.env.DEMO_PASSWORD
+
+	const { error } = await supabase.auth.signInWithPassword({
+		email: demoEmail,
+		password: demoPassword,
+	})
+
+	if (!demoEmail || !demoPassword) {
+		return {
 			error: 'The demo account is not configured.',
 		}
-  }
+	}
 
-  const supabase = await createClient();
+	if (error) {
+		return { error: error.message }
+	}
 
-  const { error } = await supabase.auth.signInWithPassword({
-    email: demoEmail,
-    password: demoPassword,
-  });
-
-  if (error) {
-    console.error("Demo sign-in failed:", error);
-
-    return {
-			error: 'Unable to access the demo account.',
-		}
-  }
-
-  revalidatePath("/", "layout");
-  redirect("/");
+	revalidatePath('/', 'layout')
+	redirect('/')
 }
-
