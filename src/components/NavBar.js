@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import { useTheme, useModal, useMount } from '@/app/providers/GlobalProvider'
-import NewEntryForm from './NewEntryForm'
+import NewEntryForm from './NewEntry/NewEntryForm'
 import Modal from './Modal/Modal'
 
 import {useRouter} from "next/navigation"

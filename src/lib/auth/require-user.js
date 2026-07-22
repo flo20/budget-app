@@ -8,10 +8,10 @@ export async function requireUser() {
 
 	const {
 		data: { user },
-		error,
+		error: userError,
 	} = await supabase.auth.getUser()
 
-	if (error || !user) {
+	if (userError || !user) {
 		redirect('/login')
 	}
 

@@ -6,11 +6,13 @@ import { requireUser } from '@/lib/auth/require-user'
 export async function createPinPayment (formData) {
     const {supabase, user} = await requireUser()
     
+
 	// Names received from the form fields
 	const label = formData.get('label')?.trim()
 	const amount = Number(formData.get('amount'))
 	const dueDate = formData.get('dueDate')
     const isRecurringMonthly = formData.has('isRecurringMonthly')
+
 
 	if (!label) {
 		throw new Error('A label is required.')
