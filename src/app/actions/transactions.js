@@ -1,21 +1,10 @@
 'use server'
 
-import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
-import { createClient } from '@/lib/supabase/server'
+import { requireUser } from '@/lib/auth/require-user'
 
 export async function createTransactions(formData) {
-	const supabase = await createClient()
-
-	//User who submitted form
-	const {
-		data: { user },
-		error: userError,
-	} = await supabase.auth.getUser()
-
-	if (userError || !user) {
-		redirect('/signup')
-	}
+	const { supabase, user } = await requireUser()
 
 	// Names received from the form fields
 	const source = formData.get('source')?.trim()
