@@ -8,7 +8,7 @@ import {
 	createContext,
 } from 'react'
 
-const ThemeContext = createContext(undefined)
+const GlobalContext = createContext(undefined)
 
 function getInitialTheme() {
 
@@ -25,7 +25,8 @@ function getInitialTheme() {
 
 export default function ThemeProvider({ children }) {
 	const [theme, setTheme] = useState(getInitialTheme)
-	const [showModal, setShowModal] = useState(false)
+	const [activeModal, setActiveModal] = useState(null)
+	const [mounted, setMounted] = useState(false)
 
 	useEffect(() => {
 		document.documentElement.setAttribute('data-theme', theme)
@@ -42,32 +43,55 @@ export default function ThemeProvider({ children }) {
 		[],
 	)
 
-	//Modal
-	const showEntryModal = () => setShowModal((prev) => !prev)
-	const closeEntryModal = () => setShowModal(false)
+	//Theme Mount
+	const mountDoc = () => setMounted(true)
+
+	//Modal controls
+	const openModal = useCallback((name) => setActiveModal(name), [])
+	const closeModal = useCallback(() => setActiveModal(null), [])
+
+	//New Entry Modal
+	const showEntryModal = activeModal === 'entry'
+	const openEntryModal = () => openModal('entry')
+	const closeEntryModal = () => closeModal()
+
+	//Pinned Payment Modal
+	const showPinnedModal = activeModal === 'pinned'
+	const openPinnedModal = () => openModal('pinned')
+	const closePinnedModal = () => closeModal()
 
 	return (
-		<ThemeContext.Provider
+		<GlobalContext.Provider
 			value={{
 				theme,
 				callbackTheme,
 				toggleTheme,
+				mounted,
+				mountDoc,
 				showEntryModal,
-				showModal,
+				openEntryModal,
 				closeEntryModal,
+				showPinnedModal,
+				openPinnedModal,
+				closePinnedModal,
 			}}>
 			{children}
-		</ThemeContext.Provider>
+		</GlobalContext.Provider>
 	)
 }
 
 export function useTheme() {
-	const themeContext = useContext(ThemeContext)
+	const themeContext = useContext(GlobalContext)
 	if (!themeContext) throw new Error('useTheme must be inside <ThemeProvider>')
 	return themeContext
 }
 export function useModal() {
-	const modalContext = useContext(ThemeContext)
+	const modalContext = useContext(GlobalContext)
 	if (!modalContext) throw new Error('useModal must be inside <ThemeProvider>')
 	return modalContext
+}
+export function useMount() {
+	const moountContext = useContext(GlobalContext)
+	if (!moountContext) throw new Error('useMount must be inside <ThemeProvider>')
+	return moountContext
 }

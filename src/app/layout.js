@@ -1,5 +1,5 @@
 import './globals.css'
-import ThemeProvider from './providers/ThemeProvider'
+import ThemeProvider from './providers/GlobalProvider'
 
 export const metadata = {
 	title: 'Budget App',

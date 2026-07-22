@@ -1,10 +1,10 @@
 'use client'
 
-import { useModal } from '@/app/providers/ThemeProvider'
+import { useModal } from '@/app/providers/GlobalProvider'
 
 export default function QuickEntryButton() {
-	const { showEntryModal } = useModal()
-	return <button onClick={showEntryModal}>QuickEntryButton</button>
+	const { openEntryModal } = useModal()
+	return <button onClick={openEntryModal}>QuickEntryButton</button>
 }
 
 

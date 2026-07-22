@@ -1,7 +1,7 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { useTheme, useModal } from '@/app/providers/ThemeProvider'
+import { useEffect } from 'react'
+import { useTheme, useModal, useMount } from '@/app/providers/GlobalProvider'
 import NewEntryForm from './NewEntryForm'
 import Modal from './Modal/Modal'
 
@@ -13,8 +13,8 @@ import styles from './NavBar.module.scss'
 
 export default function NavBar() {
 	const { theme, toggleTheme } = useTheme()
-	const { showModal, showEntryModal, closeEntryModal } = useModal()
-	const [mounted, setMounted] = useState(false)
+	const { showEntryModal, openEntryModal, closeEntryModal } = useModal()
+	const { mounted, mountDoc } = useMount()
 
     const router = useRouter()
     const supabase = createClient()
@@ -25,10 +25,7 @@ export default function NavBar() {
         router.refresh()
     }
 
-	// eslint-disable-next-line react-hooks/set-state-in-effect
-	useEffect(() => setMounted(true), [])
-
-    
+	useEffect(mountDoc, [mountDoc])
 
 	return (
 		<>
@@ -55,17 +52,17 @@ export default function NavBar() {
 						{mounted ? (theme === 'light' ? 'Dark Mode' : 'Light Mode') : null}
 					</button>
 					<button
-						onClick={showEntryModal}
+						onClick={openEntryModal}
 						id="modal-title">
 						New Entry
 					</button>
 				</ul>
-                <ul>
-                    <button onClick={handleLogout}>Log out</button>
-                </ul>
+				<ul>
+					<button onClick={handleLogout}>Log out</button>
+				</ul>
 			</nav>
 			<Modal
-				showModal={showModal}
+				showModal={showEntryModal}
 				closeModal={closeEntryModal}
 				mounted={mounted}>
 				<NewEntryForm closeModal={closeEntryModal} />
