@@ -4,17 +4,16 @@ import BudgetAllocation from '@/components/BudgetAllocation'
 import BudgetSummary from '@/components/BudgetSummary'
 import LedgerStream from '@/components/LedgerStream/LedgerStream'
 import NavBar from '@/components/NavBar'
-import Notes from '@/components/Notes'
 import PinnedPayment from '@/components/PinnedPayments/PinnedPayment'
 import QuickEntryButton from '@/components/NewEntry/QuickEntryButton'
 import SubNav from '@/components/SubNav'
-import Target from '@/components/Target'
 import {Chart} from '@/components/Chart'
 import { redirect } from 'next/navigation'
 
 import { createClient } from '@/lib/supabase/server'
 
 import './globals.css'
+import Notes from '@/components/BudgetNotes/Notes'
 
 export default async function Home() {
     const supabase = await createClient()
@@ -32,9 +31,8 @@ export default async function Home() {
 				<div className="contentWrapper">
 					<div className="leftCol">
 						<BudgetSummary />
-						<PinnedPayment/>
+						<PinnedPayment />
 						<AllocatedBudget />
-						<Target />
 						<Notes />
 					</div>
 					<div className="rightCol">
