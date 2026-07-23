@@ -1,13 +1,20 @@
 export function normalizeMonth(value) {
-	if (/^\d{4}-(0[1-9]|1[0-2])$/.test(value)) {
+	const isValidMonth =
+		typeof value === 'string' && /^\d{4}-(0[1-9]|1[0-2])$/.test(value)
+
+	if (isValidMonth) {
 		return value
 	}
 
 	return new Date().toISOString().slice(0, 7)
 }
 
-export function toBudgetMonth(value) {
-	return `${value}-01`
+export function toBudgetMonth(month) {
+	if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(month)) {
+		throw new Error(`Invalid selected month: ${month}`)
+	}
+
+	return `${month}-01`
 }
 
 export function changeMonth(value, change) {
