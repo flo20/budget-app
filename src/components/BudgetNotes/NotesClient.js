@@ -5,7 +5,6 @@ import { formatMonth, changeMonth } from '@/lib/utils/month'
 import Link from 'next/link'
 
 export default function NotesClient({ notes, selectedMonth, budgetMonth }) {
-
 	const previousMonth = changeMonth(selectedMonth, -1)
 	const nextMonth = changeMonth(selectedMonth, 1)
 
@@ -59,6 +58,7 @@ export default function NotesClient({ notes, selectedMonth, budgetMonth }) {
 					aria-label="Add budget note">
 					Add Icon
 				</button>
-			</form>		</section>
+			</form>
+		</section>
 	)
 }
