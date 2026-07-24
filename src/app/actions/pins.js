@@ -46,5 +46,5 @@ export async function createPinPayment (formData) {
             throw new Error('Unable to save the pinned payment.')
         }
     
-        revalidatePath('/')
+        revalidatePath('/dashboard')
 }

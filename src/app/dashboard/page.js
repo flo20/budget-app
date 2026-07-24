@@ -16,7 +16,7 @@ import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { normalizeMonth } from '@/lib/utils/month'
 
-import './globals.css'
+import "@/app/globals.css"
 
 export default async function Home({searchParams}) {
     const supabase = await createClient()

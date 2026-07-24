@@ -37,7 +37,7 @@ export async function createBudgetNotes(formData) {
 		throw new Error('Unable to save the note.')
 	}
 
-	revalidatePath('/')
+	revalidatePath('/dashboard')
 }
 
 export async function toggleBudgetNote(formData) {
@@ -69,7 +69,7 @@ export async function toggleBudgetNote(formData) {
 		throw new Error('Unable to update the note.')
 	}
 
-	revalidatePath('/')
+	revalidatePath('/dashboard')
 }
 
 export async function editBudgetNote(formData) {
@@ -115,7 +115,7 @@ export async function editBudgetNote(formData) {
 		}
 	}
 
-	revalidatePath('/')
+	revalidatePath('/dashboard')
 
 	return {
 		success: true,
@@ -148,7 +148,7 @@ export async function deleteBudgetNote(formData) {
 		throw new Error('Unable to delete the note.')
 	}
 
-	revalidatePath('/')
+	revalidatePath('/dashboard')
 }
 
 

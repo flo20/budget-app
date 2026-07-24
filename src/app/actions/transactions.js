@@ -67,5 +67,5 @@ export async function createTransactions(formData) {
 		throw new Error('Unable to save the entry.')
 	}
 
-	revalidatePath('/')
+	revalidatePath('/dashboard')
 }

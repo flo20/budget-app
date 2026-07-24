@@ -12,7 +12,7 @@ export async function getTransactions() {
 	} = await supabase.auth.getUser()
 
 	if (userError || !user) {
-		redirect('/login')
+		redirect('/signin')
 	}
 
 	const { data, error } = await supabase

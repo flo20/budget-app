@@ -21,7 +21,7 @@ export default function NotesClient({ notes, selectedMonth, budgetMonth }) {
 
 				<nav aria-label="Budget note month">
 					<Link
-						href={`/?month=${previousMonth}`}
+						href={`dashboard/?month=${previousMonth}`}
 						aria-label="Previous month">
 						Left arrow
 					</Link>
@@ -29,7 +29,7 @@ export default function NotesClient({ notes, selectedMonth, budgetMonth }) {
 					<strong>{formatMonth(selectedMonth)}</strong>
 
 					<Link
-						href={`/?month=${nextMonth}`}
+						href={`dashboard/?month=${nextMonth}`}
 						aria-label="Next month">
 						Right arrow
 					</Link>

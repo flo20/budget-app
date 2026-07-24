@@ -22,8 +22,6 @@ export async function getBudgetNotes(budgetMonth){
 				ascending: false,
 			})
 
-    console.log('Queries', data)
-
 		if (error) {
 			console.error('Unable to retrieve budget notes:', error)
 

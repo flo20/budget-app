@@ -29,7 +29,7 @@ export async function signUp(formData) {
 	}
 
 	redirect(
-		`/login?message=${encodeURIComponent(
+		`/signin?message=${encodeURIComponent(
 			'Account created. You can now sign in.',
 		)}`,
 	)
@@ -64,8 +64,8 @@ export async function signIn(_previousState, formData) {
 		}
 	}
 
-	revalidatePath('/', 'layout')
-	redirect('/')
+	revalidatePath('/dashboard', 'layout')
+	redirect('/dashboard')
 }
 
 export async function signInAsDemo() {
@@ -89,6 +89,6 @@ export async function signInAsDemo() {
 		return { error: error.message }
 	}
 
-	revalidatePath('/', 'layout')
-	redirect('/')
+	revalidatePath('/dashboard', 'layout')
+	redirect('/dashboard')
 }
