@@ -59,7 +59,6 @@ export default function NotesClient({ notes, selectedMonth, budgetMonth }) {
 					aria-label="Add budget note">
 					Add Icon
 				</button>
-			</form>
-		</section>
+			</form>		</section>
 	)
 }

@@ -1,6 +1,8 @@
 "use client"
 
 import { formatMonth} from '@/lib/utils/month'
+import { deleteBudgetNote, toggleBudgetNote } from '@/app/actions/budget-notes'
+import EditNotes from './EditNotes'
 
 function formatTimestamp(value) {
 	return new Intl.DateTimeFormat('en-US', {
@@ -28,7 +30,7 @@ export default function NotesContent({ notes, selectedMonth, budgetMonth }) {
 							key={note.id}
 							// className={note.is_resolved ? styles.resolved : undefined}
 						>
-							<form>
+							<form action={toggleBudgetNote}>
 								<input
 									type="hidden"
 									name="noteId"
@@ -61,7 +63,8 @@ export default function NotesContent({ notes, selectedMonth, budgetMonth }) {
 							</form>
 
 							<div>
-								<p>{note.content}</p>
+                                
+								<EditNotes note={note}/>
 
 								<time dateTime={note.created_at}>
 									{formatTimestamp(note.created_at)}
@@ -75,7 +78,7 @@ export default function NotesContent({ notes, selectedMonth, budgetMonth }) {
 								</time>
 							</div>
 
-							{/* <form action={deleteBudgetNote}>
+							<form action={deleteBudgetNote}>
 								<input
 									type="hidden"
 									name="noteId"
@@ -93,7 +96,7 @@ export default function NotesContent({ notes, selectedMonth, budgetMonth }) {
 									aria-label={`Delete ${note.content}`}>
 									Delete button
 								</button>
-							</form> */}
+							</form>
 						</li>
 					))}
 				</ul>
