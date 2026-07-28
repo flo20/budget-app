@@ -1,7 +1,12 @@
+'use client'
+
 import { useRef } from 'react'
 
 import { setBudgetAllocation } from '@/app/actions/category_budgets'
-import { EXPENSE_CATEGORIES } from '@/lib/constants/categories'
+import {
+	EXPENSE_CATEGORIES,
+	CUSTOM_CATEGORY_OPTION,
+} from '@/lib/constants/categories'
 
 import styles from './BudgetAllocation.module.scss'
 
@@ -18,7 +23,7 @@ export default function AllocationForm({ budgetMonth, budgets }) {
 			<h3>Add allocation</h3>
 
 			<input
-				// type="hidden"
+				type="hidden"
 				name="budgetMonth"
 				value={budgetMonth}
 			/>
@@ -28,8 +33,7 @@ export default function AllocationForm({ budgetMonth, budgets }) {
 
 				<select
 					name="category"
-					required
-					defaultValue="">
+					required>
 					<option
 						value=""
 						disabled>
@@ -44,6 +48,7 @@ export default function AllocationForm({ budgetMonth, budgets }) {
 							{/* {allocatedCategories.has(category) ? ' — edit' : ''} */}
 						</option>
 					))}
+					<option value={CUSTOM_CATEGORY_OPTION}>Add a custom category</option>
 				</select>
 			</label>
 			<label>

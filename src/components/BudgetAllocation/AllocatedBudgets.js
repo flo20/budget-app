@@ -1,10 +1,11 @@
-"use client"
 
-
+import { toBudgetMonth } from "@/lib/utils/month"
 import AllocationForm from "./AllocationForm"
 
-export default function AllocatedBudgets({selecetedMonth}) {
-    const budgetMonth = `${selecetedMonth}-01`
+
+export default function AllocatedBudgets({selectedMonth}) {    
+    const budgetMonth = toBudgetMonth(selectedMonth)
+
 	return (
 		<div>
 			<h2>ALLOCATED BUDGETS</h2>

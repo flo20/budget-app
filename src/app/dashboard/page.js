@@ -38,7 +38,7 @@ export default async function DashBoard({searchParams}) {
 					<div className="leftCol">
 						<BudgetSummary />
 						<PinnedPayment />
-						<AllocatedBudgets />
+						<AllocatedBudgets selectedMonth={selectedMonth}/>
 						<Notes selectedMonth={selectedMonth} />
 					</div>
 					<div className="rightCol">

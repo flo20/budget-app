@@ -9,3 +9,4 @@ export const EXPENSE_CATEGORIES = [
 	'Other',
 ]
 
+export const CUSTOM_CATEGORY_OPTION = '__custom__'
