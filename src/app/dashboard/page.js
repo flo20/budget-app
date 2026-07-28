@@ -16,6 +16,7 @@ import { createClient } from '@/lib/supabase/server'
 import { normalizeMonth } from '@/lib/utils/month'
 
 import "@/app/globals.css"
+import BudgetCategory from '@/components/BudgetAllocation/BudgetCategory'
 
 
 export default async function DashBoard({searchParams}) {
@@ -38,7 +39,7 @@ export default async function DashBoard({searchParams}) {
 					<div className="leftCol">
 						<BudgetSummary />
 						<PinnedPayment />
-						<AllocatedBudgets selectedMonth={selectedMonth}/>
+						<BudgetCategory selectedMonth={selectedMonth} />
 						<Notes selectedMonth={selectedMonth} />
 					</div>
 					<div className="rightCol">
