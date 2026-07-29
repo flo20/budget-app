@@ -1,4 +1,3 @@
-import AllocatedBudgets from '@/components/BudgetAllocation/AllocatedBudgets'
 import AssetInventory from '@/components/AssetInventory'
 import BudgetSummary from '@/components/BudgetSummary'
 import LedgerStream from '@/components/LedgerStream/LedgerStream'
@@ -16,7 +15,7 @@ import { createClient } from '@/lib/supabase/server'
 import { normalizeMonth } from '@/lib/utils/month'
 
 import "@/app/globals.css"
-import BudgetCategory from '@/components/BudgetAllocation/BudgetCategory'
+import BudgetAllocation from '@/components/BudgetAllocation/BudgetAllocation'
 
 
 export default async function DashBoard({searchParams}) {
@@ -39,7 +38,7 @@ export default async function DashBoard({searchParams}) {
 					<div className="leftCol">
 						<BudgetSummary />
 						<PinnedPayment />
-						<BudgetCategory selectedMonth={selectedMonth} />
+						<BudgetAllocation selectedMonth={selectedMonth} />
 						<Notes selectedMonth={selectedMonth} />
 					</div>
 					<div className="rightCol">
