@@ -24,6 +24,7 @@ export function buildBudgetSummary(budgets, transactions) {
 		const limit = Number(budget.monthly_limit)
 		const spent = spendingByCategory[budget.category] ?? 0
 		const remaining = limit - spent
+		const overBudgetAmount = Math.max(spent - limit, 0)
 		const percentageUsed = limit > 0 ? (spent / limit) * 100 : 0
 
 		return {
@@ -32,6 +33,7 @@ export function buildBudgetSummary(budgets, transactions) {
 			limit,
 			spent,
 			remaining,
+			overBudgetAmount,
 			percentageUsed,
 			progressWidth: Math.min(percentageUsed, 100),
 			status: getBudgetStatus(percentageUsed),
@@ -55,6 +57,16 @@ export function buildBudgetSummary(budgets, transactions) {
 		0,
 	)
 
+	const coveredSpend = categories.reduce(
+		(total, category) => total + Math.min(category.spent, category.limit),
+		0,
+	)
+
+	const totalOverBudget = categories.reduce(
+		(total, category) => total + category.overBudgetAmount,
+		0,
+	)
+
 	const remainingAllocatedBudget = totalAllocated - spentInAllocatedCategories
 
 	const totalUnallocatedSpend = unallocatedCategories.reduce(
@@ -72,11 +84,24 @@ export function buildBudgetSummary(budgets, transactions) {
 		unallocatedCategories,
 		totalAllocated,
 		spentInAllocatedCategories,
+		coveredSpend,
+		totalOverBudget,
 		remainingAllocatedBudget,
 		totalUnallocatedSpend,
 		totalSpend,
 		overallPercentage,
 		overallProgressWidth: Math.min(overallPercentage, 100),
+
+		coveredPercentage:
+			totalAllocated > 0 ? (coveredSpend / totalAllocated) * 100 : 0,
+
+		overBudgetPercentage:
+			totalAllocated > 0 ? (totalOverBudget / totalAllocated) * 100 : 0,
+
+		remainingPercentage:
+			totalAllocated > 0
+				? (Math.max(remainingAllocatedBudget, 0) / totalAllocated) * 100
+				: 0,
 	}
 
 	function getBudgetStatus(percentage) {

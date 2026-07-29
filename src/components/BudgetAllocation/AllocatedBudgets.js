@@ -27,8 +27,6 @@ export async function AllocatedBudgets({ selectedMonth }) {
 		return `${formatCurrency(category.remaining)} left`
 	}
 
-
-    
 	return (
 		<div>
 			<h2>ALLOCATED BUDGETS</h2>
@@ -41,7 +39,7 @@ export async function AllocatedBudgets({ selectedMonth }) {
 					<strong>{formatCurrency(summary.remainingAllocatedBudget)}</strong>
 
 					<span>
-						{/* left of {formatCurrency(summary.totalAllocated)} allocated */}
+						left of {formatCurrency(summary.totalAllocated)} allocated
 					</span>
 				</div>
 
@@ -49,21 +47,21 @@ export async function AllocatedBudgets({ selectedMonth }) {
 					Only reflects budgeted categories · unallocated spending is tracked
 					separately below
 				</p>
-
 			</header>
-			{summary.categories.map((category) => (
-				<BudgetCategory
-					key={category.id}
-					category={category}
-					formatCurrency={formatCurrency}
-					getStatusMessage={getStatusMessage}
-				/>
-			))}
+			<div>
+				{summary.categories.map((category) => (
+					<BudgetCategory
+						key={category.id}
+						category={category}
+						formatCurrency={formatCurrency}
+						getStatusMessage={getStatusMessage}
+					/>
+				))}
+			</div>
 
 			<section aria-labelledby="unallocated-title">
 				<header>
 					<h3 id="unallocated-title">Unallocated spend</h3>
-
 					<span>{formatCurrency(summary.totalUnallocatedSpend)} total</span>
 				</header>
 
