@@ -5,8 +5,10 @@ import { revalidatePath } from 'next/cache'
 import {
 	EXPENSE_CATEGORIES,
 	CUSTOM_CATEGORY_OPTION,
+	normalizeCategory,
 } from '@/lib/constants/categories'
 
+const normalizedExpenseCategories = EXPENSE_CATEGORIES.map(normalizeCategory)
 
 export async function setBudgetAllocation(formData) {
 	const { supabase, user } = await requireUser()
@@ -15,25 +17,32 @@ export async function setBudgetAllocation(formData) {
 	const customCategory = formData.get('customCategory')?.trim()
 	const monthlyLimit = Number(formData.get('monthlyLimit'))
 	const budgetMonth = formData.get('budgetMonth')?.trim()
-
+	const isCustomCategory = selectedCategory === CUSTOM_CATEGORY_OPTION
 	/*
 	 * If "__custom__" was selected, use the custom input.
 	 * Otherwise, use the selected predefined category.
 	 */
-	const isCustomCategory = selectedCategory === CUSTOM_CATEGORY_OPTION
 
-	const category = isCustomCategory ? customCategory : selectedCategory
+	const rawCategory =
+		selectedCategory === CUSTOM_CATEGORY_OPTION
+			? customCategory
+			: selectedCategory
+
+	const category = normalizeCategory(rawCategory ?? '')
 
 	// Make sure the user selected or entered a category.
 	if (!category) {
 		throw new Error('Select or enter an expense category.')
 	}
 
-	// A standard category must exist in the list
-	if (!isCustomCategory && !EXPENSE_CATEGORIES.includes(category)) {
-		throw new Error('Select a valid expense category.')
+	if (!/^[\p{L}\p{N} &'/-]+$/u.test(category)) {
+		throw new Error('Enter a valid category name.')
 	}
 
+	// A standard category must exist in the list
+	if (!isCustomCategory && !normalizedExpenseCategories.includes(category)) {
+		throw new Error('Select a valid expense category.')
+	}
 	// Validate the custom category separately.
 	if (isCustomCategory && customCategory.length > 50) {
 		throw new Error('Custom category must be 50 characters or fewer.')
@@ -43,7 +52,16 @@ export async function setBudgetAllocation(formData) {
 		throw new Error('Enter a valid monthly limit.')
 	}
 
-	if (!budgetMonth || !/^\d{4}-\d{2}-01$/.test(budgetMonth)) {
+	if (monthlyLimit > 9999999999.99) {
+		throw new Error('Monthly limit is too large.')
+	}
+
+	/*
+	 * Store the first day of the selected month.
+	 * Example: July 2026 → 2026-07-01.
+	 */
+
+	if (!budgetMonth || !/^\d{4}-(0[1-9]|1[0-2])-01$/.test(budgetMonth)) {
 		throw new Error('Select a valid budget month.')
 	}
 
@@ -66,4 +84,9 @@ export async function setBudgetAllocation(formData) {
 	}
 
 	revalidatePath('/dashboard')
+
+	return {
+		success: true,
+		message: 'Budget allocation saved.',
+	}
 }

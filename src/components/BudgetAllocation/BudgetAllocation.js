@@ -1,10 +1,11 @@
-import { AllocatedBudgets } from "./AllocatedBudgets";
+import { AllocatedBudgetsPanel } from './AllocatedBudgetsPanel'
+
+import styles from "./BudgetAllocation.module.scss"
 
 export default function BudgetAllocation({ selectedMonth }) {
 	return (
-		<section>
-			<AllocatedBudgets selectedMonth={selectedMonth} />
+		<section className={styles.container}>
+			<AllocatedBudgetsPanel selectedMonth={selectedMonth} />
 		</section>
 	)
 }
-
