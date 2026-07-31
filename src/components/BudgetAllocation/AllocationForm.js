@@ -25,6 +25,8 @@ export default function AllocationForm({
 	budgetMonth,
 	selectedCategory,
 	setSelectedCategory,
+    setSelectedMonthlyLimit,
+    selectedMonthlyLimit,
 	limitInputRef,
 }) {
 	const [customCategory, setCustomCategory] = useState('')
@@ -38,7 +40,7 @@ export default function AllocationForm({
 	return (
 		<form
 			action={setBudgetAllocation}
-			className={styles.wrapper}>
+			className={styles.container}>
 			<h3>Add allocation</h3>
 
 			<input
@@ -95,7 +97,9 @@ export default function AllocationForm({
 				<span>Monthly limit</span>
 
 				<input
+					value={selectedMonthlyLimit}
 					ref={limitInputRef}
+					onChange={(event) => setSelectedMonthlyLimit(event.target.value)}
 					name="monthlyLimit"
 					type="number"
 					min="0.01"

@@ -1,7 +1,8 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { formatCurrency } from '@/lib/utils/currency'
+
 import AllocationForm from './AllocationForm'
 
 export default function BudgetInteractive({
@@ -11,18 +12,29 @@ export default function BudgetInteractive({
 	totalUnallocatedSpend,
 }) {
 	const [selectedCategory, setSelectedCategory] = useState('')
+	const [selectedMonthlyLimit, setSelectedMonthlyLimit] = useState('')
 	const limitInputRef = useRef(null)
 
-	function handleAllocate(category) {
-		setSelectedCategory(category)
-		// requestAnimationFrame(() => {
-		// 	limitInputRef.current?.focus()
-		// 	limitInputRef.current?.scrollIntoView({
-		// 		behavior: 'smooth',
-		// 		block: 'center',
-		// 	})
-		// })
+    useEffect(() => {
+	if (!selectedCategory) {
+		return
 	}
+
+	limitInputRef.current?.focus()
+
+	limitInputRef.current?.scrollIntoView({
+		behavior: 'smooth',
+		block: 'center',
+	})
+}, [selectedCategory])
+
+	function handleAllocate(category) {
+        console.log('unallocatedCategories', category)
+		setSelectedCategory(category.category)
+        setSelectedMonthlyLimit(category.limit)
+	}
+
+    
 
 	return (
 		<>
@@ -42,7 +54,7 @@ export default function BudgetInteractive({
 								<span>{formatCurrency(category.spent)}</span>
 								<button
 									type="button"
-									onClick={() => handleAllocate(category.category)}>
+									onClick={() => handleAllocate(category)}>
 									Allocate
 								</button>
 							</li>
@@ -55,6 +67,8 @@ export default function BudgetInteractive({
 				budgetMonth={budgetMonth}
 				selectedCategory={selectedCategory}
 				setSelectedCategory={setSelectedCategory}
+				selectedMonthlyLimit={selectedMonthlyLimit}
+				setSelectedMonthlyLimit={setSelectedMonthlyLimit}
 				limitInputRef={limitInputRef}
 				summary={summary}
 			/>

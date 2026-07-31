@@ -47,7 +47,7 @@ export async function AllocatedBudgetsPanel({
 			</div>
 
 			<BudgetInteractive
-                summary={summary}
+				summary={summary}
 				budgetMonth={budgetMonth}
 				unallocatedCategories={summary.unallocatedCategories}
 				totalUnallocatedSpend={summary.totalUnallocatedSpend}

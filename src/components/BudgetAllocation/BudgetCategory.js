@@ -27,6 +27,7 @@ export function BudgetCategory({ category, getStatusMessage }) {
 			</header>
 
 			<p>{getStatusMessage(category)}</p>
+		
 		</article>
 	)
 }

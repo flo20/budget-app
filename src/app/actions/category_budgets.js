@@ -58,7 +58,6 @@ export async function setBudgetAllocation(formData) {
 
 	/*
 	 * Store the first day of the selected month.
-	 * Example: July 2026 → 2026-07-01.
 	 */
 
 	if (!budgetMonth || !/^\d{4}-(0[1-9]|1[0-2])-01$/.test(budgetMonth)) {
@@ -90,3 +89,5 @@ export async function setBudgetAllocation(formData) {
 		message: 'Budget allocation saved.',
 	}
 }
+
+
