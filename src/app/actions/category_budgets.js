@@ -137,7 +137,7 @@ export async function deleteCategoryBudget(budgetId) {
 		throw new Error('Budget allocation ID is required.')
 	}
 
-	const { error } = await supabase
+	const { data, error } = await supabase
 		.from('category_budgets')
 		.delete()
 		.eq('id', budgetId)
