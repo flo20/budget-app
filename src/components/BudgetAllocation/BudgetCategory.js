@@ -1,6 +1,7 @@
 import { formatCurrency } from '@/lib/utils/currency'
 
 export function BudgetCategory({ category, getStatusMessage }) {
+    
 	function getStatusMessage(category) {
 		if (category.status === 'over') {
 			return `${formatCurrency(Math.abs(category.remaining))} over budget`

@@ -6,14 +6,15 @@ import { formatCurrency } from '@/lib/utils/currency'
 import { formatMonth } from '@/lib/utils/month'
 
 import BudgetInteractive from './BudgetInteractive'
-import styles from "./BudgetAllocation.module.scss"
+import styles from './BudgetAllocation.module.scss'
+import EditCategoryBudgetLimit from './EditCategoryBudgetLimit'
+import RemoveAllocatedBudget from './RemoveAllocatedBudget'
 
-export async function AllocatedBudgetsPanel({
-	selectedMonth
-}) {
+export async function AllocatedBudgetsPanel({ selectedMonth }) {
 	const budgetMonth = toBudgetMonth(selectedMonth)
 	const { budgets, transactions } = await getBudgetAllocations(budgetMonth)
 	const summary = buildBudgetSummary(budgets, transactions)
+
 
 	return (
 		<div>
@@ -38,11 +39,14 @@ export async function AllocatedBudgetsPanel({
 			</header>
 			<div className={styles.container}>
 				{summary.categories.map((category) => (
-					<BudgetCategory
-						key={category.id}
-						category={category}
-						formatCurrency={formatCurrency}
-					/>
+					<div key={category.id}>
+						<BudgetCategory
+							category={category}
+							formatCurrency={formatCurrency}
+						/>
+						<EditCategoryBudgetLimit category={category} />
+                        <RemoveAllocatedBudget category={category}/>
+					</div>
 				))}
 			</div>
 
