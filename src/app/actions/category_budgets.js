@@ -142,11 +142,20 @@ export async function deleteCategoryBudget(budgetId) {
 		.delete()
 		.eq('id', budgetId)
 		.eq('user_id', user.id)
+		.select('id')
+        .maybeSingle()
 
 	if (error) {
 		console.error('Unable to delete allocation:', error)
 		return { success: false, error: 'Unable to delete the allocation.' }
 	}
+
+    if (!data) {
+			return {
+				success: false,
+				error: 'Budget allocation was not found.',
+			}
+		}
 
 	revalidatePath('/dashboard')
 

@@ -50,8 +50,6 @@ export default function AllocationForm({
 			/>
 
 			<label>
-				<span>Category</span>
-
 				<select
 					name="category"
 					value={selectedCategory}

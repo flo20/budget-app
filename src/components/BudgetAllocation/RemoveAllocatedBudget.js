@@ -4,7 +4,7 @@ import { deleteCategoryBudget } from '@/app/actions/category_budgets'
 
 export default function RemoveAllocatedBudget({ category }) {
 	async function handleRemove() {
-		const result = await deleteCategoryBudget(category.id)
+		const result = await deleteCategoryBudget(category.id)        
 
 		if (!result.success) {
 			console.error(result.error)
