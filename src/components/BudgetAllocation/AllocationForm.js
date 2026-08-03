@@ -52,7 +52,7 @@ export default function AllocationForm({
 			<label>
 				<select
 					name="category"
-					value={selectedCategory}
+					value={selectedCategory ?? ''}
 					onChange={(event) => {
 						setSelectedCategory(event.target.value)
 						setCustomCategory('')
@@ -95,8 +95,8 @@ export default function AllocationForm({
 				<span>Monthly limit</span>
 
 				<input
-					value={selectedMonthlyLimit}
 					ref={limitInputRef}
+                    value={selectedMonthlyLimit ?? ""}
 					onChange={(event) => setSelectedMonthlyLimit(event.target.value)}
 					name="monthlyLimit"
 					type="number"

@@ -15,6 +15,10 @@ export async function AllocatedBudgetsPanel({ selectedMonth }) {
 	const { budgets, transactions } = await getBudgetAllocations(budgetMonth)
 	const summary = buildBudgetSummary(budgets, transactions)
 
+    // console.log('budgets', budgets)
+    // console.log('transaction', transactions)
+    // console.log('summary', budgets.category)
+    
 
 	return (
 		<div>

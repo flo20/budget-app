@@ -31,7 +31,7 @@ export default function BudgetInteractive({
 	function handleAllocate(category) {
         console.log('unallocatedCategories', category)
 		setSelectedCategory(category.category)
-        setSelectedMonthlyLimit(category.limit)
+        setSelectedMonthlyLimit(category.spent)
 	}
 
     

@@ -1,4 +1,7 @@
 export function buildBudgetSummary(budgets, transactions) {
+    	console.log('Summary budgets:', budgets)
+			// console.log('Summary transactions:', transactions)
+
 	const spendingByCategory = transactions.reduce((totals, transaction) => {
 		const category = transaction.category
 		const amount = Number(transaction.amount)
@@ -16,9 +19,14 @@ export function buildBudgetSummary(budgets, transactions) {
 		return totals
 	}, {})
 
+    	// console.log('Spending by category:', spendingByCategory)
+
 	const allocatedCategoryNames = new Set(
 		budgets.map((budget) => budget.category),
 	)
+
+    console.log('Allocated category names:', [...allocatedCategoryNames])
+
 
 	const categories = budgets.map((budget) => {
 		const limit = Number(budget.monthly_limit)
@@ -47,6 +55,8 @@ export function buildBudgetSummary(budgets, transactions) {
 			spent,
 		}))
 		.sort((first, second) => second.spent - first.spent)
+
+        	// console.log('Unallocated categories:', unallocatedCategories)
 
 	const totalAllocated = categories.reduce(
 		(total, category) => total + category.limit,

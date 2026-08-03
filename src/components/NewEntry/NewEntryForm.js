@@ -2,24 +2,12 @@
 
 import { useState } from 'react'
 import { createTransactions } from '@/app/actions/transactions'
+import { EXPENSE_CATEGORIES, INCOME_CATEGORIES } from '@/lib/constants/categories'
 
 import styles from './NewEntryForm.module.scss'
 
-const EXPENSE_CATEGORIES = [
-	'Housing',
-	'Groceries',
-	'Utilities',
-	'Transport',
-	'Recreation',
-	'Healthcare',
-	'Service',
-	'Other',
-]
-const INCOME_CATEGORIES = ['Salary', 'Bonus', 'Freelance']
-
 function getLocalDate() {
 	const now = new Date()
-
 	const year = now.getFullYear()
 	const month = String(now.getMonth() + 1).padStart(2, '0')
 	const day = String(now.getDate()).padStart(2, '0')
