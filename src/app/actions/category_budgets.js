@@ -4,7 +4,6 @@ import { requireUser } from '@/lib/auth/require-user'
 import { revalidatePath } from 'next/cache'
 import {
 	EXPENSE_CATEGORIES,
-	CUSTOM_CATEGORY_OPTION,
 	normalizeCategory,
 } from '@/lib/constants/categories'
 
@@ -14,21 +13,21 @@ export async function setBudgetAllocation(formData) {
 	const { supabase, user } = await requireUser()
 
 	const selectedCategory = formData.get('category')?.trim()
-	const customCategory = formData.get('customCategory')?.trim()
 	const monthlyLimit = Number(formData.get('monthlyLimit'))
 	const budgetMonth = formData.get('budgetMonth')?.trim()
-	const isCustomCategory = selectedCategory === CUSTOM_CATEGORY_OPTION
+	// const customCategory = formData.get('customCategory')?.trim()
+	// const isCustomCategory = selectedCategory === CUSTOM_CATEGORY_OPTION
 	/*
 	 * If "__custom__" was selected, use the custom input.
 	 * Otherwise, use the selected predefined category.
 	 */
 
-	const rawCategory =
-		selectedCategory === CUSTOM_CATEGORY_OPTION
-			? customCategory
-			: selectedCategory
+	// const rawCategory =
+	// 	selectedCategory === CUSTOM_CATEGORY_OPTION
+	// 		? customCategory
+	// 		: selectedCategory
 
-	const category = normalizeCategory(rawCategory ?? '')
+	const category = normalizeCategory(selectedCategory ?? '')
 
 	// Make sure the user selected or entered a category.
 	if (!category) {
@@ -40,12 +39,8 @@ export async function setBudgetAllocation(formData) {
 	}
 
 	// A standard category must exist in the list
-	if (!isCustomCategory && !normalizedExpenseCategories.includes(category)) {
+	if (!normalizedExpenseCategories.includes(category)) {
 		throw new Error('Select a valid expense category.')
-	}
-	// Validate the custom category separately.
-	if (isCustomCategory && customCategory.length > 50) {
-		throw new Error('Custom category must be 50 characters or fewer.')
 	}
 
 	if (!Number.isFinite(monthlyLimit) || monthlyLimit <= 0) {
@@ -63,6 +58,15 @@ export async function setBudgetAllocation(formData) {
 	if (!budgetMonth || !/^\d{4}-(0[1-9]|1[0-2])-01$/.test(budgetMonth)) {
 		throw new Error('Select a valid budget month.')
 	}
+
+    // A standard category must exist in the list
+	// if (!isCustomCategory && !normalizedExpenseCategories.includes(category)) {
+	// 	throw new Error('Select a valid expense category.')
+	// }
+	// Validate the custom category separately.
+	// if (isCustomCategory && customCategory.length > 50) {
+	// 	throw new Error('Custom category must be 50 characters or fewer.')
+	// }
 
 	const { error } = await supabase.from('category_budgets').upsert(
 		{

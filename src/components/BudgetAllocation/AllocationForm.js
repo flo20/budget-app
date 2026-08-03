@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { setBudgetAllocation } from '@/app/actions/category_budgets'
-import { EXPENSE_CATEGORIES, CUSTOM_CATEGORY_OPTION } from '@/lib/constants/categories'
+import { EXPENSE_CATEGORIES } from '@/lib/constants/categories'
 
 import styles from './BudgetAllocation.module.scss'
 
@@ -29,8 +29,8 @@ export default function AllocationForm({
     selectedMonthlyLimit,
 	limitInputRef,
 }) {
-	const [customCategory, setCustomCategory] = useState('')
-	const isCustomCategory = selectedCategory === CUSTOM_CATEGORY_OPTION
+	// const [customCategory, setCustomCategory] = useState('')
+	// const isCustomCategory = selectedCategory === CUSTOM_CATEGORY_OPTION
 
 	const availableCategories = getAvailableCategories(
 		summary.categories,
@@ -55,7 +55,7 @@ export default function AllocationForm({
 					value={selectedCategory ?? ''}
 					onChange={(event) => {
 						setSelectedCategory(event.target.value)
-						setCustomCategory('')
+						// setCustomCategory('')
 					}}
 					required>
 					<option
@@ -71,10 +71,10 @@ export default function AllocationForm({
 							{category}
 						</option>
 					))}
-					<option value={CUSTOM_CATEGORY_OPTION}>Add a custom category</option>
+					{/* <option value={CUSTOM_CATEGORY_OPTION}>Add a custom category</option> */}
 				</select>
 			</label>
-
+{/* 
 			{isCustomCategory && (
 				<label>
 					<span>Custom category name</span>
@@ -89,7 +89,7 @@ export default function AllocationForm({
 						required
 					/>
 				</label>
-			)}
+			)} */}
 
 			<label>
 				<span>Monthly limit</span>

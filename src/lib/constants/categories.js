@@ -11,7 +11,7 @@ export const EXPENSE_CATEGORIES = [
 
 export const INCOME_CATEGORIES = ['Salary', 'Bonus', 'Freelance', 'Other']
 
-export const CUSTOM_CATEGORY_OPTION = '__custom__'
+// export const CUSTOM_CATEGORY_OPTION = '__custom__'
 
 //make custom categories case-insensitive
 export function normalizeCategory(value) {
