@@ -1,5 +1,5 @@
 import AssetInventory from '@/components/AssetInventory'
-import BudgetSummary from '@/components/BudgetSummary'
+import MonthlyPulse from '@/components/MonthlyPulse/MonthlyPulse'
 import LedgerStream from '@/components/LedgerStream/LedgerStream'
 import NavBar from '@/components/NavBar'
 import PinnedPayment from '@/components/PinnedPayments/PinnedPayment'
@@ -36,7 +36,7 @@ export default async function DashBoard({searchParams}) {
 				<SubNav />
 				<div className="contentWrapper">
 					<div className="leftCol">
-						<BudgetSummary />
+						<MonthlyPulse selectedMonth={selectedMonth} />
 						<PinnedPayment />
 						<BudgetAllocation selectedMonth={selectedMonth} />
 						<Notes selectedMonth={selectedMonth} />

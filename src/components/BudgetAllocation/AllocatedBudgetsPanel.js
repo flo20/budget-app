@@ -1,5 +1,5 @@
 import { toBudgetMonth } from '@/lib/utils/month'
-import { getBudgetAllocations } from '@/lib/queries/category_budgets'
+import { getBudgetAllocations } from '@/lib/queries/category-budgets'
 import { BudgetCategory } from './BudgetCategory'
 import { buildBudgetSummary } from '@/lib/budget/budget-summary'
 import { formatCurrency } from '@/lib/utils/currency'

@@ -1,6 +1,6 @@
 'use client'
 
-import { removeCategoryAllocation } from '@/app/actions/category_budgets'
+import { removeCategoryAllocation } from '@/app/actions/category-budgets'
 
 export default function RemoveAllocatedBudget({ category }) {
 	async function handleRemove() {

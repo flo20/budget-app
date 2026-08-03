@@ -1,6 +1,6 @@
 'use client'
 
-import { setBudgetAllocation } from '@/app/actions/category_budgets'
+import { setBudgetAllocation } from '@/app/actions/category-budgets'
 import { EXPENSE_CATEGORIES } from '@/lib/constants/categories'
 
 import styles from './BudgetAllocation.module.scss'
