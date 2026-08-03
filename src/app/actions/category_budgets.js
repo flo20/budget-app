@@ -134,7 +134,7 @@ export async function updateCategoryBudget(formData) {
 	}
 }
 
-export async function deleteCategoryBudget(budgetId) {
+export async function removeCategoryAllocation(budgetId) {
 	const { supabase, user } = await requireUser()
 
 	if (!budgetId) {
@@ -147,19 +147,19 @@ export async function deleteCategoryBudget(budgetId) {
 		.eq('id', budgetId)
 		.eq('user_id', user.id)
 		.select('id')
-        .maybeSingle()
+		.maybeSingle()
 
 	if (error) {
 		console.error('Unable to delete allocation:', error)
 		return { success: false, error: 'Unable to delete the allocation.' }
 	}
 
-    if (!data) {
-			return {
-				success: false,
-				error: 'Budget allocation was not found.',
-			}
+	if (!data) {
+		return {
+			success: false,
+			error: 'Budget allocation was not found.',
 		}
+	}
 
 	revalidatePath('/dashboard')
 

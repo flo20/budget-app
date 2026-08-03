@@ -26,9 +26,7 @@ export function BudgetCategory({ category, getStatusMessage }) {
 					<span>{formatCurrency(category.limit)}</span>
 				</p>
 			</header>
-
 			<p>{getStatusMessage(category)}</p>
-		
 		</article>
 	)
 }

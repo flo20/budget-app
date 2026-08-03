@@ -18,7 +18,7 @@ export default function EditCategoryBudgetLimit({ category }) {
 		setIsEditing(false)
 	}
 
-	async function handleSubmit(event) {
+	async function handleEdit(event) {
 		event.preventDefault()
 
 		const budgetLimit = category.limit
@@ -57,7 +57,7 @@ export default function EditCategoryBudgetLimit({ category }) {
 
 	if (isEditing) {
 		return (
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleEdit}>
 				<input
 					id={category.id}
 					name="monthlyLimit"

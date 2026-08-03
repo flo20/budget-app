@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import { setBudgetAllocation } from '@/app/actions/category_budgets'
 import { EXPENSE_CATEGORIES } from '@/lib/constants/categories'
 
@@ -12,8 +11,7 @@ function getAvailableCategories(allocatedCategories, unallocatedCategories) {
 	)
 
 	const transactionCategoryNames = unallocatedCategories.map(
-		(item) => item.category,
-	)
+		(item) => item.category)
 
 	return [
 		...new Set([...EXPENSE_CATEGORIES, ...transactionCategoryNames]),
@@ -25,8 +23,8 @@ export default function AllocationForm({
 	budgetMonth,
 	selectedCategory,
 	setSelectedCategory,
-    setSelectedMonthlyLimit,
-    selectedMonthlyLimit,
+	setSelectedMonthlyLimit,
+	selectedMonthlyLimit,
 	limitInputRef,
 }) {
 	// const [customCategory, setCustomCategory] = useState('')
@@ -74,7 +72,7 @@ export default function AllocationForm({
 					{/* <option value={CUSTOM_CATEGORY_OPTION}>Add a custom category</option> */}
 				</select>
 			</label>
-{/* 
+			{/* 
 			{isCustomCategory && (
 				<label>
 					<span>Custom category name</span>
@@ -93,10 +91,9 @@ export default function AllocationForm({
 
 			<label>
 				<span>Monthly limit</span>
-
 				<input
 					ref={limitInputRef}
-                    value={selectedMonthlyLimit ?? ""}
+					value={selectedMonthlyLimit ?? ''}
 					onChange={(event) => setSelectedMonthlyLimit(event.target.value)}
 					name="monthlyLimit"
 					type="number"
