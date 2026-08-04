@@ -1,4 +1,4 @@
-import AssetInventory from '@/components/Assets/AssetInventory'
+import AssetCard from '@/components/Assets/AssetCard'
 import MonthlyPulse from '@/components/MonthlyPulse/MonthlyPulse'
 import LedgerStream from '@/components/LedgerStream/LedgerStream'
 import NavBar from '@/components/NavBar'
@@ -43,7 +43,7 @@ export default async function DashBoard({searchParams}) {
 					</div>
 					<div className="rightCol">
 						<Chart />
-						<AssetInventory />
+						<AssetCard />
 						<LedgerStream />
 					</div>
 				</div>

@@ -37,12 +37,12 @@ export default async function MonthlyPulse({ selectedMonth }) {
 
 				{/* <strong>{formatCurrency(summary.netWorth)}</strong> */}
 
-				{/* <p>
+				<p>
 					{formatCurrency(summary.totalAssets)} assets
-					<span aria-hidden="true"> − </span>
+					{/* <span aria-hidden="true"> − </span>
 					<span>minus</span>
-					{formatCurrency(summary.totalLiabilities)} liabilities
-				</p> */}
+					{formatCurrency(summary.totalLiabilities)} liabilities */}
+				</p>
 			</article>
 		</section>
 	)

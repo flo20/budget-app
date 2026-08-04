@@ -1,6 +1,6 @@
 import { createAsset } from '@/app/actions/assets'
 
-import styles from './AssetInventory.module.scss'
+// import styles from './AssetInventory.module.scss'
 
 
 export default function AssetForm() {
