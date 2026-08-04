@@ -1,9 +1,9 @@
 import 'server-only'
 
-import { createClient } from '../supabase/server'
+import { requireUser } from '../auth/require-user'
 
 export async function getPinnedPayments() {
-	const  supabase  = await createClient()
+	const {supabase, user} = await requireUser()
 
 	const { data, error } = await supabase
 		.from('pinned_payments')
@@ -19,6 +19,7 @@ export async function getPinnedPayments() {
 			created_at
             `,
 		)
+		.eq('user_id', user.id)
 		.eq('is_paid', false)
 		.order('due_date', { ascending: true })
 

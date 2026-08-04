@@ -19,4 +19,5 @@ export function normalizeCategory(value) {
     .replace(/\b\p{L}/gu, (letter) => letter.toUpperCase())
 }
 
+export const ASSET_TYPES = ['cash', 'investment', 'property', 'retirement', 'other']
 // export const CUSTOM_CATEGORY_OPTION = '__custom__'

@@ -1,20 +1,10 @@
 import 'server-only'
 
-import { createClient } from '../supabase/server'
-import { redirect } from 'next/navigation'
+import { requireUser } from '../auth/require-user'
 
 export async function getTransactions() {
-	const supabase = await createClient()
-
-	const {
-		data: { user },
-		error: userError,
-	} = await supabase.auth.getUser()
-
-	if (userError || !user) {
-		redirect('/signin')
-	}
-
+    const {supabase, user} = await requireUser()
+    
 	const { data, error } = await supabase
 		.from('transactions')
 		.select(
@@ -30,6 +20,7 @@ export async function getTransactions() {
 				created_at
 			`,
 		)
+		.eq('user_id', user.id)
 		.order('transaction_date', { ascending: false })
 		.order('created_at', { ascending: false })
 

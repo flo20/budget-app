@@ -1,4 +1,4 @@
-import AssetInventory from '@/components/AssetInventory'
+import AssetInventory from '@/components/Assets/AssetInventory'
 import MonthlyPulse from '@/components/MonthlyPulse/MonthlyPulse'
 import LedgerStream from '@/components/LedgerStream/LedgerStream'
 import NavBar from '@/components/NavBar'

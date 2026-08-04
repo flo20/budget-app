@@ -1,14 +1,14 @@
 import 'server-only'
 
-import { createClient } from '../supabase/server'
+import { requireUser } from '../auth/require-user'
 
-export async function getBudgetNotes(budgetMonth){
-    const  supabase  = await createClient()
+export async function getBudgetNotes(budgetMonth) {
+	const { supabase, user } = await requireUser()
 
-    const { data, error } = await supabase
-			.from('budget_notes')
-			.select(
-				`
+	const { data, error } = await supabase
+		.from('budget_notes')
+		.select(
+			`
 			id,
 			content,
 			budget_month,
@@ -16,17 +16,18 @@ export async function getBudgetNotes(budgetMonth){
 			resolved_at,
 			created_at
 		`,
-			)
-			.eq('budget_month', budgetMonth)
-			.order('created_at', {
-				ascending: false,
-			})
+		)
+		.eq('user_id', user.id)
+		.eq('budget_month', budgetMonth)
+		.order('created_at', {
+			ascending: false,
+		})
 
-		if (error) {
-			console.error('Unable to retrieve budget notes:', error)
+	if (error) {
+		console.error('Unable to retrieve budget notes:', error)
 
-			throw new Error('Unable to retrieve budget notes.')
-		}
+		throw new Error('Unable to retrieve budget notes.')
+	}
 
 	return data ?? []
 }
