@@ -60,6 +60,11 @@ export default function ThemeProvider({ children }) {
 	const openPinnedModal = () => openModal('pinned')
 	const closePinnedModal = () => closeModal()
 
+    //Asset Modal
+    const showAssetModal = activeModal === 'asset'
+    const openAssetModal = () => openModal('asset')
+    const closeAssetModal = () => closeModal()
+
 	return (
 		<GlobalContext.Provider
 			value={{
@@ -74,6 +79,9 @@ export default function ThemeProvider({ children }) {
 				showPinnedModal,
 				openPinnedModal,
 				closePinnedModal,
+				showAssetModal,
+				openAssetModal,
+				closeAssetModal,
 			}}>
 			{children}
 		</GlobalContext.Provider>

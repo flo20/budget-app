@@ -1,34 +1,35 @@
-import AssetCard from '@/components/Assets/AssetCard'
+import AssetCard from '@/components/AssetsAllocation/AssetHeader'
 import MonthlyPulse from '@/components/MonthlyPulse/MonthlyPulse'
 import LedgerStream from '@/components/LedgerStream/LedgerStream'
 import NavBar from '@/components/NavBar'
 import PinnedPayment from '@/components/PinnedPayments/PinnedPayment'
 import QuickEntryButton from '@/components/NewEntry/QuickEntryButton'
+import BudgetAllocation from '@/components/BudgetAllocation/BudgetAllocation'
+import AssetAllocation from '@/components/AssetsAllocation/AssetAllocation'
 import SubNav from '@/components/SubNav'
 import Notes from '@/components/BudgetNotes/Notes'
-import {Chart} from '@/components/Chart'
-
+import { Chart } from '@/components/Chart'
 
 import { redirect } from 'next/navigation'
 
 import { createClient } from '@/lib/supabase/server'
 import { normalizeMonth } from '@/lib/utils/month'
 
-import "@/app/globals.css"
-import BudgetAllocation from '@/components/BudgetAllocation/BudgetAllocation'
+import '@/app/globals.css'
 
+export default async function DashBoard({ searchParams }) {
+	const supabase = await createClient()
+	const {
+		data: { user },
+	} = await supabase.auth.getUser()
 
-export default async function DashBoard({searchParams}) {
-    const supabase = await createClient()
-    const {data:{user}} = await supabase.auth.getUser();
-
-    const params = await searchParams
+	const params = await searchParams
 	const selectedMonth = normalizeMonth(params?.month)
 
-    if(!user){
-        redirect("/signup")
-    }
-    
+	if (!user) {
+		redirect('/signup')
+	}
+
 	return (
 		<>
 			<div>
@@ -43,7 +44,7 @@ export default async function DashBoard({searchParams}) {
 					</div>
 					<div className="rightCol">
 						<Chart />
-						<AssetCard />
+						<AssetAllocation />
 						<LedgerStream />
 					</div>
 				</div>
