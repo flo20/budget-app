@@ -87,3 +87,65 @@ export async function createSavingsGoal(formData) {
 			error: null,
 		}
 }
+
+export async function contributeToSavingsGoal(formData) {
+	const { supabase, user } = await requireUser()
+
+	const goalId = formData.get('goalId')
+	const contributionAmount = Number(formData.get('amount'))
+
+	if (!goalId) {
+		throw new Error('Savings goal ID is required.')
+	}
+
+	if (!Number.isFinite(contributionAmount) || contributionAmount <= 0) {
+		throw new Error('Enter a valid contribution amount.')
+	}
+
+	const { data: goal, error: goalError } = await supabase
+		.from('savings_goals')
+		.select('id, saved_amount, target_amount, status')
+		.eq('id', goalId)
+		.eq('user_id', user.id)
+		.single()
+
+	if (goalError || !goal) {
+		console.error('Unable to retrieve savings goal:', goalError)
+		throw new Error('Savings goal could not be found.')
+	}
+
+	if (goal.status !== 'active') {
+		throw new Error('You can only contribute to an active goal.')
+	}
+
+	const currentSavedAmount = Number(goal.saved_amount)
+	const targetAmount = Number(goal.target_amount)
+
+	const newSavedAmount = currentSavedAmount + contributionAmount
+
+	const isCompleted = newSavedAmount >= targetAmount
+
+	const { error: updateError } = await supabase
+		.from('savings_goals')
+		.update({
+			saved_amount: newSavedAmount,
+			status: isCompleted ? 'completed' : 'active',
+			completed_at: isCompleted ? new Date().toISOString() : null,
+			updated_at: new Date().toISOString(),
+		})
+		.eq('id', goalId)
+		.eq('user_id', user.id)
+
+	if (updateError) {
+		console.error('Unable to update savings goal:', updateError)
+
+		throw new Error('Unable to add the contribution.')
+	}
+
+	revalidatePath('/dashboard')
+
+	return {
+		success: true,
+		error: null,
+	}
+}
