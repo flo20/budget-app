@@ -4,7 +4,7 @@ import { useModal, useMount } from '@/app/providers/GlobalProvider'
 import Modal from '../Modal/Modal'
 import GoalForm from './GoalForm'
 
-export default function GoalCard() {
+export default function GoalCard({ goals }) {
 	const { openGoalModal, closeGoalModal, showGoalModal } = useModal()
 	const { mounted } = useMount()
 
