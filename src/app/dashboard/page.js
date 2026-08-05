@@ -1,4 +1,3 @@
-import AssetCard from '@/components/AssetsAllocation/AssetHeader'
 import MonthlyPulse from '@/components/MonthlyPulse/MonthlyPulse'
 import LedgerStream from '@/components/LedgerStream/LedgerStream'
 import NavBar from '@/components/NavBar/NavBar'
@@ -8,6 +7,7 @@ import BudgetAllocation from '@/components/BudgetAllocation/BudgetAllocation'
 import AssetAllocation from '@/components/AssetsAllocation/AssetAllocation'
 import SubNav from '@/components/NavBar/SubNav'
 import Notes from '@/components/BudgetNotes/Notes'
+import SavingsGoals from '@/components/SavingsGoals/SavingsGoals'
 import { Chart } from '@/components/Chart'
 
 import { redirect } from 'next/navigation'
@@ -44,6 +44,7 @@ export default async function DashBoard({ searchParams }) {
 					</div>
 					<div className="rightCol">
 						<Chart />
+                        <SavingsGoals/>
 						<AssetAllocation />
 						<LedgerStream />
 					</div>

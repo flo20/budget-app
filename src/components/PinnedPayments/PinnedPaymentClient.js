@@ -48,7 +48,7 @@ export default function PinnedPaymentClient({ pinnedPayments = [] }) {
 				showModal={showPinnedModal}
 				closeModal={closePinnedModal}
 				mounted={mounted}>
-				<PinnedPaymentForm closeModal={closePinnedModal} />
+				<PinnedPaymentForm />
 			</Modal>
 		</>
 	)

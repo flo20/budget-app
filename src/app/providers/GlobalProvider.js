@@ -65,6 +65,11 @@ export default function ThemeProvider({ children }) {
     const openAssetModal = () => openModal('asset')
     const closeAssetModal = () => closeModal()
 
+    // Savings Goal Modal
+    const showGoalModal = activeModal === 'goal'
+    const openGoalModal = () => openModal('goal')
+    const closeGoalModal = () => closeModal()
+
 	return (
 		<GlobalContext.Provider
 			value={{
@@ -82,6 +87,9 @@ export default function ThemeProvider({ children }) {
 				showAssetModal,
 				openAssetModal,
 				closeAssetModal,
+				showGoalModal,
+				openGoalModal,
+				closeGoalModal,
 			}}>
 			{children}
 		</GlobalContext.Provider>
