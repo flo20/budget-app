@@ -1,23 +1,45 @@
-import GoalCard from './GoalCard'
-import ContributeButton from './ContributeButton'
+'use client'
 
-export default async function GoalsSummary({ goals }) {
-	// console.log("goals", goals)
+import { useState } from 'react'
+import { formatCurrency } from '@/lib/utils/currency'
+import ContributeForm from './ContributeForm'
+
+export default function GoalsSummary({ goals }) {
+	const [contributionGoalId, setContributionGoalId] = useState(null)
 	return (
 		<>
-			<div>
-				{goals.map((goal) => (
+			{goals.map((goal) => {
+				const isContributing = contributionGoalId === goal.id
+
+				return (
 					<div key={goal.id}>
 						<h5> {goal.name}</h5>
 						<h5> {goal.status}</h5>
 						<h5> {goal.due_date}</h5>
-						<h5> {goal.saved_amount}</h5>
-						<h5> {goal.target_amount}</h5>
+						<p>
+							{formatCurrency(goal.saved_amount)}
+							{' / '}
+							{formatCurrency(goal.target_amount)}
+						</p>
 						<h5> {goal.completed_at}</h5>
-                        <ContributeButton goal={goal}/>
+
+						{isContributing ? (
+							<ContributeForm
+								goal={goal}
+								closeForm={() => setContributionGoalId(null)}
+							/>
+						) : (
+							<button
+								type="button"
+								onClick={() => {
+									setContributionGoalId(goal.id)
+								}}>
+								+ Contribute
+							</button>
+						)}
 					</div>
-				))}
-			</div>
+				)
+			})}
 		</>
 	)
 }

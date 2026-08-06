@@ -47,13 +47,6 @@ export async function createSavingsGoal(formData) {
 	}
 
 	if (!isCustomCategory && !SAVINGS_GOAL_CATEGORY_VALUES.includes(category)) {
-		console.log({
-			selectedCategory,
-			category,
-			isCustomCategory,
-			allowedCategories: SAVINGS_GOAL_CATEGORY_VALUES,
-		})
-
 		throw new Error('Select a valid category.')
 	}
 	if (dueDate && !/^\d{4}-\d{2}-\d{2}$/.test(dueDate)) {

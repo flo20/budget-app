@@ -11,10 +11,9 @@ import {
 const GlobalContext = createContext(undefined)
 
 function getInitialTheme() {
-
-    if (typeof window === 'undefined') {
-			return 'light'
-		}
+	if (typeof window === 'undefined') {
+		return 'light'
+	}
 	try {
 		const theme = document.documentElement.getAttribute('data-theme')
 		return theme === 'dark' ? 'dark' : 'light'
@@ -60,15 +59,20 @@ export default function ThemeProvider({ children }) {
 	const openPinnedModal = () => openModal('pinned')
 	const closePinnedModal = () => closeModal()
 
-    //Asset Modal
-    const showAssetModal = activeModal === 'asset'
-    const openAssetModal = () => openModal('asset')
-    const closeAssetModal = () => closeModal()
+	//Asset Modal
+	const showAssetModal = activeModal === 'asset'
+	const openAssetModal = () => openModal('asset')
+	const closeAssetModal = () => closeModal()
 
-    // Savings Goal Modal
-    const showGoalModal = activeModal === 'goal'
-    const openGoalModal = () => openModal('goal')
-    const closeGoalModal = () => closeModal()
+	// Savings Goal Modal
+	const showGoalModal = activeModal === 'goal'
+	const openGoalModal = () => openModal('goal')
+	const closeGoalModal = () => closeModal()
+
+	// Contribute Modal
+	const showContributeModal = activeModal === 'contribute'
+	const openContributeModal = () => openModal('contribute')
+	const closeContributeModal = () => closeModal()
 
 	return (
 		<GlobalContext.Provider
@@ -90,6 +94,9 @@ export default function ThemeProvider({ children }) {
 				showGoalModal,
 				openGoalModal,
 				closeGoalModal,
+				showContributeModal,
+				openContributeModal,
+				closeContributeModal,
 			}}>
 			{children}
 		</GlobalContext.Provider>
