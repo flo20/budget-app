@@ -2,10 +2,20 @@
 
 import { useState } from 'react'
 import { formatCurrency } from '@/lib/utils/currency'
+import { deleteSavedGoal } from '@/app/actions/savings-goals'
 import ContributeForm from './ContributeForm'
 
 export default function GoalsSummary({ goals }) {
 	const [contributionGoalId, setContributionGoalId] = useState(null)
+
+        async function handleDelete(goal) {
+					const result = await deleteSavedGoal(goal.id)
+
+					if (!result.success) {
+						console.error(result.error)
+						return
+					}
+				}
 	return (
 		<>
 			{goals.map((goal) => {
@@ -37,6 +47,11 @@ export default function GoalsSummary({ goals }) {
 								+ Contribute
 							</button>
 						)}
+						<button
+							type="button"
+							onClick={() => handleDelete(goal)}>
+							Delete
+						</button>
 					</div>
 				)
 			})}

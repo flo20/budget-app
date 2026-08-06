@@ -142,3 +142,38 @@ export async function contributeToSavingsGoal(formData) {
 		error: null,
 	}
 }
+
+export async function deleteSavedGoal(goalId) {
+    const { supabase, user } = await requireUser()
+
+		if (!goalId) {
+			throw new Error('Saved goal ID is required.')
+		}
+
+		const { data, error } = await supabase
+			.from('savings_goals')
+			.delete()
+			.eq('id', goalId)
+			.eq('user_id', user.id)
+			.select('id')
+			.maybeSingle()
+
+		if (error) {
+			console.error('Unable to delete goal:', error)
+			return { success: false, error: 'Unable to delete the saved goal.' }
+		}
+
+		if (!data) {
+			return {
+				success: false,
+				error: 'Saved goal was not found.',
+			}
+		}
+
+		revalidatePath('/dashboard')
+
+		return {
+			success: true,
+			error: null,
+		}
+}
