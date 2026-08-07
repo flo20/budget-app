@@ -1,12 +1,11 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
 import { requireUser } from '@/lib/auth/require-user'
+import { revalidatePath } from 'next/cache'
 
 export async function createPinPayment (formData) {
     const {supabase, user} = await requireUser()
     
-
 	// Names received from the form fields
 	const label = formData.get('label')?.trim()
 	const amount = Number(formData.get('amount'))

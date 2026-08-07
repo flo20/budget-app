@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { createTransactions } from '@/app/actions/transactions'
-import { EXPENSE_CATEGORIES, INCOME_CATEGORIES } from '@/lib/constants/categories'
+import { EXPENSE_CATEGORIES, INCOME_CATEGORIES } from '@/lib/constants/transaction-categories'
 
 import styles from './NewEntryForm.module.scss'
 

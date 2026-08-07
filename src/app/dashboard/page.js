@@ -8,7 +8,7 @@ import AssetAllocation from '@/components/AssetsAllocation/AssetAllocation'
 import SubNav from '@/components/NavBar/SubNav'
 import Notes from '@/components/BudgetNotes/Notes'
 import SavingsGoals from '@/components/SavingsGoals/SavingsGoals'
-import { Chart } from '@/components/Chart'
+import { Chart } from '@/components/Chart/Chart'
 
 import { redirect } from 'next/navigation'
 

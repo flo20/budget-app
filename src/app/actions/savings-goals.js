@@ -1,12 +1,12 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
 import { requireUser } from '@/lib/auth/require-user'
+import { revalidatePath } from 'next/cache'
 import {
 	SAVINGS_GOAL_CATEGORY_VALUES,
 	CUSTOM_CATEGORY_OPTION,
-	normalizeCategory,
-} from '@/lib/constants/categories'
+} from '../../lib/constants/saving-goals'
+import { normalizeCategory } from '@/lib/utils/category'
 
 export async function createSavingsGoal(formData) {
 	const { supabase, user } = await requireUser()
@@ -75,10 +75,10 @@ export async function createSavingsGoal(formData) {
 
 	revalidatePath('/dashboard')
 
-    return {
-			success: true,
-			error: null,
-		}
+	return {
+		success: true,
+		error: null,
+	}
 }
 
 export async function contributeToSavingsGoal(formData) {
@@ -144,36 +144,36 @@ export async function contributeToSavingsGoal(formData) {
 }
 
 export async function deleteSavedGoal(goalId) {
-    const { supabase, user } = await requireUser()
+	const { supabase, user } = await requireUser()
 
-		if (!goalId) {
-			throw new Error('Saved goal ID is required.')
-		}
+	if (!goalId) {
+		throw new Error('Saved goal ID is required.')
+	}
 
-		const { data, error } = await supabase
-			.from('savings_goals')
-			.delete()
-			.eq('id', goalId)
-			.eq('user_id', user.id)
-			.select('id')
-			.maybeSingle()
+	const { data, error } = await supabase
+		.from('savings_goals')
+		.delete()
+		.eq('id', goalId)
+		.eq('user_id', user.id)
+		.select('id')
+		.maybeSingle()
 
-		if (error) {
-			console.error('Unable to delete goal:', error)
-			return { success: false, error: 'Unable to delete the saved goal.' }
-		}
+	if (error) {
+		console.error('Unable to delete goal:', error)
+		return { success: false, error: 'Unable to delete the saved goal.' }
+	}
 
-		if (!data) {
-			return {
-				success: false,
-				error: 'Saved goal was not found.',
-			}
-		}
-
-		revalidatePath('/dashboard')
-
+	if (!data) {
 		return {
-			success: true,
-			error: null,
+			success: false,
+			error: 'Saved goal was not found.',
 		}
+	}
+
+	revalidatePath('/dashboard')
+
+	return {
+		success: true,
+		error: null,
+	}
 }

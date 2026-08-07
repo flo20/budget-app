@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { formatCurrency } from '@/lib/utils/currency'
+import { formatCurrency } from '@/lib/utils/format'
 import { deleteSavedGoal } from '@/app/actions/savings-goals'
 import ContributeForm from './ContributeForm'
 

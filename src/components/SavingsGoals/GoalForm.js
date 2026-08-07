@@ -4,7 +4,7 @@ import { useState } from 'react'
 import {
 	CUSTOM_CATEGORY_OPTION,
 	SAVINGS_GOAL_CATEGORIES,
-} from '@/lib/constants/categories'
+} from '@/lib/constants/saving-goals'
 import { createSavingsGoal } from '@/app/actions/savings-goals'
 import { useModal } from '@/app/providers/GlobalProvider'
 

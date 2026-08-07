@@ -1,4 +1,4 @@
-import { toValidNumber } from "../utils/number-parsing"
+import { toValidNumber } from '../utils/number-parsing'
 
 export function buildMonthlyPulseSummary({ transactions, assets }) {
 	const transactionTotals = transactions.reduce(
@@ -21,16 +21,16 @@ export function buildMonthlyPulseSummary({ transactions, assets }) {
 		},
 	)
 
-    	const totalAssets = assets.reduce((total, asset) => {
-				return total + toValidNumber(asset.current_value)
-			}, 0)
+	const totalAssets = assets.reduce((total, asset) => {
+		return total + toValidNumber(asset.current_value)
+	}, 0)
 
-			// const totalLiabilities = liabilities.reduce((total, liability) => {
-			// 	return total + toValidNumber(liability.current_balance)
-			// }, 0)
+	// const totalLiabilities = liabilities.reduce((total, liability) => {
+	// 	return total + toValidNumber(liability.current_balance)
+	// }, 0)
 
 	const remaining = transactionTotals.income - transactionTotals.outflow
-    // const netWorth = totalAssets - totalLiabilities
+	// const netWorth = totalAssets - totalLiabilities
 
 	return {
 		income: transactionTotals.income,

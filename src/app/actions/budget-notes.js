@@ -1,11 +1,8 @@
-"use server"
+'use server'
 
 import { requireUser } from '@/lib/auth/require-user'
 import { revalidatePath } from 'next/cache'
-
-function isValidBudgetMonth(value) {
-	return /^\d{4}-(0[1-9]|1[0-2])-01$/.test(value)
-}
+import { isValidBudgetMonth } from '@/lib/utils/month'
 
 export async function createBudgetNotes(formData) {
 	const { supabase, user } = await requireUser()
@@ -150,6 +147,3 @@ export async function deleteBudgetNote(formData) {
 
 	revalidatePath('/dashboard')
 }
-
-
-

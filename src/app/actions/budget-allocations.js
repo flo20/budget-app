@@ -2,10 +2,8 @@
 
 import { requireUser } from '@/lib/auth/require-user'
 import { revalidatePath } from 'next/cache'
-import {
-	EXPENSE_CATEGORIES,
-	normalizeCategory,
-} from '@/lib/constants/categories'
+import { EXPENSE_CATEGORIES } from '@/lib/constants/transaction-categories'
+import { normalizeCategory } from '@/lib/utils/category'
 
 const normalizedExpenseCategories = EXPENSE_CATEGORIES.map(normalizeCategory)
 

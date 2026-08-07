@@ -1,11 +1,11 @@
 'use client'
 
 import { useRef, useState, useEffect } from 'react'
-import { formatCurrency } from '@/lib/utils/currency'
+import { formatCurrency } from '@/lib/utils/format'
 
 import AllocationForm from './AllocationForm'
 
-export default function BudgetInteractive({
+export default function AllocationManager({
 	summary,
 	budgetMonth,
 	unallocatedCategories,
@@ -25,15 +25,13 @@ export default function BudgetInteractive({
 	limitInputRef.current?.scrollIntoView({
 		behavior: 'smooth',
 		block: 'center',
-	})
+	}) 
 }, [selectedCategory])
 
 	function handleAllocate(category) {
 		setSelectedCategory(category.category)
         setSelectedMonthlyLimit(category.spent)
 	}
-
-    
 
 	return (
 		<>

@@ -1,5 +1,4 @@
 export function buildBudgetSummary(budgets, transactions) {
-
 	const spendingByCategory = transactions.reduce((totals, transaction) => {
 		const category = transaction.category
 		const amount = Number(transaction.amount)

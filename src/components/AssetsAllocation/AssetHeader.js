@@ -4,7 +4,7 @@ import { useModal, useMount } from '@/app/providers/GlobalProvider'
 import AssetForm from './AssetForm'
 import Modal from '../Modal/Modal'
 
-import styles from './AssetInventory.module.scss'
+//import styles from './AssetInventory.module.scss'
 
 export default function AssetCard() {
 	const { showAssetModal, openAssetModal, closeAssetModal } = useModal()

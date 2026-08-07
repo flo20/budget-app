@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { editBudgetNote } from '@/app/actions/budget-notes'
 
-
 export default function EditNotes({ note }) {
 	const [isEditing, setIsEditing] = useState(false)
 
@@ -58,14 +57,8 @@ export default function EditNotes({ note }) {
 
 	if (isEditing) {
 		return (
-			<form
-				onSubmit={handleSubmit}
-				>
-				<label
-					htmlFor={`note-${note.id}`}
-					>
-					Edit
-				</label>
+			<form onSubmit={handleSubmit}>
+				<label htmlFor={`note-${note.id}`}>Edit</label>
 
 				<input
 					id={`note-${note.id}`}
@@ -94,13 +87,7 @@ export default function EditNotes({ note }) {
 					Cancel
 				</button>
 
-				{error && (
-					<p
-						
-						role="alert">
-						{error}
-					</p>
-				)}
+				{error && <p role="alert">{error}</p>}
 			</form>
 		)
 	}

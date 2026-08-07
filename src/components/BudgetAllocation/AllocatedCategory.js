@@ -1,7 +1,6 @@
-import { formatCurrency } from '@/lib/utils/currency'
+import { formatCurrency } from '@/lib/utils/format'
 
-export function BudgetCategory({ category, getStatusMessage }) {
-    
+export default function AllocatedCategory({ category, getStatusMessage }) {
 	function getStatusMessage(category) {
 		if (category.status === 'over') {
 			return `${formatCurrency(Math.abs(category.remaining))} over budget`

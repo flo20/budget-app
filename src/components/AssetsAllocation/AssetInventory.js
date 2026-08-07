@@ -1,31 +1,24 @@
-import { getAssets } from "@/lib/queries/assets"
-import { buildAssetSummary } from "@/lib/assets/asset-summary";
-import { formatPercentage } from '@/lib/utils/number-parsing'
-import { formatCurrency } from "@/lib/utils/currency";
+import { getAssets } from '@/lib/queries/assets'
+import { buildAssetSummary } from '@/lib/assets/asset-summary'
+import { formatCurrency, formatPercentage } from '@/lib/utils/format'
 
-export default async function AssetInventory () {
+export default async function AssetInventory() {
+	const assets = await getAssets()
 
-    const assets = await getAssets()
+	const summary = buildAssetSummary(assets)
 
-    const summary = buildAssetSummary(assets)
-
-    
 	return (
 		<div>
 			{summary.holdingsCount === 0 ? (
 				<div>
 					<p className={styles.emptyTitle}>No assets recorded</p>
 
-					<p >
-						Add your first asset to see how your holdings are distributed.
-					</p>
+					<p>Add your first asset to see how your holdings are distributed.</p>
 				</div>
 			) : (
 				<>
-					<div >
+					<div>
 						<div
-							
-							
 							role="img"
 							aria-label={`Asset allocation chart showing ${summary.allocations
 								.map(
@@ -38,26 +31,21 @@ export default async function AssetInventory () {
 							<div />
 						</div>
 
-						<div >
-							<strong >
-								{formatCurrency(summary.totalAssets)}
-							</strong>
+						<div>
+							<strong>{formatCurrency(summary.totalAssets)}</strong>
 
-							<p >
+							<p>
 								Total assets ·{' '}
 								{summary.allocations.length > 1
 									? 'Diversified'
 									: 'Single asset class'}
 							</p>
 
-							<ul >
+							<ul>
 								{summary.allocations.map((allocation) => (
-									<li
-										key={allocation.assetType}
-										>
-										<span >
+									<li key={allocation.assetType}>
+										<span>
 											<span
-												
 												style={{
 													backgroundColor: allocation.color,
 												}}
@@ -72,7 +60,7 @@ export default async function AssetInventory () {
 							</ul>
 
 							{summary.largestAllocation && (
-								<p >
+								<p>
 									<strong>{summary.largestAllocation.label}</strong> is your
 									largest position at{' '}
 									{formatPercentage(summary.largestAllocation.percentage)}.
@@ -81,9 +69,8 @@ export default async function AssetInventory () {
 						</div>
 					</div>
 
-
-					<div >
-						<header >
+					<div>
+						<header>
 							<h3>Holdings</h3>
 
 							<span>
@@ -92,13 +79,10 @@ export default async function AssetInventory () {
 							</span>
 						</header>
 
-						<ul >
+						<ul>
 							{summary.holdings.map((holding) => (
-								<li
-									key={holding.id}
-									>
+								<li key={holding.id}>
 									<span
-										
 										style={{
 											color: holding.color,
 										}}
@@ -106,7 +90,7 @@ export default async function AssetInventory () {
 										{holding.assetType === 'property' ? '▤' : '⌁'}
 									</span>
 
-									<div >
+									<div>
 										<strong>{holding.name}</strong>
 
 										<span>
@@ -115,9 +99,7 @@ export default async function AssetInventory () {
 										</span>
 									</div>
 
-									<strong >
-										{formatCurrency(holding.value)}
-									</strong>
+									<strong>{formatCurrency(holding.value)}</strong>
 								</li>
 							))}
 						</ul>

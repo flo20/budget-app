@@ -25,12 +25,6 @@ export function changeMonth(value, change) {
 	return date.toISOString().slice(0, 7)
 }
 
-export function formatMonth(value) {
-	const [year, month] = value.split('-').map(Number)
-
-	return new Intl.DateTimeFormat('en-US', {
-		month: 'long',
-		year: 'numeric',
-		timeZone: 'UTC',
-	}).format(new Date(Date.UTC(year, month - 1, 1)))
+export function isValidBudgetMonth(value) {
+    return /^\d{4}-(0[1-9]|1[0-2])-01$/.test(value)
 }

@@ -1,18 +1,9 @@
-"use client"
+'use client'
 
-import { formatMonth} from '@/lib/utils/month'
+import { formatTimestamp, formatMonth } from '@/lib/utils/format'
 import { deleteBudgetNote, toggleBudgetNote } from '@/app/actions/budget-notes'
-import EditNotes from './EditNotes'
 
-function formatTimestamp(value) {
-	return new Intl.DateTimeFormat('en-US', {
-		month: 'short',
-		day: 'numeric',
-		hour: 'numeric',
-		minute: '2-digit',
-		timeZone: 'Asia/Dubai',
-	}).format(new Date(value))
-}
+import EditNotes from './EditNotes'
 
 export default function NotesContent({ notes, selectedMonth, budgetMonth }) {
 	return (
@@ -63,8 +54,7 @@ export default function NotesContent({ notes, selectedMonth, budgetMonth }) {
 							</form>
 
 							<div>
-                                
-								<EditNotes note={note}/>
+								<EditNotes note={note} />
 
 								<time dateTime={note.created_at}>
 									{formatTimestamp(note.created_at)}

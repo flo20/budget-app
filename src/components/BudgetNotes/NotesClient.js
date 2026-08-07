@@ -1,7 +1,9 @@
 'use client'
 
 import { createBudgetNotes } from '@/app/actions/budget-notes'
-import { formatMonth, changeMonth } from '@/lib/utils/month'
+import { changeMonth } from '@/lib/utils/month'
+import {formatMonth} from '@/lib/utils/format'
+
 import Link from 'next/link'
 
 export default function NotesClient({ notes, selectedMonth, budgetMonth }) {

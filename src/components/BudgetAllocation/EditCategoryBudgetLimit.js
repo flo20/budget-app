@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { updateCategoryBudget } from '@/app/actions/category-budgets'
+import { updateCategoryBudget } from '@/app/actions/budget-allocations'
 
 export default function EditCategoryBudgetLimit({ category }) {
 	const [isEditing, setIsEditing] = useState(false)
