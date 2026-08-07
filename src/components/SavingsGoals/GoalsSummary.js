@@ -1,23 +1,42 @@
 'use client'
 
 import { useState } from 'react'
+
 import { formatCurrency } from '@/lib/utils/format'
 import { deleteSavedGoal } from '@/app/actions/savings-goals'
+import { useModal, useMount } from '@/app/providers/GlobalProvider'
+
 import ContributeForm from './ContributeForm'
+import GoalForm from './GoalForm'
+import Modal from '../Modal/Modal'
 
 export default function GoalsSummary({ goals }) {
 	const [contributionGoalId, setContributionGoalId] = useState(null)
 
-        async function handleDelete(goal) {
-					const result = await deleteSavedGoal(goal.id)
+	const { openGoalModal, closeGoalModal, showGoalModal } = useModal()
+	const { mounted } = useMount()
 
-					if (!result.success) {
-						console.error(result.error)
-						return
-					}
-				}
+	async function handleDelete(goal) {
+		const result = await deleteSavedGoal(goal.id)
+
+		if (!result?.success) {
+			console.error(result.error)
+			return
+		}
+	}
 	return (
-		<>
+		<section>
+			<header>
+				<h4> Savings goal</h4>
+				<button onClick={openGoalModal}>New Goal</button>
+			</header>
+
+			<Modal
+				showModal={showGoalModal}
+				closeModal={closeGoalModal}
+				mounted={mounted}>
+				<GoalForm />
+			</Modal>
 			{goals.map((goal) => {
 				const isContributing = contributionGoalId === goal.id
 
@@ -55,6 +74,6 @@ export default function GoalsSummary({ goals }) {
 					</div>
 				)
 			})}
-		</>
+		</section>
 	)
 }

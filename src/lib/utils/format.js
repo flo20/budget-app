@@ -5,6 +5,17 @@ export function formatCurrency(amount) {
 	}).format(amount)
 }
 
+export const formatTransactionCurrency = (transaction) => {
+	const formattedAmount = new Intl.NumberFormat('en-US', {
+		style: 'currency',
+		currency: 'USD',
+	}).format(Number(transaction?.amount))
+
+	return transaction?.transaction_type === 'income'
+		? `+${formattedAmount}`
+		: `-${formattedAmount}`
+}
+
 export function formatPercentage(percentage) {
 	if (!Number.isFinite(percentage)) {
 		return '0%'
@@ -28,11 +39,19 @@ export function formatTimestamp(value) {
 }
 
 export function formatMonth(value) {
-    const [year, month] = value.split('-').map(Number)
+	const [year, month] = value.split('-').map(Number)
 
-    return new Intl.DateTimeFormat('en-US', {
-        month: 'long',
-        year: 'numeric',
-        timeZone: 'UTC',
-    }).format(new Date(Date.UTC(year, month - 1, 1)))
+	return new Intl.DateTimeFormat('en-US', {
+		month: 'long',
+		year: 'numeric',
+		timeZone: 'UTC',
+	}).format(new Date(Date.UTC(year, month - 1, 1)))
+}
+
+export const formatDate = (date) => {
+	return new Intl.DateTimeFormat('en-US', {
+		year: 'numeric',
+		month: 'short',
+		day: 'numeric',
+	}).format(new Date(`${date}T00:00:00`))
 }

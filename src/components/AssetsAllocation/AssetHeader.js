@@ -6,7 +6,7 @@ import Modal from '../Modal/Modal'
 
 //import styles from './AssetInventory.module.scss'
 
-export default function AssetCard() {
+export default function AssetHeader() {
 	const { showAssetModal, openAssetModal, closeAssetModal } = useModal()
 	const { mounted } = useMount()
 

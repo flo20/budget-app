@@ -2,28 +2,27 @@
 
 import { useEffect } from 'react'
 import { useTheme, useModal, useMount } from '@/app/providers/GlobalProvider'
+import { useRouter } from 'next/navigation'
+import { createClient } from '@/lib/supabase/client'
+
 import NewEntryForm from '../NewEntry/NewEntryForm'
 import Modal from '../Modal/Modal'
 
-import {useRouter} from "next/navigation"
-import {createClient} from "@/lib/supabase/client"
-
 import styles from './NavBar.module.scss'
-
 
 export default function NavBar() {
 	const { theme, toggleTheme } = useTheme()
 	const { showEntryModal, openEntryModal, closeEntryModal } = useModal()
 	const { mounted, mountDoc } = useMount()
 
-    const router = useRouter()
-    const supabase = createClient()
+	const router = useRouter()
+	const supabase = createClient()
 
-    async function handleLogout(){
-        await supabase.auth.signOut()
-        router.push('/signin')
-        router.refresh()
-    }
+	async function handleLogout() {
+		await supabase.auth.signOut()
+		router.push('/signin')
+		router.refresh()
+	}
 
 	useEffect(mountDoc, [mountDoc])
 

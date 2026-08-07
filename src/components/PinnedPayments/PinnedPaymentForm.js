@@ -1,22 +1,12 @@
-"use client"
+'use client'
 
 import {useState} from "react"
 import { useModal } from "@/app/providers/GlobalProvider"
 import { createPinPayment } from "@/app/actions/pins"
-
-
-function getLocalDate() {
-	const now = new Date()
-
-	const year = now.getFullYear()
-	const month = String(now.getMonth() + 1).padStart(2, '0')
-	const day = String(now.getDate()).padStart(2, '0')
-
-	return `${year}-${month}-${day}`
-}
+import { localDate } from "@/lib/utils/date"
 
 export default function PinnedPaymentForm () {
-    const [dueDate, setDueDate] = useState(() => getLocalDate())
+    const [dueDate, setDueDate] = useState(() => localDate())
     
     const {closePinnedModal} = useModal()
 

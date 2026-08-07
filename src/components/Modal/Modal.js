@@ -1,10 +1,9 @@
-"use client"
+'use client'
 
 import { useEffect } from "react"
 import { createPortal } from 'react-dom'
 
 import styles from "./Modal.module.scss"
-
 
 export default function Modal({ showModal, closeModal, mounted, children }) {
 	useEffect(() => {
