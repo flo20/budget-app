@@ -8,6 +8,7 @@ import AssetAllocation from '@/components/AssetsAllocation/AssetAllocation'
 import SubNav from '@/components/NavBar/SubNav'
 import Notes from '@/components/BudgetNotes/Notes'
 import SavingsGoals from '@/components/SavingsGoals/SavingsGoals'
+import Liabilities from '@/components/Liabilities/Liabilities'
 import { Chart } from '@/components/Chart/Chart'
 
 import { redirect } from 'next/navigation'
@@ -39,6 +40,7 @@ export default async function DashBoard({ searchParams }) {
 					<div className="leftCol">
 						<MonthlyPulse selectedMonth={selectedMonth} />
 						<PinnedPayment />
+                        <Liabilities/>
 						<BudgetAllocation selectedMonth={selectedMonth} />
 						<Notes selectedMonth={selectedMonth} />
 					</div>

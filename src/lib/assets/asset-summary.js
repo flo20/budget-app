@@ -1,6 +1,5 @@
-import { toValidNumber} from '../utils/number-parsing'
+import { toValidNumber } from '../utils/number'
 import { ASSET_TYPE_DETAILS } from '../constants/asset-types'
-
 
 export function buildAssetSummary(assets) {
 	// Calculate the value of all recorded assets.

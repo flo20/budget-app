@@ -2,6 +2,7 @@
 
 import { useModal } from '@/app/providers/GlobalProvider'
 import { createAsset } from '@/app/actions/assets'
+import { ASSET_TYPES } from '@/lib/constants/asset-types'
 
 // import styles from './AssetInventory.module.scss'
 
@@ -24,13 +25,10 @@ export default function AssetForm() {
 				id="asset-type"
 				name="assetType"
 				required>
-				<option value="">Select an asset type</option>
-
-				<option value="cash">Cash</option>
-				<option value="investment">Investment</option>
-				<option value="property">Property</option>
-				<option value="retirement">Retirement</option>
-				<option value="other">Other</option>
+				<option value="" disabled> Select an asset type</option>
+                {ASSET_TYPES.map((asset)=>(
+                        <option value={asset} key={asset}>{asset}</option>
+                ))}
 			</select>
 
 			<label htmlFor="current-value">Current value</label>
