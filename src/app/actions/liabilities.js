@@ -84,3 +84,40 @@ export async function createLiability(formData) {
 		error: null,
 	}
 }
+
+
+export async function deleteLiability(liabilityId) {
+	const { supabase, user } = await requireUser()
+
+	if (!liabilityId) {
+		throw new Error('Saved goal ID is required.')
+	}
+
+	const { data, error } = await supabase
+		.from('liabilities')
+		.delete()
+		.eq('id', liabilityId)
+		.eq('user_id', user.id)
+		.select('id')
+		.maybeSingle()
+
+	if (error) {
+		console.error('Unable to delete liability item', error)
+		return { success: false, error: 'Unable to delete the liability item.' }
+	}
+
+	if (!data) {
+		return {
+			success: false,
+			error: 'Liability item was not found.',
+		}
+	}
+
+	revalidatePath('/dashboard')
+
+	return {
+		success: true,
+		error: null,
+	}
+}
+

@@ -1,7 +1,9 @@
 import { createLiability } from '@/app/actions/liabilities'
 import { LIABILITY_TYPES } from '@/lib/constants/liability-types'
+import { useModal } from '@/app/providers/GlobalProvider'
 
 export default function LiabilitiesForm() {
+	const { closeLiabilityModal } = useModal()
 	return (
 		<form action={createLiability}>
 			<input
@@ -56,6 +58,11 @@ export default function LiabilitiesForm() {
 				max="100"
 				step="0.01"
 			/>
+			<button
+				type="button"
+				onClick={closeLiabilityModal}>
+				Cancel
+			</button>
 			<button type="submit">Save Liability</button>
 		</form>
 	)

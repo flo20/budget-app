@@ -54,6 +54,11 @@ export default function ThemeProvider({ children }) {
 	const openEntryModal = () => openModal('entry')
 	const closeEntryModal = () => closeModal()
 
+    //Liabilities Modal
+	const showLiabilityModal = activeModal === 'liability'
+	const openLiabilityModal = () => openModal('liability')
+	const closeLiabilityModal = () => closeModal()
+
 	//Pinned Payment Modal
 	const showPinnedModal = activeModal === 'pinned'
 	const openPinnedModal = () => openModal('pinned')
@@ -97,6 +102,9 @@ export default function ThemeProvider({ children }) {
 				showContributeModal,
 				openContributeModal,
 				closeContributeModal,
+				showLiabilityModal,
+				openLiabilityModal,
+				closeLiabilityModal,
 			}}>
 			{children}
 		</GlobalContext.Provider>

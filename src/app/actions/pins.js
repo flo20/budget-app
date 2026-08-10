@@ -47,3 +47,4 @@ export async function createPinPayment (formData) {
     
         revalidatePath('/dashboard')
 }
+
