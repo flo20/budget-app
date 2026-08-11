@@ -15,6 +15,8 @@ import {
 	ChartTooltipContent,
 } from '@/components/ui/chart'
 
+import ChartLegendItem from './ChartLegendItem'
+
 const monthlyTrendData = [
 	{ month: 'MAR', income: 0, expense: 0 },
 	{ month: 'APR', income: 0, expense: 0 },
@@ -34,23 +36,6 @@ const trendConfig = {
 		color: '#fb5262',
 	},
 }
-
-
-function ChartLegendItem({ color, label, dashed = false }) {
-	return (
-		<div className="flex items-center gap-3">
-			<span
-				className={`block w-9 border-t-[3px] ${dashed ? 'border-dashed' : ''}`}
-				style={{ borderColor: color }}
-			/>
-
-			<span className="font-mono text-sm tracking-[0.15em] text-zinc-400">
-				{label}
-			</span>
-		</div>
-	)
-}
-
 
 
 export default function MonthlyTrend() {

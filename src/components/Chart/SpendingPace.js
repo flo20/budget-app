@@ -16,10 +16,7 @@ import {
 	ChartTooltipContent,
 } from '@/components/ui/chart'
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-
-import { formatChartCurrency } from '@/lib/utils/format'
-import { getSpendingPaceData } from '@/lib/outlook/getSpendingPaceData'
+import ChartLegendItem from './ChartLegendItem'
 
 const spendingPaceData = [
 	{
@@ -84,21 +81,6 @@ const spendingChartConfig = {
 }
 
 
-
-function ChartLegendItem({ color, label, dashed = false }) {
-	return (
-		<div className="flex items-center gap-3">
-			<span
-				className={`block w-9 border-t-[3px] ${dashed ? 'border-dashed' : ''}`}
-				style={{ borderColor: color }}
-			/>
-
-			<span className="font-mono text-sm tracking-[0.15em] text-zinc-400">
-				{label}
-			</span>
-		</div>
-	)
-}
 
 function ForecastPanel() {
 	return (
@@ -260,7 +242,6 @@ export default function SpendingPace() {
 					</ComposedChart>
 				</ChartContainer>
 			</div>
-
 			<ForecastPanel />
 		</div>
 	)

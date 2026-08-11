@@ -39,13 +39,13 @@ export default async function DashBoard({ searchParams }) {
 					<div className="leftCol">
 						<MonthlyPulse selectedMonth={selectedMonth} />
 						<PinnedPayment />
-                        <Liabilities/>
+						<Liabilities />
 						<BudgetAllocation selectedMonth={selectedMonth} />
 						<Notes selectedMonth={selectedMonth} />
 					</div>
 					<div className="rightCol">
-						<Chart/>
-                        <SavingsGoals/>
+						<Chart selectedMonth={selectedMonth} />
+						<SavingsGoals />
 						<AssetAllocation />
 						<LedgerStream />
 					</div>

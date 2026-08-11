@@ -9,6 +9,8 @@ import {
 } from '@/components/ui/chart'
 
 import { formatChartCurrency } from '@/lib/utils/format'
+import ChartLegendItem from './ChartLegendItem'
+import ForecastPanel from './ForecastPanel'
 
 const monthlyCashFlowData = [
 	{ month: 'MAR', income: 0, expense: 0, net: 0 },
@@ -30,50 +32,7 @@ const cashFlowConfig = {
 	},
 }
 
-function ChartLegendItem({ color, label, dashed = false }) {
-	return (
-		<div className="flex items-center gap-3">
-			<span
-				className={`block w-9 border-t-[3px] ${dashed ? 'border-dashed' : ''}`}
-				style={{ borderColor: color }}
-			/>
 
-			<span className="font-mono text-sm tracking-[0.15em] text-zinc-400">
-				{label}
-			</span>
-		</div>
-	)
-}
-
-function ForecastPanel() {
-	return (
-		<aside className="border-t border-[#29292e] p-8 lg:border-l lg:border-t-0">
-			<p className="font-mono text-sm tracking-[0.16em] text-zinc-400">
-				PERIOD-END FORECAST
-			</p>
-
-			<p className="mt-5 font-mono text-4xl font-semibold text-emerald-400 lg:text-5xl">
-				$2,749.92
-			</p>
-
-			<p className="mt-2 font-mono text-sm tracking-[0.15em] text-emerald-400">
-				UNDER BUDGET
-			</p>
-
-			<p className="mt-7 max-w-sm text-lg leading-7 text-zinc-400">
-				At your current pace, August 2026 should finish within budget.
-			</p>
-
-			<div className="my-8 h-px bg-[#29292e]" />
-
-			<p className="font-mono text-3xl font-semibold text-zinc-100">$2,750</p>
-
-			<p className="mt-2 font-mono text-sm tracking-[0.16em] text-zinc-400">
-				UPCOMING BILLS
-			</p>
-		</aside>
-	)
-}
 
 export default function CashFlow() {
 	return (

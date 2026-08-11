@@ -2,46 +2,10 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
-import CashFlow from './CashFlow'
 import SpendingPace from './SpendingPace'
+import CashFlow from './CashFlow'
 import MonthlyTrend from './MonthlyTrend'
-
-
-function Metric({ value, label, positive = false }) {
-	return (
-		<div className="flex min-h-[150px] flex-col items-center justify-center border-r border-[#29292e] last:border-r-0">
-			<p
-				className={`font-mono text-3xl font-semibold tracking-wide md:text-4xl ${
-					positive ? 'text-emerald-400' : 'text-zinc-100'
-				}`}>
-				{value}
-			</p>
-
-			<p className="mt-4 font-mono text-sm tracking-[0.18em] text-zinc-400">
-				{label}
-			</p>
-		</div>
-	)
-}
-
-function ChartLegendItem({ color, label, dashed = false }) {
-	return (
-		<div className="flex items-center gap-3">
-			<span
-				className={`block w-9 border-t-[3px] ${dashed ? 'border-dashed' : ''}`}
-				style={{ borderColor: color }}
-			/>
-
-			<span className="font-mono text-sm tracking-[0.15em] text-zinc-400">
-				{label}
-			</span>
-		</div>
-	)
-}
-
-
-<SpendingPace />
-
+import Metric from './Metric'
 
 export default function Chart() {
 	return (
@@ -73,7 +37,7 @@ export default function Chart() {
                 data-[state=active]:bg-transparent
                 data-[state=active]:text-blue-400
                 data-[state=active]:shadow-none
-              ">
+            ">
 							SPENDING PACE
 						</TabsTrigger>
 
@@ -95,7 +59,7 @@ export default function Chart() {
                 data-[state=active]:bg-transparent
                 data-[state=active]:text-blue-400
                 data-[state=active]:shadow-none
-              ">
+            ">
 							CASH FLOW
 						</TabsTrigger>
 
@@ -117,7 +81,7 @@ export default function Chart() {
                 data-[state=active]:bg-transparent
                 data-[state=active]:text-blue-400
                 data-[state=active]:shadow-none
-              ">
+            ">
 							MONTHLY TREND
 						</TabsTrigger>
 					</TabsList>
@@ -198,7 +162,6 @@ export default function Chart() {
 							positive
 						/>
 					</div>
-
 					<MonthlyTrend />
 				</TabsContent>
 			</Tabs>
