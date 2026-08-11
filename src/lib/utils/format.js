@@ -16,6 +16,14 @@ export const formatTransactionCurrency = (transaction) => {
 		: `-${formattedAmount}`
 }
 
+export function formatChartCurrency(value) {
+	return new Intl.NumberFormat('en-US', {
+		style: 'currency',
+		currency: 'USD',
+		maximumFractionDigits: 2,
+	}).format(value)
+}
+
 export function formatPercentage(percentage) {
 	if (!Number.isFinite(percentage)) {
 		return '0%'

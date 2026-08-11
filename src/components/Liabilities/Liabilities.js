@@ -2,11 +2,9 @@ import { getLiabilities } from '@/lib/queries/liabilities'
 import { formatCurrency } from '@/lib/utils/format'
 import LiabilitiesHeader from './LiabilitiesHeader'
 import DeleteButton from './DeleteButton'
-//import { deleteLiability } from '@/app/actions/liabilities'
 
 export default async function Liabilities() {
 	const liabilities = await getLiabilities()
-	console.log('liabilities', liabilities)
 
 	return (
 		<section>
@@ -22,7 +20,7 @@ export default async function Liabilities() {
 							</div>
 							<strong>{formatCurrency(liability.current_balance)}</strong>
 						</div>
-						<DeleteButton liability ={liability}/>
+						<DeleteButton liability={liability} />
 					</li>
 				))}
 			</ul>

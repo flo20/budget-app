@@ -9,10 +9,9 @@ import SubNav from '@/components/NavBar/SubNav'
 import Notes from '@/components/BudgetNotes/Notes'
 import SavingsGoals from '@/components/SavingsGoals/SavingsGoals'
 import Liabilities from '@/components/Liabilities/Liabilities'
-import { Chart } from '@/components/Chart/Chart'
+import Chart from '@/components/Chart/Chart'
 
 import { redirect } from 'next/navigation'
-
 import { createClient } from '@/lib/supabase/server'
 import { normalizeMonth } from '@/lib/utils/month'
 
@@ -45,7 +44,7 @@ export default async function DashBoard({ searchParams }) {
 						<Notes selectedMonth={selectedMonth} />
 					</div>
 					<div className="rightCol">
-						<Chart />
+						<Chart/>
                         <SavingsGoals/>
 						<AssetAllocation />
 						<LedgerStream />
