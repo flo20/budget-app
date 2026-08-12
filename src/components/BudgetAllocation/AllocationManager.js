@@ -12,7 +12,7 @@ export default function AllocationManager({
 	totalUnallocatedSpend,
 }) {
 	const [selectedCategory, setSelectedCategory] = useState('')
-	const [selectedMonthlyLimit, setSelectedMonthlyLimit] = useState('')
+	const [budgetMonthlyLimit, setbudgetMonthlyLimit] = useState('')
 	const limitInputRef = useRef(null)
 
     useEffect(() => {
@@ -30,7 +30,7 @@ export default function AllocationManager({
 
 	function handleAllocate(category) {
 		setSelectedCategory(category.category)
-        setSelectedMonthlyLimit(category.spent)
+        setbudgetMonthlyLimit(category.spent)
 	}
 
 	return (
@@ -64,8 +64,8 @@ export default function AllocationManager({
 				budgetMonth={budgetMonth}
 				selectedCategory={selectedCategory}
 				setSelectedCategory={setSelectedCategory}
-				selectedMonthlyLimit={selectedMonthlyLimit}
-				setSelectedMonthlyLimit={setSelectedMonthlyLimit}
+				budgetMonthlyLimit={budgetMonthlyLimit}
+				setbudgetMonthlyLimit={setbudgetMonthlyLimit}
 				limitInputRef={limitInputRef}
 				summary={summary}
 			/>

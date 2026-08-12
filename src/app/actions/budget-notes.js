@@ -8,7 +8,7 @@ export async function createBudgetNotes(formData) {
 	const { supabase, user } = await requireUser()
 
 	const content = formData.get('content')?.trim()
-	const budgetMonth = formData.get('budgetMonth')
+	const budgetMonth = formData.get('notebudgetMonth')
 
 	if (!content) {
 		throw new Error('Enter a note.')
@@ -41,7 +41,7 @@ export async function toggleBudgetNote(formData) {
 	const { supabase } = await requireUser()
 
 	const noteId = formData.get('noteId')
-	const budgetMonth = formData.get('budgetMonth')
+	const budgetMonth = formData.get('notebudgetMonth')
 	const resolved = formData.get('resolved') === 'true'
 
 	if (!noteId) {
@@ -124,7 +124,7 @@ export async function deleteBudgetNote(formData) {
 	const { supabase } = await requireUser()
 
 	const noteId = formData.get('noteId')
-	const budgetMonth = formData.get('budgetMonth')
+	const budgetMonth = formData.get('notebudgetMonth')
 
 	if (!noteId) {
 		throw new Error('Note ID is required.')

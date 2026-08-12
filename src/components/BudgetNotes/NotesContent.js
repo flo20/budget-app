@@ -5,12 +5,12 @@ import { deleteBudgetNote, toggleBudgetNote } from '@/app/actions/budget-notes'
 
 import EditNotes from './EditNotes'
 
-export default function NotesContent({ notes, selectedMonth, budgetMonth }) {
+export default function NotesContent({ notes, budgetMonth }) {
 	return (
 		<div>
 			{notes.length === 0 ? (
 				<div>
-					<p>No notes for {formatMonth(selectedMonth)}.</p>
+					<p>No notes for {formatMonth(budgetMonth)}.</p>
 
 					<span>Add reminders or decisions about this month budget.</span>
 				</div>
@@ -30,7 +30,7 @@ export default function NotesContent({ notes, selectedMonth, budgetMonth }) {
 
 								<input
 									type="hidden"
-									name="budgetMonth"
+									name="notebudgetMonth"
 									value={budgetMonth}
 								/>
 
@@ -77,7 +77,7 @@ export default function NotesContent({ notes, selectedMonth, budgetMonth }) {
 
 								<input
 									type="hidden"
-									name="budgetMonth"
+									name="notebudgetMonth"
 									value={budgetMonth}
 								/>
 

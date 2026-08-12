@@ -12,7 +12,7 @@ export async function setBudgetAllocation(formData) {
 
 	const selectedCategory = formData.get('category')?.trim()
 	const monthlyLimit = Number(formData.get('monthlyLimit'))
-	const budgetMonth = formData.get('budgetMonth')?.trim()
+	const budgetMonth = formData.get('allocationBudgetMonth')?.trim()
 	// const customCategory = formData.get('customCategory')?.trim()
 	// const isCustomCategory = selectedCategory === CUSTOM_CATEGORY_OPTION
 	/*

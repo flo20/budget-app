@@ -1,4 +1,3 @@
-import { toBudgetMonth } from '@/lib/utils/month'
 import { getBudgetAllocations } from '@/lib/queries/budget-allocations'
 import { buildBudgetSummary } from '@/lib/budget/budget-summary'
 import { formatCurrency, formatMonth } from '@/lib/utils/format'
@@ -10,8 +9,7 @@ import RemoveAllocatedBudget from './RemoveAllocatedBudget'
 
 import styles from './BudgetAllocation.module.scss'
 
-export default async function BudgetAllocation({ selectedMonth }) {
-	const budgetMonth = toBudgetMonth(selectedMonth)
+export default async function BudgetAllocation({ budgetMonth }) {
 	const { budgets, transactions } = await getBudgetAllocations(budgetMonth)
 	const summary = buildBudgetSummary(budgets, transactions)
 

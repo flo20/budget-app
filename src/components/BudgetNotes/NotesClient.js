@@ -6,9 +6,9 @@ import {formatMonth} from '@/lib/utils/format'
 
 import Link from 'next/link'
 
-export default function NotesClient({ notes, selectedMonth, budgetMonth }) {
-	const previousMonth = changeMonth(selectedMonth, -1)
-	const nextMonth = changeMonth(selectedMonth, 1)
+export default function NotesClient({ notes,budgetMonth }) {
+	const previousMonth = changeMonth(budgetMonth, -1)
+	const nextMonth = changeMonth(budgetMonth, 1)
 
 	return (
 		<section aria-labelledby="budget-notes-title">
@@ -28,7 +28,7 @@ export default function NotesClient({ notes, selectedMonth, budgetMonth }) {
 						Left arrow
 					</Link>
 
-					<strong>{formatMonth(selectedMonth)}</strong>
+					<strong>{formatMonth(budgetMonth)}</strong>
 
 					<Link
 						href={`dashboard/?month=${nextMonth}`}
@@ -40,7 +40,7 @@ export default function NotesClient({ notes, selectedMonth, budgetMonth }) {
 			<form action={createBudgetNotes}>
 				<input
 					type="hidden"
-					name="budgetMonth"
+					name="notebudgetMonth"
 					value={budgetMonth}
 				/>
 
@@ -51,7 +51,7 @@ export default function NotesClient({ notes, selectedMonth, budgetMonth }) {
 					name="content"
 					type="text"
 					maxLength={280}
-					placeholder={`Add a note for ${formatMonth(selectedMonth)}...`}
+					placeholder={`Add a note for ${formatMonth(budgetMonth)}...`}
 					required
 				/>
 

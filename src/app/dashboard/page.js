@@ -13,7 +13,7 @@ import Chart from '@/components/Chart/Chart'
 
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
-import { normalizeMonth } from '@/lib/utils/month'
+import { normalizeMonth, toBudgetMonth } from '@/lib/utils/month'
 
 import '@/app/globals.css'
 
@@ -24,7 +24,7 @@ export default async function DashBoard({ searchParams }) {
 	} = await supabase.auth.getUser()
 
 	const params = await searchParams
-	const selectedMonth = normalizeMonth(params?.month)
+	const budgetMonth = toBudgetMonth(normalizeMonth(params?.month))
 
 	if (!user) {
 		redirect('/signup')
@@ -37,14 +37,14 @@ export default async function DashBoard({ searchParams }) {
 				<SubNav />
 				<div className="contentWrapper">
 					<div className="leftCol">
-						<MonthlyPulse selectedMonth={selectedMonth} />
+						<MonthlyPulse budgetMonth={budgetMonth} />
 						<PinnedPayment />
 						<Liabilities />
-						<BudgetAllocation selectedMonth={selectedMonth} />
-						<Notes selectedMonth={selectedMonth} />
+						<BudgetAllocation budgetMonth={budgetMonth} />
+						<Notes budgetMonth={budgetMonth} />
 					</div>
 					<div className="rightCol">
-						<Chart selectedMonth={selectedMonth} />
+						<Chart budgetMonth={budgetMonth} />
 						<SavingsGoals />
 						<AssetAllocation />
 						<LedgerStream />

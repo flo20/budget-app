@@ -2,12 +2,10 @@
 import { getMonthlyPulse } from '@/lib/queries/monthly-pulse'
 import { buildMonthlyPulseSummary } from '@/lib/dashboard/monthly-pulse-summary'
 import { formatCurrency, formatMonth } from '@/lib/utils/format'
-import { toBudgetMonth } from '@/lib/utils/month'
 
 import styles from './MonthlyPulse.module.scss'
 
-export default async function MonthlyPulse({ selectedMonth }) {
-	const budgetMonth = toBudgetMonth(selectedMonth)
+export default async function MonthlyPulse({ budgetMonth }) {
 	const data = await getMonthlyPulse(budgetMonth)
 	const summary = buildMonthlyPulseSummary(data)
 
@@ -28,9 +26,7 @@ export default async function MonthlyPulse({ selectedMonth }) {
 			<article className={styles.metric}>
 				<p className={styles.label}>Remaining</p>
 
-				<strong>
-					{formatCurrency(summary.remaining)}
-				</strong>
+				<strong>{formatCurrency(summary.remaining)}</strong>
 			</article>
 			<article>
 				<p>Net worth</p>
