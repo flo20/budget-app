@@ -24,6 +24,30 @@ export function formatChartCurrency(value) {
 	}).format(value)
 }
 
+export function formatCompactCurrency(value) {
+	const number = Number(value)
+
+	if (!Number.isFinite(number)) {
+		return '$0'
+	}
+
+	const absolute = Math.abs(number)
+
+	if (absolute >= 1_000_000_000) {
+		return `$${(number / 1_000_000_000).toFixed(2)}B`
+	}
+
+	if (absolute >= 1_000_000) {
+		return `$${(number / 1_000_000).toFixed(2)}M`
+	}
+
+	if (absolute >= 1_000) {
+		return `$${(number / 1_000).toFixed(1)}K`
+	}
+
+	return `$${number.toFixed(2)}`
+}
+
 export function formatPercentage(percentage) {
 	if (!Number.isFinite(percentage)) {
 		return '0%'

@@ -20,12 +20,10 @@ import { spendingChartConfig } from '@/lib/constants/chart-configs'
 import ChartLegendItem from './ChartLegendItem'
 import ForecastPanel from './ForecastPanel'
 
-
-export default function SpendingPaceClient({ spendingPace = {} }) {
-	const { spendingPaceData, metrics } = spendingPace
-    // console.log('spendingPaceData', spendingPaceData)
-    
-
+export default function SpendingPaceClient({
+	spendingPaceData = {},
+	paceMetrics = {},
+}) {
 	return (
 		<div className="grid lg:grid-cols-[2fr_1fr]">
 			<div className="min-w-0 p-6 md:p-8">
@@ -151,8 +149,8 @@ export default function SpendingPaceClient({ spendingPace = {} }) {
 				</ChartContainer>
 			</div>
 			<ForecastPanel
-				projectedRemaining={metrics?.projectedRemaining}
-				upcomingBills={metrics?.upcomingBills}
+				projectedRemaining={paceMetrics?.projectedRemaining}
+				upcomingBills={paceMetrics?.upcomingBills}
 			/>
 		</div>
 	)

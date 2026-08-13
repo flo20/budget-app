@@ -60,7 +60,7 @@ export function getCashFlowData({
 
 	const previousMonth = cashFlowData[cashFlowData.length - 2]
 
-	const metrics = {
+	const cashFlowMetrics = {
 		currentIncome: currentMonth?.income ?? 0,
 
 		currentExpense: currentMonth?.expense ?? 0,
@@ -74,7 +74,7 @@ export function getCashFlowData({
 		totalExpense: cashFlowData.reduce((sum, month) => sum + month.expense, 0),
 	}
 
-	return { cashFlowData, metrics }
+	return { cashFlowData, cashFlowMetrics }
 }
 
 export function getCashFlowDateRange(budgetMonth, monthsToShow = 6) {

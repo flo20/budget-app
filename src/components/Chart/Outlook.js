@@ -33,6 +33,7 @@ export default async function OutLook({ budgetMonth }) {
 
 	return (
 		<Chart
+			budgetMonth={budgetMonth}
 			spendingPace={spendingPace}
 			cashFlow={cashFlow}
 			monthlyTrend={monthlyTrend}

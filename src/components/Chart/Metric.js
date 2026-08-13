@@ -1,10 +1,22 @@
-export default function Metric({ value, label, positive = false }) {
+export default function Metric({ value, label, variant = 'default' }) {
+	const valueStyles = {
+		default: 'text-zinc-100',
+		positive: 'text-emerald-400',
+		negative: 'text-red-400',
+	}
 	return (
-		<div className="flex min-h-[150px] flex-col items-center justify-center border-r border-[#29292e] last:border-r-0">
+		<div className="min-w-0 flex min-h-[150px] flex-col items-center justify-center border-r border-[#29292e] last:border-r-0">
 			<p
-				className={`font-mono text-3xl font-semibold tracking-wide md:text-4xl ${
-					positive ? 'text-emerald-400' : 'text-zinc-100'
-				}`}>
+		className={`
+        max-w-full
+        whitespace-nowrap
+        text-center
+        font-mono
+        font-semibold
+        tracking-wide
+        text-[clamp(1.25rem,2.2vw,2.25rem)]
+        ${valueStyles[variant]}
+        `}>
 				{value}
 			</p>
 

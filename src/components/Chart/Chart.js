@@ -1,13 +1,85 @@
 'use client'
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-
-import Metric from './Metric'
+import { formatMonth, formatCompactCurrency } from '@/lib/utils/format'
+import { changeMonth } from '@/lib/utils/month'
+import Metrics from './Metrics'
 import CashFlowClient from './CashFlowClient'
 import MonthlyTrendClient from './MonthlyTrendClient'
 import SpendingPaceClient from './SpendingPaceClient'
 
-export default function Chart({ spendingPace, cashFlow, monthlyTrend }) {
+export default function Chart({
+	budgetMonth,
+	spendingPace,
+	cashFlow,
+	monthlyTrend,
+}) {
+	const { spendingPaceData, paceMetrics } = spendingPace
+	const { cashFlowData, cashFlowMetrics } = cashFlow
+	const { trendData, trendMetrics } = monthlyTrend
+
+	const previousMonth = changeMonth(budgetMonth, -1)
+
+	const spendingMetrics = [
+		{
+			label: 'SPENT',
+			value: formatCompactCurrency(paceMetrics.totalSpent),
+		},
+		{
+			label: 'BUDGET',
+			value: formatCompactCurrency(paceMetrics.monthlyBudget),
+		},
+		{
+			label: 'PROJECTED',
+			value: formatCompactCurrency(paceMetrics.projectedSpending),
+			variant: 'positive',
+		},
+		{
+			label: 'SAFE / DAY',
+			value: formatCompactCurrency(paceMetrics.safePerDay),
+		},
+	]
+
+	const cashMetrics = [
+		{
+			label: 'INCOME',
+			value: formatCompactCurrency(cashFlowMetrics.currentIncome),
+		},
+		{
+			label: 'EXPENSE',
+			value: formatCompactCurrency(cashFlowMetrics.currentExpense),
+		},
+		{
+			label: 'NET CASH FLOW',
+			value: formatCompactCurrency(cashFlowMetrics.netCashFlow),
+			variant: 'positive',
+		},
+		{
+			label: 'PREV MONTH NET',
+			value: formatCompactCurrency(cashFlowMetrics.previousMonthNet),
+		},
+	]
+
+	const monthlyTrendMetrics = [
+		{
+			label: 'THIS MONTH',
+			value: formatCompactCurrency(trendMetrics.currentMonthSpending),
+		},
+		{
+			label: formatMonth(previousMonth),
+			value: formatCompactCurrency(paceMetrics.monthlyBudget),
+			variant: 'positive',
+		},
+		{
+			label: '3-MONTH AVG',
+			value: formatCompactCurrency(trendMetrics.threeMonthAverage),
+		},
+		{
+			label: 'NET CASH FLOW',
+			value: formatCompactCurrency(trendMetrics.netCashFlow),
+		},
+	]
+
 	return (
 		<section className="overflow-hidden rounded-2xl border border-[#29292e] bg-[#09090b]">
 			<Tabs defaultValue="spending">
@@ -15,7 +87,7 @@ export default function Chart({ spendingPace, cashFlow, monthlyTrend }) {
 					<div className="font-mono text-sm tracking-[0.18em] text-zinc-400 md:text-base">
 						OUTLOOK
 						<span className="mx-3">·</span>
-						<span className="text-zinc-100">AUGUST 2026</span>
+						<span className="text-zinc-100">{formatMonth(budgetMonth)}</span>
 					</div>
 
 					<TabsList className="mt-5 h-auto justify-start gap-2 bg-transparent p-0 lg:mt-0">
@@ -87,82 +159,49 @@ export default function Chart({ spendingPace, cashFlow, monthlyTrend }) {
 					</TabsList>
 				</div>
 
+				{/* TABS CONTENT */}
 				<TabsContent
 					value="spending"
 					className="m-0">
-					<div className="grid grid-cols-2 border-b border-[#29292e] lg:grid-cols-4">
-						<Metric
-							value="$195.19"
-							label="SPENT"
-						/>
-						<Metric
-							value="$3,300"
-							label="BUDGET"
-						/>
-						<Metric
-							value="$550.08"
-							label="PROJECTED"
-							positive
-						/>
-						<Metric
-							value="$155.24"
-							label="SAFE / DAY"
-						/>
-					</div>
-
-					<SpendingPaceClient spendingPace={spendingPace} />
+					<Metrics items={spendingMetrics} />
+					<SpendingPaceClient
+						spendingPaceData={spendingPaceData}
+						paceMetrics={paceMetrics}
+					/>
 				</TabsContent>
 
 				<TabsContent
 					value="cashflow"
 					className="m-0">
-					<div className="grid grid-cols-2 border-b border-[#29292e] lg:grid-cols-4">
-						<Metric
-							value="$195.19"
-							label="SPENT"
-						/>
-						<Metric
-							value="$3,300"
-							label="BUDGET"
-						/>
-						<Metric
-							value="$550.08"
-							label="PROJECTED"
-							positive
-						/>
-						<Metric
-							value="$155.24"
-							label="SAFE / DAY"
-						/>
-					</div>
-
-					<CashFlowClient cashFlow={cashFlow} />
+					<Metrics items={cashMetrics} />
+					<CashFlowClient cashFlowData={cashFlowData} />
 				</TabsContent>
 
 				<TabsContent
 					value="trend"
 					className="m-0">
-					<div className="grid grid-cols-2 border-b border-[#29292e] lg:grid-cols-4">
+					<Metrics items={monthlyTrendMetrics} />
+					{/* <div className="grid grid-cols-2 border-b border-[#29292e] lg:grid-cols-4">
 						<Metric
-							value="$195.19"
+							value={formatCurrency(trendMetrics.currentMonthSpending)}
 							label="THIS MONTH"
 						/>
 						<Metric
-							value="-92%"
+							value={formatCurrency(trendMetrics.spendingDifference)}
 							label="VS JUL"
 							positive
 						/>
 						<Metric
-							value="$907.13"
+							value={formatCurrency(trendMetrics.threeMonthAverage)}
 							label="3-MONTH AVG"
 						/>
 						<Metric
-							value="+$4,004.81"
+							value={formatCurrency(trendMetrics.netCashFlow)}
 							label="NET CASH FLOW"
 							positive
 						/>
-					</div>
-					<MonthlyTrendClient monthlyTrend={monthlyTrend} />
+					</div> */}
+					<MonthlyTrendClient trendData={trendData} />
 				</TabsContent>
 			</Tabs>
 		</section>

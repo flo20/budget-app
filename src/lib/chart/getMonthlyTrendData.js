@@ -2,7 +2,7 @@ export function getMonthlyTrendData(cashFlowData = []) {
 	if (!cashFlowData.length) {
 		return {
 			trendData: [],
-			metrics: {
+			trendMetrics: {
 				currentMonthSpending: 0,
 				previousMonthSpending: 0,
 				spendingChange: 0,
@@ -50,7 +50,7 @@ export function getMonthlyTrendData(cashFlowData = []) {
 
 	return {
 		trendData: cashFlowData,
-		metrics: {
+		trendMetrics: {
 			currentMonthSpending,
 			previousMonthSpending,
 			spendingChange,

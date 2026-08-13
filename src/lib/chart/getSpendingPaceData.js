@@ -195,7 +195,7 @@ export function getSpendingPaceData({
 	return {
 		spendingPaceData,
 
-		metrics: {
+		paceMetrics: {
 			totalSpent,
 			monthlyBudget,
 			projectedSpending,
