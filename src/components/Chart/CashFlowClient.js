@@ -13,11 +13,7 @@ import { cashFlowConfig } from '@/lib/constants/chart-configs'
 import ChartLegendItem from './ChartLegendItem'
 import ForecastPanel from './ForecastPanel'
 
-
-
-export default function CashFlowClient({ cashFlowData }) {  
-    console.log('cashFlowData', cashFlowData)
-      
+export default function CashFlowClient({ cashFlow }) {  
 	return (
 		<div className="grid lg:grid-cols-[2fr_1fr]">
 			<div className="min-w-0 p-6 md:p-8">
@@ -36,7 +32,7 @@ export default function CashFlowClient({ cashFlowData }) {
 					config={cashFlowConfig}
 					className="h-[440px] w-full">
 					<BarChart
-						data={cashFlowData}
+						data={cashFlow.cashFlowData}
 						margin={{
 							left: 20,
 							right: 20,
@@ -75,7 +71,7 @@ export default function CashFlowClient({ cashFlowData }) {
 				</ChartContainer>
 
 				<div className="grid grid-cols-6 text-center">
-					{cashFlowData.map((item) => (
+					{cashFlow.cashFlowData.map((item) => (
 						<div key={item.month}>
 							<p className="font-mono text-sm tracking-[0.12em] text-zinc-400">
 								{item.month}
@@ -91,7 +87,6 @@ export default function CashFlowClient({ cashFlowData }) {
 					))}
 				</div>
 			</div>
-
 			<ForecastPanel />
 		</div>
 	)

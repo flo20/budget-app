@@ -4,7 +4,7 @@ import { formatDate, formatTransactionCurrency } from '@/lib/utils/format'
 import styles from './LedgerStream.module.scss'
 
 export default async function LedgerStream() {
-	const transactions = await getTransactions()
+	const transactions = await getTransactions()    
 
 	return (
 		<section

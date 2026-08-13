@@ -56,5 +56,44 @@ export function getCashFlowData({
 		net: month.income - month.expense,
 	}))
 
-	return cashFlowData
+	const currentMonth = cashFlowData[cashFlowData.length - 1]
+
+	const previousMonth = cashFlowData[cashFlowData.length - 2]
+
+	const metrics = {
+		currentIncome: currentMonth?.income ?? 0,
+
+		currentExpense: currentMonth?.expense ?? 0,
+
+		netCashFlow: currentMonth?.net ?? 0,
+
+		previousMonthNet: previousMonth?.net ?? 0,
+
+		totalIncome: cashFlowData.reduce((sum, month) => sum + month.income, 0),
+
+		totalExpense: cashFlowData.reduce((sum, month) => sum + month.expense, 0),
+	}
+
+	return { cashFlowData, metrics }
+}
+
+export function getCashFlowDateRange(budgetMonth, monthsToShow = 6) {
+	const [year, month] = budgetMonth.split('-').map(Number)
+
+	const start = new Date(year, month - monthsToShow, 1)
+
+	const end = new Date(year, month, 1)
+
+	function formatDate(date) {
+		const year = date.getFullYear()
+
+		const month = String(date.getMonth() + 1).padStart(2, '0')
+
+		return `${year}-${month}-01`
+	}
+
+	return {
+		startDate: formatDate(start),
+		endDate: formatDate(end),
+	}
 }

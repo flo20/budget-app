@@ -23,3 +23,15 @@ export const cashFlowConfig = {
         color: '#fb5262',
     },
 }
+
+export const trendConfig = {
+    income: {
+        label: 'Income',
+        color: '#3b82f6',
+    },
+    expense: {
+        label: 'Expense',
+        color: '#fb5262',
+    },
+}
+
