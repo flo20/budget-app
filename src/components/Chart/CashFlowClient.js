@@ -13,7 +13,7 @@ import { cashFlowConfig } from '@/lib/constants/chart-configs'
 import ChartLegendItem from './ChartLegendItem'
 import ForecastPanel from './ForecastPanel'
 
-export default function CashFlowClient({ cashFlow }) {  
+export default function CashFlowClient({ cashFlow = {} }) {
 	return (
 		<div className="grid lg:grid-cols-[2fr_1fr]">
 			<div className="min-w-0 p-6 md:p-8">

@@ -9,13 +9,13 @@ import SubNav from '@/components/NavBar/SubNav'
 import Notes from '@/components/BudgetNotes/Notes'
 import SavingsGoals from '@/components/SavingsGoals/SavingsGoals'
 import Liabilities from '@/components/Liabilities/Liabilities'
-import Chart from '@/components/Chart/Chart'
 
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { normalizeMonth, toBudgetMonth } from '@/lib/utils/month'
 
 import '@/app/globals.css'
+import OutLook from '@/components/Chart/Outlook'
 
 export default async function DashBoard({ searchParams }) {
 	const supabase = await createClient()
@@ -44,7 +44,7 @@ export default async function DashBoard({ searchParams }) {
 						<Notes budgetMonth={budgetMonth} />
 					</div>
 					<div className="rightCol">
-						<Chart budgetMonth={budgetMonth} />
+						<OutLook budgetMonth={budgetMonth} />
 						<SavingsGoals />
 						<AssetAllocation />
 						<LedgerStream />

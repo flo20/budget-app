@@ -1,30 +1,13 @@
+'use client'
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
-import { getTransactionsByDateRange } from '@/lib/queries/date-range-transactions'
-import { getMonthlyTrendData } from '@/lib/chart/getMonthlyTrendData'
-import {
-	getCashFlowData,
-	getCashFlowDateRange,
-} from '@/lib/chart/getCashFlowData'
-
-import SpendingPace from './SpendingPace'
 import Metric from './Metric'
 import CashFlowClient from './CashFlowClient'
 import MonthlyTrendClient from './MonthlyTrendClient'
+import SpendingPaceClient from './SpendingPaceClient'
 
-export default async function Chart({ budgetMonth }) {
-    const { startDate, endDate } = getCashFlowDateRange(budgetMonth)
-        const cashFlowTransactions = await getTransactionsByDateRange(
-            startDate,
-            endDate,
-        )
-        const cashFlow = getCashFlowData({
-            transactions: cashFlowTransactions,
-            endMonth: budgetMonth,
-        })
-
-        const monthlyTrend = getMonthlyTrendData(cashFlow.cashFlowData)
-
+export default function Chart({ spendingPace, cashFlow, monthlyTrend }) {
 	return (
 		<section className="overflow-hidden rounded-2xl border border-[#29292e] bg-[#09090b]">
 			<Tabs defaultValue="spending">
@@ -127,7 +110,7 @@ export default async function Chart({ budgetMonth }) {
 						/>
 					</div>
 
-					<SpendingPace budgetMonth={budgetMonth} />
+					<SpendingPaceClient spendingPace={spendingPace} />
 				</TabsContent>
 
 				<TabsContent

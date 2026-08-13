@@ -23,6 +23,8 @@ import ForecastPanel from './ForecastPanel'
 
 export default function SpendingPaceClient({ spendingPace = {} }) {
 	const { spendingPaceData, metrics } = spendingPace
+    // console.log('spendingPaceData', spendingPaceData)
+    
 
 	return (
 		<div className="grid lg:grid-cols-[2fr_1fr]">
