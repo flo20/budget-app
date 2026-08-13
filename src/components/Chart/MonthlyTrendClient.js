@@ -19,17 +19,7 @@ import { trendConfig } from '@/lib/constants/chart-configs'
 
 import ChartLegendItem from './ChartLegendItem'
 
-const monthlyTrendData = [
-	{ month: 'MAR', income: 0, expense: 0 },
-	{ month: 'APR', income: 0, expense: 0 },
-	{ month: 'MAY', income: 0, expense: 0 },
-	{ month: 'JUN', income: 0, expense: 0 },
-	{ month: 'JUL', income: 4200, expense: 2526.2 },
-	{ month: 'AUG', income: 4200, expense: 195.19 },
-]
-
-
-export default function MonthlyTrendClient() {
+export default function MonthlyTrendClient({monthlyTrend}) {    
 	return (
 		<div className="grid lg:grid-cols-[2fr_1fr]">
 			<div className="min-w-0 p-6 md:p-8">
@@ -55,7 +45,7 @@ export default function MonthlyTrendClient() {
 					config={trendConfig}
 					className="h-[440px] w-full">
 					<LineChart
-						data={monthlyTrendData}
+						data={monthlyTrend.trendData}
 						margin={{
 							left: 5,
 							right: 20,

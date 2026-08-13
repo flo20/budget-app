@@ -40,7 +40,7 @@ export function getMonthlyTrendData(cashFlowData = []) {
 	/*
 	 * Last 3 months
 	 */
-	const lastThreeMonths = cashFlowData.slice(-3)
+	const lastThreeMonths = cashFlowData.slice(-3)    
 
 	const threeMonthAverage =
 		lastThreeMonths.length > 0
@@ -50,7 +50,6 @@ export function getMonthlyTrendData(cashFlowData = []) {
 
 	return {
 		trendData: cashFlowData,
-
 		metrics: {
 			currentMonthSpending,
 			previousMonthSpending,
