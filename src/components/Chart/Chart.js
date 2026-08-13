@@ -135,7 +135,7 @@ export default function Chart({ budgetMonth }) {
 							/>
 						</div>
 
-						<CashFlow />
+						<CashFlow budgetMonth={budgetMonth} />
 					</TabsContent>
 
 					<TabsContent
@@ -161,7 +161,7 @@ export default function Chart({ budgetMonth }) {
 								positive
 							/>
 						</div>
-						<MonthlyTrend />
+						<MonthlyTrend budgetMonth={budgetMonth} />
 					</TabsContent>
 				</Tabs>
 			</section>

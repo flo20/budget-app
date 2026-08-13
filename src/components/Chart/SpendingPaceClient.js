@@ -15,7 +15,7 @@ import {
 	ChartTooltip,
 	ChartTooltipContent,
 } from '@/components/ui/chart'
-import { spendingChartConfig } from '@/lib/constants/spending-pace'
+import { spendingChartConfig } from '@/lib/constants/chart-configs'
 
 import ChartLegendItem from './ChartLegendItem'
 import ForecastPanel from './ForecastPanel'

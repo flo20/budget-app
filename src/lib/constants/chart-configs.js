@@ -12,3 +12,14 @@ export const spendingChartConfig = {
         color: '#fbbf24',
     },
 }
+
+export const cashFlowConfig = {
+    income: {
+        label: 'Income',
+        color: '#3b82f6',
+    },
+    expense: {
+        label: 'Expense',
+        color: '#fb5262',
+    },
+}
