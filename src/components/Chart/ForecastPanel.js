@@ -8,7 +8,7 @@ export default function ForecastPanel({ budgetMonth, paceMetrics }) {
 				PERIOD-END FORECAST
 			</p>
 
-			<p className="mt-5 font-mono text-4xl font-semibold text-emerald-400 lg:text-5xl">
+			<p className="mt-5 font-mono text-4xl font-semibold text-emerald-400 lg:text-4xl">
 				{formatCompactCurrency(Math.abs(projectedRemaining))}
 			</p>
 

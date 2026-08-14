@@ -18,8 +18,10 @@ import {
 import { trendConfig } from '@/lib/constants/chart-configs'
 
 import ChartLegendItem from './ChartLegendItem'
+import { formatCompactCurrency } from '../../lib/utils/format'
 
-export default function MonthlyTrendClient({ trendData = {} }) {
+export default function MonthlyTrendClient({ trendData = {}, trendMetrics }) {
+	const { spendingDifference, spendingChange, trendDirection } = trendMetrics
 	return (
 		<div className="grid lg:grid-cols-[2fr_1fr]">
 			<div className="min-w-0 p-6 md:p-8">
@@ -128,37 +130,59 @@ export default function MonthlyTrendClient({ trendData = {} }) {
 			</div>
 
 			<aside className="border-t border-[#29292e] p-8 lg:border-l lg:border-t-0">
-				<p className="font-mono text-sm tracking-[0.16em] text-zinc-400">
+				<p className="font-mono text-xs font-medium tracking-[0.2em] text-zinc-500">
 					MONTHLY TREND
 				</p>
 
-				<p className="mt-5 font-mono text-4xl font-semibold text-emerald-400">
-					92% Lower
+				<p
+					className={`mt-4 font-mono text-4xl font-semibold tracking-tight lg:text-5xl ${
+						spendingChange <= 0 ? 'text-emerald-400' : 'text-red-400'
+					}`}>
+					{Math.abs(Math.round(spendingChange))}%{' '}
+					{spendingChange <= 0 ? 'Lower' : 'Higher'}
 				</p>
 
-				<p className="mt-2 font-mono text-sm tracking-[0.15em] text-zinc-400">
-					SPENDING VS JUL
+				<p className="mt-2 font-mono text-xs font-medium tracking-[0.16em] text-zinc-500">
+					SPENDING VS PREVIOUS MONTH
 				</p>
 
-				<p className="mt-7 text-lg leading-7 text-zinc-400">
-					You spent $2,331.01 less than last month.
+				<p className="mt-6 max-w-sm text-base leading-7 text-zinc-400">
+					{spendingDifference < 0
+						? `You spent ${formatCompactCurrency(
+								Math.abs(spendingDifference),
+							)} less than last month`
+						: spendingDifference > 0
+							? `You spent ${formatCompactCurrency(
+									spendingDifference,
+								)} more than last month`
+							: 'Your spending was unchanged from last month'}
 				</p>
 
 				<div className="my-8 h-px bg-[#29292e]" />
 
-				<p className="font-mono text-3xl font-semibold text-[#fb5262]">
-					RISING
+				<p
+					className={`font-mono text-2xl font-semibold tracking-wide ${
+						trendDirection === 'rising'
+							? 'text-red-400'
+							: trendDirection === 'falling'
+								? 'text-emerald-400'
+								: 'text-zinc-300'
+					}`}>
+					{trendDirection.toUpperCase()}
 				</p>
 
-				<p className="mt-2 font-mono text-sm tracking-[0.16em] text-zinc-400">
+				<p className="mt-2 font-mono text-xs font-medium tracking-[0.16em] text-zinc-500">
 					3-MONTH DIRECTION
 				</p>
 
-				<p className="mt-7 text-lg leading-7 text-zinc-400">
-					Expenses are creeping up over the last three months.
+				<p className="mt-5 max-w-sm text-base leading-7 text-zinc-400">
+					{trendDirection === 'rising'
+						? 'Expenses have been trending upward over the last three months'
+						: trendDirection === 'falling'
+							? 'Expenses have been trending downward over the last three months'
+							: 'Expenses have remained relatively stable over the last three months'}
 				</p>
 			</aside>
 		</div>
 	)
 }
-

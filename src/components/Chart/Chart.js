@@ -175,14 +175,21 @@ export default function Chart({
 					value="cashflow"
 					className="m-0">
 					<Metrics items={cashMetrics} />
-					<CashFlowClient cashFlowData={cashFlowData} />
+					<CashFlowClient
+						cashFlowData={cashFlowData}
+						cashFlowMetrics={cashFlowMetrics}
+					/>
 				</TabsContent>
 
 				<TabsContent
 					value="trend"
 					className="m-0">
 					<Metrics items={monthlyTrendMetrics} />
-					<MonthlyTrendClient trendData={trendData} />
+					<MonthlyTrendClient
+						trendMetrics={trendMetrics}
+						budgetMonth={budgetMonth}
+						trendData={trendData}
+					/>
 				</TabsContent>
 			</Tabs>
 		</section>

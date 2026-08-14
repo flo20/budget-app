@@ -40,14 +40,31 @@ export function getMonthlyTrendData(cashFlowData = []) {
 	/*
 	 * Last 3 months
 	 */
-	const lastThreeMonths = cashFlowData.slice(-3)    
+	const lastThreeMonths = cashFlowData.slice(-3)
 
 	const threeMonthAverage =
 		lastThreeMonths.length > 0
 			? lastThreeMonths.reduce((total, month) => total + month.expense, 0) /
 				lastThreeMonths.length
 			: 0
+	// Trend direction
+	let trendDirection = 'stable'
 
+	if (lastThreeMonths.length >= 3) {
+		const [firstMonth, secondMonth, thirdMonth] = lastThreeMonths
+
+		if (
+			firstMonth.expense < secondMonth.expense &&
+			secondMonth.expense < thirdMonth.expense
+		) {
+			trendDirection = 'rising'
+		} else if (
+			firstMonth.expense > secondMonth.expense &&
+			secondMonth.expense > thirdMonth.expense
+		) {
+			trendDirection = 'falling'
+		}
+	}
 	return {
 		trendData: cashFlowData,
 		trendMetrics: {
@@ -57,6 +74,7 @@ export function getMonthlyTrendData(cashFlowData = []) {
 			spendingDifference,
 			threeMonthAverage,
 			netCashFlow: currentMonth?.net ?? 0,
+			trendDirection,
 		},
 	}
 }
