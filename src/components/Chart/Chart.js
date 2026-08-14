@@ -165,6 +165,7 @@ export default function Chart({
 					className="m-0">
 					<Metrics items={spendingMetrics} />
 					<SpendingPaceClient
+						budgetMonth={budgetMonth}
 						spendingPaceData={spendingPaceData}
 						paceMetrics={paceMetrics}
 					/>
@@ -181,26 +182,6 @@ export default function Chart({
 					value="trend"
 					className="m-0">
 					<Metrics items={monthlyTrendMetrics} />
-					{/* <div className="grid grid-cols-2 border-b border-[#29292e] lg:grid-cols-4">
-						<Metric
-							value={formatCurrency(trendMetrics.currentMonthSpending)}
-							label="THIS MONTH"
-						/>
-						<Metric
-							value={formatCurrency(trendMetrics.spendingDifference)}
-							label="VS JUL"
-							positive
-						/>
-						<Metric
-							value={formatCurrency(trendMetrics.threeMonthAverage)}
-							label="3-MONTH AVG"
-						/>
-						<Metric
-							value={formatCurrency(trendMetrics.netCashFlow)}
-							label="NET CASH FLOW"
-							positive
-						/>
-					</div> */}
 					<MonthlyTrendClient trendData={trendData} />
 				</TabsContent>
 			</Tabs>

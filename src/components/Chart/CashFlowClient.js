@@ -1,17 +1,16 @@
 'use client'
 
-import { Bar, BarChart, XAxis, YAxis } from 'recharts'
-
 import {
-	ChartContainer,
+    ChartContainer,
 	ChartTooltip,
 	ChartTooltipContent,
 } from '@/components/ui/chart'
+import { Bar, BarChart, XAxis, YAxis } from 'recharts'
 
 import { formatChartCurrency } from '@/lib/utils/format'
 import { cashFlowConfig } from '@/lib/constants/chart-configs'
+
 import ChartLegendItem from './ChartLegendItem'
-import ForecastPanel from './ForecastPanel'
 
 export default function CashFlowClient({ cashFlowData = {} }) {
 	return (
@@ -71,23 +70,22 @@ export default function CashFlowClient({ cashFlowData = {} }) {
 				</ChartContainer>
 
 				<div className="grid grid-cols-6 text-center">
-					{cashFlowData.map((item) => (
-						<div key={item.month}>
+					{cashFlowData.map((cashData) => (
+						<div key={cashData.month}>
 							<p className="font-mono text-sm tracking-[0.12em] text-zinc-400">
-								{item.month}
+								{cashData.month}
 							</p>
 
 							<p className="mt-1 font-mono text-sm text-emerald-400">
 								+
-								{item.net >= 1000
-									? `$${(item.net / 1000).toFixed(1)}K`
-									: formatChartCurrency(item.net)}
+								{cashData.net >= 1000
+									? `$${(cashData.net / 1000).toFixed(1)}K`
+									: formatChartCurrency(cashData.net)}
 							</p>
 						</div>
 					))}
 				</div>
 			</div>
-			<ForecastPanel />
 		</div>
 	)
 }

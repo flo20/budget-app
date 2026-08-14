@@ -21,6 +21,7 @@ import ChartLegendItem from './ChartLegendItem'
 import ForecastPanel from './ForecastPanel'
 
 export default function SpendingPaceClient({
+	budgetMonth,
 	spendingPaceData = {},
 	paceMetrics = {},
 }) {
@@ -149,8 +150,8 @@ export default function SpendingPaceClient({
 				</ChartContainer>
 			</div>
 			<ForecastPanel
-				projectedRemaining={paceMetrics?.projectedRemaining}
-				upcomingBills={paceMetrics?.upcomingBills}
+				budgetMonth={budgetMonth}
+				paceMetrics={paceMetrics}
 			/>
 		</div>
 	)
