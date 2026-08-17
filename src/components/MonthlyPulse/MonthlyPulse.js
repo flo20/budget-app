@@ -1,4 +1,3 @@
-
 import { getMonthlyPulse } from '@/lib/queries/monthly-pulse'
 import { buildMonthlyPulseSummary } from '@/lib/dashboard/monthly-pulse-summary'
 import { formatCurrency, formatMonth } from '@/lib/utils/format'
@@ -8,6 +7,8 @@ import styles from './MonthlyPulse.module.scss'
 export default async function MonthlyPulse({ budgetMonth }) {
 	const data = await getMonthlyPulse(budgetMonth)
 	const summary = buildMonthlyPulseSummary(data)
+
+	console.log('summary', summary)
 
 	return (
 		<section
@@ -31,13 +32,12 @@ export default async function MonthlyPulse({ budgetMonth }) {
 			<article>
 				<p>Net worth</p>
 
-				{/* <strong>{formatCurrency(summary.netWorth)}</strong> */}
+				<strong>{formatCurrency(summary.netWorth)}</strong>
 
 				<p>
 					{formatCurrency(summary.totalAssets)} assets
-					{/* <span aria-hidden="true"> − </span>
-					<span>minus</span>
-					{formatCurrency(summary.totalLiabilities)} liabilities */}
+					<span aria-hidden="true"> − </span>
+					{formatCurrency(summary.totalLiabilities)} liabilities
 				</p>
 			</article>
 		</section>

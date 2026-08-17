@@ -1,6 +1,6 @@
 import { toValidNumber } from '../utils/number'
 
-export function buildMonthlyPulseSummary({ transactions, assets }) {
+export function buildMonthlyPulseSummary({ transactions, assets, liabilities }) {
 	const transactionTotals = transactions.reduce(
 		(totals, transaction) => {
 			const amount = toValidNumber(transaction.amount)
@@ -25,19 +25,19 @@ export function buildMonthlyPulseSummary({ transactions, assets }) {
 		return total + toValidNumber(asset.current_value)
 	}, 0)
 
-	// const totalLiabilities = liabilities.reduce((total, liability) => {
-	// 	return total + toValidNumber(liability.current_balance)
-	// }, 0)
+	const totalLiabilities = liabilities.reduce((total, liability) => {
+		return total + toValidNumber(liability.current_balance)
+	}, 0)
 
 	const remaining = transactionTotals.income - transactionTotals.outflow
-	// const netWorth = totalAssets - totalLiabilities
+	const netWorth = totalAssets - totalLiabilities
 
 	return {
 		income: transactionTotals.income,
 		outflow: transactionTotals.outflow,
 		totalAssets,
-		//totalLiabilities,
-		//netWorth,
+		totalLiabilities,
+		netWorth,
 		remaining,
 	}
 }
