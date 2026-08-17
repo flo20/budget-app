@@ -16,7 +16,7 @@ export default async function BudgetAllocation({ budgetMonth }) {
 	return (
 		<section
 			className={styles.container}
-			id="budget">
+			id="plan">
 			<h2>ALLOCATED BUDGETS</h2>
 			<header>
 				<p id="allocated-budgets-title">

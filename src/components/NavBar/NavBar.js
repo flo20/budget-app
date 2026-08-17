@@ -34,16 +34,16 @@ export default function NavBar() {
 				</ul>
 				<ul className={styles.flexMainNav}>
 					<li>
-						<a href="#dashboard">Dashboard</a>
+						<a href="#dashboard">Overview</a>
 					</li>
 					<li>
-						<a href="#pinned">Pinned</a>
+						<a href="#plan">Plan</a>
 					</li>
 					<li>
-						<a href="#assets">Assets</a>
+						<a href="#accounts">Accounts</a>
 					</li>
 					<li>
-						<a href="#ledger">Ledger</a>
+						<a href="#activity">Activity</a>
 					</li>
 				</ul>
 				<ul>

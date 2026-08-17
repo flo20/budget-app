@@ -11,17 +11,14 @@ import SavingsGoals from '@/components/SavingsGoals/SavingsGoals'
 import Liabilities from '@/components/Liabilities/Liabilities'
 
 import { redirect } from 'next/navigation'
-import { createClient } from '@/lib/supabase/server'
+import { requireUser } from '@/lib/auth/require-user'
 import { normalizeMonth, toBudgetMonth } from '@/lib/utils/month'
 
 import '@/app/globals.css'
 import OutLook from '@/components/Chart/Outlook'
 
 export default async function DashBoard({ searchParams }) {
-	const supabase = await createClient()
-	const {
-		data: { user },
-	} = await supabase.auth.getUser()
+	const { user } = await requireUser()
 
 	const params = await searchParams
 	const budgetMonth = toBudgetMonth(normalizeMonth(params?.month))
@@ -31,27 +28,25 @@ export default async function DashBoard({ searchParams }) {
 	}
 
 	return (
-		<>
-			<div>
-				<NavBar />
-				<SubNav />
-				<div className="contentWrapper">
-					<div className="leftCol">
-						<MonthlyPulse budgetMonth={budgetMonth} />
-						<PinnedPayment />
-						<Liabilities />
-						<BudgetAllocation budgetMonth={budgetMonth} />
-						<Notes budgetMonth={budgetMonth} />
-					</div>
-					<div className="rightCol">
-						<OutLook budgetMonth={budgetMonth} />
-						<SavingsGoals />
-						<AssetAllocation />
-						<LedgerStream />
-					</div>
+		<section id="#overview">
+			<NavBar />
+			<SubNav budgetMonth={budgetMonth} />
+			<div className="contentWrapper">
+				<div className="leftCol">
+					<MonthlyPulse budgetMonth={budgetMonth} />
+					<PinnedPayment />
+					<Liabilities />
+					<BudgetAllocation budgetMonth={budgetMonth} />
+					<Notes budgetMonth={budgetMonth} />
 				</div>
-				<QuickEntryButton />
+				<div className="rightCol">
+					<OutLook budgetMonth={budgetMonth} />
+					<SavingsGoals />
+					<AssetAllocation />
+					<LedgerStream />
+				</div>
 			</div>
-		</>
+			<QuickEntryButton />
+		</section>
 	)
 }

@@ -1,31 +1,25 @@
 'use client'
 
 import { useState } from 'react'
+import { useSearchParams, useRouter } from 'next/navigation'
+import { periodButtons, PERIODS } from '@/lib/constants/periods'
 import styles from './SubNav.module.scss'
 
+export default function SubNav({ budgetMonth }) {
+	const router = useRouter()
+	const searchParams = useSearchParams()
 
-const PERIODS = {
-	MONTHLY: 'Monthly',
-	YEARLY: 'Yearly',
-	LIFETIME: 'Lifetime',
-}
-
-const periodButtons = [
-	{ label: 'Month', value: PERIODS.MONTHLY },
-	{ label: 'Year', value: PERIODS.YEARLY },
-	{ label: 'All', value: PERIODS.LIFETIME },
-]
-
-export default function SubNav() {
 	const [period, setPeriod] = useState(PERIODS.MONTHLY)
 	const [viewMode, setViewMode] = useState(PERIODS.MONTHLY)
 
-	const [date, setDate] = useState(() => new Date())
+	const [year, month] = budgetMonth.split('-').map(Number)
+	const date = new Date(year, month - 1, 1)
 
-	const month = new Intl.DateTimeFormat('en-US', {
+	const monthLabel = new Intl.DateTimeFormat('en-US', {
 		month: 'long',
 	}).format(date)
-	const year = date.getFullYear()
+
+	const displayYear = date.getFullYear()
 
 	const isMonthly = period === PERIODS.MONTHLY
 	const isYearly = period === PERIODS.YEARLY
@@ -36,21 +30,27 @@ export default function SubNav() {
 		setViewMode(newPeriod)
 	}
 
-	const changeMonth = (delta) => {
-		setDate((prev) => {
-			const next = new Date(prev)
-			next.setMonth(next.getMonth() + delta)
-
-			return next
-		})
+	function changeYear(delta) {
+		const nextDate = new Date(year + delta, month - 1, 1)
+		updateMonthParam(nextDate)
 	}
 
-	const changeYear = (delta) => {
-		setDate((prev) => {
-			const next = new Date(prev)
-			next.setFullYear(next.getFullYear() + delta)
-			return next
-		})
+	function updateMonthParam(date) {
+		const monthParam = `${date.getFullYear()}-${String(
+			date.getMonth() + 1,
+		).padStart(2, '0')}`
+
+		const params = new URLSearchParams(searchParams.toString())
+
+		params.set('month', monthParam)
+
+		router.push(`/dashboard?${params.toString()}`)
+	}
+
+	function changeMonth(delta) {
+		const nextDate = new Date(year, month - 1 + delta, 1)
+
+		updateMonthParam(nextDate)
 	}
 
 	return (
@@ -58,8 +58,8 @@ export default function SubNav() {
 			<header>
 				<div className={styles.periodHeader}>
 					{isLifetime && <h5>ALL TIME</h5>}
-					{period === PERIODS.MONTHLY && <h5>{month}</h5>}
-					{!isLifetime && <h5>{year}</h5>}
+					{period === PERIODS.MONTHLY && <h5>{monthLabel}</h5>}
+					{!isLifetime && <h5>{displayYear}</h5>}
 					<h5>HOUSEHOLD</h5>
 				</div>
 				<h2>{period} Pulse</h2>

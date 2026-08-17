@@ -33,7 +33,7 @@ export async function createAsset(formData) {
 		throw new Error('Enter a valid asset value.')
 	}
 
-    	if (currentValue > 999999999999.99) {
+    if (currentValue > 999999999999.99) {
 				throw new Error('Asset value is too large.')
 			}
 
@@ -60,7 +60,7 @@ export async function createAsset(formData) {
 
 	revalidatePath('/dashboard')
 
-    	return {
+    return {
 				success: true,
 				error: null,
 			}

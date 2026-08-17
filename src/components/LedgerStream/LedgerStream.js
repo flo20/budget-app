@@ -9,7 +9,7 @@ export default async function LedgerStream() {
 	return (
 		<section
 			aria-labelledby="asset-inventory-title"
-			id="ledger"
+			id="activity"
 			className={styles.container}>
 			<header>
 				<h2 id="asset-inventory-title">Ledger Stream</h2>
