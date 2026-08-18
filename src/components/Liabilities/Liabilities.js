@@ -7,7 +7,7 @@ export default async function Liabilities() {
 	const liabilities = await getLiabilities()
 
 	return (
-		<section>
+		<section id="liabilities">
 			<LiabilitiesHeader />
 			<ul>
 				{liabilities.map((liability) => (

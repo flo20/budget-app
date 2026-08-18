@@ -25,7 +25,7 @@ export default function GoalsSummary({ goals }) {
 		}
 	}
 	return (
-		<section>
+		<section id="savings">
 			<header>
 				<h4> Savings goal</h4>
 				<button onClick={openGoalModal}>New Goal</button>

@@ -1,0 +1,22 @@
+'use client'
+
+import {
+	Popover,
+	PopoverContent,
+	PopoverTrigger,
+} from '@/components/ui/popover'
+
+export default function Profile({ handleLogout }) {
+	return (
+		<Popover>
+			<PopoverTrigger>Login Name</PopoverTrigger>
+			<PopoverContent
+				align="center"
+				sideOffset={16}
+				className="w-[200px] rounded-xl border border-[#29292e] p-0 shadow-2xl">
+				<p>Use login email address</p>
+				<button onClick={handleLogout}>Log out</button>
+			</PopoverContent>
+		</Popover>
+	)
+}

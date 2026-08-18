@@ -8,8 +8,6 @@ export default async function MonthlyPulse({ budgetMonth }) {
 	const data = await getMonthlyPulse(budgetMonth)
 	const summary = buildMonthlyPulseSummary(data)
 
-	console.log('summary', summary)
-
 	return (
 		<section
 			className={styles.container}

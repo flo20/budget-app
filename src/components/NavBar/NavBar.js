@@ -4,9 +4,12 @@ import { useEffect } from 'react'
 import { useTheme, useModal, useMount } from '@/app/providers/GlobalProvider'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
+import { SunIcon, MoonIcon } from 'lucide-react'
 
 import NewEntryForm from '../NewEntry/NewEntryForm'
+import AccountsPopover from './AccountsPopover'
 import Modal from '../Modal/Modal'
+import Profile from './Profile'
 
 import styles from './NavBar.module.scss'
 
@@ -40,24 +43,22 @@ export default function NavBar() {
 						<a href="#plan">Plan</a>
 					</li>
 					<li>
-						<a href="#accounts">Accounts</a>
+						<AccountsPopover />
 					</li>
 					<li>
 						<a href="#activity">Activity</a>
 					</li>
 				</ul>
 				<ul>
-					<button onClick={toggleTheme}>
-						{mounted ? (theme === 'light' ? 'Dark Mode' : 'Light Mode') : null}
-					</button>
 					<button
 						onClick={openEntryModal}
 						id="modal-title">
 						New Entry
 					</button>
-				</ul>
-				<ul>
-					<button onClick={handleLogout}>Log out</button>
+					<button onClick={toggleTheme}>
+						{mounted ? theme === 'light' ? <MoonIcon /> : <SunIcon /> : null}
+					</button>
+					<Profile handleLogout={handleLogout} />
 				</ul>
 			</nav>
 			<Modal

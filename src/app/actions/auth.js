@@ -52,12 +52,6 @@ export async function signIn(_previousState, formData) {
 		password,
 	})
 
-	console.log('Sign-in result:', {
-		userId: data.user?.id,
-		hasSession: Boolean(data.session),
-		error: error?.message,
-	})
-
 	if (error) {
 		return {
 			error: error.message,
