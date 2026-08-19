@@ -6,7 +6,6 @@ export default function AccountItem({
 	title,
 	subtitle,
 	value,
-	onClick,
 }) {
 	return (
 		<Link

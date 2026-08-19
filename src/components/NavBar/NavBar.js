@@ -7,13 +7,12 @@ import { createClient } from '@/lib/supabase/client'
 import { SunIcon, MoonIcon } from 'lucide-react'
 
 import NewEntryForm from '../NewEntry/NewEntryForm'
-import AccountsPopover from './AccountsPopover'
 import Modal from '../Modal/Modal'
 import Profile from './Profile'
 
 import styles from './NavBar.module.scss'
 
-export default function NavBar() {
+export default function NavBar({user}) {
 	const { theme, toggleTheme } = useTheme()
 	const { showEntryModal, openEntryModal, closeEntryModal } = useModal()
 	const { mounted, mountDoc } = useMount()
@@ -43,7 +42,7 @@ export default function NavBar() {
 						<a href="#plan">Plan</a>
 					</li>
 					<li>
-						<AccountsPopover />
+						<a href="#savings">Accounts</a>
 					</li>
 					<li>
 						<a href="#activity">Activity</a>
@@ -58,7 +57,7 @@ export default function NavBar() {
 					<button onClick={toggleTheme}>
 						{mounted ? theme === 'light' ? <MoonIcon /> : <SunIcon /> : null}
 					</button>
-					<Profile handleLogout={handleLogout} />
+					<Profile handleLogout={handleLogout} user={user}/>
 				</ul>
 			</nav>
 			<Modal

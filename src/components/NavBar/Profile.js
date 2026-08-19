@@ -6,15 +6,17 @@ import {
 	PopoverTrigger,
 } from '@/components/ui/popover'
 
-export default function Profile({ handleLogout }) {
+export default function Profile({ handleLogout,user }) {
+    const initial = user.email?.[0]?.toUpperCase()
 	return (
 		<Popover>
-			<PopoverTrigger>Login Name</PopoverTrigger>
+			<PopoverTrigger>{initial}</PopoverTrigger>
 			<PopoverContent
 				align="center"
 				sideOffset={16}
 				className="w-[200px] rounded-xl border border-[#29292e] p-0 shadow-2xl">
-				<p>Use login email address</p>
+				<p>{user.email}</p>
+                <p>HOUSEHOLD</p>
 				<button onClick={handleLogout}>Log out</button>
 			</PopoverContent>
 		</Popover>
