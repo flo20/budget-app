@@ -86,3 +86,13 @@ export async function signInAsDemo() {
 	revalidatePath('/dashboard', 'layout')
 	redirect('/dashboard')
 }
+
+export async function requireUserOptional() {
+	const supabase = await createClient()
+
+	const {
+		data: { user },
+	} = await supabase.auth.getUser()
+
+	return user ?? null
+}

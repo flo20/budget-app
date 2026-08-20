@@ -9,13 +9,13 @@ import SubNav from '@/components/NavBar/SubNav'
 import Notes from '@/components/BudgetNotes/Notes'
 import SavingsGoals from '@/components/SavingsGoals/SavingsGoals'
 import Liabilities from '@/components/Liabilities/Liabilities'
+import OutLook from '@/components/Chart/Outlook'
 
 import { redirect } from 'next/navigation'
 import { requireUser } from '@/lib/auth/require-user'
 import { normalizeMonth, toBudgetMonth } from '@/lib/utils/month'
 
 import '@/app/globals.css'
-import OutLook from '@/components/Chart/Outlook'
 
 export default async function DashBoard({ searchParams }) {
 	const { user } = await requireUser()

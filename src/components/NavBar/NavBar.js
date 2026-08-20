@@ -6,13 +6,14 @@ import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { SunIcon, MoonIcon } from 'lucide-react'
 
+import Link from 'next/link'
 import NewEntryForm from '../NewEntry/NewEntryForm'
 import Modal from '../Modal/Modal'
 import Profile from './Profile'
 
 import styles from './NavBar.module.scss'
 
-export default function NavBar({user}) {
+export default function NavBar({ user }) {
 	const { theme, toggleTheme } = useTheme()
 	const { showEntryModal, openEntryModal, closeEntryModal } = useModal()
 	const { mounted, mountDoc } = useMount()
@@ -34,31 +35,63 @@ export default function NavBar({user}) {
 				<ul>
 					<a className="text-3xl font-bold">Logo</a>
 				</ul>
-				<ul className={styles.flexMainNav}>
-					<li>
-						<a href="#dashboard">Overview</a>
-					</li>
-					<li>
-						<a href="#plan">Plan</a>
-					</li>
-					<li>
-						<a href="#savings">Accounts</a>
-					</li>
-					<li>
-						<a href="#activity">Activity</a>
-					</li>
-				</ul>
-				<ul>
-					<button
-						onClick={openEntryModal}
-						id="modal-title">
-						New Entry
-					</button>
-					<button onClick={toggleTheme}>
-						{mounted ? theme === 'light' ? <MoonIcon /> : <SunIcon /> : null}
-					</button>
-					<Profile handleLogout={handleLogout} user={user}/>
-				</ul>
+				{user ? (
+					<>
+						<ul className={styles.flexMainNav}>
+							<li>
+								<a href="#dashboard">Overview</a>
+							</li>
+							<li>
+								<a href="#plan">Plan</a>
+							</li>
+							<li>
+								<a href="#savings">Accounts</a>
+							</li>
+							<li>
+								<a href="#activity">Activity</a>
+							</li>
+						</ul>
+						<ul>
+							<button
+								onClick={openEntryModal}
+								id="modal-title">
+								New Entry
+							</button>
+
+							<button onClick={toggleTheme}>
+								{mounted ? (
+									theme === 'light' ? (
+										<MoonIcon />
+									) : (
+										<SunIcon />
+									)
+								) : null}
+							</button>
+							<Profile
+								handleLogout={handleLogout}
+								user={user}
+							/>
+						</ul>
+					</>
+				) : (
+					<div className="flex items-center gap-6">
+						<button onClick={toggleTheme}>
+							{mounted ? theme === 'light' ? <MoonIcon /> : <SunIcon /> : null}
+						</button>
+
+						<Link
+							href="/signin"
+							className="font-mono text-sm tracking-[0.18em] text-white">
+							SIGN IN
+						</Link>
+
+						<Link
+							href="/signup"
+							className="rounded-md bg-blue-500 px-6 py-3 font-mono text-sm tracking-[0.18em] text-black">
+							GET STARTED
+						</Link>
+					</div>
+				)}
 			</nav>
 			<Modal
 				showModal={showEntryModal}
