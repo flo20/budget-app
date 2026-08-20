@@ -30,7 +30,7 @@ export default async function DashBoard({ searchParams }) {
 
 	return (
 		<section id="#overview">
-			<NavBar user={user}/>
+			<NavBar user={user} />
 			<SubNav budgetMonth={budgetMonth} />
 			<div className="contentWrapper">
 				<div className="leftCol">
@@ -44,7 +44,7 @@ export default async function DashBoard({ searchParams }) {
 					<OutLook budgetMonth={budgetMonth} />
 					<SavingsGoals />
 					<AssetAllocation />
-					<LedgerStream />
+					<LedgerStream budgetMonth={budgetMonth} />
 				</div>
 			</div>
 			<QuickEntryButton />

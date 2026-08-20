@@ -1,10 +1,11 @@
 import { getTransactions } from '@/lib/queries/transactions'
 import { formatDate, formatTransactionCurrency } from '@/lib/utils/format'
+import LedgerFooter from './LedgerFooter'
 
 import styles from './LedgerStream.module.scss'
 
-export default async function LedgerStream() {
-	const transactions = await getTransactions()    
+export default async function LedgerStream({ budgetMonth }) {
+	const transactions = await getTransactions()
 
 	return (
 		<section
@@ -21,20 +22,28 @@ export default async function LedgerStream() {
 					<p>No transactions recorded yet.</p>
 				</section>
 			) : (
-				<table>
-					<tbody>
-						{transactions.map((transaction) => (
-							<tr key={transaction.id}>
-								<td>{transaction.source}</td>
-								<td>{formatDate(transaction.transaction_date)}</td>
-								<td>{transaction.transaction_type}</td>
-								<td>{transaction.category}</td>
-								<td>{transaction.notes}</td>
-								<td>{formatTransactionCurrency(transaction)}</td>
-							</tr>
-						))}
-					</tbody>
-				</table>
+				<>
+					<table>
+						<tbody>
+							{transactions.map((transaction) => (
+								<tr key={transaction.id}>
+									<td>{transaction.source}</td>
+									<td>{formatDate(transaction.transaction_date)}</td>
+									<td>{transaction.transaction_type}</td>
+									<td>{transaction.category}</td>
+									<td>{transaction.notes}</td>
+									<td>{formatTransactionCurrency(transaction)}</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+
+					<LedgerFooter
+						budgetMonth={budgetMonth}
+						showingCount={transactions.length}
+						totalCount={transactions.length}
+					/>
+				</>
 			)}
 		</section>
 	)
