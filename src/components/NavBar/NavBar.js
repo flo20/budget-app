@@ -33,13 +33,13 @@ export default function NavBar({ user }) {
 		<>
 			<nav className={styles.flex}>
 				<ul>
-					<a className="text-3xl font-bold">Logo</a>
+					<Link href="/" className="text-3xl font-bold">Logo</Link>
 				</ul>
 				{user ? (
 					<>
 						<ul className={styles.flexMainNav}>
 							<li>
-								<a href="#dashboard">Overview</a>
+								<a href="#overview">Overview</a>
 							</li>
 							<li>
 								<a href="#plan">Plan</a>
@@ -68,7 +68,6 @@ export default function NavBar({ user }) {
 								) : null}
 							</button>
 							<Profile
-								handleLogout={handleLogout}
 								user={user}
 							/>
 						</ul>

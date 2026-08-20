@@ -1,12 +1,14 @@
 'use client'
 
+import Link from 'next/link'
+
 import {
 	Popover,
 	PopoverContent,
 	PopoverTrigger,
 } from '@/components/ui/popover'
 
-export default function Profile({ handleLogout,user }) {
+export default function Profile({ user }) {
     const initial = user.email?.[0]?.toUpperCase()
 	return (
 		<Popover>
@@ -17,7 +19,7 @@ export default function Profile({ handleLogout,user }) {
 				className="w-[200px] rounded-xl border border-[#29292e] p-0 shadow-2xl">
 				<p>{user.email}</p>
                 <p>HOUSEHOLD</p>
-				<button onClick={handleLogout}>Log out</button>
+				<Link href="/">Log out</Link>
 			</PopoverContent>
 		</Popover>
 	)

@@ -1,6 +1,7 @@
 import HeroBanner from '@/components/HeroBanner/HeroBanner'
-import '@/app/globals.css'
 import NavbarServer from '@/components/NavBar/NavBarServer'
+
+import '@/app/globals.css'
 
 export default function Home() {
 	return (
