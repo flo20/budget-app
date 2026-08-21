@@ -22,14 +22,13 @@ export default async function DashBoard({ searchParams }) {
 
 	const params = await searchParams
 	const budgetMonth = toBudgetMonth(normalizeMonth(params?.month))
-    console.log('user', user.email)
     
 	if (!user) {
 		redirect('/signup')
 	}
 
 	return (
-		<section id="#overview">
+		<section id="#dashboard">
 			<NavBar user={user} />
 			<SubNav budgetMonth={budgetMonth} />
 			<div className="contentWrapper">

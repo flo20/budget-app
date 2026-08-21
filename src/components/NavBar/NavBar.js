@@ -14,6 +14,8 @@ import Profile from './Profile'
 import styles from './NavBar.module.scss'
 
 export default function NavBar({ user }) {
+	const isAuthenticated = Boolean(user?.id)
+
 	const { theme, toggleTheme } = useTheme()
 	const { showEntryModal, openEntryModal, closeEntryModal } = useModal()
 	const { mounted, mountDoc } = useMount()
@@ -22,8 +24,12 @@ export default function NavBar({ user }) {
 	const supabase = createClient()
 
 	async function handleLogout() {
-		await supabase.auth.signOut()
-		router.push('/signin')
+		const { error } = await supabase.auth.signOut()
+		if (error) {
+			console.error('Unable to sign out:', error)
+			return
+		}
+		router.replace('/')
 		router.refresh()
 	}
 
@@ -33,9 +39,9 @@ export default function NavBar({ user }) {
 		<>
 			<nav className={styles.flex}>
 				<ul>
-					<Link href="/" className="text-3xl font-bold">Logo</Link>
+					<div className="text-3xl font-bold">Logo</div>
 				</ul>
-				{user ? (
+				{isAuthenticated ? (
 					<>
 						<ul className={styles.flexMainNav}>
 							<li>
@@ -69,6 +75,7 @@ export default function NavBar({ user }) {
 							</button>
 							<Profile
 								user={user}
+								handleLogout={handleLogout}
 							/>
 						</ul>
 					</>

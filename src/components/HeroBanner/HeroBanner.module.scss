@@ -1,18 +1,17 @@
 .hero {
-    min-height: 100svh;
-	background:var(--bg-primary);
-    color: var(--text-primary);
+	min-height: 100svh;
+	background: var(--bg-primary);
+	color: var(--text-primary);
 
-    transition:
-    background-color 180ms ease,
-    color 180ms ease;
-
+	transition:
+		background-color 180ms ease,
+		color 180ms ease;
 }
 
 .inner {
 	width: min(100% - 48px, 1320px);
 	margin: 0 auto;
-    min-height: 100svh;
+
 	display: grid;
 	grid-template-columns: minmax(0, 1fr) minmax(420px, 0.95fr);
 	align-items: center;
@@ -31,7 +30,8 @@
 	font-family: monospace;
 	font-size: 0.72rem;
 	letter-spacing: 0.32em;
-	color: #8f8f98;
+
+	color: var(--text-muted);
 }
 
 .title {
@@ -52,8 +52,8 @@
 
 	font-size: 1.08rem;
 	line-height: 1.75;
-	color: var(--text-primary);
-	// color: #a1a1aa;
+
+	color: var(--text-secondary);
 }
 
 .actions {
@@ -66,6 +66,7 @@
 
 .button {
 	min-height: 48px;
+
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -85,7 +86,8 @@
 	transition:
 		transform 160ms ease,
 		background-color 160ms ease,
-		border-color 160ms ease;
+		border-color 160ms ease,
+		color 160ms ease;
 }
 
 .button:hover {
@@ -95,24 +97,24 @@
 .primaryButton {
 	min-width: 240px;
 
-	background: #3b92ff;
+	background: var(--accent-blue);
 	color: #050505;
 
 	&:hover {
-		background: #59a3ff;
+		filter: brightness(1.08);
 	}
 }
 
 .secondaryButton {
 	min-width: 215px;
 
-	background: #202024;
-	color: #e4e4e7;
+	background: var(--bg-secondary);
+	color: var(--text-primary);
 
-	border: 1px solid #25252a;
+	border: 1px solid var(--border);
 
 	&:hover {
-		background: #29292e;
+		filter: brightness(1.05);
 	}
 }
 
@@ -130,19 +132,20 @@
 	align-items: center;
 	gap: 8px;
 
-	color: #8e8e96;
+	color: var(--text-muted);
 
 	font-family: monospace;
 	font-size: 0.68rem;
 	letter-spacing: 0.15em;
 
 	svg {
-		color: #00c896;
+		color: var(--positive);
 	}
 }
 
 .previewWrapper {
 	min-width: 0;
+
 	display: flex;
 	justify-content: flex-end;
 }
@@ -153,12 +156,16 @@
 
 	padding: 30px;
 
-	background: #111114;
+	background: var(--bg-secondary);
 
-	border: 1px solid #303036;
+	border: 1px solid var(--border);
 	border-radius: 14px;
 
-	box-shadow: 0 30px 80px rgb(0 0 0 / 0.25);
+	box-shadow: 0 30px 80px rgb(0 0 0 / 0.18);
+
+	transition:
+		background-color 180ms ease,
+		border-color 180ms ease;
 }
 
 .balance {
@@ -168,7 +175,8 @@
 		font-family: monospace;
 		font-size: 0.7rem;
 		letter-spacing: 0.24em;
-		color: #8e8e96;
+
+		color: var(--text-muted);
 	}
 
 	strong {
@@ -178,6 +186,8 @@
 		font-size: clamp(2rem, 3vw, 2.7rem);
 		font-weight: 500;
 		letter-spacing: -0.03em;
+
+		color: var(--text-primary);
 	}
 }
 
@@ -203,11 +213,11 @@
 }
 
 .positiveBar {
-	background: #05966f;
+	background: var(--positive);
 }
 
 .negativeBar {
-	background: #c94752;
+	background: var(--negative);
 }
 
 .chartCaption {
@@ -216,7 +226,8 @@
 	font-family: monospace;
 	font-size: 0.68rem;
 	letter-spacing: 0.16em;
-	color: #898991;
+
+	color: var(--text-muted);
 }
 
 .categories {
@@ -240,7 +251,7 @@
 	margin-bottom: 7px;
 
 	font-size: 0.82rem;
-	color: #a1a1aa;
+	color: var(--text-secondary);
 
 	span:last-child {
 		font-family: monospace;
@@ -253,24 +264,25 @@
 
 	overflow: hidden;
 
-	background: #27272c;
+	background: var(--track-bg);
 	border-radius: 999px;
 }
 
 .progressValue {
 	height: 100%;
+
 	border-radius: inherit;
 }
 
 .progressGood {
-	background: #00c896;
+	background: var(--positive);
 }
 
 .progressOver {
-	background: #ff5865;
+	background: var(--negative);
 }
 
-/* -------- Tablet -------- */
+/* ---------- Tablet ---------- */
 
 @media (max-width: 1050px) {
 	.inner {
@@ -285,8 +297,8 @@
 	}
 
 	.actions {
-		align-items: stretch;
 		flex-direction: column;
+		align-items: stretch;
 	}
 
 	.button {
@@ -298,16 +310,15 @@
 	}
 }
 
-/* -------- Mobile -------- */
+/* ---------- Mobile ---------- */
 
 @media (max-width: 760px) {
 	.inner {
 		width: min(100% - 32px, 600px);
-		min-height: auto;
 
 		grid-template-columns: 1fr;
-
 		gap: 56px;
+
 		padding: 64px 0;
 	}
 
@@ -363,7 +374,7 @@
 	}
 }
 
-/* -------- Small phones -------- */
+/* ---------- Small phones ---------- */
 
 @media (max-width: 420px) {
 	.inner {
