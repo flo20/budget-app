@@ -2,10 +2,13 @@ import Link from 'next/link'
 
 import SignUpForm from '../../components/Auth/SignUpForm'
 import DemoLoginButton from '@/components/Auth/DemoLoginButton'
+import NavBar from '@/components/NavBar/NavBar'
 
 export default async function SignUpPage() {
 	return (
-		<main className="flex min-h-screen items-center justify-center">
+        <>
+        <NavBar/>
+        <main className="flex min-h-screen items-center justify-center">
 			<div className="w-full max-w-sm space-y-6">
 				<h1 className="text-2xl font-bold">Sign Up with Balance</h1>
 				<p>Manage your household finances in one place</p>
@@ -26,5 +29,7 @@ export default async function SignUpPage() {
 				<SignUpForm />
 			</div>
 		</main>
+        </>
+		
 	)
 }

@@ -28,7 +28,7 @@ export default async function DashBoard({ searchParams }) {
 	}
 
 	return (
-		<section id="#dashboard">
+		<div id="#dashboard">
 			<NavBar user={user} />
 			<SubNav budgetMonth={budgetMonth} />
 			<div className="contentWrapper">
@@ -47,6 +47,6 @@ export default async function DashBoard({ searchParams }) {
 				</div>
 			</div>
 			<QuickEntryButton />
-		</section>
+		</div>
 	)
 }

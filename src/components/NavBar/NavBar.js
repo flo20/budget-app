@@ -39,7 +39,11 @@ export default function NavBar({ user }) {
 		<>
 			<nav className={styles.flex}>
 				<ul>
-					<div className="text-3xl font-bold">Logo</div>
+					<Link
+						href="/"
+						className="text-3xl font-bold">
+						Logo
+					</Link>
 				</ul>
 				{isAuthenticated ? (
 					<>
