@@ -2,6 +2,7 @@
 
 import { useModal, useMount } from '@/app/providers/GlobalProvider'
 
+import { PinIcon } from 'lucide-react'
 import Modal from '../Modal/Modal'
 import PinnedPaymentForm from './PinnedPaymentForm'
 
@@ -18,7 +19,13 @@ export default function PinnedPaymentClient({ pinnedPayments = [] }) {
 				className={styles.container}>
 				<header>
 					<h4>Pinned Payment</h4>
-					<button onClick={openPinnedModal}>Pin Icon</button>
+					<button onClick={openPinnedModal}>
+						<PinIcon
+							size={16}
+							strokeWidth={0.9}
+						/>
+						Pin
+					</button>
 				</header>
 
 				{pinnedPayments.length === 0 ? (

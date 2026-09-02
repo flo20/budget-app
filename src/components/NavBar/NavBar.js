@@ -21,9 +21,9 @@ export default function NavBar({ user }) {
 	const { mounted, mountDoc } = useMount()
 
 	const router = useRouter()
-	const supabase = createClient()
 
 	async function handleLogout() {
+        const supabase = createClient()
 		const { error } = await supabase.auth.signOut()
 		if (error) {
 			console.error('Unable to sign out:', error)

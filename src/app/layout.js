@@ -2,7 +2,7 @@ import './globals.css'
 import ThemeProvider from './providers/GlobalProvider'
 
 export const metadata = {
-	title: 'Budget App',
+	title: 'TALLY',
 	description: 'Household budgeting app',
 }
 
