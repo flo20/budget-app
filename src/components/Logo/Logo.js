@@ -6,8 +6,8 @@ export default function Logo() {
 			<Image
 				src="/logo-light.svg"
 				alt="Tally"
-				width={160}
-				height={45}
+				width={120}
+				height={40}
 				priority
 				className="logo-light object-contain object-left"
 			/>
@@ -15,8 +15,8 @@ export default function Logo() {
 			<Image
 				src="/logo-dark.svg"
 				alt="Tally"
-				width={160}
-				height={45}
+				width={120}
+				height={40}
 				priority
 				className="logo-dark object-contain object-left"
 			/>
