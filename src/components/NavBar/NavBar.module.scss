@@ -1,32 +1,27 @@
 .flex {
 	display: flex;
-
 	align-items: center;
-
 	justify-content: space-between;
 
+	min-height: 96px;
 	padding: 1rem 2rem;
 
 	background: var(--bg-primary);
-
 	border-bottom: 1px solid var(--border);
 
 	transition:
-		background 0.3s ease,
-		border-color 0.3s ease;
+		background-color 0.2s ease,
+		border-color 0.2s ease,
+		color 0.2s ease;
 }
 
 .flex ul {
 	display: flex;
-
 	align-items: center;
-
 	gap: 1rem;
 
 	list-style: none;
-
 	padding: 0;
-
 	margin: 0;
 }
 
@@ -57,8 +52,6 @@
 
 	border-radius: 8px;
 
-	background: var(--button-bg);
-
 	color: var(--button-text);
 
 	cursor: pointer;
@@ -79,4 +72,45 @@
 
 .flex button:active {
 	transform: translateY(0);
+}
+
+
+
+// Get started button
+
+.startButton {
+	min-height: 45px;
+
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+
+	padding: 0 28px;
+
+	border-radius: 5px;
+
+	font-family: monospace;
+	font-size: 0.8rem;
+	font-weight: 600;
+	letter-spacing: 0.16em;
+
+	text-decoration: none;
+
+	transition:
+		transform 160ms ease,
+		background-color 160ms ease,
+		border-color 160ms ease,
+		color 160ms ease;
+}
+
+.primaryButton {
+	min-width: 100px;
+
+	background: var(--accent-blue);
+	color: #050505;
+
+	&:hover {
+		filter: brightness(1.08);
+	}
 }

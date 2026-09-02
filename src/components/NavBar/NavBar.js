@@ -12,6 +12,7 @@ import Modal from '../Modal/Modal'
 import Profile from './Profile'
 
 import styles from './NavBar.module.scss'
+import Logo from '../Logo/Logo'
 
 export default function NavBar({ user }) {
 	const isAuthenticated = Boolean(user?.id)
@@ -23,7 +24,7 @@ export default function NavBar({ user }) {
 	const router = useRouter()
 
 	async function handleLogout() {
-        const supabase = createClient()
+		const supabase = createClient()
 		const { error } = await supabase.auth.signOut()
 		if (error) {
 			console.error('Unable to sign out:', error)
@@ -38,13 +39,11 @@ export default function NavBar({ user }) {
 	return (
 		<>
 			<nav className={styles.flex}>
-				<ul>
-					<Link
-						href="/"
-						className="text-3xl font-bold">
-						Logo
-					</Link>
-				</ul>
+				<Link
+					href="/"
+					className="text-3xl font-bold">
+					<Logo />
+				</Link>
 				{isAuthenticated ? (
 					<>
 						<ul className={styles.flexMainNav}>
@@ -91,13 +90,13 @@ export default function NavBar({ user }) {
 
 						<Link
 							href="/signin"
-							className="font-mono text-sm tracking-[0.18em] text-white">
+							className="font-mono text-sm tracking-[0.18em] text-white signButton">
 							SIGN IN
 						</Link>
 
 						<Link
 							href="/signup"
-							className="rounded-md bg-blue-500 px-6 py-3 font-mono text-sm tracking-[0.18em] text-black">
+							className={`${styles.startButton} ${styles.primaryButton}`}>
 							GET STARTED
 						</Link>
 					</div>

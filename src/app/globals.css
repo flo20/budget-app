@@ -130,8 +130,8 @@
 
 	--border: #e5e5e5;
 
-	--button-bg: #111111;
-	--button-text: #ffffff;
+	--button-bg: #120e0e;
+	--button-text: #020001;
 
 	--accent-blue: #3b92ff;
 	--positive: #00a878;
@@ -141,8 +141,8 @@
 }
 
 [data-theme='dark'] {
-	--bg-primary: #121212;
-	--bg-secondary: #1f1f1f;
+	--bg-primary: #020001;
+	--bg-secondary: #120e0e;
 
 	--text-primary: #ffffff;
 	--text-secondary: #b3b3b3;
@@ -151,7 +151,7 @@
 	--border: #333333;
 
 	--button-bg: #ffffff;
-	--button-text: #111111;
+	--button-text: #ffffff;
 
 	--accent-blue: #3b92ff;
 	--positive: #00c896;
@@ -159,6 +159,25 @@
 
 	--track-bg: #2a2a2a;
 }
+
+/* Logo dark and light theme */
+.logo-light {
+	display: block;
+}
+
+.logo-dark {
+	display: none;
+}
+
+html[data-theme='dark'] .logo-light {
+	display: none;
+}
+
+html[data-theme='dark'] .logo-dark {
+	display: block;
+}
+
+
 
 html {
 	height: 100%;
