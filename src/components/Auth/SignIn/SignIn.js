@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import DemoLoginButton from '../DemoLoginButton'
-import SignInForm from '../SignInForm'
+import SignInForm from './SignInForm'
 
 import styles from './SignIn.module.scss'
 
@@ -20,7 +20,7 @@ export default function SignIn() {
 					<p>or sign in with your account</p>
 					<span />
 				</div>
-                
+
 				<SignInForm />
 
 				<p className={styles.signUp}>
