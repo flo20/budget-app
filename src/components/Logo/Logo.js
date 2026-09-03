@@ -6,19 +6,19 @@ export default function Logo() {
 			<Image
 				src="/logo-light.svg"
 				alt="Tally"
-				width={120}
-				height={40}
+				width={160}
+				height={20}
 				priority
-				className="logo-light object-contain object-left h-auto w-[180px]"
+				className="logo-light object-contain object-left h-auto w-[150px]"
 			/>
 
 			<Image
 				src="/logo-dark.svg"
 				alt="Tally"
-				width={120}
-				height={40}
+				width={90}
+				height={20}
 				priority
-				className="logo-dark object-contain object-left h-auto w-[180px]"
+				className="logo-dark object-contain object-left h-auto w-[150px]"
 			/>
 		</div>
 	)
