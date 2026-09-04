@@ -3,7 +3,7 @@
 import { useActionState } from 'react'
 import { signIn } from '../../../app/actions/auth'
 
-import styles from '../SignIn/SignIn.module.scss'
+import styles from '../AuthCard.module.scss'
 
 const initialState = {
 	error: null,

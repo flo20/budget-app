@@ -1,12 +1,13 @@
 import { signUp } from '@/app/actions/auth'
 
-export default async function SignUpForm() {
+import styles from '../AuthCard.module.scss'
 
+export default async function SignUpForm() {
 	return (
 		<form
 			action={signUp}
-			className="space-y-4">
-			<div>
+			className={styles.form}>
+			<div className={styles.field}>
 				<label htmlFor="email">Email</label>
 
 				<input
@@ -15,11 +16,11 @@ export default async function SignUpForm() {
 					type="email"
 					autoComplete="email"
 					required
-					className="w-full rounded border px-3 py-2"
+					
 				/>
 			</div>
 
-			<div>
+			<div className={styles.field}>
 				<label htmlFor="password">Password</label>
 
 				<input
@@ -29,11 +30,11 @@ export default async function SignUpForm() {
 					autoComplete="new-password"
 					minLength={6}
 					required
-					className="w-full rounded border px-3 py-2"
+					
 				/>
 			</div>
 
-			<div>
+			<div className={styles.field}>
 				<label htmlFor="confirmPassword">Confirm password</label>
 
 				<input
@@ -43,13 +44,13 @@ export default async function SignUpForm() {
 					autoComplete="new-password"
 					minLength={6}
 					required
-					className="w-full rounded border px-3 py-2"
+					
 				/>
 			</div>
 
 			<button
 				type="submit"
-				className="w-full rounded bg-blue-500 py-2 text-white">
+				className={styles.submitButton}>
 				Create account
 			</button>
 		</form>

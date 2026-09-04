@@ -1,33 +1,30 @@
 import Link from 'next/link'
 
-import SignUpForm from '../SignUpForm'
+import SignUpForm from './SignUpForm'
 import DemoLoginButton from '../DemoLoginButton'
 
+import styles from '../AuthCard.module.scss'
 
 export default async function SignUp() {
-    return (
-        <main className="flex min-h-screen items-center justify-center">
-            
-            <div className="w-full max-w-sm space-y-6">
-                <h1 className="text-2xl font-bold">Sign Up with Balance</h1>
-                <p>Manage your household finances in one place</p>
-                <DemoLoginButton />
-                <div className="flex items-center gap-3">
-                    <div className="h-px flex-1 bg-gray-300" />
-                    <span>or sign in with your account</span>
-                    <div className="h-px flex-1 bg-gray-300" />
-                    <div className="text-sm text-gray-400">
-                        Have an account?
-                        <Link
-                            href="/signin"
-                            className="underline">
-                            Sign in
-                        </Link>
-                    </div>
-                </div>
-                <SignUpForm />
-            </div>
-        </main>
-        
-    )
+	return (
+		<main className={styles.page}>
+			<section className={styles.card}>
+				<header className={styles.header}>
+					<h1>Sign Up with Balance</h1>
+					<p>Manage your household finances in one place</p>
+				</header>
+				<DemoLoginButton />
+				<div className={styles.divider}>
+					<span />
+					<p>or create your account</p>
+					<span />
+				</div>
+				<SignUpForm />
+				<p className={styles.authSwitch}>
+					<span>Have an account?</span>
+					<Link href="/signin">Sign in</Link>
+				</p>
+			</section>
+		</main>
+	)
 }

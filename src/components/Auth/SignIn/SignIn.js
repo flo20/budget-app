@@ -4,7 +4,7 @@ import Link from 'next/link'
 import DemoLoginButton from '../DemoLoginButton'
 import SignInForm from './SignInForm'
 
-import styles from './SignIn.module.scss'
+import styles from '../AuthCard.module.scss'
 
 export default function SignIn() {
 	return (
