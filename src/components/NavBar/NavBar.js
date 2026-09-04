@@ -44,7 +44,7 @@ export default function NavBar({ user }) {
 			<nav className={styles.flex}>
 				<Link
 					href="/"
-					className="text-3xl font-bold">
+					className={styles.brand}>
 					<Logo />
 				</Link>
 				{isAuthenticated ? (
@@ -63,14 +63,20 @@ export default function NavBar({ user }) {
 								<a href="#activity">Activity</a>
 							</li>
 						</ul>
-						<ul>
+						<div className={styles.actions}>
 							<button
 								onClick={openEntryModal}
-								id="modal-title">
+								className={styles.newEntryButton}
+								//id="modal-title"
+							>
+								<span>＋</span>
 								New Entry
 							</button>
-
-							<button onClick={toggleTheme}>
+							<div className={styles.actionDivider} />
+							<button
+								onClick={toggleTheme}
+								className={styles.themeButton}
+								aria-label="Toggle theme">
 								{mounted ? (
 									theme === 'light' ? (
 										<MoonIcon />
@@ -83,11 +89,14 @@ export default function NavBar({ user }) {
 								user={user}
 								handleLogout={handleLogout}
 							/>
-						</ul>
+						</div>
 					</>
 				) : (
-					<div className="flex items-center gap-6">
-						<button onClick={toggleTheme}>
+					<div className={styles.actions}>
+						<button
+							onClick={toggleTheme}
+							className={styles.themeButton}
+							aria-label="Toggle theme">
 							{mounted ? theme === 'light' ? <MoonIcon /> : <SunIcon /> : null}
 						</button>
 
@@ -95,13 +104,13 @@ export default function NavBar({ user }) {
 							<>
 								<Link
 									href="/signin"
-									className="font-mono text-sm tracking-[0.18em] text-white signButton">
+									className={styles.signButton}>
 									SIGN IN
 								</Link>
 
 								<Link
 									href="/signup"
-									className={`${styles.startButton} ${styles.primaryButton}`}>
+									className={styles.startButton}>
 									GET STARTED
 								</Link>
 							</>

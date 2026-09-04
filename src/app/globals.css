@@ -142,6 +142,15 @@
 	--track-bg: #e7e7e7;
     --surface: #f7f7f7;
     --primary-button-text: #ffffff;
+
+    --navbar-bg: #ffffff;
+	--navbar-border: #e5e5e5;
+	--navbar-text: #666666;
+	--navbar-text-active: #111111;
+	--navbar-action-bg: #f5f5f5;
+	--navbar-action-text: #111111;
+	--navbar-icon-border: #d6d6d6;
+	--navbar-avatar-bg: #ffffff;
 }
 
 [data-theme='dark'] {
@@ -165,6 +174,15 @@
     --surface: #0e0f10;
     --border: #303236;
     --primary-button-text: #ffffff;
+
+    --navbar-bg: #09090b;
+	--navbar-border: #242424;
+	--navbar-text: #8f8f95;
+	--navbar-text-active: #f5f5f5;
+	--navbar-action-bg: #242426;
+	--navbar-action-text: #f5f5f5;
+	--navbar-icon-border: #303236;
+	--navbar-avatar-bg: #111113;
 }
 
 /* Logo dark and light theme */
