@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import { useTheme, useModal, useMount } from '@/app/providers/GlobalProvider'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { SunIcon, MoonIcon } from 'lucide-react'
 
@@ -16,12 +16,15 @@ import Logo from '../Logo/Logo'
 
 export default function NavBar({ user }) {
 	const isAuthenticated = Boolean(user?.id)
+	const pathname = usePathname()
 
 	const { theme, toggleTheme } = useTheme()
 	const { showEntryModal, openEntryModal, closeEntryModal } = useModal()
 	const { mounted, mountDoc } = useMount()
 
 	const router = useRouter()
+
+	const isAuthPage = pathname === '/signin' || pathname === '/signup'
 
 	async function handleLogout() {
 		const supabase = createClient()
@@ -88,17 +91,21 @@ export default function NavBar({ user }) {
 							{mounted ? theme === 'light' ? <MoonIcon /> : <SunIcon /> : null}
 						</button>
 
-						<Link
-							href="/signin"
-							className="font-mono text-sm tracking-[0.18em] text-white signButton">
-							SIGN IN
-						</Link>
+						{!isAuthPage && (
+							<>
+								<Link
+									href="/signin"
+									className="font-mono text-sm tracking-[0.18em] text-white signButton">
+									SIGN IN
+								</Link>
 
-						<Link
-							href="/signup"
-							className={`${styles.startButton} ${styles.primaryButton}`}>
-							GET STARTED
-						</Link>
+								<Link
+									href="/signup"
+									className={`${styles.startButton} ${styles.primaryButton}`}>
+									GET STARTED
+								</Link>
+							</>
+						)}
 					</div>
 				)}
 			</nav>

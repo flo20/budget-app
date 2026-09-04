@@ -6,7 +6,7 @@
 /* @custom-variant dark (&:is(.dark *)); */
 
 :root {
-	--border: oklch(0.922 0 0);
+	/* --border: oklch(0.922 0 0); */
 	/* --input: oklch(0.922 0 0); */
 	--ring: oklch(0.708 0 0);
 	--radius: 0.625rem;
@@ -39,6 +39,8 @@
 	--sidebar-accent-foreground: oklch(0.205 0 0);
 	--sidebar-border: oklch(0.922 0 0);
 	--sidebar-ring: oklch(0.708 0 0);
+    --border: #dddddd;
+    --surface: #f7f7f7;
 }
 
 .dark {
@@ -138,6 +140,8 @@
 	--negative: #d94b57;
 
 	--track-bg: #e7e7e7;
+    --surface: #f7f7f7;
+    --primary-button-text: #ffffff;
 }
 
 [data-theme='dark'] {
@@ -158,6 +162,9 @@
 	--negative: #ff5865;
 
 	--track-bg: #2a2a2a;
+    --surface: #0e0f10;
+    --border: #303236;
+    --primary-button-text: #ffffff;
 }
 
 /* Logo dark and light theme */
