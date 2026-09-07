@@ -323,6 +323,14 @@ body {
     DASHBOARD
    ========================================================= */
 
+.dashboardPage {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: var(--section-gap);
+    margin-bottom: 2rem;
+}
+
 .contentWrapper {
 	display: grid;
 	grid-template-columns: 1fr 2fr;
@@ -337,6 +345,7 @@ body {
 	display: grid;
 	row-gap: 0.5rem;
 }
+
 
 /* Media Queries */
 @media (max-width: 1200px) {

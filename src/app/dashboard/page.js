@@ -30,7 +30,7 @@ export default async function DashBoard({ searchParams }) {
 	return (
 		<main id="#dashboard">
 			<NavBar user={user} />
-			<section className="pageContainer">
+			<section className="pageContainer dashboardPage">
 				<SubNav budgetMonth={budgetMonth} />
 				<MonthlyPulse budgetMonth={budgetMonth} />
 				<div className="contentWrapper">

@@ -2,7 +2,10 @@
 
 import { useState } from 'react'
 import { createTransactions } from '@/app/actions/transactions'
-import { EXPENSE_CATEGORIES, INCOME_CATEGORIES } from '@/lib/constants/transaction-categories'
+import {
+	EXPENSE_CATEGORIES,
+	INCOME_CATEGORIES,
+} from '@/lib/constants/transaction-categories'
 
 import styles from './NewEntryForm.module.scss'
 
@@ -33,7 +36,7 @@ export default function NewEntryForm({ closeModal }) {
 					X
 				</button>
 			</header>
-				<p>Record an income or expense</p>
+			<p>Record an income or expense</p>
 
 			{/* Expense Form */}
 			<form
