@@ -9,15 +9,14 @@
 }
 
 .inner {
-	width: min(100% - 48px, 1320px);
 	margin: 0 auto;
-
 	display: grid;
 	grid-template-columns: minmax(0, 1fr) minmax(420px, 0.95fr);
 	align-items: center;
 	gap: 96px;
 
-	padding: 96px 0;
+	padding-top: var(--page-padding-y);
+
 }
 
 .content {
@@ -25,8 +24,6 @@
 }
 
 .eyebrow {
-	margin: 0 0 22px;
-
 	font-family: monospace;
 	font-size: 0.72rem;
 	letter-spacing: 0.32em;
@@ -122,7 +119,7 @@
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
-	gap: 28px;
+	gap: 10px;
 
 	margin-top: 32px;
 }
@@ -152,7 +149,7 @@
 
 .previewCard {
 	width: 100%;
-	max-width: 600px;
+	max-width: 750px;
 
 	padding: 30px;
 

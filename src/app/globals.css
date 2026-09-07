@@ -298,6 +298,28 @@ body {
 }
 
 /* =========================================================
+    GLOBAL LAYOUT
+   ========================================================= */
+
+:root {
+	--page-max-width: 1240px;
+	--page-padding-x: 2rem;
+	--page-padding-y: 2.5rem;
+	--section-gap: 1.5rem;
+}
+
+.pageContainer {
+	width: 100%;
+	max-width: var(--page-max-width);
+
+	margin-inline: auto;
+
+	padding:
+		var(--page-padding-y)
+		var(--page-padding-x);
+}
+
+/* =========================================================
     DASHBOARD
    ========================================================= */
 
@@ -314,4 +336,34 @@ body {
 .rightCol {
 	display: grid;
 	row-gap: 0.5rem;
+}
+
+/* Media Queries */
+@media (max-width: 1200px) {
+	:root {
+		--page-padding-x: 1.5rem;
+	}
+}
+
+@media (max-width: 900px) {
+	.contentWrapper {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 640px) {
+	:root {
+		--page-padding-x: 1rem;
+		--page-padding-top: 1.5rem;
+		--page-padding-bottom: 2.5rem;
+	}
+
+	.contentWrapper {
+		gap: 1rem;
+	}
+
+	.leftCol,
+	.rightCol {
+		gap: 1rem;
+	}
 }

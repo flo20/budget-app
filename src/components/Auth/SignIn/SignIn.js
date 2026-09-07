@@ -23,13 +23,9 @@ export default function SignIn() {
 
 				<SignInForm />
 
-				<p className={styles.signUp}>
+				<p className={styles.authSwitch}>
 					<span>Need an account?</span>
-					<Link
-						href="/signup"
-						className="underline">
-						Sign up
-					</Link>
+					<Link href="/signup">Sign up</Link>
 				</p>
 			</section>
 		</main>

@@ -5,9 +5,11 @@ import SignIn from '@/components/Auth/SignIn/SignIn'
 
 export default function SignInPage() {
 	return (
-		<>
+		<main>
 			<NavBar />
-			<SignIn />
-		</>
+			<section className="pageContainer">
+				<SignIn />
+			</section>
+		</main>
 	)
 }

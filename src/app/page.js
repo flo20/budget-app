@@ -5,9 +5,11 @@ import '@/app/globals.css'
 
 export default function Home() {
 	return (
-		<>
+		<main>
 			<NavbarServer />
-			<HeroBanner />
-		</>
+			<section className="pageContainer">
+				<HeroBanner />
+			</section>
+		</main>
 	)
 }

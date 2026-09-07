@@ -22,31 +22,33 @@ export default async function DashBoard({ searchParams }) {
 
 	const params = await searchParams
 	const budgetMonth = toBudgetMonth(normalizeMonth(params?.month))
-    
+
 	if (!user) {
 		redirect('/signup')
 	}
 
 	return (
-		<div id="#dashboard">
+		<main id="#dashboard">
 			<NavBar user={user} />
-			<SubNav budgetMonth={budgetMonth} />
-			<div className="contentWrapper">
-				<div className="leftCol">
-					<MonthlyPulse budgetMonth={budgetMonth} />
-					<PinnedPayment />
-					<Liabilities />
-					<BudgetAllocation budgetMonth={budgetMonth} />
-					<Notes budgetMonth={budgetMonth} />
+			<section className="pageContainer">
+				<SubNav budgetMonth={budgetMonth} />
+				<MonthlyPulse budgetMonth={budgetMonth} />
+				<div className="contentWrapper">
+					<div className="leftCol">
+						<PinnedPayment />
+						<Liabilities />
+						<BudgetAllocation budgetMonth={budgetMonth} />
+						<Notes budgetMonth={budgetMonth} />
+					</div>
+					<div className="rightCol">
+						<OutLook budgetMonth={budgetMonth} />
+						<SavingsGoals />
+						<AssetAllocation />
+						<LedgerStream budgetMonth={budgetMonth} />
+					</div>
 				</div>
-				<div className="rightCol">
-					<OutLook budgetMonth={budgetMonth} />
-					<SavingsGoals />
-					<AssetAllocation />
-					<LedgerStream budgetMonth={budgetMonth} />
-				</div>
-			</div>
+			</section>
 			<QuickEntryButton />
-		</div>
+		</main>
 	)
 }

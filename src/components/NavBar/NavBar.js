@@ -41,38 +41,59 @@ export default function NavBar({ user }) {
 
 	return (
 		<>
-			<nav className={styles.flex}>
-				<Link
-					href="/"
-					className={styles.brand}>
-					<Logo />
-				</Link>
-				{isAuthenticated ? (
-					<>
-						<ul className={styles.flexMainNav}>
-							<li>
-								<a href="#overview">Overview</a>
-							</li>
-							<li>
-								<a href="#plan">Plan</a>
-							</li>
-							<li>
-								<a href="#savings">Accounts</a>
-							</li>
-							<li>
-								<a href="#activity">Activity</a>
-							</li>
-						</ul>
+			<nav className={styles.navbar}>
+				<div className={styles.flex}>
+					<Link
+						href="/"
+						className={styles.brand}>
+						<Logo />
+					</Link>
+					{isAuthenticated ? (
+						<>
+							<ul className={styles.flexMainNav}>
+								<li>
+									<a href="#overview">Overview</a>
+								</li>
+								<li>
+									<a href="#plan">Plan</a>
+								</li>
+								<li>
+									<a href="#savings">Accounts</a>
+								</li>
+								<li>
+									<a href="#activity">Activity</a>
+								</li>
+							</ul>
+							<div className={styles.actions}>
+								<button
+									onClick={openEntryModal}
+									className={styles.newEntryButton}
+									//id="modal-title"
+								>
+									<span>＋</span>
+									New Entry
+								</button>
+								<div className={styles.actionDivider} />
+								<button
+									onClick={toggleTheme}
+									className={styles.themeButton}
+									aria-label="Toggle theme">
+									{mounted ? (
+										theme === 'light' ? (
+											<MoonIcon />
+										) : (
+											<SunIcon />
+										)
+									) : null}
+								</button>
+								<Profile
+									user={user}
+									handleLogout={handleLogout}
+								/>
+							</div>
+						</>
+					) : (
 						<div className={styles.actions}>
-							<button
-								onClick={openEntryModal}
-								className={styles.newEntryButton}
-								//id="modal-title"
-							>
-								<span>＋</span>
-								New Entry
-							</button>
-							<div className={styles.actionDivider} />
 							<button
 								onClick={toggleTheme}
 								className={styles.themeButton}
@@ -85,38 +106,25 @@ export default function NavBar({ user }) {
 									)
 								) : null}
 							</button>
-							<Profile
-								user={user}
-								handleLogout={handleLogout}
-							/>
+
+							{!isAuthPage && (
+								<>
+									<Link
+										href="/signin"
+										className={styles.signButton}>
+										SIGN IN
+									</Link>
+
+									<Link
+										href="/signup"
+										className={styles.startButton}>
+										GET STARTED
+									</Link>
+								</>
+							)}
 						</div>
-					</>
-				) : (
-					<div className={styles.actions}>
-						<button
-							onClick={toggleTheme}
-							className={styles.themeButton}
-							aria-label="Toggle theme">
-							{mounted ? theme === 'light' ? <MoonIcon /> : <SunIcon /> : null}
-						</button>
-
-						{!isAuthPage && (
-							<>
-								<Link
-									href="/signin"
-									className={styles.signButton}>
-									SIGN IN
-								</Link>
-
-								<Link
-									href="/signup"
-									className={styles.startButton}>
-									GET STARTED
-								</Link>
-							</>
-						)}
-					</div>
-				)}
+					)}
+				</div>
 			</nav>
 			<Modal
 				showModal={showEntryModal}

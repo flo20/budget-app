@@ -6,7 +6,7 @@
 	justify-content: center;
 	align-items: flex-start;
 
-	padding-top: 1rem;
+	padding-top: var(--page-padding-y);
 	background: var(--bg-primary);
 	color: var(--text-primary);
 	transition:
@@ -240,23 +240,23 @@
 	cursor: pointer;
 }
 
-.signUp {
-	display: flex;
-	justify-content: center;
-	gap: 0.35rem;
+// .signUp {
+// 	display: flex;
+// 	justify-content: center;
+// 	gap: 0.35rem;
 
-	margin: 2rem 0 0;
+// 	margin: 2rem 0 0;
 
-	color: #a7a7ad;
+// 	color: #a7a7ad;
 
-	font-size: 0.9rem;
+// 	font-size: 0.9rem;
 
-	a {
-		color: #eeeeef;
-		text-decoration: underline;
-		text-underline-offset: 4px;
-	}
-}
+// 	a {
+// 		color: #eeeeef;
+// 		text-decoration: underline;
+// 		text-underline-offset: 4px;
+// 	}
+// }
 
 /* Medium screens */
 @media (max-width: 700px) {

@@ -3,10 +3,11 @@ import SignUp from '@/components/Auth/SignUp/SignUp'
 
 export default async function SignUpPage() {
 	return (
-        <>
-        <NavBar/>
-        <SignUp/>
-        </>
-		
+		<main>
+			<NavBar />
+			<section className="pageContainer">
+				<SignUp />
+			</section>
+		</main>
 	)
 }
