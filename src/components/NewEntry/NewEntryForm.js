@@ -8,14 +8,14 @@ import {
 	INCOME_CATEGORIES,
 } from '@/lib/constants/transaction-categories'
 
-import {X} from "lucide-react"
+import { X } from 'lucide-react'
 
 import styles from './NewEntryForm.module.scss'
 
 export default function NewEntryForm({ closeModal }) {
 	const [entryType, setEntryType] = useState('expense')
 	const [transactionDate, setTransactionDate] = useState(() => localDate())
-    const [expenseType, setExpenseType] = useState('variable')
+	const [expenseType, setExpenseType] = useState('variable')
 	const isExpense = entryType === 'expense'
 
 	const categories = isExpense ? EXPENSE_CATEGORIES : INCOME_CATEGORIES
@@ -33,7 +33,7 @@ export default function NewEntryForm({ closeModal }) {
 					className={styles.closeButton}
 					onClick={closeModal}
 					aria-label="Close">
-					<X/>
+					<X />
 				</button>
 			</header>
 

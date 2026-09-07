@@ -10,7 +10,7 @@ export default async function SignUp() {
 		<main className={styles.page}>
 			<section className={styles.card}>
 				<header className={styles.header}>
-					<h1>Sign Up with Balance</h1>
+					<h1>Sign Up with TALLY</h1>
 					<p>Manage your household finances in one place</p>
 				</header>
 				<DemoLoginButton />

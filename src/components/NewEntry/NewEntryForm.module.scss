@@ -1,3 +1,9 @@
+.formWrapper{
+    width: 100%;
+
+	color: var(--text-primary);
+}
+
 .dialogHeading {
 	display: flex;
 	align-items: flex-start;
@@ -11,7 +17,6 @@
 
 		color: var(--text-primary);
 
-		font-family: var(--font-mono), monospace;
 		font-size: 1.1rem;
 		font-weight: 500;
 		letter-spacing: 0.15em;
@@ -23,7 +28,7 @@
 
 		color: var(--text-secondary);
 
-		font-family: var(--font-sans), sans-serif;
+		
 		font-size: 1rem;
 		line-height: 1.5;
 	}
@@ -86,7 +91,6 @@
 	background: transparent;
 	color: var(--text-secondary);
 
-	font-family: var(--font-mono), monospace;
 	font-size: 0.8rem;
 	font-weight: 500;
 	letter-spacing: 0.14em;
@@ -120,7 +124,7 @@
 	.fieldLabel {
 		color: var(--text-primary);
 
-		font-family: var(--font-sans), sans-serif;
+		
 		font-size: 0.95rem;
 		font-weight: 500;
 	}
@@ -136,7 +140,7 @@
 		border: 1px solid var(--border);
 		border-radius: 8px;
 
-		font-family: var(--font-sans), sans-serif;
+		
 		font-size: 1rem;
 
 		outline: none;
@@ -192,7 +196,6 @@
 	background: transparent;
 	color: var(--text-secondary);
 
-	font-family: var(--font-mono), monospace;
 	font-size: 0.8rem;
 	font-weight: 500;
 	letter-spacing: 0.14em;
@@ -213,7 +216,6 @@
 
 	color: var(--text-muted);
 
-	font-family: var(--font-mono), monospace;
 	font-size: 0.7rem;
 }
 
@@ -235,7 +237,7 @@
 	border: 0;
 	border-radius: 8px;
 
-	font-family: var(--font-sans), sans-serif;
+	
 	font-size: 0.95rem;
 	font-weight: 500;
 
@@ -280,7 +282,6 @@
 	background: var(--accent-blue);
 	color: var(--primary-button-text);
 
-	font-family: var(--font-mono), monospace;
 	font-size: 0.75rem;
 	font-weight: 500;
 	letter-spacing: 0.16em;

@@ -11,7 +11,7 @@ export default function SignIn() {
 		<main className={styles.page}>
 			<section className={styles.card}>
 				<header className={styles.header}>
-					<h1>Sign in to Balance</h1>
+					<h1>Sign in to TALLY</h1>
 					<p>Manage your household finances in one place</p>
 				</header>
 				<DemoLoginButton />
