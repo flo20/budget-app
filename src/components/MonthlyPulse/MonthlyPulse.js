@@ -11,32 +11,29 @@ export default async function MonthlyPulse({ budgetMonth }) {
 	return (
 		<section
 			className={styles.container}
-			aria-labelledby="monthly-pulse-title">
-			<article>
+			aria-label="Monthly financial summary">
+			<article className={styles.metric}>
 				<p>{formatMonth(budgetMonth)} income</p>
-
 				<strong>{formatCurrency(summary.income)}</strong>
 			</article>
-			<article>
-				<p>Total outflow</p>
 
-				<strong>{formatCurrency(summary.outflow)}</strong>
+			<article className={styles.metric}>
+				<p>Total outflow</p>
+				<strong className={styles.negative}>
+					{formatCurrency(summary.outflow)}
+				</strong>
 			</article>
 			<article className={styles.metric}>
 				<p className={styles.label}>Remaining</p>
-
-				<strong>{formatCurrency(summary.remaining)}</strong>
+				<strong className={styles.positive}>
+					{formatCurrency(summary.remaining)}
+				</strong>
 			</article>
-			<article>
+			<article className={styles.metric}>
 				<p>Net worth</p>
-
-				<strong>{formatCurrency(summary.netWorth)}</strong>
-
-				<p>
-					{formatCurrency(summary.totalAssets)} assets
-					<span aria-hidden="true"> − </span>
-					{formatCurrency(summary.totalLiabilities)} liabilities
-				</p>
+				<strong className={styles.positive}>
+					{formatCurrency(summary.netWorth)}
+				</strong>
 			</article>
 		</section>
 	)
