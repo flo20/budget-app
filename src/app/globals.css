@@ -233,6 +233,8 @@
 
 	--navbar-icon-border: #303236;
 	--navbar-avatar-bg: #111113;
+
+    --warning: #e0a526;
 }
 
 /* =========================================================
@@ -312,6 +314,7 @@ textarea {
 	--page-padding-x: 2rem;
 	--page-padding-y: 2.5rem;
 	--section-gap: 1.5rem;
+    --warning: #b98516;
 }
 
 .pageContainer {

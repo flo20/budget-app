@@ -5,6 +5,14 @@ export function formatCurrency(amount) {
 	}).format(amount)
 }
 
+export function formatAmount(amount) {
+	return Number(amount).toLocaleString('en-US', {
+		style: 'currency',
+		currency: 'USD',
+		maximumFractionDigits: 0,
+	})
+}
+
 export const formatTransactionCurrency = (transaction) => {
 	const formattedAmount = new Intl.NumberFormat('en-US', {
 		style: 'currency',
@@ -87,3 +95,4 @@ export const formatDate = (date) => {
 		day: 'numeric',
 	}).format(new Date(`${date}T00:00:00`))
 }
+
