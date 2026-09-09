@@ -1,30 +1,245 @@
-.flex {
+.subNav {
+	width: 100%;
+
 	display: flex;
+	align-items: flex-end;
 	justify-content: space-between;
-    width: 100%;
+	gap: 2rem;
+
+	padding-block: 1.5rem 1.75rem;
 }
 
-.period{
-    display: flex;
+.heading {
+	min-width: 0;
+
+	h2 {
+		margin: 0;
+
+		color: var(--text-primary);
+
+		font-size: clamp(1.5rem, 4vw, 1rem);
+		font-weight: 520;
+		line-height: 1;
+		letter-spacing: -0.04em;
+	}
 }
 
-.periodHeader{
-    display: flex;
+.periodHeader {
+	display: flex;
+	align-items: center;
+	gap: 0.7rem;
 
-    h5{
-        margin-right: 0.2rem;
-        // border: 1px solid red;
-    }
+	margin-bottom: 1.15rem;
+
+	color: var(--text-muted);
+
+	font-size: 0.8rem;
+	font-weight: 500;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
 }
 
-.hide {
-    display: none;
+.separator {
+	color: var(--text-secondary);
 }
 
-.show {
-    display: block;
+.controls {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 0.75rem;
+
+	flex-shrink: 0;
+}
+
+.periodSelector {
+	height: 40px;
+
+	display: flex;
+	align-items: center;
+
+	padding: 3px;
+
+	background: var(--bg-primary);
+
+	border: 1px solid var(--border);
+	border-radius: 8px;
+}
+
+.periodButton {
+	min-width: 84px;
+	height: 35px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	padding-inline: 0.5rem;
+
+	border: 0;
+	border-radius: 6px;
+
+	background: transparent;
+	color: var(--text-muted);
+
+	font: inherit;
+	font-size: 0.75rem;
+	letter-spacing: 0.15em;
+	text-transform: lowercase;
+
+	cursor: pointer;
+
+	transition:
+		background-color 0.2s ease,
+		color 0.2s ease;
+
+	&:hover {
+		color: var(--text-primary);
+	}
 }
 
 .active {
-    background-color: blue;
+	background: var(--accent-blue);
+	color: var(--primary-button-text);
+
+	&:hover {
+		color: var(--primary-button-text);
+	}
+}
+
+.dateSelector {
+	height: 40px;
+	min-width: 270px;
+
+	display: grid;
+	grid-template-columns: 52px 1fr 52px;
+	align-items: center;
+
+	background: var(--bg-primary);
+
+	border: 1px solid var(--border);
+	border-radius: 8px;
+}
+
+.dateLabel {
+	color: var(--text-primary);
+
+	font-size: 0.8rem;
+	font-weight: 500;
+	letter-spacing: 0.16em;
+	text-align: center;
+	text-transform: uppercase;
+
+	white-space: nowrap;
+}
+
+.arrowButton {
+	height: 100%;
+
+	display: grid;
+	place-items: center;
+
+	padding: 0;
+
+	background: transparent;
+	color: var(--text-primary);
+
+	border: 0;
+
+	cursor: pointer;
+
+	transition:
+		background-color 0.2s ease,
+		color 0.2s ease;
+
+	svg {
+		width: 20px;
+		height: 20px;
+		stroke-width: 2;
+	}
+
+	&:hover {
+		background: var(--bg-secondary);
+		color: var(--accent-blue);
+	}
+}
+
+@media (max-width: 900px) {
+	.subNav {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 1.75rem;
+	}
+
+	.controls {
+		width: 100%;
+		justify-content: space-between;
+	}
+
+	.periodSelector {
+		flex: 1;
+	}
+
+	.periodButton {
+		flex: 1;
+		min-width: 0;
+	}
+
+	.dateSelector {
+		flex: 1;
+		min-width: 0;
+	}
+}
+
+@media (max-width: 640px) {
+	.subNav {
+		gap: 1.5rem;
+		padding-block: 1rem 1.5rem;
+	}
+
+	.heading {
+		h2 {
+			font-size: clamp(2.25rem, 11vw, 3rem);
+		}
+	}
+
+	.periodHeader {
+		gap: 0.5rem;
+
+		margin-bottom: 0.9rem;
+
+		font-size: 0.68rem;
+		letter-spacing: 0.14em;
+	}
+
+	.controls {
+		flex-direction: column;
+		align-items: stretch;
+		gap: 0.75rem;
+	}
+
+	.periodSelector,
+	.dateSelector {
+		width: 100%;
+	}
+
+	.periodSelector {
+		height: 52px;
+	}
+
+	.periodButton {
+		height: 40px;
+
+		font-size: 0.7rem;
+		letter-spacing: 0.12em;
+	}
+
+	.dateSelector {
+		height: 52px;
+	}
+
+	.dateLabel {
+		font-size: 0.72rem;
+		letter-spacing: 0.12em;
+	}
 }

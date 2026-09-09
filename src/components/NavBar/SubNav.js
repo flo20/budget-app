@@ -2,7 +2,9 @@
 
 import { useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { periodButtons, PERIODS } from '@/lib/constants/periods'
+
 import styles from './SubNav.module.scss'
 
 export default function SubNav({ budgetMonth }) {
@@ -53,54 +55,74 @@ export default function SubNav({ budgetMonth }) {
 		updateMonthParam(nextDate)
 	}
 
+	const currentPeriodLabel = isLifetime
+		? 'All time'
+		: isYearly
+			? `${displayYear}`
+			: new Intl.DateTimeFormat('en-US', {
+					month: 'long',
+					year: 'numeric',
+				}).format(date)
+
 	return (
-		<div className={styles.flex}>
-			<header>
+		<section className={styles.subNav}>
+			<header className={styles.heading}>
 				<div className={styles.periodHeader}>
-					{isLifetime && <h5>ALL TIME</h5>}
-					{period === PERIODS.MONTHLY && <h5>{monthLabel}</h5>}
-					{!isLifetime && <h5>{displayYear}</h5>}
-					<h5>HOUSEHOLD</h5>
-				</div>
-				<h2>{period} Pulse</h2>
-			</header>
-			<div>
-				<div className={styles.period}>
-					<div>
-						{periodButtons.map((periodButton) => (
-							<button
-								className={
-									viewMode === periodButton.value ? styles.active : ' '
-								}
-								onClick={() => updatePeriod(periodButton.value)}
-								aria-pressed={viewMode === periodButton.value}
-								key={periodButton.value}>
-								{periodButton.label}
-							</button>
-						))}
-					</div>
-					{/* Month View */}
-					{!isLifetime && isMonthly && (
+					{isLifetime ? (
+						<span>All time</span>
+					) : (
 						<>
-							<button onClick={() => changeMonth(-1)}>{'<'} </button>
-							{new Intl.DateTimeFormat('en-US', {
-								month: 'long',
-								year: 'numeric',
-							}).format(date)}
-							<button onClick={() => changeMonth(1)}> {'>'}</button>
+							{isMonthly && <span>{monthLabel}</span>}
+							<span>{displayYear}</span>
 						</>
 					)}
 
-					{/* Year View */}
-					{!isLifetime && isYearly && (
-						<>
-							<button onClick={() => changeYear(-1)}>{'<'} </button>
-							{date.getFullYear()}
-							<button onClick={() => changeYear(1)}> {'>'}</button>
-						</>
-					)}
+					<span className={styles.separator}>·</span>
+					<span>HOUSEHOLD</span>
 				</div>
+				<h2>{period} Pulse</h2>
+			</header>
+
+			<div className={styles.controls}>
+				<div className={styles.periodSelector}>
+					{periodButtons.map((periodButton) => {
+						const isActive = viewMode === periodButton.value
+						return (
+							<button
+								type="button"
+								className={`${styles.periodButton} ${
+									isActive ? styles.active : ''
+								}`}
+								onClick={() => updatePeriod(periodButton.value)}
+								aria-pressed={isActive}
+								key={periodButton.value}>
+								{periodButton.label}
+							</button>
+						)
+					})}
+				</div>
+				{/* Month View */}
+				{!isLifetime && (
+					<div className={styles.dateSelector}>
+						<button
+							type="button"
+							className={styles.arrowButton}
+							onClick={() => (isMonthly ? changeMonth(-1) : changeYear(-1))}
+							aria-label={isMonthly ? 'Previous month' : 'Previous year'}>
+							<ChevronLeft />
+						</button>
+
+						<span className={styles.dateLabel}>{currentPeriodLabel}</span>
+						<button
+							type="button"
+							className={styles.arrowButton}
+							onClick={() => (isMonthly ? changeMonth(1) : changeYear(1))}
+							aria-label={isMonthly ? 'Next month' : 'Next year'}>
+							<ChevronRight />
+						</button>
+					</div>
+				)}
 			</div>
-		</div>
+		</section>
 	)
 }
