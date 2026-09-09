@@ -157,26 +157,30 @@ export default function NewEntryForm({ closeModal }) {
 					onChange={(event) => setTransactionDate(event.target.value)}
 				/>
 
-				<div className={styles.field}></div>
-				<div className={styles.noteHeading}>
-					<label htmlFor="notes">Note(optional)</label>
+				<div className={styles.field}>
+					<div className={styles.noteHeading}>
+						<label htmlFor="notes">Note(optional)</label>
+					</div>
+
+					<textarea
+						id="notes"
+						name="notes"
+						maxLength={280}
+						placeholder="Add a comment or reminder..."
+					/>
+					<span className={styles.characterCount}>0/280</span>
 				</div>
-
-				<textarea
-					id="notes"
-					name="notes"
-					maxLength={280}
-					placeholder="Add a comment or reminder..."
-				/>
-				<span className={styles.characterCount}>0/280</span>
-
 				<div className={styles.actions}>
 					<button
 						type="button"
-						onClick={closeModal}>
+						onClick={closeModal}
+						className={styles.cancelButton}>
 						Cancel
 					</button>
-					<button type="submit">
+					<button
+						type="submit"
+						onClick={closeModal}
+						className={styles.submitButton}>
 						{isExpense ? 'Record Expense' : 'Record Income'}
 					</button>
 				</div>

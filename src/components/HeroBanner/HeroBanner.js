@@ -1,45 +1,10 @@
 import Link from 'next/link'
 
+import { categories, weeklySpend } from '@/lib/constants/hero-banner'
 import { signInAsDemo } from '@/app/actions/auth'
 import { ArrowRight, Check, ShieldCheck, Sparkles } from 'lucide-react'
 
 import styles from './HeroBanner.module.scss'
-
-const weeklySpend = [
-	{ height: 58, type: 'positive' },
-	{ height: 44, type: 'positive' },
-	{ height: 72, type: 'positive' },
-	{ height: 50, type: 'positive' },
-	{ height: 32, type: 'negative' },
-	{ height: 65, type: 'positive' },
-	{ height: 38, type: 'positive' },
-	{ height: 76, type: 'positive' },
-	{ height: 53, type: 'positive' },
-	{ height: 62, type: 'negative' },
-	{ height: 36, type: 'positive' },
-	{ height: 68, type: 'positive' },
-]
-
-const categories = [
-	{
-		name: 'Groceries',
-		spent: 412,
-		budget: 500,
-		status: 'good',
-	},
-	{
-		name: 'Dining',
-		spent: 189,
-		budget: 150,
-		status: 'over',
-	},
-	{
-		name: 'Transport',
-		spent: 71,
-		budget: 120,
-		status: 'good',
-	},
-]
 
 export default function HeroBanner() {
 	return (
@@ -48,14 +13,10 @@ export default function HeroBanner() {
 				<div className={styles.content}>
 					<p className={styles.eyebrow}>HOUSEHOLD FINANCE, IN FOCUS</p>
 
-					<h1 className={styles.title}>
-						See what&apos;s coming,
-						<br />
-						not just what happened.
-					</h1>
+					<h1 className={styles.title}>Stay ahead <br/>of your finances.</h1>
 
 					<p className={styles.description}>
-						Valence forecasts your cash flow, tracks every category against its
+						Tally forecasts your cash flow, tracks every category against its
 						budget, and keeps assets, debts and deadlines in one calm dashboard.
 					</p>
 
