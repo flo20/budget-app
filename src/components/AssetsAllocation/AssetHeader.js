@@ -1,10 +1,12 @@
 'use client'
 
 import { useModal, useMount } from '@/app/providers/GlobalProvider'
+import { Plus } from 'lucide-react'
+
 import AssetForm from './AssetForm'
 import Modal from '../Modal/Modal'
 
-//import styles from './AssetInventory.module.scss'
+import styles from './AssetInventory.module.scss'
 
 export default function AssetHeader() {
 	const { showAssetModal, openAssetModal, closeAssetModal } = useModal()
@@ -12,15 +14,21 @@ export default function AssetHeader() {
 
 	return (
 		<>
-			<header>
-				<h2>Asset Inventory</h2>
-				<button onClick={openAssetModal}>Asset</button>
+			<header className={styles.header}>
+				<h2>Asset Allocation</h2>
+				<button
+					type="button"
+					className={styles.addButton}
+					onClick={openAssetModal}>
+					<Plus />
+					<span>Asset</span>
+				</button>
 			</header>
 			<Modal
 				showModal={showAssetModal}
 				closeModal={closeAssetModal}
 				mounted={mounted}>
-				<AssetForm closeAssetModal={closeAssetModal} />
+				<AssetForm />
 			</Modal>
 		</>
 	)

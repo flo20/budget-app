@@ -13,6 +13,11 @@ export default async function BudgetAllocation({ budgetMonth }) {
 	const { budgets, transactions } = await getBudgetAllocations(budgetMonth)
 	const summary = buildBudgetSummary(budgets, transactions)
 
+    	const usedPercentage =
+				summary.totalAllocated > 0
+					? Math.min(100, (summary.coveredSpend / summary.totalAllocated) * 100)
+					: 0
+
 	return (
 		<section
 			className={styles.container}

@@ -1,4 +1,523 @@
 .container {
-        border: 1px solid #29292C;
+	width: 100%;
+	padding: 2rem;
 
+	background: var(--bg-primary);
+
+	border: 1px solid var(--border);
+	border-radius: 14px;
+}
+
+/* HEADER */
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+
+	h2 {
+		margin: 0;
+
+		color: var(--text-secondary);
+
+		font-size: 0.95rem;
+		font-weight: 500;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+	}
+}
+
+.addButton {
+	height: 44px;
+
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.65rem;
+
+	padding: 0 1.15rem;
+
+	background: transparent;
+	color: var(--text-primary);
+
+	border: 1px solid var(--border);
+	border-radius: 999px;
+
+	font: inherit;
+	font-size: 0.76rem;
+	font-weight: 600;
+	letter-spacing: 0.15em;
+	text-transform: uppercase;
+
+	cursor: pointer;
+
+	transition:
+		border-color 0.2s ease,
+		background-color 0.2s ease;
+
+	svg {
+		width: 20px;
+		height: 20px;
+	}
+
+	&:hover {
+		border-color: var(--accent-blue);
+		background: rgb(59 146 255 / 6%);
+	}
+}
+
+/* ALLOCATION OVERVIEW */
+
+.allocationOverview {
+	display: grid;
+	grid-template-columns: 240px minmax(0, 1fr);
+	align-items: center;
+	gap: 3rem;
+
+	margin-top: 2.75rem;
+	padding: 0 1rem 2.75rem;
+}
+
+/* DONUT */
+
+.donut {
+	position: relative;
+
+	width: 190px;
+	aspect-ratio: 1;
+
+	display: grid;
+	place-items: center;
+
+	border-radius: 50%;
+
+	&::after {
+		content: '';
+
+		position: absolute;
+		inset: 23px;
+
+		background: var(--bg-primary);
+
+		border-radius: 50%;
+	}
+}
+
+.donutCenter {
+	position: relative;
+	z-index: 1;
+
+	display: grid;
+	place-items: center;
+	gap: 0.45rem;
+
+	text-align: center;
+
+	span {
+		color: var(--text-muted);
+
+		font-size: 0.7rem;
+		letter-spacing: 0.17em;
+		text-transform: uppercase;
+	}
+
+	strong {
+		color: var(--text-primary);
+
+		font-size: 1.4rem;
+		font-weight: 400;
+		letter-spacing: 0.02em;
+	}
+}
+
+/* ALLOCATION DETAILS */
+
+.allocationDetails {
+	min-width: 0;
+}
+
+.allocationSummary {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 0.7rem;
+
+	margin: 0 0 1.1rem;
+
+	color: var(--text-muted);
+
+	font-size: 0.78rem;
+	font-weight: 500;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+}
+
+.allocationList {
+	display: grid;
+	gap: 1rem;
+
+	margin: 0;
+	padding: 0;
+
+	list-style: none;
+
+	li {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		align-items: center;
+		gap: 2rem;
+	}
+}
+
+.allocationName {
+	display: flex;
+	align-items: center;
+	gap: 0.8rem;
+
+	color: var(--text-primary);
+
+	font-size: 0.95rem;
+}
+
+.colorDot {
+	width: 10px;
+	height: 10px;
+
+	flex-shrink: 0;
+
+	border-radius: 50%;
+}
+
+.allocationValue {
+	display: grid;
+	grid-template-columns: 100px 50px;
+	align-items: center;
+	gap: 1rem;
+
+	text-align: right;
+
+	strong {
+		color: var(--text-primary);
+
+		font-size: 0.9rem;
+		font-weight: 400;
+	}
+
+	span {
+		color: var(--text-muted);
+
+		font-size: 0.82rem;
+	}
+}
+
+/* HOLDINGS */
+
+.holdings {
+	border-top: 1px solid var(--border);
+}
+
+.holdingsList {
+	margin: 0;
+	padding: 0;
+
+	list-style: none;
+
+	li {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1.5rem;
+
+		padding: 1rem 0;
+
+		border-bottom: 1px solid var(--border);
+
+		&:last-child {
+			border-bottom: 0;
+			padding-bottom: 0;
+		}
+	}
+}
+
+.holdingInfo {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+
+	min-width: 0;
+
+	> div {
+		display: grid;
+		gap: 0.25rem;
+
+		min-width: 0;
+	}
+
+	strong {
+		color: var(--text-primary);
+
+		font-size: 1rem;
+		font-weight: 500;
+		line-height: 1.2;
+
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	div > span {
+		color: var(--text-muted);
+
+		font-size: 0.72rem;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+	}
+}
+
+.holdingIcon {
+	width: 30px;
+
+	display: grid;
+	place-items: center;
+
+	flex-shrink: 0;
+
+	font-size: 1.35rem;
+	line-height: 1;
+}
+
+.holdingValue {
+	flex-shrink: 0;
+
+	color: var(--text-primary);
+
+	font-size: 1rem;
+	font-weight: 400;
+}
+
+/* EMPTY STATE */
+
+.emptyState {
+	margin-top: 2rem;
+	padding: 2rem;
+
+	text-align: center;
+
+	border: 1px dashed var(--border);
+	border-radius: 10px;
+
+	color: var(--text-muted);
+
+	p {
+		margin: 0;
+	}
+}
+
+.emptyTitle {
+	margin-bottom: 0.5rem !important;
+
+	color: var(--text-primary);
+
+	font-size: 1rem;
+	font-weight: 500;
+}
+
+.holdingRight {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 1.25rem;
+
+	flex-shrink: 0;
+}
+
+.holdingActions {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+}
+
+.editButton,
+.deleteButton {
+	width: 36px;
+	height: 36px;
+
+	display: grid;
+	place-items: center;
+
+	padding: 0;
+
+	background: transparent;
+	color: var(--text-muted);
+
+	border: 0;
+	border-radius: 6px;
+
+	cursor: pointer;
+
+	transition:
+		color 0.2s ease,
+		background-color 0.2s ease;
+
+	svg {
+		width: 20px;
+		height: 20px;
+		stroke-width: 1.8;
+	}
+}
+
+.editButton {
+	&:hover {
+		background: var(--bg-secondary);
+		color: var(--accent-blue);
+	}
+}
+
+.deleteButton {
+	&:hover {
+		background: var(--bg-secondary);
+		color: var(--negative);
+	}
+}
+
+
+// Media Queries
+@media (max-width: 900px) {
+	.allocationOverview {
+		grid-template-columns: 190px minmax(0, 1fr);
+		gap: 2rem;
+
+		padding-inline: 0;
+	}
+
+	.donut {
+		width: 165px;
+	}
+
+	.donut::after {
+		inset: 20px;
+	}
+}
+
+@media (max-width: 700px) {
+	.container {
+		padding: 1.5rem;
+	}
+
+	.allocationOverview {
+		grid-template-columns: 1fr;
+		justify-items: center;
+
+		margin-top: 2rem;
+		padding-bottom: 2rem;
+	}
+
+	.allocationDetails {
+		width: 100%;
+	}
+
+	.allocationSummary {
+		justify-content: center;
+	}
+
+	.donut {
+		width: 180px;
+	}
+}
+
+@media (max-width: 640px) {
+	.holdingsList {
+		li {
+			align-items: flex-start;
+		}
+	}
+
+	.holdingRight {
+		gap: 0.6rem;
+	}
+
+	.holdingActions {
+		gap: 0.25rem;
+	}
+
+	.editButton,
+	.deleteButton {
+		width: 32px;
+		height: 32px;
+
+		svg {
+			width: 18px;
+			height: 18px;
+		}
+	}
+}
+
+@media (max-width: 480px) {
+	.container {
+		padding: 1.25rem;
+	}
+
+	.header {
+		h2 {
+			font-size: 0.78rem;
+			letter-spacing: 0.14em;
+		}
+	}
+
+	.addButton {
+		height: 40px;
+		padding-inline: 0.85rem;
+
+		font-size: 0.68rem;
+
+		svg {
+			width: 17px;
+			height: 17px;
+		}
+	}
+
+	.allocationOverview {
+		gap: 1.75rem;
+	}
+
+	.donut {
+		width: 160px;
+	}
+
+	.donut::after {
+		inset: 19px;
+	}
+
+	.allocationList {
+		gap: 0.85rem;
+
+		li {
+			gap: 1rem;
+		}
+	}
+
+	.allocationValue {
+		grid-template-columns: auto auto;
+		gap: 0.75rem;
+	}
+
+	.holdingsList {
+		li {
+			align-items: flex-start;
+			gap: 1rem;
+		}
+	}
+
+	.holdingInfo {
+		gap: 0.7rem;
+
+		strong {
+			font-size: 0.9rem;
+		}
+	}
+
+	.holdingValue {
+		font-size: 0.9rem;
+	}
 }

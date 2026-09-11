@@ -51,7 +51,7 @@ export default function AssetForm() {
 			/>
 
 			<button
-				type="submit"
+				type="button"
 				onClick={closeAssetModal}>
 				Cancel
 			</button>
