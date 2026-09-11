@@ -2,7 +2,7 @@ import { getBudgetAllocations } from '@/lib/queries/budget-allocations'
 import { buildBudgetSummary } from '@/lib/budget/budget-summary'
 import { formatCurrency, formatMonth } from '@/lib/utils/format'
 
-import AllocatedCategory  from './AllocatedCategory'
+import AllocatedCategory from './AllocatedCategory'
 import AllocationManager from './AllocationManager'
 import EditCategoryBudgetLimit from './EditCategoryBudgetLimit'
 import RemoveAllocatedBudget from './RemoveAllocatedBudget'
@@ -13,43 +13,59 @@ export default async function BudgetAllocation({ budgetMonth }) {
 	const { budgets, transactions } = await getBudgetAllocations(budgetMonth)
 	const summary = buildBudgetSummary(budgets, transactions)
 
-    	const usedPercentage =
-				summary.totalAllocated > 0
-					? Math.min(100, (summary.coveredSpend / summary.totalAllocated) * 100)
-					: 0
+	const usedPercentage =
+		summary.totalAllocated > 0
+			? Math.min(100, (summary.coveredSpend / summary.totalAllocated) * 100)
+			: 0
 
 	return (
 		<section
 			className={styles.container}
 			id="plan">
-			<h2>ALLOCATED BUDGETS</h2>
-			<header>
-				<p id="allocated-budgets-title">
-					Allocated budgets · {formatMonth(budgetMonth)}
+			<header className={styles.summaryHeader}>
+				<p
+					id="allocated-budgets-title"
+					className={styles.eyebrow}>
+					ALLOCATED BUDGETS
+					<span>·</span>
+					{formatMonth(budgetMonth)}
 				</p>
 
-				<div>
-					<strong>{formatCurrency(summary.remainingAllocatedBudget)}</strong>
+				<div className={styles.totalRow}>
+					<strong className={styles.remainingTotal}>
+						{formatCurrency(summary.remainingAllocatedBudget)}
+					</strong>
 
-					<span>
+					<span className={styles.totalContext}>
 						left of {formatCurrency(summary.totalAllocated)} allocated
 					</span>
 				</div>
 
-				<p>
+				<p className={styles.description}>
 					Only reflects budgeted categories · unallocated spending is tracked
 					separately below
 				</p>
+				<div className={styles.overallTrack}>
+					<span
+						className={styles.overallProgress}
+						style={{ width: `${usedPercentage}%` }}
+					/>
+				</div>
 			</header>
-			<div className={styles.container}>
+			<div className={styles.categoryList}>
 				{summary.categories.map((category) => (
-					<div key={category.id}>
+					<div
+						key={category.id}
+						className={styles.categoryRow}>
 						<AllocatedCategory
 							category={category}
 							formatCurrency={formatCurrency}
 						/>
-						<EditCategoryBudgetLimit category={category} />
-						<RemoveAllocatedBudget category={category} />
+							<EditCategoryBudgetLimit category={category} />
+
+						<div className={styles.removeAction}>
+							<RemoveAllocatedBudget category={category} />
+						</div>
 					</div>
 				))}
 			</div>
@@ -61,12 +77,12 @@ export default async function BudgetAllocation({ budgetMonth }) {
 				totalUnallocatedSpend={summary.totalUnallocatedSpend}
 			/>
 
-			<p>
+			{/* <p>
 				{formatCurrency(summary.coveredSpend)} spent within category limits,{' '}
 				{formatCurrency(summary.totalOverBudget)} over budget, and{' '}
 				{formatCurrency(Math.max(summary.remainingAllocatedBudget, 0))}
 				remaining.
-			</p>
+			</p> */}
 		</section>
 	)
 }

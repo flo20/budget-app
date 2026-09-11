@@ -3,6 +3,8 @@
 import { setBudgetAllocation } from '@/app/actions/budget-allocations'
 import { EXPENSE_CATEGORIES } from '@/lib/constants/transaction-categories'
 
+import { Plus } from 'lucide-react'
+
 import styles from './BudgetAllocation.module.scss'
 
 function getAvailableCategories(allocatedCategories, unallocatedCategories) {
@@ -11,7 +13,8 @@ function getAvailableCategories(allocatedCategories, unallocatedCategories) {
 	)
 
 	const transactionCategoryNames = unallocatedCategories.map(
-		(item) => item.category)
+		(item) => item.category,
+	)
 
 	return [
 		...new Set([...EXPENSE_CATEGORIES, ...transactionCategoryNames]),
@@ -38,17 +41,22 @@ export default function AllocationForm({
 	return (
 		<form
 			action={setBudgetAllocation}
-			className={styles.container}>
-			<h3>Add allocation</h3>
-
+			className={styles.allocationForm}>
 			<input
 				type="hidden"
 				name="allocationBudgetMonth"
 				value={budgetMonth}
 			/>
 
-			<label>
+			<div className={styles.allocationField}>
+				<label
+					htmlFor="allocation-category"
+					className={styles.srOnly}>
+					Category
+				</label>
+
 				<select
+					id="allocation-category"
 					name="category"
 					value={selectedCategory ?? ''}
 					onChange={(event) => {
@@ -71,7 +79,8 @@ export default function AllocationForm({
 					))}
 					{/* <option value={CUSTOM_CATEGORY_OPTION}>Add a custom category</option> */}
 				</select>
-			</label>
+			</div>
+
 			{/* 
 			{isCustomCategory && (
 				<label>
@@ -89,9 +98,14 @@ export default function AllocationForm({
 				</label>
 			)} */}
 
-			<label>
-				<span>Monthly limit</span>
+			<div className={styles.allocationField}>
+				<label
+					htmlFor="monthly-limit"
+					className={styles.srOnly}>
+					Monthly limit
+				</label>
 				<input
+					id="monthly-limit"
 					ref={limitInputRef}
 					value={budgetMonthlyLimit ?? ''}
 					onChange={(event) => setbudgetMonthlyLimit(event.target.value)}
@@ -102,9 +116,14 @@ export default function AllocationForm({
 					placeholder="Monthly limit"
 					required
 				/>
-			</label>
+			</div>
 
-			<button type="submit">Set</button>
+			<button
+				type="submit"
+				className={styles.setButton}>
+				<Plus />
+				<span>Set</span>
+			</button>
 		</form>
 	)
 }

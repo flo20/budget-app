@@ -1,15 +1,15 @@
 'use client'
 
 import { useState } from 'react'
+import { Check, Pencil, X } from 'lucide-react'
 import { updateCategoryBudget } from '@/app/actions/budget-allocations'
+
+import styles from './BudgetAllocation.module.scss'
 
 export default function EditCategoryBudgetLimit({ category }) {
 	const [isEditing, setIsEditing] = useState(false)
-
 	const [draft, setDraft] = useState(category.limit)
-
 	const [isSaving, setIsSaving] = useState(false)
-
 	const [error, setError] = useState(null)
 
 	function cancelEditing() {
@@ -21,9 +21,7 @@ export default function EditCategoryBudgetLimit({ category }) {
 	async function handleEdit(event) {
 		event.preventDefault()
 
-		const budgetLimit = category.limit
-
-		if (!budgetLimit) {
+		if (!draft) {
 			setError('Monthly limit cannot be empty.')
 			return
 		}
@@ -45,7 +43,6 @@ export default function EditCategoryBudgetLimit({ category }) {
 			return
 		}
 
-		setDraft(budgetLimit)
 		setIsEditing(false)
 	}
 
@@ -57,7 +54,9 @@ export default function EditCategoryBudgetLimit({ category }) {
 
 	if (isEditing) {
 		return (
-			<form onSubmit={handleEdit}>
+			<form
+				onSubmit={handleEdit}
+				className={styles.editForm}>
 				<input
 					id={category.id}
 					name="monthlyLimit"
@@ -75,8 +74,8 @@ export default function EditCategoryBudgetLimit({ category }) {
 				<button
 					type="submit"
 					disabled={isSaving}
-					aria-label="Save note">
-					Check icon
+					aria-label="Save monthly limit">
+					<Check />
 				</button>
 
 				<button
@@ -84,7 +83,7 @@ export default function EditCategoryBudgetLimit({ category }) {
 					onClick={cancelEditing}
 					disabled={isSaving}
 					aria-label="Cancel editing">
-					Cancel
+					<X />
 				</button>
 
 				{error && <p role="alert">{error}</p>}
@@ -95,9 +94,10 @@ export default function EditCategoryBudgetLimit({ category }) {
 	return (
 		<button
 			type="button"
+			className={styles.editButton}
 			onClick={() => setIsEditing(true)}
-			aria-label="Edit monthly limit">
-			Edit
+			aria-label={`Edit ${category.category} monthly limit`}>
+			<Pencil />
 		</button>
 	)
 }
