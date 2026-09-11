@@ -3,13 +3,14 @@
 import { useState } from 'react'
 import { editBudgetNote } from '@/app/actions/budget-notes'
 
+import { Check, X } from 'lucide-react'
+
+import styles from './Notes.module.scss'
+
 export default function EditNotes({ note }) {
 	const [isEditing, setIsEditing] = useState(false)
-
 	const [draft, setDraft] = useState(note.content)
-
 	const [isSaving, setIsSaving] = useState(false)
-
 	const [error, setError] = useState(null)
 
 	function cancelEditing() {
@@ -57,8 +58,14 @@ export default function EditNotes({ note }) {
 
 	if (isEditing) {
 		return (
-			<form onSubmit={handleSubmit}>
-				<label htmlFor={`note-${note.id}`}>Edit</label>
+			<form
+				onSubmit={handleSubmit}
+				className={styles.editForm}>
+				<label
+					htmlFor={`note-${note.id}`}
+					className={styles.srOnly}>
+					Edit
+				</label>
 
 				<input
 					id={`note-${note.id}`}
@@ -76,7 +83,7 @@ export default function EditNotes({ note }) {
 					type="submit"
 					disabled={isSaving}
 					aria-label="Save note">
-					Check icon
+					<Check />
 				</button>
 
 				<button
@@ -84,10 +91,16 @@ export default function EditNotes({ note }) {
 					onClick={cancelEditing}
 					disabled={isSaving}
 					aria-label="Cancel editing">
-					Cancel
+					<X />
 				</button>
 
-				{error && <p role="alert">{error}</p>}
+				{error && (
+					<p
+						className={styles.error}
+						role="alert">
+						{error}
+					</p>
+				)}
 			</form>
 		)
 	}
@@ -95,6 +108,7 @@ export default function EditNotes({ note }) {
 	return (
 		<button
 			type="button"
+			className={styles.noteButton}
 			onClick={() => setIsEditing(true)}
 			aria-label={`Edit note: ${draft}`}>
 			{draft}

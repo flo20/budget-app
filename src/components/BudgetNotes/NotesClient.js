@@ -2,17 +2,21 @@
 
 import { createBudgetNotes } from '@/app/actions/budget-notes'
 import { changeMonth } from '@/lib/utils/month'
-import {formatMonth} from '@/lib/utils/format'
+import { formatMonth } from '@/lib/utils/format'
+
+import { Plus, ChevronLeft, ChevronRight } from 'lucide-react'
 
 import Link from 'next/link'
 
-export default function NotesClient({ notes,budgetMonth }) {
+import styles from './Notes.module.scss'
+
+export default function NotesClient({ notes, budgetMonth }) {
 	const previousMonth = changeMonth(budgetMonth, -1)
 	const nextMonth = changeMonth(budgetMonth, 1)
 
 	return (
-		<section aria-labelledby="budget-notes-title">
-			<header>
+		<>
+			<header className={styles.header}>
 				<div>
 					<h2>Budget Notes</h2>
 					<p>
@@ -21,11 +25,13 @@ export default function NotesClient({ notes,budgetMonth }) {
 					</p>
 				</div>
 
-				<nav aria-label="Budget note month">
+				<nav
+					className={styles.monthNav}
+					aria-label="Budget note month">
 					<Link
 						href={`dashboard/?month=${previousMonth}`}
 						aria-label="Previous month">
-						Left arrow
+						<ChevronLeft />
 					</Link>
 
 					<strong>{formatMonth(budgetMonth)}</strong>
@@ -33,18 +39,24 @@ export default function NotesClient({ notes,budgetMonth }) {
 					<Link
 						href={`dashboard/?month=${nextMonth}`}
 						aria-label="Next month">
-						Right arrow
+						<ChevronRight />
 					</Link>
 				</nav>
 			</header>
-			<form action={createBudgetNotes}>
+			<form
+				action={createBudgetNotes}
+				className={styles.addForm}>
 				<input
 					type="hidden"
 					name="notebudgetMonth"
 					value={budgetMonth}
 				/>
 
-				<label htmlFor="budget-note">Add a budget note</label>
+				<label
+					htmlFor="budget-note"
+					className={styles.srOnly}>
+					Add a budget note
+				</label>
 
 				<input
 					id="budget-note"
@@ -58,9 +70,9 @@ export default function NotesClient({ notes,budgetMonth }) {
 				<button
 					type="submit"
 					aria-label="Add budget note">
-					Add Icon
+					<Plus />
 				</button>
 			</form>
-		</section>
+		</>
 	)
 }
