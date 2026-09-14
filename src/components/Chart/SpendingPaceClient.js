@@ -20,15 +20,17 @@ import { spendingChartConfig } from '@/lib/constants/chart-configs'
 import ChartLegendItem from './ChartLegendItem'
 import ForecastPanel from './ForecastPanel'
 
+import styles from './Chart.module.scss'
+
 export default function SpendingPaceClient({
 	budgetMonth,
 	spendingPaceData = {},
 	paceMetrics = {},
 }) {
 	return (
-		<div className="grid lg:grid-cols-[2fr_1fr]">
-			<div className="min-w-0 p-6 md:p-8">
-				<div className="mb-10 flex flex-wrap gap-8">
+		<div className={styles.chartLayout}>
+			<div className={styles.chartArea}>
+				<div className={styles.legend}>
 					<ChartLegendItem
 						color="#00c896"
 						label="ACTUAL"

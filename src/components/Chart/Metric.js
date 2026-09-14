@@ -1,3 +1,5 @@
+import styles from './Chart.module.scss'
+
 export default function Metric({ value, label, variant = 'default' }) {
 	const valueStyles = {
 		default: 'text-zinc-100',
@@ -5,24 +7,18 @@ export default function Metric({ value, label, variant = 'default' }) {
 		negative: 'text-red-400',
 	}
 	return (
-		<div className="min-w-0 flex min-h-[150px] flex-col items-center justify-center border-r border-[#29292e] last:border-r-0">
+		<div className={styles.metric}>
 			<p
-		className={`
-        max-w-full
-        whitespace-nowrap
-        text-center
-        font-mono
-        font-semibold
-        tracking-wide
-        text-[clamp(1.25rem,2.2vw,2.25rem)]
-        ${valueStyles[variant]}
-        `}>
+				className={`${styles.metricValue} ${
+					variant === 'positive'
+						? styles.positive
+						: variant === 'negative'
+							? styles.negative
+							: ''
+				}`}>
 				{value}
 			</p>
-
-			<p className="mt-4 font-mono text-sm tracking-[0.18em] text-zinc-400">
-				{label}
-			</p>
+			<p className={styles.metricLabel}>{label}</p>
 		</div>
 	)
 }

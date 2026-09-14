@@ -3,10 +3,13 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { formatMonth, formatCompactCurrency } from '@/lib/utils/format'
 import { changeMonth } from '@/lib/utils/month'
+
 import Metrics from './Metrics'
 import CashFlowClient from './CashFlowClient'
 import MonthlyTrendClient from './MonthlyTrendClient'
 import SpendingPaceClient from './SpendingPaceClient'
+
+import styles from './Chart.module.scss'
 
 export default function Chart({
 	budgetMonth,
@@ -81,89 +84,43 @@ export default function Chart({
 	]
 
 	return (
-		<section className="overflow-hidden rounded-2xl border border-[#29292e] bg-[#09090b]">
+		<section className={styles.container}>
 			<Tabs defaultValue="spending">
-				<div className="flex flex-col border-b border-[#29292e] px-6 py-5 lg:flex-row lg:items-center lg:justify-between lg:px-10">
-					<div className="font-mono text-sm tracking-[0.18em] text-zinc-400 md:text-base">
-						OUTLOOK
-						<span className="mx-3">·</span>
-						<span className="text-zinc-100">{formatMonth(budgetMonth)}</span>
+				<header className={styles.header}>
+					<div className={styles.title}>
+						<span>Outlook</span>
+						<span>·</span>
+						<strong>{formatMonth(budgetMonth)}</strong>
 					</div>
 
-					<TabsList className="mt-5 h-auto justify-start gap-2 bg-transparent p-0 lg:mt-0">
+					<TabsList
+						className={styles.tabsList}
+						variant="line">
 						<TabsTrigger
 							value="spending"
-							className="
-                rounded-none
-                border-b-2
-                border-transparent
-                bg-transparent
-                px-5
-                py-3
-                font-mono
-                text-sm
-                tracking-[0.15em]
-                text-zinc-400
-                shadow-none
-                data-[state=active]:border-blue-500
-                data-[state=active]:bg-transparent
-                data-[state=active]:text-blue-400
-                data-[state=active]:shadow-none
-            ">
-							SPENDING PACE
+							className={styles.tabTrigger}>
+							Spending Pace
 						</TabsTrigger>
 
 						<TabsTrigger
 							value="cashflow"
-							className="
-                rounded-none
-                border-b-2
-                border-transparent
-                bg-transparent
-                px-5
-                py-3
-                font-mono
-                text-sm
-                tracking-[0.15em]
-                text-zinc-400
-                shadow-none
-                data-[state=active]:border-blue-500
-                data-[state=active]:bg-transparent
-                data-[state=active]:text-blue-400
-                data-[state=active]:shadow-none
-            ">
-							CASH FLOW
+							className={styles.tabTrigger}>
+							Cash Flow
 						</TabsTrigger>
 
 						<TabsTrigger
 							value="trend"
-							className="
-                rounded-none
-                border-b-2
-                border-transparent
-                bg-transparent
-                px-5
-                py-3
-                font-mono
-                text-sm
-                tracking-[0.15em]
-                text-zinc-400
-                shadow-none
-                data-[state=active]:border-blue-500
-                data-[state=active]:bg-transparent
-                data-[state=active]:text-blue-400
-                data-[state=active]:shadow-none
-            ">
-							MONTHLY TREND
+							className={styles.tabTrigger}>
+							Monthly Trend
 						</TabsTrigger>
 					</TabsList>
-				</div>
+				</header>
 
-				{/* TABS CONTENT */}
 				<TabsContent
 					value="spending"
-					className="m-0">
+					className={styles.tabContent}>
 					<Metrics items={spendingMetrics} />
+
 					<SpendingPaceClient
 						budgetMonth={budgetMonth}
 						spendingPaceData={spendingPaceData}
@@ -173,8 +130,9 @@ export default function Chart({
 
 				<TabsContent
 					value="cashflow"
-					className="m-0">
+					className={styles.tabContent}>
 					<Metrics items={cashMetrics} />
+
 					<CashFlowClient
 						cashFlowData={cashFlowData}
 						cashFlowMetrics={cashFlowMetrics}
@@ -183,8 +141,9 @@ export default function Chart({
 
 				<TabsContent
 					value="trend"
-					className="m-0">
+					className={styles.tabContent}>
 					<Metrics items={monthlyTrendMetrics} />
+
 					<MonthlyTrendClient
 						trendMetrics={trendMetrics}
 						budgetMonth={budgetMonth}

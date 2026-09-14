@@ -12,11 +12,13 @@ import { cashFlowConfig } from '@/lib/constants/chart-configs'
 
 import ChartLegendItem from './ChartLegendItem'
 
+import styles from "./Chart.module.scss"
+
 export default function CashFlowClient({ cashFlowData = {}, cashFlowMetrics }) {
 	const { previousMonthNet, netCashFlow } = cashFlowMetrics
 	return (
-		<div className="grid lg:grid-cols-[2fr_1fr]">
-			<div className="min-w-0 p-6 md:p-8">
+		<div className={styles.chartLayout}>
+			<div className={styles.chartArea}>
 				<div className="mb-8 flex gap-8">
 					<ChartLegendItem
 						color="#3b82f6"
@@ -87,8 +89,9 @@ export default function CashFlowClient({ cashFlowData = {}, cashFlowMetrics }) {
 					))}
 				</div>
 			</div>
+
 			{/* SIDE PANEL */}
-			<aside className="border-t border-[#29292e] p-8 lg:border-l lg:border-t-0">
+			<aside className={styles.sidePanel}>
 				<p className="font-mono text-xs font-medium tracking-[0.2em] text-zinc-500">
 					NET CASH FLOW
 				</p>
@@ -160,7 +163,7 @@ export default function CashFlowClient({ cashFlowData = {}, cashFlowMetrics }) {
 								: 'Last month ended with balanced cash flow.'}
 					</p>
 				</div>
-			</aside>{' '}
+			</aside>
 		</div>
 	)
 }

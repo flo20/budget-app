@@ -1,36 +1,43 @@
 import { formatMonth, formatCompactCurrency } from '@/lib/utils/format'
 
+import styles from './Chart.module.scss'
+
 export default function ForecastPanel({ budgetMonth, paceMetrics }) {
 	const { projectedRemaining, upcomingBills } = paceMetrics
-	return (
-		<aside className="border-t border-[#29292e] p-8 lg:border-l lg:border-t-0">
-			<p className="font-mono text-sm tracking-[0.16em] text-zinc-400">
-				PERIOD-END FORECAST
-			</p>
 
-			<p className="mt-5 font-mono text-4xl font-semibold text-emerald-400 lg:text-4xl">
+    const isUnderBudget = projectedRemaining > 0
+
+	return (
+		<aside className={styles.sidePanel}>
+			<p className={styles.panelLabel}>PERIOD-END FORECAST</p>
+
+			<p
+				className={`${styles.forecastValue} ${
+					isUnderBudget ? styles.positive : styles.negative
+				}`}>
 				{formatCompactCurrency(Math.abs(projectedRemaining))}
 			</p>
 
-			<p className="mt-2 font-mono text-sm tracking-[0.15em] text-emerald-400">
-				{projectedRemaining <= 0 ? 'OVER BUDGET' : 'UNDER BUDGET'}
+			<p
+				className={`${styles.forecastStatus} ${
+					isUnderBudget ? styles.positive : styles.negative
+				}`}>
+				{isUnderBudget ? 'Under budget' : 'Over budget'}
 			</p>
 
-			<p className="mt-7 max-w-sm text-lg leading-7 text-zinc-400">
-				{projectedRemaining <= 0
+			<p className={styles.panelDescription}>
+				{isUnderBudget
 					? `At your current pace, ${formatMonth(budgetMonth)} should finish over budget`
 					: `At your current pace, ${formatMonth(budgetMonth)} should finish within budget.`}
 			</p>
 
-			<div className="my-8 h-px bg-[#29292e]" />
+			<div className={styles.panelDivider} />
 
-			<p className="font-mono text-3xl font-semibold text-zinc-100">
-				{upcomingBills}
+			<p className={styles.secondaryValue}>
+				{formatCompactCurrency(upcomingBills)}
 			</p>
 
-			<p className="mt-2 font-mono text-sm tracking-[0.16em] text-zinc-400">
-				UPCOMING BILLS
-			</p>
+			<p className={styles.panelLabel}>UPCOMING BILLS</p>
 		</aside>
 	)
 }
