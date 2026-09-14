@@ -1,0 +1,472 @@
+.container {
+	width: 100%;
+	padding: 2.5rem;
+
+	background: var(--bg-primary);
+
+	border: 1px solid var(--border);
+	border-radius: 14px;
+}
+
+.header {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 1.5rem;
+
+	h2 {
+		margin: 0;
+
+		color: var(--text-primary);
+
+		font-size: 1.5rem;
+		font-weight: 600;
+	}
+
+	p {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+
+		margin: 0.8rem 0 0;
+
+		color: var(--text-muted);
+
+		font-size: 0.8rem;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+	}
+}
+
+.newGoalButton {
+	height: 48px;
+
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.75rem;
+
+	padding: 0 1.1rem;
+
+	background: var(--bg-secondary);
+	color: var(--text-primary);
+
+	border: 0;
+	border-radius: 10px;
+
+	font: inherit;
+	font-size: 0.8rem;
+	font-weight: 600;
+	letter-spacing: 0.15em;
+	text-transform: uppercase;
+
+	cursor: pointer;
+
+	svg {
+		width: 21px;
+		height: 21px;
+	}
+}
+
+.activeList {
+	display: grid;
+	gap: 2.25rem;
+
+	margin-top: 2.5rem;
+}
+
+.goal {
+	display: grid;
+	grid-template-columns: 44px minmax(0, 1fr);
+	gap: 1rem;
+}
+
+.goalIcon {
+	width: 44px;
+	height: 44px;
+
+	display: grid;
+	place-items: center;
+
+	color: var(--positive);
+
+	svg {
+		width: 24px;
+		height: 24px;
+		stroke-width: 1.8;
+	}
+}
+
+.goalMain {
+	min-width: 0;
+}
+
+.goalTop {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1.5rem;
+}
+
+.goalTitle {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+
+	min-width: 0;
+
+	h3 {
+		margin: 0;
+
+		color: var(--text-primary);
+
+		font-size: 1rem;
+		font-weight: 500;
+
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+}
+
+.percentage {
+	flex-shrink: 0;
+
+	color: var(--positive);
+
+	font-size: 0.9rem;
+}
+
+.amount {
+	display: flex;
+	align-items: center;
+	gap: 0.55rem;
+
+	margin: 0;
+
+	flex-shrink: 0;
+
+	color: var(--text-muted);
+
+	font-size: 0.95rem;
+
+	strong {
+		color: var(--text-secondary);
+		font-weight: 400;
+	}
+}
+
+.dueDate {
+	margin: 0.45rem 0 0;
+
+	color: var(--text-muted);
+
+	font-size: 0.72rem;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+}
+
+.progressTrack {
+	width: 100%;
+	height: 8px;
+
+	margin-top: 0.9rem;
+
+	overflow: hidden;
+
+	background: var(--track-bg);
+
+	border-radius: 999px;
+}
+
+.progressBar {
+	display: block;
+	height: 100%;
+
+	background: var(--positive);
+
+	border-radius: inherit;
+}
+
+.goal:first-child {
+	.goalIcon,
+	.percentage {
+		color: var(--warning);
+	}
+
+	.progressBar {
+		background: var(--warning);
+	}
+}
+
+.goalActions {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 0.75rem;
+
+	margin-top: 0.75rem;
+
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+
+	transition:
+		opacity 0.2s ease,
+		visibility 0.2s ease;
+}
+
+.goal:hover,
+.goal:focus-within {
+	.goalActions {
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+	}
+}
+
+.contributeButton {
+	padding: 0;
+
+	background: transparent;
+	color: var(--accent-blue);
+
+	border: 0;
+
+	font: inherit;
+	font-size: 0.72rem;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+
+	cursor: pointer;
+}
+
+.deleteButton {
+	width: 34px;
+	height: 34px;
+
+	display: grid;
+	place-items: center;
+
+	padding: 0;
+
+	background: transparent;
+	color: var(--text-muted);
+
+	border: 0;
+	border-radius: 6px;
+
+	cursor: pointer;
+
+	svg {
+		width: 18px;
+		height: 18px;
+	}
+
+	&:hover {
+		color: var(--negative);
+		background: var(--bg-secondary);
+	}
+}
+
+/* COMPLETED */
+
+.completedSection {
+	margin-top: 3rem;
+	padding-top: 1.75rem;
+
+	border-top: 1px solid var(--border);
+}
+
+.completedHeader {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+
+	margin-bottom: 1rem;
+
+	color: var(--text-muted);
+
+	font-size: 0.75rem;
+	letter-spacing: 0.17em;
+	text-transform: uppercase;
+}
+
+.completedList {
+	display: grid;
+	gap: 0.75rem;
+}
+
+.completedGoal {
+	display: grid;
+	grid-template-columns: 30px 34px minmax(0, 1fr) auto auto;
+	align-items: center;
+	gap: 0.9rem;
+
+	padding: 1rem;
+
+	border: 1px solid var(--border);
+	border-radius: 8px;
+
+	h3 {
+		margin: 0;
+
+		color: var(--text-primary);
+
+		font-size: 0.95rem;
+		font-weight: 500;
+
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	p {
+		display: flex;
+		align-items: center;
+		gap: 0.3rem;
+
+		margin: 0;
+
+		color: var(--text-secondary);
+
+		font-size: 0.82rem;
+
+		white-space: nowrap;
+	}
+}
+
+.completedCheck {
+	width: 20px;
+	height: 20px;
+
+	color: var(--positive);
+}
+
+.completedIcon {
+	width: 21px;
+	height: 21px;
+
+	color: var(--text-muted);
+}
+
+.archiveButton {
+	padding: 0;
+
+	background: transparent;
+	color: var(--text-primary);
+
+	border: 0;
+
+	font: inherit;
+	font-size: 0.7rem;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+
+	cursor: pointer;
+
+	&:hover {
+		color: var(--accent-blue);
+	}
+}
+
+@media (max-width: 700px) {
+	.container {
+		padding: 1.5rem;
+	}
+
+	.header {
+		h2 {
+			font-size: 1.25rem;
+		}
+	}
+
+	.goalTop {
+		align-items: flex-start;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.amount {
+		font-size: 0.85rem;
+	}
+
+	.completedGoal {
+		grid-template-columns: 26px 30px minmax(0, 1fr) auto;
+
+		p {
+			grid-column: 3 / -1;
+		}
+
+		.archiveButton {
+			grid-column: 4;
+			grid-row: 1;
+		}
+	}
+}
+
+@media (max-width: 480px) {
+	.container {
+		padding: 1.25rem;
+	}
+
+	.header {
+		gap: 1rem;
+
+		p {
+			font-size: 0.68rem;
+			letter-spacing: 0.12em;
+		}
+	}
+
+	.newGoalButton {
+		height: 42px;
+		padding: 0 0.85rem;
+
+		font-size: 0.68rem;
+
+		svg {
+			width: 18px;
+			height: 18px;
+		}
+	}
+
+	.goal {
+		grid-template-columns: 34px minmax(0, 1fr);
+		gap: 0.75rem;
+	}
+
+	.goalIcon {
+		width: 34px;
+		height: 34px;
+
+		svg {
+			width: 21px;
+			height: 21px;
+		}
+	}
+
+	.goalTitle {
+		gap: 0.65rem;
+
+		h3 {
+			font-size: 0.9rem;
+		}
+	}
+
+	.percentage {
+		font-size: 0.82rem;
+	}
+
+	.completedGoal {
+		grid-template-columns: 24px minmax(0, 1fr) auto;
+
+		.completedIcon {
+			display: none;
+		}
+
+		p {
+			grid-column: 2 / -1;
+		}
+	}
+}

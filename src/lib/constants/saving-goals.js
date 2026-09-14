@@ -1,3 +1,5 @@
+import { Car, ShieldCheck, Plane, House, WalletCards } from 'lucide-react'
+
 export const CUSTOM_CATEGORY_OPTION = '__custom__'
 
 export const SAVINGS_GOAL_CATEGORIES = [
@@ -12,3 +14,27 @@ export const SAVINGS_GOAL_CATEGORIES = [
 export const SAVINGS_GOAL_CATEGORY_VALUES = SAVINGS_GOAL_CATEGORIES.filter(
 	({ value }) => value !== CUSTOM_CATEGORY_OPTION,
 ).map(({ value }) => value)
+
+export function getGoalIcon(category) {
+	switch (category) {
+		case 'car':
+			return Car
+		case 'emergency':
+			return ShieldCheck
+		case 'travel':
+			return Plane
+		case 'home':
+			return House
+		default:
+			return WalletCards
+	}
+}
+
+export function getProgress(goal) {
+	const target = Number(goal.target_amount || 0)
+	const saved = Number(goal.saved_amount || 0)
+
+	if (target <= 0) return 0
+
+	return Math.min(100, (saved / target) * 100)
+}
