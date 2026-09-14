@@ -20,6 +20,8 @@ import { trendConfig } from '@/lib/constants/chart-configs'
 import ChartLegendItem from './ChartLegendItem'
 import { formatCompactCurrency } from '../../lib/utils/format'
 
+import styles from './Chart.module.scss'
+
 export default function MonthlyTrendClient({ trendData = {}, trendMetrics }) {
 	const { spendingDifference, spendingChange, trendDirection } = trendMetrics
 	return (
@@ -140,7 +142,7 @@ export default function MonthlyTrendClient({ trendData = {}, trendMetrics }) {
 				</ChartContainer>
 			</div>
 
-			<aside className="border-t border-[#29292e] p-8 lg:border-l lg:border-t-0">
+			<aside className={styles.sidePanel}>
 				<p className="font-mono text-xs font-medium tracking-[0.2em] text-zinc-500">
 					MONTHLY TREND
 				</p>
