@@ -320,10 +320,8 @@ textarea {
 .pageContainer {
 	width: 100%;
 	max-width: var(--page-max-width);
-
 	margin-inline: auto;
-
-	padding: var(--page-padding-y) var(--page-padding-x);
+	/* padding: var(--page-padding-y) var(--page-padding-x); */
 }
 
 /* =========================================================
