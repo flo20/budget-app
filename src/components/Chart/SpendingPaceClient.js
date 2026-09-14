@@ -49,14 +49,14 @@ export default function SpendingPaceClient({
 
 				<ChartContainer
 					config={spendingChartConfig}
-					className="h-[440px] w-full">
+					className="h-[500px] w-full">
 					<ComposedChart
 						data={spendingPaceData}
 						margin={{
-							left: 10,
-							right: 20,
-							top: 20,
-							bottom: 10,
+							left: 16,
+							right: 28,
+							top: 28,
+							bottom: 20,
 						}}>
 						<defs>
 							<linearGradient

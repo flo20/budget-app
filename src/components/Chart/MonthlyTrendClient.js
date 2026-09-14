@@ -45,14 +45,14 @@ export default function MonthlyTrendClient({ trendData = {}, trendMetrics }) {
 
 				<ChartContainer
 					config={trendConfig}
-					className="h-[440px] w-full">
+					className="h-[500px] w-full">
 					<LineChart
 						data={trendData}
 						margin={{
-							left: 5,
-							right: 20,
-							top: 20,
-							bottom: 10,
+							left: 16,
+							right: 28,
+							top: 28,
+							bottom: 20,
 						}}>
 						<CartesianGrid
 							vertical={false}
@@ -69,15 +69,26 @@ export default function MonthlyTrendClient({ trendData = {}, trendMetrics }) {
 						/>
 
 						<YAxis
-							domain={[0, 5000]}
-							ticks={[0, 1250, 2500, 3750, 5000]}
+							domain={[0, 'auto']}
 							axisLine={false}
 							tickLine={false}
-							width={60}
-							tick={{ fill: '#8b8b93', fontSize: 12 }}
+							width={65}
+							tick={{
+								fill: 'var(--text-muted)',
+								fontSize: 12,
+							}}
 							tickFormatter={(value) => {
 								if (value === 0) return '$0'
-								return `$${(value / 1000).toFixed(1)}K`
+
+								if (value >= 1_000_000) {
+									return `$${(value / 1_000_000).toFixed(1)}M`
+								}
+
+								if (value >= 1000) {
+									return `$${(value / 1000).toFixed(1)}K`
+								}
+
+								return `$${value}`
 							}}
 						/>
 
@@ -135,8 +146,8 @@ export default function MonthlyTrendClient({ trendData = {}, trendMetrics }) {
 				</p>
 
 				<p
-					className={`mt-4 font-mono text-4xl font-semibold tracking-tight lg:text-5xl ${
-						spendingChange <= 0 ? 'text-emerald-400' : 'text-red-400'
+					className={`${styles.trendValue} ${
+						spendingChange <= 0 ? styles.positive : styles.negative
 					}`}>
 					{Math.abs(Math.round(spendingChange))}%{' '}
 					{spendingChange <= 0 ? 'Lower' : 'Higher'}
@@ -146,7 +157,7 @@ export default function MonthlyTrendClient({ trendData = {}, trendMetrics }) {
 					SPENDING VS PREVIOUS MONTH
 				</p>
 
-				<p className="mt-6 max-w-sm text-base leading-7 text-zinc-400">
+				<p className={styles.panelDescription}>
 					{spendingDifference < 0
 						? `You spent ${formatCompactCurrency(
 								Math.abs(spendingDifference),

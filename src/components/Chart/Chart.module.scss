@@ -1,10 +1,7 @@
 .container {
 	width: 100%;
 	overflow: hidden;
-
-	container-name: outlook;
-	container-type: inline-size;
-
+    
 	background: var(--bg-primary);
 
 	border: 1px solid var(--border);
@@ -20,7 +17,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	gap: 1.25rem;
+	gap:2rem;
 
 	padding: 0 2rem;
 
@@ -29,6 +26,18 @@
 
 .title {
 	flex-shrink: 0;
+    gap: 2rem;
+
+    color: var(--text-muted);
+
+    font-size: 0.8rem;
+	font-weight: 500;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+    strong {
+		color: var(--text-primary);
+		font-weight: 500;
+	}
 }
 
 /* TABS */
@@ -92,14 +101,14 @@
 
 .metric {
 	min-width: 0;
-	min-height: 156px;
+	min-height: 150px;
 
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 
-	padding: 1.5rem;
+	padding: 1.5rem 1rem;
 
 	border-right: 1px solid var(--border);
 
@@ -109,17 +118,15 @@
 }
 
 .metricValue {
-	max-width: 100%;
-
 	margin: 0;
 
 	color: var(--text-primary);
 
-	font-size: clamp(1.7rem, 2.6vw, 2.5rem);
+	font-size: clamp(1.8rem, 2.3vw, 2.5rem);
 	font-weight: 500;
 	line-height: 1;
 
-	letter-spacing: 0.01em;
+	letter-spacing: 0.015em;
 
 	text-align: center;
 	white-space: nowrap;
@@ -149,22 +156,24 @@
 
 .chartLayout {
 	display: grid;
-	grid-template-columns: minmax(0, 2fr) minmax(300px, 1fr);
+	grid-template-columns: minmax(0, 2.2fr) minmax(300px, 1fr);
+
+    min-height: 540px;
 }
 
 .chartArea {
 	min-width: 0;
 
-	padding: 2rem;
+	padding: 2.25rem 2.5rem 2.5rem;
 }
 
 .legend {
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
-	gap: 2rem;
+	gap: 2.25rem;
 
-	margin-bottom: 2rem;
+	margin-bottom: 3rem;
 }
 
 .legendItem {
@@ -193,8 +202,8 @@
 /* SIDE PANEL */
 
 .sidePanel {
-	padding: 2rem;
-
+    min-width: 0;
+	padding: 2.5rem;
 	border-left: 1px solid var(--border);
 }
 
@@ -210,16 +219,16 @@
 }
 
 .forecastValue {
-	margin: 1.4rem 0 0;
+	margin: 1.5rem 0 0;
 
-	font-size: clamp(2.5rem, 4vw, 3.5rem);
+	font-size: clamp(2.5rem, 3.5vw, 3.4rem);
 	font-weight: 500;
 	line-height: 1;
 	letter-spacing: -0.03em;
 }
 
 .forecastStatus {
-	margin: 0.7rem 0 0;
+	margin: 0.75rem 0 0;
 
 	font-size: 0.75rem;
 	font-weight: 500;
@@ -242,7 +251,7 @@
 	width: 100%;
 	height: 1px;
 
-	margin: 2rem 0;
+	margin: 2.25rem 0;
 
 	background: var(--border);
 }
@@ -252,9 +261,27 @@
 
 	color: var(--text-primary);
 
-	font-size: clamp(2rem, 3vw, 2.8rem);
+	font-size: clamp(2rem, 2.8vw, 2.7rem);
 	font-weight: 500;
 	line-height: 1;
+}
+
+.trendValue {
+	margin: 1.25rem 0 0;
+
+	font-size: clamp(2.25rem, 3.2vw, 3.25rem);
+	font-weight: 500;
+	line-height: 1.05;
+	letter-spacing: -0.03em;
+}
+
+.trendDirection {
+	margin: 0;
+
+	font-size: 1.35rem;
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
 }
 
 @media (max-width: 1100px) {
@@ -318,6 +345,16 @@
 
 		font-size: 0.62rem;
 		letter-spacing: 0.07em;
+	}
+
+    .chartLayout {
+		grid-template-columns: 1fr;
+		min-height: 0;
+	}
+
+	.sidePanel {
+		border-top: 1px solid var(--border);
+		border-left: 0;
 	}
 }
 

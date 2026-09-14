@@ -32,7 +32,7 @@ export default function CashFlowClient({ cashFlowData = {}, cashFlowMetrics }) {
 
 				<ChartContainer
 					config={cashFlowConfig}
-					className="h-[440px] w-full">
+					className="h-[500px] w-full">
 					<BarChart
 						data={cashFlowData}
 						margin={{
