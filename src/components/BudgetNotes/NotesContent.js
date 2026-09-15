@@ -5,6 +5,8 @@ import { Check, Trash2 } from 'lucide-react'
 import { formatTimestamp, formatMonth } from '@/lib/utils/format'
 import { deleteBudgetNote, toggleBudgetNote } from '@/app/actions/budget-notes'
 
+import FormButton from '../form/FormButtons'
+
 import EditNotes from './EditNotes'
 
 import styles from './Notes.module.scss'
@@ -50,14 +52,13 @@ export default function NotesContent({ notes, budgetMonth }) {
 						<button
 							type="submit"
 							className={styles.checkbox}
-							role="checkbox"
-							aria-checked={note.is_resolved}
+							aria-pressed={note.is_resolved}
 							aria-label={
 								note.is_resolved
 									? `Mark ${note.content} unresolved`
 									: `Mark ${note.content} resolved`
 							}>
-							{note.is_resolved && <Check />}
+							{note.is_resolved && <Check aria-hidden="true" />}
 						</button>
 					</form>
 
@@ -89,12 +90,13 @@ export default function NotesContent({ notes, budgetMonth }) {
 							value={budgetMonth}
 						/>
 
-						<button
+						<FormButton
 							type="submit"
+							variant="icon"
 							className={styles.deleteButton}
 							aria-label={`Delete ${note.content}`}>
-							<Trash2 />
-						</button>
+							<Trash2 aria-hidden="true" />
+						</FormButton>
 					</form>
 				</li>
 			))}

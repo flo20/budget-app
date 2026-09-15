@@ -176,28 +176,19 @@
 }
 
 .button {
-	min-height: 46px;
-
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	gap: 0.6rem;
-
-	padding: 0 1.25rem;
 
 	border: 0;
-	border-radius: 8px;
 
 	font: inherit;
-	font-size: 0.9rem;
-	font-weight: 500;
-
 	cursor: pointer;
 
 	transition:
-		background-color 0.2s ease,
+		background 0.2s ease,
 		color 0.2s ease,
-		transform 0.2s ease;
+		border-color 0.2s ease;
 
 	&:disabled {
 		opacity: 0.5;
@@ -206,11 +197,35 @@
 }
 
 .primary {
-	background: var(--accent-blue);
+	min-height: 52px;
+	padding-inline: 1.25rem;
+
+	background: var(--button-bg);
 	color: var(--primary-button-text);
 
-	&:hover:not(:disabled) {
-		transform: translateY(-1px);
+	border-radius: 8px;
+}
+
+.icon {
+	flex: 0 0 auto;
+
+	width: 40px;
+	height: 40px;
+	padding: 0;
+
+	background: transparent;
+	color: var(--text-secondary);
+
+	border-radius: 8px;
+
+	&:hover {
+		background: var(--bg-secondary);
+		color: var(--text-primary);
+	}
+
+	svg {
+		width: 18px;
+		height: 18px;
 	}
 }
 

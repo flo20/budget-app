@@ -4,6 +4,9 @@ import { createBudgetNotes } from '@/app/actions/budget-notes'
 import { changeMonth } from '@/lib/utils/month'
 import { formatMonth } from '@/lib/utils/format'
 
+import FormInput from '../form/FormInput'
+import FormButton from '../form/FormButtons'
+
 import { Plus, ChevronLeft, ChevronRight } from 'lucide-react'
 
 import Link from 'next/link'
@@ -37,7 +40,7 @@ export default function NotesClient({ notes, budgetMonth }) {
 					<strong>{formatMonth(budgetMonth)}</strong>
 
 					<Link
-						href={`dashboard/?month=${nextMonth}`}
+						href={`/dashboard/?month=${nextMonth}`}
 						aria-label="Next month">
 						<ChevronRight />
 					</Link>
@@ -58,20 +61,23 @@ export default function NotesClient({ notes, budgetMonth }) {
 					Add a budget note
 				</label>
 
-				<input
+				<FormInput
 					id="budget-note"
 					name="content"
 					type="text"
 					maxLength={280}
 					placeholder={`Add a note for ${formatMonth(budgetMonth)}...`}
 					required
+					className={styles.addInput}
 				/>
 
-				<button
+				<FormButton
 					type="submit"
+					variant="icon"
+					className={styles.addButton}
 					aria-label="Add budget note">
 					<Plus />
-				</button>
+				</FormButton>
 			</form>
 		</>
 	)
