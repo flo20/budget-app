@@ -11,13 +11,15 @@ export default function FormHeader({ title, description, onClose }) {
 				{description && <p>{description}</p>}
 			</div>
 
-			<button
-				type="button"
-				className={styles.closeButton}
-				onClick={onClose}
-				aria-label="Close">
-				<X />
-			</button>
+			{onClose && (
+				<button
+					type="button"
+					className={styles.closeButton}
+					onClick={onClose}
+					aria-label="Close">
+					<X />
+				</button>
+			)}
 		</header>
 	)
 }

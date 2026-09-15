@@ -1,58 +1,55 @@
 import { signUp } from '@/app/actions/auth'
 
-import styles from '../AuthCard.module.scss'
+import Form from '@/components/form/Form'
+import FormField from '@/components/form/FormField'
+import FormInput from '@/components/form/FormInput'
 
 export default async function SignUpForm() {
 	return (
-		<form
-			action={signUp}
-			className={styles.form}>
-			<div className={styles.field}>
-				<label htmlFor="email">Email</label>
-
-				<input
+		<Form action={signUp}>
+			<FormField
+				label="Email"
+				htmlFor="email">
+				<FormInput
 					id="email"
 					name="email"
 					type="email"
 					autoComplete="email"
 					required
-					
 				/>
-			</div>
+			</FormField>
 
-			<div className={styles.field}>
-				<label htmlFor="password">Password</label>
-
-				<input
+			<FormField
+				label="Password"
+				htmlFor="password">
+				<FormInput
 					id="password"
 					name="password"
 					type="password"
 					autoComplete="new-password"
 					minLength={6}
 					required
-					
 				/>
-			</div>
+			</FormField>
 
-			<div className={styles.field}>
-				<label htmlFor="confirmPassword">Confirm password</label>
-
-				<input
+			<FormField
+				label="Confirm password"
+				htmlFor="confirmPassword">
+				<FormInput
 					id="confirmPassword"
 					name="confirmPassword"
 					type="password"
 					autoComplete="new-password"
 					minLength={6}
 					required
-					
 				/>
-			</div>
+			</FormField>
 
 			<button
 				type="submit"
-				className={styles.submitButton}>
+				fullWidth>
 				Create account
 			</button>
-		</form>
+		</Form>
 	)
 }

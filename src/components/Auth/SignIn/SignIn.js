@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import DemoLoginButton from '../DemoLoginButton'
 import SignInForm from './SignInForm'
+import FormHeader from '@/components/form/FormHeader'
 
 import styles from '../AuthCard.module.scss'
 
@@ -10,10 +11,10 @@ export default function SignIn() {
 	return (
 		<main className={styles.page}>
 			<section className={styles.card}>
-				<header className={styles.header}>
-					<h1>Sign in to TALLY</h1>
-					<p>Manage your household finances in one place</p>
-				</header>
+				<FormHeader
+					title="Sign in to TALLY"
+					description="Manage your household finances in one place"
+				/>
 				<DemoLoginButton />
 				<div className={styles.divider}>
 					<span />

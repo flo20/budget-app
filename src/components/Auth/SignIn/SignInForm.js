@@ -3,6 +3,10 @@
 import { useActionState } from 'react'
 import { signIn } from '../../../app/actions/auth'
 
+import Form from '@/components/form/Form'
+import FormField from '@/components/form/FormField'
+import FormInput from '@/components/form/FormInput'
+
 import styles from '../AuthCard.module.scss'
 
 const initialState = {
@@ -13,12 +17,11 @@ export default function SignInForm() {
 	const [state, formAction, isPending] = useActionState(signIn, initialState)
 
 	return (
-		<form
-			action={formAction}
-			className={styles.form}>
-			<div className={styles.field}>
-				<label htmlFor="email">Email</label>
-				<input
+		<Form action={formAction}>
+			<FormField
+				htmlFor="email"
+				label="Email">
+				<FormInput
 					className="w-full rounded border px-3 py-2"
 					id="email"
 					name="email"
@@ -26,10 +29,11 @@ export default function SignInForm() {
 					autoComplete="email"
 					required
 				/>
-			</div>
-			<div className={styles.field}>
-				<label htmlFor="password">Password</label>
-				<input
+			</FormField>
+			<FormField
+				htmlFor="password"
+				label="Password">
+				<FormInput
 					className="w-full rounded border px-3 py-2"
 					id="password"
 					name="password"
@@ -37,7 +41,7 @@ export default function SignInForm() {
 					autoComplete="current-password"
 					required
 				/>
-			</div>
+			</FormField>
 
 			{state?.error && (
 				<p
@@ -47,12 +51,12 @@ export default function SignInForm() {
 				</p>
 			)}
 
-			<button
-				type="submit"
-				disabled={isPending}
-				className={styles.signInButton}>
-				{isPending ? 'Signing in...' : 'Sign in'}
-			</button>
-		</form>
+				<button
+					type="submit"
+					disabled={isPending}
+					className={styles.signInButton}>
+					{isPending ? 'Signing in...' : 'Sign in'}
+				</button>
+		</Form>
 	)
 }
