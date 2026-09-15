@@ -22,9 +22,6 @@ export default function AllocationForm({
 	budgetMonthlyLimit,
 	limitInputRef,
 }) {
-	// const [customCategory, setCustomCategory] = useState('')
-	// const isCustomCategory = selectedCategory === CUSTOM_CATEGORY_OPTION
-
 	const availableCategories = getAvailableCategories(
 		summary.categories,
 		summary.unallocatedCategories,
@@ -47,14 +44,11 @@ export default function AllocationForm({
 					Category
 				</label>
 
-				<select
+				<FormSelect
 					id="allocation-category"
 					name="category"
 					value={selectedCategory ?? ''}
-					onChange={(event) => {
-						setSelectedCategory(event.target.value)
-						// setCustomCategory('')
-					}}
+					onChange={(event) => setSelectedCategory(event.target.value)}
 					required>
 					<option
 						value=""
@@ -69,40 +63,21 @@ export default function AllocationForm({
 							{category}
 						</option>
 					))}
-					{/* <option value={CUSTOM_CATEGORY_OPTION}>Add a custom category</option> */}
-				</select>
+				</FormSelect>
 			</div>
-
-			{/* 
-			{isCustomCategory && (
-				<label>
-					<span>Custom category name</span>
-
-					<input
-						name="customCategory"
-						type="text"
-						value={customCategory}
-						onChange={(event) => setCustomCategory(event.target.value)}
-						placeholder="e.g. Pet Care"
-						maxLength="50"
-						required
-					/>
-				</label>
-			)} */}
-
 			<div className={styles.allocationField}>
 				<label
 					htmlFor="monthly-limit"
 					className={styles.srOnly}>
 					Monthly limit
 				</label>
-				<input
+				<FormInput
 					id="monthly-limit"
 					ref={limitInputRef}
-					value={budgetMonthlyLimit ?? ''}
-					onChange={(event) => setbudgetMonthlyLimit(event.target.value)}
 					name="monthlyLimit"
 					type="number"
+					value={budgetMonthlyLimit ?? ''}
+					onChange={(event) => setbudgetMonthlyLimit(event.target.value)}
 					min="0.01"
 					step="0.01"
 					placeholder="Monthly limit"
@@ -110,12 +85,12 @@ export default function AllocationForm({
 				/>
 			</div>
 
-			<button
+			<FormButton
 				type="submit"
 				className={styles.setButton}>
 				<Plus />
 				<span>Set</span>
-			</button>
+			</FormButton>
 		</form>
 	)
 }

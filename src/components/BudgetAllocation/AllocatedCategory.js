@@ -14,13 +14,27 @@ import styles from './BudgetAllocation.module.scss'
 function getCategoryIcon(categoryName) {
 	const name = categoryName.toLowerCase()
 
-	if (name.includes('housing')) return House
-	if (name.includes('grocer')) return ShoppingCart
-	if (name.includes('utilit')) return Zap
-	if (name.includes('transport')) return Car
-	if (name.includes('recreation')) return Clapperboard
+	if (name.includes('housing')) {
+		return <House aria-hidden="true" />
+	}
 
-	return WalletCards
+	if (name.includes('grocer')) {
+		return <ShoppingCart aria-hidden="true" />
+	}
+
+	if (name.includes('utilit')) {
+		return <Zap aria-hidden="true" />
+	}
+
+	if (name.includes('transport')) {
+		return <Car aria-hidden="true" />
+	}
+
+	if (name.includes('recreation')) {
+		return <Clapperboard aria-hidden="true" />
+	}
+
+	return <WalletCards aria-hidden="true" />
 }
 
 export default function AllocatedCategory({ category }) {
@@ -40,7 +54,6 @@ export default function AllocatedCategory({ category }) {
 		return `${formatCurrency(category.remaining)} left`
 	}
 
-	// const Icon = getCategoryIcon(category.category)
 
 	const progress =
 		category.limit > 0
@@ -52,7 +65,7 @@ export default function AllocatedCategory({ category }) {
 			className={styles.category}>
 			<div className={styles.categoryTop}>
 				<div className={styles.categoryName}>
-					{/* <Icon aria-hidden="true" /> */}
+					{getCategoryIcon(category.category)}
 					<h3>{category.category}</h3>
 				</div>
 
