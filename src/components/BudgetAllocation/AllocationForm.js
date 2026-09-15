@@ -1,25 +1,17 @@
 'use client'
 
 import { setBudgetAllocation } from '@/app/actions/budget-allocations'
-import { EXPENSE_CATEGORIES } from '@/lib/constants/transaction-categories'
+import { getAvailableCategories } from '@/lib/constants/transaction-categories'
+
+import FormInput from '../form/FormInput'
+import FormSelect from '../form/FormSelect'
+import FormButton from '../form/FormButtons'
 
 import { Plus } from 'lucide-react'
 
 import styles from './BudgetAllocation.module.scss'
 
-function getAvailableCategories(allocatedCategories, unallocatedCategories) {
-	const allocatedNames = new Set(
-		allocatedCategories.map((item) => item.category),
-	)
 
-	const transactionCategoryNames = unallocatedCategories.map(
-		(item) => item.category,
-	)
-
-	return [
-		...new Set([...EXPENSE_CATEGORIES, ...transactionCategoryNames]),
-	].filter((category) => !allocatedNames.has(category))
-}
 
 export default function AllocationForm({
 	summary,

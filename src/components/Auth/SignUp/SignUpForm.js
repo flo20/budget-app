@@ -4,6 +4,8 @@ import Form from '@/components/form/Form'
 import FormField from '@/components/form/FormField'
 import FormInput from '@/components/form/FormInput'
 
+import styles from "../AuthCard.module.scss"
+
 export default async function SignUpForm() {
 	return (
 		<Form action={signUp}>
@@ -47,7 +49,7 @@ export default async function SignUpForm() {
 
 			<button
 				type="submit"
-				fullWidth>
+				className={styles.submitButton}>
 				Create account
 			</button>
 		</Form>
