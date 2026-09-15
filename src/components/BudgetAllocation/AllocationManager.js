@@ -41,7 +41,6 @@ export default function AllocationManager({
 				<section className={styles.unallocated}>
 					<header>
 						<h3>Unallocated spend</h3>
-
 						<span>{formatCurrency(totalUnallocatedSpend)} total</span>
 					</header>
 
@@ -50,7 +49,6 @@ export default function AllocationManager({
 							<li key={category.category}>
 								<span>{category.category}</span>
 								<span>{formatCurrency(category.spent)}</span>
-
 								<button
 									type="button"
 									onClick={() => handleAllocate(category)}>

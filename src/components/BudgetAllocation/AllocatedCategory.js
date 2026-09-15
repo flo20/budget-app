@@ -9,6 +9,7 @@ import {
 	WalletCards,
 } from 'lucide-react'
 
+
 import styles from './BudgetAllocation.module.scss'
 
 function getCategoryIcon(categoryName) {
@@ -38,6 +39,7 @@ function getCategoryIcon(categoryName) {
 }
 
 export default function AllocatedCategory({ category }) {
+
 	function getStatusMessage(category) {
 		if (category.status === 'over') {
 			return `${formatCurrency(Math.abs(category.remaining))} over budget`
@@ -54,11 +56,9 @@ export default function AllocatedCategory({ category }) {
 		return `${formatCurrency(category.remaining)} left`
 	}
 
+    console.log('category.progressWidth', category.progressWidth)
+    
 
-	const progress =
-		category.limit > 0
-			? Math.min(100, (category.spent / category.limit) * 100)
-			: 0
 	return (
 		<article
 			data-status={category.status}
@@ -78,16 +78,9 @@ export default function AllocatedCategory({ category }) {
 			<div className={styles.categoryTrack}>
 				<span
 					className={styles.categoryProgress}
-					style={{ width: `${progress}%` }}
+					style={{ width: `${category.progressWidth}%` }}
 				/>
 			</div>
-			{/* <header>
-				<h3>{category.category}</h3>
-				<p>
-					<strong>{formatCurrency(category.spent)}</strong>/
-					<span>{formatCurrency(category.limit)}</span>
-				</p>
-			</header> */}
 			<p className={styles.categoryStatus}>{getStatusMessage(category)}</p>
 		</article>
 	)

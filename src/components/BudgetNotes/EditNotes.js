@@ -3,6 +3,9 @@
 import { useState } from 'react'
 import { editBudgetNote } from '@/app/actions/budget-notes'
 
+import FormInput from '../form/FormInput'
+import FormButton from '../form/FormButtons'
+
 import { Check, X } from 'lucide-react'
 
 import styles from './Notes.module.scss'
@@ -67,7 +70,7 @@ export default function EditNotes({ note }) {
 					Edit
 				</label>
 
-				<input
+				<FormInput
 					id={`note-${note.id}`}
 					name="content"
 					type="text"
@@ -77,22 +80,27 @@ export default function EditNotes({ note }) {
 					maxLength={280}
 					disabled={isSaving}
 					autoFocus
+					className={styles.editInput}
 				/>
 
-				<button
+				<FormButton
 					type="submit"
 					disabled={isSaving}
-					aria-label="Save note">
+					variant="icon"
+					aria-label="Save note"
+					className={styles.editActionButton}>
 					<Check />
-				</button>
+				</FormButton>
 
-				<button
+				<FormButton
 					type="button"
+					variant="icon"
 					onClick={cancelEditing}
 					disabled={isSaving}
-					aria-label="Cancel editing">
+					aria-label="Cancel editing"
+					className={styles.editActionButton}>
 					<X />
-				</button>
+				</FormButton>
 
 				{error && (
 					<p

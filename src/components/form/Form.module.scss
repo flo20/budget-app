@@ -232,6 +232,29 @@
 	}
 }
 
+.icon {
+	width: 40px;
+	height: 40px;
+	min-height: 40px;
+
+	padding: 0;
+
+	background: transparent;
+	color: var(--text-secondary);
+
+	border: 0;
+
+	&:hover {
+		background: var(--bg-secondary);
+		color: var(--text-primary);
+	}
+
+	svg {
+		width: 17px;
+		height: 17px;
+	}
+}
+
 @media (max-width: 640px) {
 	.actions {
 		flex-direction: column-reverse;

@@ -45,12 +45,12 @@ export default async function BudgetAllocation({ budgetMonth }) {
 					Only reflects budgeted categories · unallocated spending is tracked
 					separately below
 				</p>
-				<div className={styles.overallTrack}>
+				{/* <div className={styles.overallTrack}>
 					<span
 						className={styles.overallProgress}
 						style={{ width: `${usedPercentage}%` }}
 					/>
-				</div>
+				</div> */}
 			</header>
 			<div className={styles.categoryList}>
 				{summary.categories.map((category) => (
