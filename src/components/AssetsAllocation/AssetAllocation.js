@@ -1,27 +1,13 @@
 import { getAssets } from '@/lib/queries/assets'
 import { buildAssetSummary } from '@/lib/assets/asset-summary'
 import { formatCurrency, formatPercentage } from '@/lib/utils/format'
+import { buildAllocationGradient } from '@/lib/constants/asset-allocation'
 
 import { Pencil, Trash2 } from 'lucide-react'
 
 import AssetHeader from './AssetHeader'
 
-import styles from './AssetInventory.module.scss'
-
-function buildAllocationGradient(allocations) {
-	let current = 0
-
-	const segments = allocations.map((allocation) => {
-		const start = current
-		const end = current + allocation.percentage
-
-		current = end
-
-		return `${allocation.color} ${start}% ${end}%`
-	})
-
-	return `conic-gradient(${segments.join(', ')})`
-}
+import styles from './AssetAllocation.module.scss'
 
 export default async function AssetAllocation() {
 	const assets = await getAssets()

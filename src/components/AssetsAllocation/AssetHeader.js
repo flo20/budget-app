@@ -6,7 +6,7 @@ import { Plus } from 'lucide-react'
 import AssetForm from './AssetForm'
 import Modal from '../Modal/Modal'
 
-import styles from './AssetInventory.module.scss'
+import styles from './AssetAllocation.module.scss'
 
 export default function AssetHeader() {
 	const { showAssetModal, openAssetModal, closeAssetModal } = useModal()

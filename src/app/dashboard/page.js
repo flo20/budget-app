@@ -35,16 +35,16 @@ export default async function DashBoard({ searchParams }) {
 				<MonthlyPulse budgetMonth={budgetMonth} />
 				<div className="contentWrapper">
 					<div className="leftCol">
-						<PinnedPayment />
-						<Liabilities />
-						<BudgetAllocation budgetMonth={budgetMonth} />
-						<Notes budgetMonth={budgetMonth} />
-					</div>
-					<div className="rightCol">
 						<OutLook budgetMonth={budgetMonth} />
+						<BudgetAllocation budgetMonth={budgetMonth} />
 						<SavingsGoals />
 						<AssetAllocation />
 						<LedgerStream budgetMonth={budgetMonth} />
+					</div>
+					<div className="aside">
+						<PinnedPayment />
+						<Liabilities />
+						<Notes budgetMonth={budgetMonth} />
 					</div>
 				</div>
 			</section>

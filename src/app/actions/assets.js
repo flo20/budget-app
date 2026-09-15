@@ -2,7 +2,7 @@
 
 import { requireUser } from '@/lib/auth/require-user'
 import { revalidatePath } from 'next/cache'
-import { ASSET_TYPES } from '@/lib/constants/asset-types'
+import { ASSET_TYPES } from '@/lib/constants/asset-allocation'
 
 export async function createAsset(formData) {
 	const { supabase, user } = await requireUser()

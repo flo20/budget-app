@@ -28,3 +28,18 @@ export const ASSET_TYPE_DETAILS = {
         color: '#8f929b',
     },
 }
+
+export function buildAllocationGradient(allocations) {
+    let current = 0
+
+    const segments = allocations.map((allocation) => {
+        const start = current
+        const end = current + allocation.percentage
+
+        current = end
+
+        return `${allocation.color} ${start}% ${end}%`
+    })
+
+    return `conic-gradient(${segments.join(', ')})`
+}
