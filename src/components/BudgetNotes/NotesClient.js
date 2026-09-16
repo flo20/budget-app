@@ -4,8 +4,8 @@ import { createBudgetNotes } from '@/app/actions/budget-notes'
 import { changeMonth } from '@/lib/utils/month'
 import { formatMonth } from '@/lib/utils/format'
 
-import FormInput from '../form/FormInput'
-import FormButton from '../form/FormButtons'
+import FormInput from '../Form/FormInput'
+import FormButton from '../Form/FormButtons'
 
 import { Plus, ChevronLeft, ChevronRight } from 'lucide-react'
 

@@ -3,9 +3,9 @@
 import { useActionState } from 'react'
 import { signIn } from '../../../app/actions/auth'
 
-import Form from '@/components/form/Form'
-import FormField from '@/components/form/FormField'
-import FormInput from '@/components/form/FormInput'
+import Form from '@/components/Form/Form'
+import FormField from '@/components/Form/FormField'
+import FormInput from '@/components/Form/FormInput'
 
 import styles from '../AuthCard.module.scss'
 

@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import SignUpForm from './SignUpForm'
 import DemoLoginButton from '../DemoLoginButton'
-import FormHeader from '@/components/form/FormHeader'
+import FormHeader from '@/components/Form/FormHeader'
 
 import styles from '../AuthCard.module.scss'
 

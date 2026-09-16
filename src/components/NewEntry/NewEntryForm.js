@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+
 import { localDate } from '@/lib/utils/date'
 import { createTransactions } from '@/app/actions/transactions'
 import {
@@ -8,7 +9,16 @@ import {
 	INCOME_CATEGORIES,
 } from '@/lib/constants/transaction-categories'
 
-import { X } from 'lucide-react'
+import {
+	Form,
+	FormHeader,
+	FormField,
+	FormInput,
+	FormSelect,
+	FormTextarea,
+	FormActions,
+	FormButton,
+} from '@/components/Form'
 
 import styles from './NewEntryForm.module.scss'
 
@@ -16,175 +26,171 @@ export default function NewEntryForm({ closeModal }) {
 	const [entryType, setEntryType] = useState('expense')
 	const [transactionDate, setTransactionDate] = useState(() => localDate())
 	const [expenseType, setExpenseType] = useState('variable')
+    const [notes, setNotes] = useState('')
+
 	const isExpense = entryType === 'expense'
 
 	const categories = isExpense ? EXPENSE_CATEGORIES : INCOME_CATEGORIES
 
 	return (
-		<div className={styles.formWrapper}>
-			<header className={styles.dialogHeading}>
-				<div>
-					<h3>New Ledger Entry</h3>
-					<p>Record an income or expense</p>
-				</div>
+		<Form action={createTransactions}>
+			<FormHeader
+				title="New Ledger Entry"
+				description="Record an income or expense"
+				onClose={closeModal}
+			/>
+
+			<input
+				type="hidden"
+				name="transactionType"
+				value={entryType}
+			/>
+
+			<div className={styles.typeSelector}>
+				<button
+					type="button"
+					className={`${styles.typeButton} ${
+						isExpense ? styles.activeType : ''
+					}`}
+					aria-pressed={isExpense}
+					onClick={() => setEntryType('expense')}>
+					EXPENSE
+				</button>
 
 				<button
 					type="button"
-					className={styles.closeButton}
-					onClick={closeModal}
-					aria-label="Close">
-					<X />
+					className={`${styles.typeButton} ${
+						!isExpense ? styles.activeType : ''
+					}`}
+					aria-pressed={!isExpense}
+					onClick={() => setEntryType('income')}>
+					INCOME
 				</button>
-			</header>
+			</div>
 
-			{/* Expense Form */}
-			<form
-				action={createTransactions}
-				className={styles.form}>
-				<input
-					type="hidden"
-					name="transactionType"
-					value={entryType}
+			<FormField
+				label={isExpense ? 'Merchant' : 'Income Source'}
+				htmlFor="source">
+				<FormInput
+					id="source"
+					name="source"
+					type="text"
+					placeholder={isExpense ? 'e.g. Whole Foods' : 'e.g. Salary'}
+					required
 				/>
-				<div className={styles.typeSelector}>
-					<button
-						type="button"
-						className={`${styles.typeButton} ${
-							isExpense ? styles.activeType : ''
-						}`}
-						aria-pressed={isExpense}
-						onClick={() => setEntryType('expense')}>
-						EXPENSE
-					</button>
-					<button
-						type="button"
-						className={`${styles.typeButton} ${
-							!isExpense ? styles.activeType : ''
-						}`}
-						aria-pressed={!isExpense}
-						onClick={() => setEntryType('income')}>
-						INCOME
-					</button>
-				</div>
-				<div className={styles.field}>
-					<label htmlFor="source">
-						{isExpense ? 'Merchant' : 'Income Source'}
-					</label>
-					<input
-						id="source"
-						type="text"
-						name="source"
-						placeholder={isExpense ? 'e.g. Whole Foods' : 'e.g. Salary'}
-						required
-					/>
-				</div>
+			</FormField>
 
-				<div className={styles.field}>
-					<label htmlFor="amount">Amount</label>
+			<FormField
+				label="Amount"
+				htmlFor="amount">
+				<FormInput
+					id="amount"
+					name="amount"
+					type="number"
+					min="0.01"
+					step="0.01"
+					placeholder="0.00"
+					required
+				/>
+			</FormField>
 
-					<input
-						id="amount"
-						name="amount"
-						type="number"
-						min="0.01"
-						step="0.01"
-						required
-					/>
-				</div>
+			<FormField
+				label="Category"
+				htmlFor="category">
+				<FormSelect
+					id="category"
+					name="category"
+					defaultValue=""
+					required>
+					<option
+						value=""
+						disabled>
+						Select...
+					</option>
 
-				<div className={styles.field}>
-					<label htmlFor="category">Category</label>
-
-					<select
-						id="category"
-						name="category"
-						required
-						defaultValue="">
+					{categories.map((category) => (
 						<option
-							value=""
-							disabled>
-							Select...
+							key={category}
+							value={category}>
+							{category}
 						</option>
-						{categories.map((category) => (
-							<option
-								value={category}
-								key={category}>
-								{category}
-							</option>
-						))}
-					</select>
-				</div>
+					))}
+				</FormSelect>
+			</FormField>
 
-				{isExpense && (
-					<div className={styles.field}>
-						<p className={styles.fieldLabel}>Expense kind</p>
-						<input
-							type="hidden"
-							name="expenseType"
-							value={expenseType}
-						/>
-						<div className={styles.expenseTypeSelector}>
-							<button
-								type="button"
-								className={`${styles.expenseTypeButton} ${
-									expenseType === 'fixed' ? styles.activeExpenseType : ''
-								}`}
-								onClick={() => setExpenseType('fixed')}>
-								Fixed
-							</button>
+			{isExpense && (
+				<FormField label="Expense kind">
+					<input
+						type="hidden"
+						name="expenseType"
+						value={expenseType}
+					/>
 
-							<button
-								type="button"
-								className={`${styles.expenseTypeButton} ${
-									expenseType === 'variable' ? styles.activeExpenseType : ''
-								}`}
-								onClick={() => setExpenseType('variable')}>
-								Variable
-							</button>
-						</div>
+					<div className={styles.expenseTypeSelector}>
+						<button
+							type="button"
+							className={`${styles.expenseTypeButton} ${
+								expenseType === 'fixed' ? styles.activeExpenseType : ''
+							}`}
+							aria-pressed={expenseType === 'fixed'}
+							onClick={() => setExpenseType('fixed')}>
+							Fixed
+						</button>
+
+						<button
+							type="button"
+							className={`${styles.expenseTypeButton} ${
+								expenseType === 'variable' ? styles.activeExpenseType : ''
+							}`}
+							aria-pressed={expenseType === 'variable'}
+							onClick={() => setExpenseType('variable')}>
+							Variable
+						</button>
 					</div>
-				)}
+				</FormField>
+			)}
 
-				<div className={styles.field}>
-					<label htmlFor="transactionDate">Transaction date</label>
-				</div>
-
-				<input
+			<FormField
+				label="Transaction date"
+				htmlFor="transactionDate">
+				<FormInput
 					id="transactionDate"
 					name="transactionDate"
 					type="date"
 					value={transactionDate}
 					onChange={(event) => setTransactionDate(event.target.value)}
+					required
+				/>
+			</FormField>
+
+			<FormField
+				label="Note"
+				htmlFor="notes"
+				optional>
+				<FormTextarea
+					id="notes"
+					name="notes"
+					value={notes}
+					onChange={(event) => setNotes(event.target.value)}
+					maxLength={280}
+					placeholder="Add a comment or reminder..."
 				/>
 
-				<div className={styles.field}>
-					<div className={styles.noteHeading}>
-						<label htmlFor="notes">Note(optional)</label>
-					</div>
+				<span className={styles.characterCount}>{notes.length}/280</span>
+			</FormField>
 
-					<textarea
-						id="notes"
-						name="notes"
-						maxLength={280}
-						placeholder="Add a comment or reminder..."
-					/>
-					<span className={styles.characterCount}>0/280</span>
-				</div>
-				<div className={styles.actions}>
-					<button
-						type="button"
-						onClick={closeModal}
-						className={styles.cancelButton}>
-						Cancel
-					</button>
-					<button
-						type="submit"
-						onClick={closeModal}
-						className={styles.submitButton}>
-						{isExpense ? 'Record Expense' : 'Record Income'}
-					</button>
-				</div>
-			</form>
-		</div>
+			<FormActions>
+				<FormButton
+					type="button"
+					variant="secondary"
+					onClick={closeModal}>
+					Cancel
+				</FormButton>
+
+				<FormButton type="submit">
+					{isExpense ? 'Record Expense' : 'Record Income'}
+				</FormButton>
+			</FormActions>
+		</Form>
 	)
 }

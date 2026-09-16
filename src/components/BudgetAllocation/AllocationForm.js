@@ -3,9 +3,9 @@
 import { setBudgetAllocation } from '@/app/actions/budget-allocations'
 import { getAvailableCategories } from '@/lib/constants/transaction-categories'
 
-import FormInput from '../form/FormInput'
-import FormSelect from '../form/FormSelect'
-import FormButton from '../form/FormButtons'
+import FormInput from '../Form/FormInput'
+import FormSelect from '../Form/FormSelect'
+import FormButton from '../Form/FormButtons'
 
 import { Plus } from 'lucide-react'
 

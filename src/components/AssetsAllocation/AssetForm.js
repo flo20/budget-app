@@ -4,14 +4,14 @@ import { useModal } from '@/app/providers/GlobalProvider'
 import { createAsset } from '@/app/actions/assets'
 import { ASSET_TYPES } from '@/lib/constants/asset-allocation'
 
-import FormHeader from '../form/FormHeader'
-import Form from '../form/Form'
-import FormField from '../form/FormField'
-import FormInput from '../form/FormInput'
-import FormSelect from '../form/FormSelect'
-import FormTextarea from '../form/FormTextarea'
-import FormActions from '../form/FormActions'
-import FormButton from '../form/FormButtons'
+import FormHeader from '../Form/FormHeader'
+import Form from '../Form/Form'
+import FormField from '../Form/FormField'
+import FormInput from '../Form/FormInput'
+import FormSelect from '../Form/FormSelect'
+import FormTextarea from '../Form/FormTextarea'
+import FormActions from '../Form/FormActions'
+import FormButton from '../Form/FormButtons'
 
 export default function AssetForm() {
 	const { closeAssetModal } = useModal()

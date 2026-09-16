@@ -5,7 +5,7 @@ import { Check, Trash2 } from 'lucide-react'
 import { formatTimestamp, formatMonth } from '@/lib/utils/format'
 import { deleteBudgetNote, toggleBudgetNote } from '@/app/actions/budget-notes'
 
-import FormButton from '../form/FormButtons'
+import FormButton from '../Form/FormButtons'
 
 import EditNotes from './EditNotes'
 

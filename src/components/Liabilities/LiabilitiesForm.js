@@ -4,13 +4,13 @@ import { createLiability } from '@/app/actions/liabilities'
 import { LIABILITY_TYPES } from '@/lib/constants/liability-types'
 import { useModal } from '@/app/providers/GlobalProvider'
 
-import Form from '../form/Form'
-import FormHeader from '../form/FormHeader'
-import FormField from '../form/FormField'
-import FormInput from '../form/FormInput'
-import FormSelect from '../form/FormSelect'
-import FormActions from '../form/FormActions'
-import FormButton from '../form/FormButtons'
+import Form from '../Form/Form'
+import FormHeader from '../Form/FormHeader'
+import FormField from '../Form/FormField'
+import FormInput from '../Form/FormInput'
+import FormSelect from '../Form/FormSelect'
+import FormActions from '../Form/FormActions'
+import FormButton from '../Form/FormButtons'
 
 export default function LiabilitiesForm() {
 	const { closeLiabilityModal } = useModal()
