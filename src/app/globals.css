@@ -271,18 +271,18 @@ html[data-theme='dark'] .logo-dark {
 }
 
 html {
-	height: 100%;
+	min-height: 100%;
 	max-width: 100vw;
+	overflow-x: clip;
 
-	overflow-x: hidden;
-
+    scroll-behavior: smooth;
+	scroll-padding-top: 90px;
 }
 
 body {
-	min-height: 100%;
+	min-height: 100vh;
 	max-width: 100vw;
-
-	overflow-x: hidden;
+	overflow-x: clip;
 
 	background: var(--bg-primary);
 	color: var(--text-primary);

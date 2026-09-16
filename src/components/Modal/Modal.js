@@ -1,33 +1,31 @@
 'use client'
 
-import { useEffect } from "react"
+import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 
-import styles from "./Modal.module.scss"
+import styles from './Modal.module.scss'
 
 export default function Modal({ showModal, closeModal, mounted, children }) {
 	useEffect(() => {
-		const OriginalOverflow = document.body.style.overflow
-		document.body.style.overflow = 'hidden'
-		return () => {
-			document.body.style.overflow = OriginalOverflow
-		}
-	}, [])
+		if (!showModal) return
 
-	useEffect(() => {
+		const OriginalOverflow = document.body.style.overflow
+
 		document.body.style.overflow = 'hidden'
-		function handleKeydown(e) {
-			if (e.key === 'Escape') {
+
+		function handleKeydown(event) {
+			if (event.key === 'Escape') {
 				closeModal()
 			}
 		}
 
 		window.addEventListener('keydown', handleKeydown)
+
 		return () => {
-			document.body.style.overflow = ' '
+			document.body.style.overflow = OriginalOverflow
 			window.removeEventListener('keydown', handleKeydown)
 		}
-	}, [closeModal])
+	}, [showModal, closeModal])
 
 	if (!showModal || !mounted) return null
 	return createPortal(
@@ -46,4 +44,3 @@ export default function Modal({ showModal, closeModal, mounted, children }) {
 		document.body,
 	)
 }
-

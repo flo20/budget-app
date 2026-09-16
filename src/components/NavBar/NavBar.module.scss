@@ -1,8 +1,15 @@
 .navbar {
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+
 	width: 100%;
+
+	padding: var(--navbar-padding-y) var(--navbar-padding-x);
+
 	background: var(--navbar-bg);
+
 	border-bottom: 1px solid var(--navbar-border);
-    padding: var(--navbar-padding-x) var(--navbar-padding-y);
 }
 
 .flex {
@@ -11,6 +18,7 @@
 	min-height: 66px;
 
 	margin-inline: auto;
+
 	display: grid;
 	grid-template-columns: 1fr auto 1fr;
 	align-items: center;
@@ -90,24 +98,6 @@
 		&:hover {
 			color: var(--navbar-text-active);
 		}
-	}
-}
-
-.activeLink {
-	color: var(--navbar-text-active);
-
-	&::after {
-		content: '';
-
-		position: absolute;
-		left: 0;
-		right: 0;
-		bottom: 0;
-
-		height: 2px;
-
-		background: var(--accent-blue);
-		border-radius: 999px;
 	}
 }
 
