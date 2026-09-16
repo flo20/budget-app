@@ -21,8 +21,10 @@ import styles from './NavBar.module.scss'
 export default function NavBar({ user }) {
 	const [activeSection, setActiveSection] = useState('overview')
 
-	const isAuthenticated = Boolean(user?.id)
+	//const isAuthenticated = Boolean(user?.id)
 	const pathname = usePathname()
+    const isAuthPage = pathname === '/signin' || pathname === '/signup'
+	const isDashboardPage = pathname.startsWith('/dashboard')
 
 	const { theme, toggleTheme } = useTheme()
 	const { showEntryModal, openEntryModal, closeEntryModal } = useModal()
@@ -30,7 +32,7 @@ export default function NavBar({ user }) {
 
 	const router = useRouter()
 
-	const isAuthPage = pathname === '/signin' || pathname === '/signup'
+
 
 	async function handleLogout() {
 		const supabase = createClient()
@@ -50,11 +52,11 @@ export default function NavBar({ user }) {
 			<nav className={styles.navbar}>
 				<div className={styles.flex}>
 					<Link
-						href="/"
+						href={isDashboardPage ? '/dashboard' : '/'}
 						className={styles.brand}>
 						<Logo />
 					</Link>
-					{isAuthenticated ? (
+					{isDashboardPage ? (
 						<>
 							<ul className={styles.flexMainNav}>
 								{NAV_ITEMS.map((item) => (
@@ -134,12 +136,14 @@ export default function NavBar({ user }) {
 					)}
 				</div>
 			</nav>
-			<Modal
-				showModal={showEntryModal}
-				closeModal={closeEntryModal}
-				mounted={mounted}>
-				<NewEntryForm closeModal={closeEntryModal} />
-			</Modal>
+			{isDashboardPage && (
+				<Modal
+					showModal={showEntryModal}
+					closeModal={closeEntryModal}
+					mounted={mounted}>
+					<NewEntryForm closeModal={closeEntryModal} />
+				</Modal>
+			)}
 		</>
 	)
 }
