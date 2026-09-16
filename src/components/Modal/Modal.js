@@ -10,8 +10,10 @@ export default function Modal({ showModal, closeModal, mounted, children }) {
 		if (!showModal) return
 
 		const OriginalOverflow = document.body.style.overflow
+        const originalHtmlOverflow = document.documentElement.style.overflow
 
 		document.body.style.overflow = 'hidden'
+        document.documentElement.style.overflow = 'hidden'
 
 		function handleKeydown(event) {
 			if (event.key === 'Escape') {
@@ -23,6 +25,8 @@ export default function Modal({ showModal, closeModal, mounted, children }) {
 
 		return () => {
 			document.body.style.overflow = OriginalOverflow
+            document.documentElement.style.overflow = originalHtmlOverflow
+
 			window.removeEventListener('keydown', handleKeydown)
 		}
 	}, [showModal, closeModal])

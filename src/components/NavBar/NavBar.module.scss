@@ -8,7 +8,6 @@
 	padding: var(--navbar-padding-y) var(--navbar-padding-x);
 
 	background: var(--navbar-bg);
-
 	border-bottom: 1px solid var(--navbar-border);
 }
 
@@ -24,9 +23,8 @@
 	align-items: center;
 }
 
-
 .brand {
-    grid-column: 1;
+	grid-column: 1;
 	justify-self: start;
 }
 
@@ -64,8 +62,7 @@
 }
 
 .flexMainNav {
-
-    grid-column: 2;
+	grid-column: 2;
 	justify-self: center;
 
 	display: flex;
@@ -233,7 +230,7 @@
 }
 
 .profilePopover {
-    z-index: 100;
+	z-index: 100;
 	width: 180px;
 
 	padding: 1rem;
@@ -289,7 +286,6 @@
 
 	border: 0;
 
-	
 	font-size: 0.95rem;
 
 	text-align: left;
