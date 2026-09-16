@@ -1,25 +1,22 @@
 'use client'
 
+import Link from 'next/link'
+
 import { useEffect, useState } from 'react'
 import { useTheme, useModal, useMount } from '@/app/providers/GlobalProvider'
 import { useRouter, usePathname } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
+
 import { SunIcon, MoonIcon } from 'lucide-react'
 
-import Link from 'next/link'
+import { NAV_ITEMS } from '@/lib/constants/navbar'
+
 import NewEntryForm from '../NewEntry/NewEntryForm'
 import Modal from '../Modal/Modal'
 import Profile from './Profile'
-
-import styles from './NavBar.module.scss'
 import Logo from '../Logo/Logo'
 
-const NAV_ITEMS = [
-	{ label: 'Overview', id: 'overview' },
-	{ label: 'Plan', id: 'plan' },
-	{ label: 'Accounts', id: 'accounts' },
-	{ label: 'Activity', id: 'activity' },
-]
+import styles from './NavBar.module.scss'
 
 export default function NavBar({ user }) {
 	const [activeSection, setActiveSection] = useState('overview')
