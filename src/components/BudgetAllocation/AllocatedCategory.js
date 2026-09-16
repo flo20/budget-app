@@ -56,7 +56,7 @@ export default function AllocatedCategory({ category }) {
 		return `${formatCurrency(category.remaining)} left`
 	}
 
-    console.log('category.progressWidth', category.progressWidth)
+    // console.log('category.progressWidth', category.progressWidth)
     
 
 	return (

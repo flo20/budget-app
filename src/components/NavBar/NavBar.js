@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useTheme, useModal, useMount } from '@/app/providers/GlobalProvider'
 import { useRouter, usePathname } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
@@ -14,7 +14,16 @@ import Profile from './Profile'
 import styles from './NavBar.module.scss'
 import Logo from '../Logo/Logo'
 
+const NAV_ITEMS = [
+	{ label: 'Overview', id: 'overview' },
+	{ label: 'Plan', id: 'plan' },
+	{ label: 'Accounts', id: 'accounts' },
+	{ label: 'Activity', id: 'activity' },
+]
+
 export default function NavBar({ user }) {
+	const [activeSection, setActiveSection] = useState('overview')
+
 	const isAuthenticated = Boolean(user?.id)
 	const pathname = usePathname()
 
@@ -51,18 +60,20 @@ export default function NavBar({ user }) {
 					{isAuthenticated ? (
 						<>
 							<ul className={styles.flexMainNav}>
-								<li>
-									<a href="#overview">Overview</a>
-								</li>
-								<li>
-									<a href="#plan">Plan</a>
-								</li>
-								<li>
-									<a href="#savings">Accounts</a>
-								</li>
-								<li>
-									<a href="#activity">Activity</a>
-								</li>
+								{NAV_ITEMS.map((item) => (
+									<li key={item.id}>
+										<a
+											href={`#${item.id}`}
+											className={styles.navItem}
+											data-active={activeSection === item.id ? '' : undefined}
+											aria-current={
+												activeSection === item.id ? 'page' : undefined
+											}
+											onClick={() => setActiveSection(item.id)}>
+											{item.label}
+										</a>
+									</li>
+								))}
 							</ul>
 							<div className={styles.actions}>
 								<button

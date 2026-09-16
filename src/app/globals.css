@@ -196,6 +196,9 @@
 
 	--navbar-icon-border: #d6d6d6;
 	--navbar-avatar-bg: #ffffff;
+
+	--navbar-padding-x: 0.5rem;
+	--navbar-padding-y: 0.5rem;
 }
 
 [data-theme='dark'] {
@@ -321,7 +324,7 @@ textarea {
 	width: 100%;
 	max-width: var(--page-max-width);
 	margin-inline: auto;
-	/* padding: var(--page-padding-y) var(--page-padding-x); */
+	/* padding: var(--page-padding-y) var(--page-padding-x);  */
 }
 
 /* =========================================================
