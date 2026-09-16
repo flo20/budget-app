@@ -1,15 +1,14 @@
 'use client'
 
+import Link from 'next/link'
+
 import { createBudgetNotes } from '@/app/actions/budget-notes'
 import { changeMonth } from '@/lib/utils/month'
 import { formatMonth } from '@/lib/utils/format'
 
-import FormInput from '../Form/FormInput'
-import FormButton from '../Form/FormButtons'
+import { FormInput, FormButton } from '@/components/Form'
 
 import { Plus, ChevronLeft, ChevronRight } from 'lucide-react'
-
-import Link from 'next/link'
 
 import styles from './Notes.module.scss'
 

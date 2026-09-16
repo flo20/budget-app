@@ -3,8 +3,7 @@
 import { useState } from 'react'
 import { editBudgetNote } from '@/app/actions/budget-notes'
 
-import FormInput from '../Form/FormInput'
-import FormButton from '../Form/FormButtons'
+import { FormInput, FormButton } from '@/components/Form'
 
 import { Check, X } from 'lucide-react'
 

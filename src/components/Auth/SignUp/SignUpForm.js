@@ -1,8 +1,6 @@
 import { signUp } from '@/app/actions/auth'
 
-import Form from '@/components/Form/Form'
-import FormField from '@/components/Form/FormField'
-import FormInput from '@/components/Form/FormInput'
+import { Form, FormField,FormInput } from '@/components/Form'
 
 import styles from "../AuthCard.module.scss"
 
