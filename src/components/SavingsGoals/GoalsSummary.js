@@ -71,7 +71,8 @@ export default function GoalsSummary({ goals }) {
 					return (
 						<article
 							key={goal.id}
-							className={styles.goal}>
+							className={styles.goal}
+							data-status={goal.status}>
 							<div className={styles.goalIcon}>
 								<Icon />
 							</div>
