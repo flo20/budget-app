@@ -21,7 +21,8 @@ export default function LiabilitiesHeader() {
 					type="button"
 					className={styles.addButton}
 					onClick={openLiabilityModal}>
-					Liability
+					<Plus />
+					<span>Liability</span>
 				</button>
 			</header>
 			<Modal
