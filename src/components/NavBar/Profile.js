@@ -12,13 +12,14 @@ import styles from './NavBar.module.scss'
 export default function Profile({ user, handleLogout }) {
 	const initial = user.email?.[0]?.toUpperCase()
 	return (
-		<Popover>
+		<Popover modal>
 			<PopoverTrigger className={styles.profileAvatar}>
 				{initial}
 			</PopoverTrigger>
 			<PopoverContent
 				align="end"
 				sideOffset={6}
+				positionerClassName={styles.profilePopoverPositioner}
 				className={styles.profilePopover}>
 				<div className={styles.profileInfo}>
 					<p className={styles.profileEmail}>{user.email}</p>
