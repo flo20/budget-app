@@ -338,9 +338,9 @@ textarea {
 .contentWrapper {
 	display: grid;
 	grid-template-columns:
-		minmax(0, 1.9fr)
+		minmax(0, 3fr)
 		minmax(340px, 1fr);
-	gap: 1.5rem;
+	gap: 0.5rem;
 	align-items: start;
 }
 
