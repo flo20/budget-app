@@ -315,12 +315,12 @@ textarea {
 	--page-padding-y: 2.5rem;
 	--section-gap: 1.5rem;
 	--warning: #b98516;
+    --success:#00A878;
 }
 
 .pageContainer {
 	width: min(calc(100% - (var(--page-padding-x) * 2)), var(--page-max-width));
 	margin-inline: auto;
-	/* padding: var(--page-padding-y) var(--page-padding-x);  */
 }
 
 /* =========================================================

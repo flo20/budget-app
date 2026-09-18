@@ -2,8 +2,13 @@
 
 import { useModal, useMount } from '@/app/providers/GlobalProvider'
 import { formatAmount, formatDate } from '@/lib/utils/format'
+import {
+	markPinnedPaymentPaid,
+	undoPinnedPaymentPaid,
+	deletePinnedPayment,
+} from '@/app/actions/pins'
 
-import { PinIcon, Check, Trash2 } from 'lucide-react'
+import { PinIcon, Check, Trash2, Undo2 } from 'lucide-react'
 
 import Modal from '../Modal/Modal'
 import PinnedPaymentForm from './PinnedPaymentForm'
@@ -66,10 +71,12 @@ export default function PinnedPaymentClient({ pinnedPayments = [] }) {
 					<div className={styles.paymentList}>
 						{pinnedPayments.map((payment) => {
 							const status = getPaymentStatus(payment.due_date)
+							const isPaid = payment.is_paid
+
 							return (
 								<article
 									key={payment.id}
-									className={`${styles.payment} ${styles[status.type]}`}>
+									className={`${styles.payment} ${styles[status.type]} ${isPaid ? styles.paid : ''}`}>
 									<div className={styles.paymentTop}>
 										<h3>{payment.label}</h3>
 										<strong>{formatAmount(payment.amount)}</strong>
@@ -77,10 +84,12 @@ export default function PinnedPaymentClient({ pinnedPayments = [] }) {
 
 									<div className={styles.meta}>
 										<span>{formatDate(payment.due_date).toUpperCase()}</span>
-
-										<span className={styles.dot}>·</span>
-
-										<span className={styles.status}>{status.label}</span>
+										{!isPaid && (
+											<>
+												<span className={styles.dot}>·</span>
+												<span className={styles.status}>{status.label}</span>
+											</>
+										)}
 
 										{payment.is_recurring_monthly && (
 											<>
@@ -90,19 +99,51 @@ export default function PinnedPaymentClient({ pinnedPayments = [] }) {
 										)}
 									</div>
 									<div className={styles.actions}>
-										<button
-											type="button"
-											className={styles.paidButton}>
-											<Check />
-											<span>Paid</span>
-										</button>
+										{isPaid ? (
+											<form action={undoPinnedPaymentPaid}>
+												<input
+													type="hidden"
+													name="paymentId"
+													value={payment.id}
+												/>
 
-										<button
-											type="button"
-											className={styles.deleteButton}
-											aria-label={`Delete ${payment.label}`}>
-											<Trash2 />
-										</button>
+												<button
+													type="submit"
+													className={styles.undoButton}>
+													<Check />
+													<span>Undo</span>
+												</button>
+											</form>
+										) : (
+											<form action={markPinnedPaymentPaid}>
+												<input
+													type="hidden"
+													name="paymentId"
+													value={payment.id}
+												/>
+
+												<button
+													type="submit"
+													className={styles.paidButton}>
+													<Undo2 />
+													<span>Paid</span>
+												</button>
+											</form>
+										)}
+										<form action={deletePinnedPayment}>
+											<input
+												type="hidden"
+												name="paymentId"
+												value={payment.id}
+											/>
+
+											<button
+												type="submit"
+												className={styles.deleteButton}
+												aria-label={`Delete ${payment.label}`}>
+												<Trash2 />
+											</button>
+										</form>
 									</div>
 								</article>
 							)

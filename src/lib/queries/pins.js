@@ -20,11 +20,10 @@ export async function getPinnedPayments() {
             `,
 		)
 		.eq('user_id', user.id)
-		.eq('is_paid', false)
 		.order('due_date', { ascending: true })
 
 	if (error) {
-		console.error('Unable to retrieve pinned paymentss:', error)
+		console.error('Unable to retrieve pinned payments:', error)
 			throw new Error('Unable to retrieve pinned payments.')
 	}
 
