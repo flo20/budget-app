@@ -50,15 +50,12 @@ export default function PinnedPaymentClient({ pinnedPayments = [] }) {
 				id="pinned"
 				className={styles.container}>
 				<header className={styles.header}>
-					<h4>Pinned Payment</h4>
+					<h5>Pinned Payments</h5>
 					<button
 						type="button"
 						className={styles.pinButton}
 						onClick={openPinnedModal}>
-						<PinIcon
-							size={16}
-							strokeWidth={0.9}
-						/>
+						<PinIcon strokeWidth={1.5} />
 						Pin
 					</button>
 				</header>

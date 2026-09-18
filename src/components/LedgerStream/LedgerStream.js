@@ -25,7 +25,7 @@ export default async function LedgerStream({ budgetMonth }) {
 			id="activity"
 			className={styles.container}>
 			<header className={styles.header}>
-				<h2 id="asset-inventory-title">Ledger Stream</h2>
+				<h5 id="asset-inventory-title">Ledger Stream</h5>
 				<span>Recency sort</span>
 			</header>
 			{transactions.length === 0 ? (

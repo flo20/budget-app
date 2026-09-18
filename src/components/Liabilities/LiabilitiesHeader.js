@@ -16,7 +16,7 @@ export default function LiabilitiesHeader() {
 	return (
 		<>
 			<header className={styles.header}>
-				<h2>Liabilities</h2>
+				<h5>Liabilities</h5>
 				<button
 					type="button"
 					className={styles.addButton}

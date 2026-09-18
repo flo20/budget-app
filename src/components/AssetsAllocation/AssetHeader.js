@@ -15,7 +15,7 @@ export default function AssetHeader() {
 	return (
 		<>
 			<header className={styles.header}>
-				<h2>Asset Allocation</h2>
+				<h5>Asset Allocation</h5>
 				<button
 					type="button"
 					className={styles.addButton}
