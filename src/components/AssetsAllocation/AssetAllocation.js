@@ -3,15 +3,15 @@ import { buildAssetSummary } from '@/lib/assets/asset-summary'
 import { formatCurrency, formatPercentage } from '@/lib/utils/format'
 import { buildAllocationGradient } from '@/lib/constants/asset-allocation'
 
-import { Pencil, Trash2 } from 'lucide-react'
-
 import AssetHeader from './AssetHeader'
+import AssetHoldings from './AssetHoldings'
 
 import styles from './AssetAllocation.module.scss'
 
 export default async function AssetAllocation() {
 	const assets = await getAssets()
 	const summary = buildAssetSummary(assets)
+    const holdings = summary.holdings
 
 	const allocationGradient = buildAllocationGradient(summary.allocations)
 
@@ -87,55 +87,7 @@ export default async function AssetAllocation() {
 							</ul>
 						</div>
 					</div>
-
-					<div className={styles.holdings}>
-						<ul className={styles.holdingsList}>
-							{summary.holdings.map((holding) => (
-								<li key={holding.id}>
-									<div className={styles.holdingInfo}>
-										<span
-											className={styles.holdingIcon}
-											style={{
-												color: holding.color,
-											}}
-											aria-hidden="true">
-											{holding.assetType === 'property' ? '▤' : '⌁'}
-										</span>
-										<div>
-											<strong>{holding.name}</strong>
-
-											<span>
-												{holding.typeLabel}
-												<span aria-hidden="true"> · </span>
-												{formatPercentage(holding.percentage)}
-											</span>
-										</div>
-									</div>
-
-									<div className={styles.holdingRight}>
-										<strong className={styles.holdingValue}>
-											{formatCurrency(holding.value)}
-										</strong>
-										<div className={styles.holdingActions}>
-											<button
-												type="button"
-												className={styles.editButton}
-												aria-label={`Edit ${holding.name}`}>
-												<Pencil />
-											</button>
-
-											<button
-												type="button"
-												className={styles.deleteButton}
-												aria-label={`Delete ${holding.name}`}>
-												<Trash2 />
-											</button>
-										</div>
-									</div>
-								</li>
-							))}
-						</ul>
-					</div>
+					<AssetHoldings holdings={holdings} />
 				</>
 			)}
 		</section>
