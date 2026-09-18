@@ -13,7 +13,7 @@ import styles from './AssetAllocation.module.scss'
 
 export function EditAssetRow({ holding, onCancel }) {
 	return (
-<Form
+		<Form
 			action={updateAsset}
 			className={styles.editAssetForm}>
 			<input
@@ -75,5 +75,6 @@ export function EditAssetRow({ holding, onCancel }) {
 					<X />
 				</FormButton>
 			</FormActions>
-		</Form>	)
+		</Form>
+	)
 }
