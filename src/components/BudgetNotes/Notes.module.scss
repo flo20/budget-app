@@ -1,9 +1,9 @@
 .container {
 	width: 100%;
 	padding: 2rem;
-
+    min-width: 0;
 	background: var(--bg-primary);
-
+    container-type: inline-size;
 	border: 1px solid var(--border);
 	border-radius: 14px;
 }
@@ -13,7 +13,7 @@
 	align-items: flex-start;
 	justify-content: space-between;
 	gap: 1.5rem;
-
+    min-width: 0;
 	h2 {
 		margin: 0;
 
@@ -34,12 +34,16 @@
 	}
 }
 
+.headerText {
+	min-width: 0;
+}
+
 .monthNav {
 	height: 52px;
-	min-width: 260px;
-
+	width: min(100%, 260px);
+    flex-shrink: 0;
 	display: grid;
-	grid-template-columns: 48px 1fr 48px;
+	grid-template-columns: 48px minmax(0, 1fr) 48px;
 	align-items: center;
 
 	border: 1px solid var(--border);
@@ -67,14 +71,18 @@
 
 	strong {
 		color: var(--text-primary);
-
+        min-width: 0;
 		font-size: 0.9rem;
 		font-weight: 500;
 		text-align: center;
+        white-space: nowrap;
 	}
 }
 
 .addForm {
+    width: 100%;
+	min-width: 0;
+
 	display: grid;
 	grid-template-columns: minmax(0, 1fr) 52px;
 	gap: 0.75rem;
@@ -85,7 +93,7 @@
 .addButton {
 	height: 52px;
 	width: 100%;
-	min-height: 40px;
+	//min-height: 40px;
 
 	padding: 0;
 
@@ -108,6 +116,7 @@
 
 .addInput {
 	min-width: 0;
+    width: 100%;
 }
 
 .noteList {
@@ -380,18 +389,22 @@
 	border-color: var(--accent-blue);
 }
 
-@media (max-width: 700px) {
+@container (max-width: 500px) {
 	.container {
 		padding: 1.5rem;
 	}
 
 	.header {
 		flex-direction: column;
+		gap: 1.25rem;
+	}
+
+	.headerText {
+		width: 100%;
 	}
 
 	.monthNav {
 		width: 100%;
-		min-width: 0;
 	}
 
 	.noteList {

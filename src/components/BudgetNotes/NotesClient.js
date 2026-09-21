@@ -19,7 +19,7 @@ export default function NotesClient({ notes, budgetMonth }) {
 	return (
 		<>
 			<header className={styles.header}>
-				<div>
+				<div className={styles.headerText}>
 					<h2>Budget Notes</h2>
 					<p>
 						{notes.length} {notes.length === 1 ? 'note' : 'notes'} for this
@@ -31,7 +31,7 @@ export default function NotesClient({ notes, budgetMonth }) {
 					className={styles.monthNav}
 					aria-label="Budget note month">
 					<Link
-						href={`dashboard/?month=${previousMonth}`}
+						href={`/dashboard/?month=${previousMonth}`}
 						aria-label="Previous month">
 						<ChevronLeft />
 					</Link>

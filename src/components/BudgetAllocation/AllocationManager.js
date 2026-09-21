@@ -37,13 +37,12 @@ export default function AllocationManager({
 
 	return (
 		<div className={styles.allocationManager}>
-			{unallocatedCategories.length === 0 && (
+			<header>
+				<h3>Unallocated spend</h3>
+				<span>{formatCurrency(totalUnallocatedSpend)} total</span>
+			</header>
+			{unallocatedCategories.length > 0 && (
 				<section className={styles.unallocated}>
-					<header>
-						<h3>Unallocated spend</h3>
-						<span>{formatCurrency(totalUnallocatedSpend)} total</span>
-					</header>
-
 					<ul>
 						{unallocatedCategories.map((category) => (
 							<li key={category.category}>
