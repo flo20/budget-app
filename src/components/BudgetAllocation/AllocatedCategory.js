@@ -1,42 +1,7 @@
 import { formatCurrency } from '@/lib/utils/format'
-
-import {
-	House,
-	ShoppingCart,
-	Zap,
-	Car,
-	Clapperboard,
-	WalletCards,
-} from 'lucide-react'
-
+import { getCategoryIcon } from '@/lib/constants/transaction-categories'
 
 import styles from './BudgetAllocation.module.scss'
-
-function getCategoryIcon(categoryName) {
-	const name = categoryName.toLowerCase()
-
-	if (name.includes('housing')) {
-		return <House aria-hidden="true" />
-	}
-
-	if (name.includes('grocer')) {
-		return <ShoppingCart aria-hidden="true" />
-	}
-
-	if (name.includes('utilit')) {
-		return <Zap aria-hidden="true" />
-	}
-
-	if (name.includes('transport')) {
-		return <Car aria-hidden="true" />
-	}
-
-	if (name.includes('recreation')) {
-		return <Clapperboard aria-hidden="true" />
-	}
-
-	return <WalletCards aria-hidden="true" />
-}
 
 export default function AllocatedCategory({ category }) {
 
@@ -54,10 +19,7 @@ export default function AllocatedCategory({ category }) {
 		}
 
 		return `${formatCurrency(category.remaining)} left`
-	}
-
-    // console.log('category.progressWidth', category.progressWidth)
-    
+	}    
 
 	return (
 		<article

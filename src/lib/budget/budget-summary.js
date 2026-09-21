@@ -90,7 +90,6 @@ export function buildBudgetSummary(budgets, transactions) {
 		totalUnallocatedSpend,
 		totalSpend,
 		overallPercentage,
-		overallProgressWidth: Math.min(overallPercentage, 100),
 
 		coveredPercentage:
 			totalAllocated > 0 ? (coveredSpend / totalAllocated) * 100 : 0,

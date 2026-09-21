@@ -11,6 +11,8 @@ import {
 	FormButton,
 } from '@/components/Form'
 
+import styles from './SavingsGoals.module.scss'
+
 export default function ContributeForm({ goal, closeForm }) {
 	const [amount, setAmount] = useState('')
 

@@ -13,11 +13,6 @@ export default async function BudgetAllocation({ budgetMonth }) {
 	const { budgets, transactions } = await getBudgetAllocations(budgetMonth)
 	const summary = buildBudgetSummary(budgets, transactions)
 
-	const usedPercentage =
-		summary.totalAllocated > 0
-			? Math.min(100, (summary.coveredSpend / summary.totalAllocated) * 100)
-			: 0
-
 	return (
 		<section
 			className={styles.container}
@@ -45,12 +40,6 @@ export default async function BudgetAllocation({ budgetMonth }) {
 					Only reflects budgeted categories · unallocated spending is tracked
 					separately below
 				</p>
-				{/* <div className={styles.overallTrack}>
-					<span
-						className={styles.overallProgress}
-						style={{ width: `${usedPercentage}%` }}
-					/>
-				</div> */}
 			</header>
 			<div className={styles.categoryList}>
 				{summary.categories.map((category) => (
@@ -76,13 +65,6 @@ export default async function BudgetAllocation({ budgetMonth }) {
 				unallocatedCategories={summary.unallocatedCategories}
 				totalUnallocatedSpend={summary.totalUnallocatedSpend}
 			/>
-
-			{/* <p>
-				{formatCurrency(summary.coveredSpend)} spent within category limits,{' '}
-				{formatCurrency(summary.totalOverBudget)} over budget, and{' '}
-				{formatCurrency(Math.max(summary.remainingAllocatedBudget, 0))}
-				remaining.
-			</p> */}
 		</section>
 	)
 }

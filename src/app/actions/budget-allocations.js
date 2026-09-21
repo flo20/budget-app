@@ -7,24 +7,12 @@ import { normalizeCategory } from '@/lib/utils/category'
 
 const normalizedExpenseCategories = EXPENSE_CATEGORIES.map(normalizeCategory)
 
-export async function setBudgetAllocation(formData) {
+export async function setBudgetAllocation(previousState,formData) {
 	const { supabase, user } = await requireUser()
 
 	const selectedCategory = formData.get('category')?.trim()
 	const monthlyLimit = Number(formData.get('monthlyLimit'))
 	const budgetMonth = formData.get('allocationBudgetMonth')?.trim()
-	// const customCategory = formData.get('customCategory')?.trim()
-	// const isCustomCategory = selectedCategory === CUSTOM_CATEGORY_OPTION
-	/*
-	 * If "__custom__" was selected, use the custom input.
-	 * Otherwise, use the selected predefined category.
-	 */
-
-	// const rawCategory =
-	// 	selectedCategory === CUSTOM_CATEGORY_OPTION
-	// 		? customCategory
-	// 		: selectedCategory
-
 	const category = normalizeCategory(selectedCategory ?? '')
 
 	// Make sure the user selected or entered a category.
@@ -57,15 +45,6 @@ export async function setBudgetAllocation(formData) {
 		throw new Error('Select a valid budget month.')
 	}
 
-    // A standard category must exist in the list
-	// if (!isCustomCategory && !normalizedExpenseCategories.includes(category)) {
-	// 	throw new Error('Select a valid expense category.')
-	// }
-	// Validate the custom category separately.
-	// if (isCustomCategory && customCategory.length > 50) {
-	// 	throw new Error('Custom category must be 50 characters or fewer.')
-	// }
-
 	const { error } = await supabase.from('category_budgets').upsert(
 		{
 			user_id: user.id,
@@ -81,7 +60,10 @@ export async function setBudgetAllocation(formData) {
 
 	if (error) {
 		console.error('Unable to save category allocation:', error)
-		throw new Error('Unable to save the allocation.')
+		return {
+			success: false,
+			error: 'Unable to save the allocation.',
+		}
 	}
 
 	revalidatePath('/dashboard')
