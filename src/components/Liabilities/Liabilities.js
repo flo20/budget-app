@@ -1,4 +1,5 @@
 import { getLiabilities } from '@/lib/queries/liabilities'
+import { getLiabilityIcon } from '@/lib/constants/liability-types'
 import { formatCurrency } from '@/lib/utils/format'
 import LiabilitiesHeader from './LiabilitiesHeader'
 import DeleteButton from './DeleteButton'
@@ -12,7 +13,7 @@ export default async function Liabilities() {
 		(total, liability) => total + Number(liability.current_balance || 0),
 		0,
 	)
-
+    
 	return (
 		<section
 			id="liabilities"
@@ -47,13 +48,16 @@ export default async function Liabilities() {
 									<span
 										className={styles.icon}
 										aria-hidden="true">
-										{liability.liability_type === 'mortgage' ? '▥' : '▭'}
+										{getLiabilityIcon(liability.liability_type)}
 									</span>
 									<h3>{liability.name}</h3>
 								</div>
-								<strong className={styles.balance}>
-									{formatCurrency(liability.current_balance)}
-								</strong>
+								<div className={styles.liabilityRight}>
+									<strong className={styles.balance}>
+										{formatCurrency(liability.current_balance)}
+									</strong>
+								</div>
+								<DeleteButton liability={liability} />
 							</div>
 							<div className={styles.progressTrack}>
 								<span
@@ -68,24 +72,36 @@ export default async function Liabilities() {
 									<span>{paidPercentage.toFixed(0)}% paid off</span>
 								)}
 
-								{liability.apr && <span>{Number(liability.apr)}% APR</span>}
+								{liability.apr && (
+									<>
+										{originalAmount > 0 && (
+											<span className={styles.dot}>·</span>
+										)}
+
+										<span>{Number(liability.apr)}% APR</span>
+									</>
+								)}
 
 								{liability.monthly_payment && (
 									<>
-										<span className={styles.dot}>·</span>
-										<span>
-											{formatCurrency(liability.monthly_payment)}
-											/mo
-										</span>
+										{(originalAmount > 0 || liability.apr) && (
+											<span className={styles.dot}>·</span>
+										)}
+
+										<span>{formatCurrency(liability.monthly_payment)}/mo</span>
 									</>
 								)}
-							</div>
-							<div className={styles.deleteWrap}>
-								<DeleteButton liability={liability} />
 							</div>
 						</li>
 					)
 				})}
+
+				{totalLiabilities === 0 && (
+					<p className={styles.helperText}>
+						No debts tracked. Add a mortgage, loan or card to sharpen your net
+						worth.
+					</p>
+				)}
 			</ul>
 		</section>
 	)

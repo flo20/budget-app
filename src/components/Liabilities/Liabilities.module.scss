@@ -1,10 +1,8 @@
 .container {
 	width: 100%;
-
+	min-width: 0;
 	padding: 2rem;
-
 	background: var(--bg-primary);
-
 	border: 1px solid var(--border);
 	border-radius: 14px;
 }
@@ -50,7 +48,7 @@
 
 	cursor: pointer;
 
-    svg {
+	svg {
 		width: 15px;
 		height: 15px;
 	}
@@ -67,12 +65,9 @@
 
 .total {
 	display: block;
-
 	margin-top: 2rem;
-
 	color: var(--text-primary);
-
-	font-size: clamp(2rem, 3vw, 4rem);
+	font-size: clamp(1rem, 3vw, 2rem);
 	font-weight: 400;
 	line-height: 1;
 	letter-spacing: -0.04em;
@@ -110,12 +105,10 @@
 
 	h3 {
 		margin: 0;
-
 		color: var(--text-primary);
-
 		font-size: 1.1rem;
 		font-weight: 500;
-
+		line-height: 1.2;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
@@ -123,46 +116,56 @@
 }
 
 .icon {
-	width: 28px;
+	width: 22px;
+	height: 22px;
+	display: grid;
+	place-items: center;
+	flex-shrink: 0;
+	color: var(--text-muted);
+	svg {
+		width: 20px;
+		height: 20px;
+		stroke-width: 1.7;
+	}
+}
+
+.liabilityRight {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 0.55rem;
 
 	flex-shrink: 0;
-
-	color: var(--text-muted);
-
-	font-size: 1.5rem;
-	line-height: 1;
 }
 
 .balance {
-	flex-shrink: 0;
-
 	color: var(--text-primary);
 
-	font-size: 1.1rem;
+	font-size: 1rem;
 	font-weight: 400;
+
+	white-space: nowrap;
 }
 
 .progressTrack {
 	width: 100%;
 	height: 8px;
 
-	margin-top: 1rem;
+	margin-top: 0.9rem;
 
 	overflow: hidden;
 
 	background: var(--track-bg);
 
-	border-radius: 999px;
+	border-radius: 9px;
 }
 
 .progressBar {
 	display: block;
-
 	height: 100%;
-
 	background: var(--positive);
-
 	border-radius: inherit;
+    transition: width 0.3s ease;
 }
 
 .metaRow {
@@ -171,7 +174,7 @@
 	flex-wrap: wrap;
 	gap: 0.7rem;
 
-	margin-top: 0.85rem;
+	margin-top: 0.8rem;
 
 	color: var(--text-muted);
 
@@ -185,12 +188,12 @@
 	color: var(--text-muted);
 }
 
-.deleteWrap {
-	margin-top: 0.8rem;
+// .deleteWrap {
+// 	margin-top: 0.8rem;
 
-	display: flex;
-	justify-content: flex-end;
-}
+// 	display: flex;
+// 	justify-content: flex-end;
+// }
 
 .liability[data-type='credit_card'] {
 	.icon {
@@ -202,15 +205,58 @@
 	}
 }
 
+.helperText {
+    margin: 0;
+	color: var(--text-secondary);
+	text-align: center;
+	font-size: 0.82rem;
+}
+
+.deleteButton {
+	width: 28px;
+	height: 28px;
+
+	display: grid;
+	place-items: center;
+
+	flex-shrink: 0;
+
+	padding: 0;
+
+	background: transparent;
+	color: var(--text-muted);
+
+	border: 0;
+	border-radius: 6px;
+
+	cursor: pointer;
+
+	transition:
+		color 0.2s ease,
+		background-color 0.2s ease;
+
+	svg {
+		width: 18px;
+		height: 18px;
+		stroke-width: 1.8;
+	}
+
+	&:hover {
+		color: var(--negative);
+		background: var(--bg-secondary);
+	}
+}
+
+
 // Media queries
 @media (max-width: 768px) {
 	.container {
-		padding: 1.75rem;
+		padding: 1.5rem;
 	}
 
 	.total {
-		margin-top: 1.75rem;
-		font-size: clamp(2.75rem, 10vw, 3.75rem);
+		margin-top: 2rem;
+		font-size: clamp(2.5rem, 9vw, 3.25rem);
 	}
 
 	.list {
@@ -226,19 +272,31 @@
 	}
 
 	.header {
-		align-items: flex-start;
-
-		h2 {
-			font-size: 0.8rem;
-			letter-spacing: 0.14em;
+	h5 {
+			font-size: 0.75rem;
+			letter-spacing: 0.16em;
 		}
 	}
 
 	.addButton {
-		height: 42px;
-		padding: 0 0.9rem;
+		height: 38px;
+		padding: 0 0.85rem;
 
-		font-size: 0.7rem;
+		font-size: 0.68rem;
+
+		svg {
+			width: 17px;
+			height: 17px;
+		}
+	}
+
+	.total {
+		font-size: 2.75rem;
+	}
+
+	.icon {
+		width: 20px;
+		height: 20px;
 
 		svg {
 			width: 18px;
@@ -246,24 +304,26 @@
 		}
 	}
 
-	.total {
-		font-size: clamp(2.5rem, 14vw, 3.25rem);
-	}
-
-	.liabilityName {
-		gap: 0.65rem;
-
-		h3 {
-			font-size: 0.95rem;
-		}
+	.liabilityRight {
+		gap: 0.35rem;
 	}
 
 	.balance {
 		font-size: 0.95rem;
 	}
 
+	.deleteButton {
+		width: 26px;
+		height: 26px;
+
+		svg {
+			width: 17px;
+			height: 17px;
+		}
+	}
+
 	.metaRow {
 		font-size: 0.66rem;
-		letter-spacing: 0.1em;
+		letter-spacing: 0.11em;
 	}
 }
