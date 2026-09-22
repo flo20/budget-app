@@ -12,6 +12,7 @@ import { useModal, useMount } from '@/app/providers/GlobalProvider'
 import ContributeForm from './ContributeForm'
 import GoalForm from './GoalForm'
 import Modal from '../Modal/Modal'
+import ArchiveButton from './ArchiveButton'
 
 import styles from './SavingsGoals.module.scss'
 
@@ -21,7 +22,7 @@ export default function GoalsSummary({ goals }) {
 	const { openGoalModal, closeGoalModal, showGoalModal } = useModal()
 	const { mounted } = useMount()
 
-	const activeGoals = goals.filter((goal) => goal.status !== 'completed')
+	const activeGoals = goals.filter((goal) => goal.status === 'active')
 	const completedGoals = goals.filter((goal) => goal.status === 'completed')
 
 	async function handleDelete(goal) {
@@ -163,11 +164,7 @@ export default function GoalsSummary({ goals }) {
 										{formatCurrency(goal.target_amount)}
 									</p>
 
-									<button
-										type="button"
-										className={styles.archiveButton}>
-										Archive
-									</button>
+									<ArchiveButton goal={goal} />
 								</article>
 							)
 						})}

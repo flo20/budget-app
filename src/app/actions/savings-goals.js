@@ -143,6 +143,52 @@ export async function contributeToSavingsGoal(formData) {
 	}
 }
 
+export async function archiveSavingsGoal(goalId) {
+	const { supabase, user } = await requireUser()
+
+	if (!goalId) {
+		return {
+			success: false,
+			error: 'Savings goal ID is required.',
+		}
+	}
+
+	const { data, error } = await supabase
+		.from('savings_goals')
+		.update({
+			status: 'archived',
+			updated_at: new Date().toISOString(),
+		})
+		.eq('id', goalId)
+		.eq('user_id', user.id)
+		.eq('status', 'completed')
+		.select('id')
+		.maybeSingle()
+
+	if (error) {
+		console.error('Unable to archive savings goal:', error)
+
+		return {
+			success: false,
+			error: 'Unable to archive the savings goal.',
+		}
+	}
+
+	if (!data) {
+		return {
+			success: false,
+			error: 'Completed savings goal was not found.',
+		}
+	}
+
+	revalidatePath('/dashboard')
+
+	return {
+		success: true,
+		error: null,
+	}
+}
+
 export async function deleteSavedGoal(goalId) {
 	const { supabase, user } = await requireUser()
 

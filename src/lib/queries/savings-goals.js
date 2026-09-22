@@ -20,6 +20,7 @@ export async function getSavingsGoals() {
             `,
 		)
 		.eq('user_id', user.id)
+		.in('status', ['active', 'completed'])
 		.order('created_at', { ascending: false })
 
 	if (error) {
