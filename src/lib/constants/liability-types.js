@@ -10,45 +10,41 @@ export const LIABILITY_TYPES = [
 
 export const LIABILITY_TYPE_VALUES = LIABILITY_TYPES.map(({ value }) => value)
 
-
 import {
-    Coins,
-    HandCoins,
-    BookText,
-    Hospital,
-    CreditCard,
-    WalletCards,
-    CirclePlus, 
-    CalendarSync
+	Coins,
+	HandCoins,
+	BookText,
+	Hospital,
+	CreditCard,
+	WalletCards,
+	CirclePlus,
+	CalendarSync,
 } from 'lucide-react'
 
-export function getLiabilityIcon(categoryName) {
-    const name = categoryName.toLowerCase()
+export function getLiabilityIcon(liabilityType) {
+	switch (liabilityType) {
+		case 'mortgage':
+			return <HandCoins aria-hidden="true" />
 
-    if (name.includes('mortgage')) {
-        return <HandCoins aria-hidden="true" />
-    }
+		case 'personal_loan':
+			return <Coins aria-hidden="true" />
 
-    if (name.includes('loan')) {
-        return <Coins aria-hidden="true" />
-    }
+		case 'credit_card':
+			return <CreditCard aria-hidden="true" />
 
-    if (name.includes('credit')) {
-        return <CreditCard aria-hidden="true" />
-    }
-
-    if (name.includes('student')) {
+		case 'student_loan':
 			return <BookText aria-hidden="true" />
-		}
-    if (name.includes('auto')) {
-			return <CalendarSync aria-hidden="true" />
-		}
-    if (name.includes('medical')) {
-			return <Hospital aria-hidden="true" />
-		}
-    if (name.includes('other')) {
-        return <CirclePlus aria-hidden="true" />
-    }
 
-    return <WalletCards aria-hidden="true" />
+		case 'auto_loan':
+			return <CalendarSync aria-hidden="true" />
+
+		case 'medical_debt':
+			return <Hospital aria-hidden="true" />
+
+		case 'other':
+			return <CirclePlus aria-hidden="true" />
+
+		default:
+			return <WalletCards aria-hidden="true" />
+	}
 }

@@ -1,5 +1,6 @@
 import { formatCurrency, formatPercentage } from '@/lib/utils/format'
 import { deleteAsset } from '@/app/actions/assets'
+import { getAssetIcon } from '@/lib/constants/asset-allocation'
 
 import { Form, FormButton } from '@/components/Form'
 
@@ -15,7 +16,7 @@ export function AssetRow({ holding, onEdit }) {
 					className={styles.holdingIcon}
 					style={{ color: holding.color }}
 					aria-hidden="true">
-					{holding.assetType === 'property' ? '▤' : '⌁'}
+					{getAssetIcon(holding.assetType)}
 				</span>
 
 				<div>

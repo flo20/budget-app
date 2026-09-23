@@ -1,4 +1,4 @@
-import { Car, Target, ShieldCheck, Plane, House, Wallet } from 'lucide-react'
+import { Car, ShieldCheck, Plane, House, Wallet } from 'lucide-react'
 
 export const CUSTOM_CATEGORY_OPTION = '__custom__'
 
