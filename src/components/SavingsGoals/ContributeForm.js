@@ -2,14 +2,9 @@
 
 import { useState } from 'react'
 import { contributeToSavingsGoal } from '@/app/actions/savings-goals'
+import { X } from 'lucide-react'
 
-import {
-	Form,
-	FormField,
-	FormInput,
-	FormActions,
-	FormButton,
-} from '@/components/Form'
+import { Form, FormField, FormInput, FormButton } from '@/components/Form'
 
 import styles from './SavingsGoals.module.scss'
 
@@ -27,7 +22,7 @@ export default function ContributeForm({ goal, closeForm }) {
 			/>
 
 			<FormField
-				label="Contribution amount"
+				className={styles.contributionField}
 				htmlFor={`contribution-${goal.id}`}>
 				<FormInput
 					id={`contribution-${goal.id}`}
@@ -39,20 +34,23 @@ export default function ContributeForm({ goal, closeForm }) {
 					value={amount}
 					onChange={(event) => setAmount(event.target.value)}
 					placeholder="0.00"
+					aria-label="Contribution amount"
 					required
 				/>
 			</FormField>
 
-			<FormActions>
-				<FormButton
-					type="button"
-					variant="secondary"
-					onClick={closeForm}>
-					Cancel
-				</FormButton>
-
-				<FormButton type="submit">Add contribution</FormButton>
-			</FormActions>
+			<FormButton
+				type="submit"
+				className={styles.addContributionButton}>
+				Add
+			</FormButton>
+			<FormButton
+				type="button"
+				variant="secondary"
+				className={styles.cancelContributionButton}
+				onClick={closeForm}>
+				<X />
+			</FormButton>
 		</Form>
 	)
 }

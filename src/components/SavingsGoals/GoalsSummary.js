@@ -115,21 +115,22 @@ export default function GoalsSummary({ goals }) {
 											closeForm={() => setContributionGoalId(null)}
 										/>
 									) : (
-										<button
-											type="button"
-											className={styles.contributeButton}
-											onClick={() => setContributionGoalId(goal.id)}>
-											+ Contribute
-										</button>
+										<>
+											<button
+												type="button"
+												className={styles.contributeButton}
+												onClick={() => setContributionGoalId(goal.id)}>
+												+ Contribute
+											</button>
+											<button
+												type="button"
+												className={styles.deleteButton}
+												onClick={() => handleDelete(goal)}
+												aria-label={`Delete ${goal.name}`}>
+												<Trash2 />
+											</button>
+										</>
 									)}
-
-									<button
-										type="button"
-										className={styles.deleteButton}
-										onClick={() => handleDelete(goal)}
-										aria-label={`Delete ${goal.name}`}>
-										<Trash2 />
-									</button>
 								</div>
 							</div>
 						</article>

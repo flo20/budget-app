@@ -74,8 +74,50 @@
 }
 
 .contributionForm {
-	grid-template-columns: minmax(0, 1fr) auto;
+    width: 100%;
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto 40px;
 	align-items: end;
+	gap: 0.75rem;
+}
+
+.contributionField {
+	min-width: 0;
+	margin: 0;
+}
+
+.addContributionButton {
+	width: auto;
+	height: 50px;
+
+	padding-inline: 1rem;
+
+	white-space: nowrap;
+}
+
+.cancelContributionButton {
+	height: 50px;
+	display: grid;
+	place-items: center;
+
+	flex: 0 0 40px;
+
+	padding: 0;
+
+	background: transparent;
+	color: var(--text-muted);
+
+	border: 0;
+
+	svg {
+		width: 18px;
+		height: 18px;
+	}
+
+	&:hover {
+		background: var(--bg-secondary);
+		color: var(--negative);
+	}
 }
 
 .activeList {
@@ -491,3 +533,18 @@
 	}
 }
 
+@media (max-width: 600px) {
+	.contributionForm {
+		grid-template-columns: minmax(0, 1fr) auto;
+		justify-content: stretch;
+	}
+
+	.contributionField {
+		grid-column: 1 / -1;
+	}
+
+	.addContributionButton,
+	.cancelContributionButton {
+		width: 100%;
+	}
+}
