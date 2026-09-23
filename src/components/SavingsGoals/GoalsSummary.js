@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-import { Plus, Check, Trash2 } from 'lucide-react'
+import { Plus, Check, Trash2, ChevronDown, ChevronUp } from 'lucide-react'
 
 import { formatCurrency } from '@/lib/utils/format'
 import { deleteSavedGoal } from '@/app/actions/savings-goals'
@@ -18,6 +18,7 @@ import styles from './SavingsGoals.module.scss'
 
 export default function GoalsSummary({ goals }) {
 	const [contributionGoalId, setContributionGoalId] = useState(null)
+	const [showCompleted, setShowCompleted] = useState(false)
 
 	const { openGoalModal, closeGoalModal, showGoalModal } = useModal()
 	const { mounted } = useMount()
@@ -139,37 +140,48 @@ export default function GoalsSummary({ goals }) {
 			</div>
 			{completedGoals.length > 0 && (
 				<div className={styles.completedSection}>
-					<div className={styles.completedHeader}>
-						<span>Completed</span>
-						<span>·</span>
-						<span>{completedGoals.length}</span>
-					</div>
+					<button
+						type="button"
+						className={styles.completedHeader}
+						onClick={() => setShowCompleted((current) => !current)}
+						aria-expanded={showCompleted}
+						aria-controls="completed-goals">
+						<div>
+							<span>Completed</span>
+							<span>·</span>
+							<span>{completedGoals.length}</span>
+						</div>
 
-					<div className={styles.completedList}>
-						{completedGoals.map((goal) => {
-							const Icon = getGoalIcon(goal.category)
+						{showCompleted ? <ChevronUp /> : <ChevronDown />}
+					</button>
 
-							return (
-								<article
-									key={goal.id}
-									className={styles.completedGoal}>
-									<Check className={styles.completedCheck} />
+					{showCompleted && (
+						<div className={styles.completedList}>
+							{completedGoals.map((goal) => {
+								const Icon = getGoalIcon(goal.category)
 
-									<Icon className={styles.completedIcon} />
+								return (
+									<article
+										key={goal.id}
+										className={styles.completedGoal}>
+										<Check className={styles.completedCheck} />
 
-									<h3>{goal.name}</h3>
+										<Icon className={styles.completedIcon} />
 
-									<p>
-										{formatCurrency(goal.saved_amount)}
-										<span>/</span>
-										{formatCurrency(goal.target_amount)}
-									</p>
+										<h3>{goal.name}</h3>
 
-									<ArchiveButton goal={goal} />
-								</article>
-							)
-						})}
-					</div>
+										<p>
+											{formatCurrency(goal.saved_amount)}
+											<span>/</span>
+											{formatCurrency(goal.target_amount)}
+										</p>
+
+										<ArchiveButton goal={goal} />
+									</article>
+								)
+							})}
+						</div>
+					)}
 				</div>
 			)}
 		</section>
