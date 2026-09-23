@@ -24,7 +24,7 @@ export default async function AssetAllocation() {
 
 	return (
 		<section
-			id="assets"
+			id="accounts"
 			className={styles.container}>
 			<AssetHeader />
 			{summary.holdingsCount === 0 ? (

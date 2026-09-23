@@ -20,8 +20,7 @@ import styles from './NavBar.module.scss'
 
 export default function NavBar({ user }) {
 	const [activeSection, setActiveSection] = useState('overview')
-
-	//const isAuthenticated = Boolean(user?.id)
+    
 	const pathname = usePathname()
     const isAuthPage = pathname === '/signin' || pathname === '/signup'
 	const isDashboardPage = pathname.startsWith('/dashboard')

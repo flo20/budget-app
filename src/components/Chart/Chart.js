@@ -84,7 +84,7 @@ export default function Chart({
 	]
 
 	return (
-		<section className={styles.container}>
+		<section className={styles.container} id="overview">
 			<Tabs defaultValue="spending">
 				<header className={styles.header}>
 					<div className={styles.title}>

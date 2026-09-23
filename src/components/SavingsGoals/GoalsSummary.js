@@ -36,7 +36,7 @@ export default function GoalsSummary({ goals }) {
 	}
 	return (
 		<section
-			id="savings"
+			id="accounts"
 			className={styles.container}>
 			<header className={styles.header}>
 				<div>
