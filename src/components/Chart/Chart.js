@@ -56,10 +56,22 @@ export default function Chart({
 			label: 'NET CASH FLOW',
 			value: formatCompactCurrency(cashFlowMetrics.netCashFlow),
 			variant: 'positive',
+			variant:
+				cashFlowMetrics.netCashFlow > 0
+					? 'positive'
+					: cashFlowMetrics.netCashFlow < 0
+						? 'negative'
+						: undefined,
 		},
 		{
 			label: 'PREV MONTH NET',
 			value: formatCompactCurrency(cashFlowMetrics.previousMonthNet),
+			variant:
+				cashFlowMetrics.previousMonthNet > 0
+					? 'positive'
+					: cashFlowMetrics.previousMonthNet < 0
+						? 'negative'
+						: undefined,
 		},
 	]
 
@@ -70,7 +82,7 @@ export default function Chart({
 		},
 		{
 			label: formatMonth(previousMonth),
-			value: formatCompactCurrency(paceMetrics.monthlyBudget),
+			value: formatCompactCurrency(paceMetrics.previousMonthSpending),
 			variant: 'positive',
 		},
 		{
@@ -80,11 +92,19 @@ export default function Chart({
 		{
 			label: 'NET CASH FLOW',
 			value: formatCompactCurrency(trendMetrics.netCashFlow),
+			variant:
+				trendMetrics.netCashFlow > 0
+					? 'positive'
+					: trendMetrics.netCashFlow < 0
+						? 'negative'
+						: undefined,
 		},
 	]
 
 	return (
-		<section className={styles.container} id="overview">
+		<section
+			className={styles.container}
+			id="overview">
 			<Tabs defaultValue="spending">
 				<header className={styles.header}>
 					<div className={styles.title}>

@@ -8,6 +8,13 @@ export default async function MonthlyPulse({ budgetMonth }) {
 	const data = await getMonthlyPulse(budgetMonth)
 	const summary = buildMonthlyPulseSummary(data)
 
+    const getValueClass = (value) => {
+			if (value > 0) return styles.positive
+			if (value < 0) return styles.negative
+
+			return ''
+		}
+
 	return (
 		<section
 			className={styles.container}
@@ -25,13 +32,13 @@ export default async function MonthlyPulse({ budgetMonth }) {
 			</article>
 			<article className={styles.metric}>
 				<p className={styles.label}>Remaining</p>
-				<strong className={styles.positive}>
+				<strong className={getValueClass(summary.remaining)}>
 					{formatCompactCurrency(summary.remaining)}
 				</strong>
 			</article>
 			<article className={styles.metric}>
 				<p>Net worth</p>
-				<strong className={styles.positive}>
+				<strong className={getValueClass(summary.netWorth)}>
 					{formatCompactCurrency(summary.netWorth)}
 				</strong>
 			</article>

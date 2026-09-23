@@ -102,7 +102,6 @@
 
 .metric {
 	min-width: 0;
-	min-height: 150px;
 
 	display: flex;
 	flex-direction: column;
@@ -124,12 +123,11 @@
 	color: var(--text-primary);
 
 	font-size: clamp(1.8rem, 2.3vw, 2.5rem);
-	font-weight: 500;
+	font-weight: 400;
 	line-height: 1;
 
-	letter-spacing: 0.015em;
+	letter-spacing: -0.025em;
 
-	text-align: center;
 	white-space: nowrap;
 }
 
@@ -140,7 +138,7 @@
 
 	font-size: 0.72rem;
 	font-weight: 500;
-	letter-spacing: 0.18em;
+	letter-spacing: 0.16em;
 	text-align: center;
 	text-transform: uppercase;
 }
@@ -153,28 +151,33 @@
 	color: var(--negative);
 }
 
+.neutral {
+	color: var(--text-muted);
+}
+
 /* CHART + SIDE PANEL */
 
 .chartLayout {
 	display: grid;
-	grid-template-columns: minmax(0, 2.2fr) minmax(300px, 1fr);
+	grid-template-columns: minmax(0, 2fr) minmax(320px, 1fr);
 
-    min-height: 540px;
+    min-height: 460px;
 }
 
 .chartArea {
 	min-width: 0;
-
-	padding: 2.25rem 2.5rem 2.5rem;
+    display: flex;
+	flex-direction: column;
+	padding: 2rem 2.25rem 1.75rem;
 }
 
 .legend {
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
-	gap: 2.25rem;
+	gap: 2rem;
 
-	margin-bottom: 3rem;
+	margin-bottom: 1rem;
 }
 
 .legendItem {
@@ -204,7 +207,7 @@
 
 .sidePanel {
     min-width: 0;
-	padding: 2.5rem;
+	padding: 2.25rem 2.5rem;
 	border-left: 1px solid var(--border);
 }
 
@@ -220,39 +223,39 @@
 }
 
 .forecastValue {
-	margin: 1.5rem 0 0;
+	margin: 1rem 0 0;
 
-	font-size: clamp(2.5rem, 3.5vw, 3.4rem);
+	font-size: clamp(2.5rem, 3.5vw, 3.5rem);
 	font-weight: 500;
 	line-height: 1;
-	letter-spacing: -0.03em;
+	letter-spacing: -0.04em;
 }
 
 .forecastStatus {
-	margin: 0.75rem 0 0;
+	margin: 0.8rem 0 0;
 
-	font-size: 0.75rem;
+	font-size: 0.72rem;
 	font-weight: 500;
 	letter-spacing: 0.16em;
 	text-transform: uppercase;
 }
 
 .panelDescription {
-	max-width: 340px;
+	max-width: 30ch;
 
-	margin: 1.75rem 0 0;
+	margin: 1.5rem 0 0;
 
 	color: var(--text-secondary);
 
-	font-size: 1rem;
-	line-height: 1.6;
+	font-size: 0.95rem;
+	line-height: 1.65;
 }
 
 .panelDivider {
 	width: 100%;
 	height: 1px;
 
-	margin: 2.25rem 0;
+	margin: 2rem 0;
 
 	background: var(--border);
 }
@@ -260,11 +263,10 @@
 .secondaryValue {
 	margin: 0;
 
-	color: var(--text-primary);
-
 	font-size: clamp(2rem, 2.8vw, 2.7rem);
 	font-weight: 500;
 	line-height: 1;
+    letter-spacing: -0.03em;
 }
 
 .trendValue {
@@ -284,6 +286,64 @@
 	letter-spacing: 0.04em;
 	text-transform: uppercase;
 }
+
+.previousMonth {
+	display: grid;
+	gap: 0.75rem;
+}
+
+.previousDescription {
+	max-width: 30ch;
+
+	margin: 0.25rem 0 0;
+
+	color: var(--text-secondary);
+
+	font-size: 0.88rem;
+	line-height: 1.6;
+}
+
+/* CASH FLOW CHART */
+
+.cashFlowChart {
+	width: 100%;
+	height: 320px;
+
+	margin-top: 0.5rem;
+}
+
+.cashFlowMonths {
+	display: grid;
+	grid-template-columns: repeat(6, minmax(0, 1fr));
+
+	margin-top: 0.25rem;
+}
+
+.cashFlowMonth {
+	min-width: 0;
+
+	text-align: center;
+
+	p {
+		margin: 0;
+
+		color: var(--text-muted);
+
+		font-size: 0.72rem;
+		font-weight: 500;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+	}
+
+	span {
+		display: block;
+
+		margin-top: 0.4rem;
+
+		font-size: 0.78rem;
+	}
+}
+
 
 @media (max-width: 1100px) {
 	.header {

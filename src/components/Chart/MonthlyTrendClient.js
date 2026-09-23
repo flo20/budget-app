@@ -58,7 +58,7 @@ export default function MonthlyTrendClient({ trendData = {}, trendMetrics }) {
 						}}>
 						<CartesianGrid
 							vertical={false}
-							stroke="#29292e"
+							stroke="var(--border)"
 							strokeDasharray="3 6"
 						/>
 
@@ -67,7 +67,7 @@ export default function MonthlyTrendClient({ trendData = {}, trendMetrics }) {
 							axisLine={false}
 							tickLine={false}
 							tickMargin={12}
-							tick={{ fill: '#8b8b93', fontSize: 12 }}
+							tick={{ fill: 'var(--text-muted)', fontSize: 12 }}
 						/>
 
 						<YAxis
@@ -101,12 +101,12 @@ export default function MonthlyTrendClient({ trendData = {}, trendMetrics }) {
 
 						<ReferenceLine
 							y={907.13}
-							stroke="#a1a1aa"
+							stroke="var(--text-muted)"
 							strokeDasharray="7 7"
 							label={{
 								value: '$907',
 								position: 'right',
-								fill: '#a1a1aa',
+								fill: 'var(--text-muted)',
 								fontSize: 12,
 							}}
 						/>
@@ -143,9 +143,7 @@ export default function MonthlyTrendClient({ trendData = {}, trendMetrics }) {
 			</div>
 
 			<aside className={styles.sidePanel}>
-				<p className="font-mono text-xs font-medium tracking-[0.2em] text-zinc-500">
-					MONTHLY TREND
-				</p>
+				<p className={styles.panelLabel}>MONTHLY TREND</p>
 
 				<p
 					className={`${styles.trendValue} ${
@@ -171,15 +169,15 @@ export default function MonthlyTrendClient({ trendData = {}, trendMetrics }) {
 							: 'Your spending was unchanged from last month'}
 				</p>
 
-				<div className="my-8 h-px bg-[#29292e]" />
+				<div className={styles.panelDivider} />
 
 				<p
-					className={`font-mono text-2xl font-semibold tracking-wide ${
+					className={`${styles.trendDirection} ${
 						trendDirection === 'rising'
-							? 'text-red-400'
+							? styles.negative
 							: trendDirection === 'falling'
-								? 'text-emerald-400'
-								: 'text-zinc-300'
+								? styles.positive
+								: styles.neutral
 					}`}>
 					{trendDirection.toUpperCase()}
 				</p>
@@ -188,7 +186,7 @@ export default function MonthlyTrendClient({ trendData = {}, trendMetrics }) {
 					3-MONTH DIRECTION
 				</p>
 
-				<p className="mt-5 max-w-sm text-base leading-7 text-zinc-400">
+				<p className={styles.panelDescription}>
 					{trendDirection === 'rising'
 						? 'Expenses have been trending upward over the last three months'
 						: trendDirection === 'falling'

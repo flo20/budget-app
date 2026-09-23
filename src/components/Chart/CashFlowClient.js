@@ -12,79 +12,91 @@ import { cashFlowConfig } from '@/lib/constants/chart-configs'
 
 import ChartLegendItem from './ChartLegendItem'
 
-import styles from "./Chart.module.scss"
+import styles from './Chart.module.scss'
 
-export default function CashFlowClient({ cashFlowData = {}, cashFlowMetrics }) {
+export default function CashFlowClient({ cashFlowData = [], cashFlowMetrics }) {
 	const { previousMonthNet, netCashFlow } = cashFlowMetrics
+
+	function getValueClass(value) {
+		if (value > 0) return styles.positive
+		if (value < 0) return styles.negative
+
+		return styles.neutral
+	}
+
 	return (
 		<div className={styles.chartLayout}>
 			<div className={styles.chartArea}>
-				<div className="mb-8 flex gap-8">
+				<div className={styles.legend}>
 					<ChartLegendItem
-						color="#3b82f6"
+						color="var(--accent-blue)"
 						label="INCOME"
 					/>
 					<ChartLegendItem
-						color="#fb5262"
+						color="var(--negative)"
 						label="EXPENSE"
 					/>
 				</div>
 
-				<ChartContainer
-					config={cashFlowConfig}
-					className="h-[500px] w-full">
-					<BarChart
-						data={cashFlowData}
-						margin={{
-							left: 20,
-							right: 20,
-							top: 20,
-							bottom: 20,
-						}}>
-						<XAxis
-							dataKey="month"
-							axisLine={false}
-							tickLine={false}
-							tickMargin={20}
-							tick={{ fill: '#a1a1aa', fontSize: 12 }}
-						/>
+				<div className={styles.cashFlowChart}>
+					<ChartContainer
+						config={cashFlowConfig}
+						className="h-full w-full">
+						<BarChart
+							data={cashFlowData}
+							margin={{
+								left: 20,
+								right: 20,
+								top: 10,
+								bottom: 10,
+							}}>
+							<XAxis
+								dataKey="month"
+								axisLine={false}
+								tickLine={false}
+								tickMargin={20}
+								tick={{
+									fill: 'var(--text-muted)',
+									fontSize: 12,
+								}}
+							/>
 
-						<YAxis hide />
+							<YAxis hide />
 
-						<ChartTooltip
-							cursor={false}
-							content={<ChartTooltipContent />}
-						/>
+							<ChartTooltip
+								cursor={false}
+								content={<ChartTooltipContent />}
+							/>
 
-						<Bar
-							dataKey="income"
-							fill="#3b82f6"
-							radius={[7, 7, 0, 0]}
-							barSize={42}
-						/>
+							<Bar
+								dataKey="income"
+								fill="var(--accent-blue)"
+								radius={[7, 7, 0, 0]}
+								barSize={42}
+							/>
 
-						<Bar
-							dataKey="expense"
-							fill="#fb5262"
-							radius={[7, 7, 0, 0]}
-							barSize={42}
-						/>
-					</BarChart>
-				</ChartContainer>
+							<Bar
+								dataKey="expense"
+								fill="var(--negative)"
+								radius={[7, 7, 0, 0]}
+								barSize={42}
+							/>
+						</BarChart>
+					</ChartContainer>
+				</div>
 
-				<div className="grid grid-cols-6 text-center">
+				<div className={styles.cashFlowMonths}>
 					{cashFlowData.map((cashData) => (
-						<div key={cashData.month}>
-							<p className="font-mono text-sm tracking-[0.12em] text-zinc-400">
-								{cashData.month}
-							</p>
-
-							<p className="mt-1 font-mono text-sm text-emerald-400">
-								+
-								{cashData.net >= 1000
-									? `$${(cashData.net / 1000).toFixed(1)}K`
+						<div
+							key={cashData.month}
+							className={styles.cashFlowMonth}>
+							<p>{cashData.month}</p>
+							<span className={getValueClass(cashData.net)}>
+								{cashData.net > 0 ? '+' : ''}
+								{Math.abs(cashData.net) >= 1000
+									? `$${(Math.abs(cashData.net) / 1000).toFixed(1)}K`
 									: formatChartCurrency(cashData.net)}
-							</p>
+							</span>
 						</div>
 					))}
 				</div>
@@ -92,39 +104,22 @@ export default function CashFlowClient({ cashFlowData = {}, cashFlowMetrics }) {
 
 			{/* SIDE PANEL */}
 			<aside className={styles.sidePanel}>
-				<p className="font-mono text-xs font-medium tracking-[0.2em] text-zinc-500">
-					NET CASH FLOW
-				</p>
+				<p className={styles.panelLabel}>NET CASH FLOW</p>
 
-				<p
-					className={`mt-4 font-mono text-4xl font-semibold tracking-tight lg:text-4xl ${
-						netCashFlow > 0
-							? 'text-emerald-400'
-							: netCashFlow < 0
-								? 'text-red-400'
-								: 'text-zinc-100'
-					}`}>
+				<p className={`${styles.forecastValue} ${getValueClass(netCashFlow)}`}>
+					{netCashFlow > 0 ? '+' : netCashFlow < 0 ? '-' : ''}
 					{formatCompactCurrency(Math.abs(netCashFlow))}
 				</p>
 
-				<div className="mt-3 flex items-center gap-2">
-					<p
-						className={`font-mono text-xs font-medium tracking-[0.16em] ${
-							netCashFlow > 0
-								? 'text-emerald-400'
-								: netCashFlow < 0
-									? 'text-red-400'
-									: 'text-zinc-400'
-						}`}>
-						{netCashFlow > 0
-							? 'POSITIVE CASH FLOW'
-							: netCashFlow < 0
-								? 'NEGATIVE CASH FLOW'
-								: 'BALANCED'}
-					</p>
-				</div>
+				<p className={`${styles.forecastStatus} ${getValueClass(netCashFlow)}`}>
+					{netCashFlow > 0
+						? 'Positive cash flow'
+						: netCashFlow < 0
+							? 'Negative cash flow'
+							: 'Balanced'}
+				</p>
 
-				<p className="mt-6 max-w-sm text-base leading-7 text-zinc-400">
+				<p className={styles.panelDescription}>
 					{netCashFlow > 0
 						? `Income exceeded expenses by ${formatCompactCurrency(
 								netCashFlow,
@@ -136,26 +131,19 @@ export default function CashFlowClient({ cashFlowData = {}, cashFlowMetrics }) {
 							: 'Income and expenses were equal this month.'}
 				</p>
 
-				<div className="my-8 h-px bg-[#29292e]" />
-
-				<div>
-					<p className="font-mono text-xs font-medium tracking-[0.2em] text-zinc-500">
-						PREVIOUS MONTH NET
-					</p>
-
+				<div className={styles.panelDivider} />
+				<div className={styles.previousMonth}>
 					<p
-						className={`mt-3 font-mono text-2xl font-semibold tracking-tight ${
-							previousMonthNet > 0
-								? 'text-zinc-100'
-								: previousMonthNet < 0
-									? 'text-red-400'
-									: 'text-zinc-400'
-						}`}>
+						className={`${styles.secondaryValue} ${getValueClass(
+							previousMonthNet,
+						)}`}>
 						{previousMonthNet > 0 ? '+' : previousMonthNet < 0 ? '-' : ''}
 						{formatCompactCurrency(Math.abs(previousMonthNet))}
 					</p>
 
-					<p className="mt-3 text-sm leading-6 text-zinc-500">
+					<p className={styles.panelLabel}>Previous month net</p>
+
+					<p className={styles.previousDescription}>
 						{previousMonthNet > 0
 							? 'Last month also closed with positive cash flow.'
 							: previousMonthNet < 0
