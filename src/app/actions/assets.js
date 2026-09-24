@@ -4,7 +4,7 @@ import { requireUser } from '@/lib/auth/require-user'
 import { revalidatePath } from 'next/cache'
 import { ASSET_TYPES } from '@/lib/constants/asset-allocation'
 
-export async function createAsset(formData) {
+export async function createAsset(_previousState, formData) {
 	const { supabase, user } = await requireUser()
 
 	// Names received from the form fields
@@ -15,28 +15,46 @@ export async function createAsset(formData) {
 
 	//Server side validation
 	if (!assetName) {
-		throw new Error('Asset name is required.')
+		return {
+			success: false,
+			error: 'Asset name is required.',
+		}
 	}
 
 	if (assetName.length > 100) {
-		throw new Error('Asset name must be 100 characters or fewer.')
+		return {
+			success: false,
+			error: 'Asset name must be 100 characters or fewer.',
+		}
 	}
 
 	if (!assetType || !ASSET_TYPES.includes(assetType)) {
-		throw new Error('Select a valid asset type.')
+		return {
+			success: false,
+			error: 'Select a valid asset type.',
+		}
 	}
 
 	if (!Number.isFinite(currentValue) || currentValue < 0) {
-		throw new Error('Enter a valid asset value.')
+		return {
+			success: false,
+			error: 'Enter a valid asset value.',
+		}
 	}
 
 	if (currentValue > 999999999999.99) {
-		throw new Error('Asset value is too large.')
+		return {
+			success: false,
+			error: 'Asset value is too large.',
+		}
 	}
 
 	// Validate the optional notes.
 	if (notes && notes.length > 500) {
-		throw new Error('Notes must be 500 characters or fewer.')
+		return {
+			success: false,
+			error: 'Notes must be 500 characters or fewer.',
+		}
 	}
 
 	const asset = {
@@ -63,7 +81,7 @@ export async function createAsset(formData) {
 	}
 }
 
-export async function updateAsset(formData) {
+export async function updateAsset(_previousState, formData) {
 	const { supabase, user } = await requireUser()
 
 	const assetId = formData.get('assetId')
@@ -72,27 +90,45 @@ export async function updateAsset(formData) {
 	const currentValue = Number(formData.get('currentValue'))
 
 	if (!assetId) {
-		throw new Error('Asset ID is required.')
+		return {
+			success: false,
+			error: 'Asset ID is required.',
+		}
 	}
 
 	if (!assetName) {
-		throw new Error('Asset name is required.')
+		return {
+			success: false,
+			error: 'Asset name is required.',
+		}
 	}
 
 	if (assetName.length > 100) {
-		throw new Error('Asset name must be 100 characters or fewer.')
+		return {
+			success: false,
+			error: 'Asset name must be 100 characters or fewer.',
+		}
 	}
 
 	if (!assetType || !ASSET_TYPES.includes(assetType)) {
-		throw new Error('Select a valid asset type.')
+		return {
+			success: false,
+			error: 'Select a valid asset type.',
+		}
 	}
 
 	if (!Number.isFinite(currentValue) || currentValue < 0) {
-		throw new Error('Enter a valid asset value.')
+		return {
+			success: false,
+			error: 'Enter a valid asset value.',
+		}
 	}
 
 	if (currentValue > 999999999999.99) {
-		throw new Error('Asset value is too large.')
+		return {
+			success: false,
+			error: 'Asset value is too large.',
+		}
 	}
 
 	const { error } = await supabase
@@ -108,10 +144,17 @@ export async function updateAsset(formData) {
 
 	if (error) {
 		console.error('Unable to update asset:', error)
-		throw new Error('Unable to update asset.')
+		return {
+			success: false,
+			error: 'Unable to update the asset.',
+		}
 	}
 
 	revalidatePath('/dashboard')
+	return {
+		success: true,
+		error: null,
+	}
 }
 
 export async function deleteAsset(formData) {
@@ -120,7 +163,10 @@ export async function deleteAsset(formData) {
 	const assetId = formData.get('assetId')
 
 	if (!assetId) {
-		throw new Error('Asset ID is required.')
+		return {
+			success: false,
+			error: 'Asset ID is required.',
+		}
 	}
 
 	const { error } = await supabase
@@ -131,8 +177,16 @@ export async function deleteAsset(formData) {
 
 	if (error) {
 		console.error('Unable to delete asset:', error)
-		throw new Error('Unable to delete asset.')
+		return {
+			success: false,
+			error: 'Unable to delete the asset.',
+		}
 	}
 
 	revalidatePath('/dashboard')
+
+	return {
+		success: true,
+		error: null,
+	}
 }
