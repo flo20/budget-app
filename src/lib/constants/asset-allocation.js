@@ -7,11 +7,11 @@ import {
 } from 'lucide-react'
 
 export const ASSET_TYPES = [
-	'Cash',
-	'Investment',
-	'Property',
-	'Retirement',
-	'Other',
+	'cash',
+	'investment',
+	'property',
+	'retirement',
+	'other',
 ]
 
 export const ASSET_TYPE_DETAILS = {

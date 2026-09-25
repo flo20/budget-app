@@ -1,5 +1,6 @@
 'use client'
 
+import { useFormAction } from '../hooks/useFormActions'
 import { useModal } from '@/app/providers/GlobalProvider'
 import { createAsset } from '@/app/actions/assets'
 import { ASSET_TYPES } from '@/lib/constants/asset-allocation'
@@ -13,10 +14,16 @@ import {
 	FormTextarea,
 	FormActions,
 	FormButton,
+	FormError,
 } from '@/components/Form'
 
 export default function AssetForm() {
 	const { closeAssetModal } = useModal()
+
+	const { formAction, isPending, error } = useFormAction(
+		createAsset,
+		closeAssetModal,
+	)
 
 	return (
 		<>
@@ -25,7 +32,7 @@ export default function AssetForm() {
 				description="Track an account, investment, or owned item."
 				onClose={closeAssetModal}
 			/>
-			<Form action={createAsset}>
+			<Form action={formAction}>
 				<FormField
 					label="Asset name"
 					htmlFor="asset-name">
@@ -82,14 +89,20 @@ export default function AssetForm() {
 						maxLength={500}
 					/>
 				</FormField>
+				<FormError error={error} />
 				<FormActions>
 					<FormButton
 						type="button"
 						variant="secondary"
-						onClick={closeAssetModal}>
+						onClick={closeAssetModal}
+						disabled={isPending}>
 						Cancel
 					</FormButton>
-					<FormButton type="submit">Add asset</FormButton>
+					<FormButton
+						type="submit"
+						disabled={isPending}>
+						{isPending ? 'Adding...' : 'Add asset'}
+					</FormButton>
 				</FormActions>
 			</Form>
 		</>
