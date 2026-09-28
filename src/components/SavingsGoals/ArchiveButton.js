@@ -1,7 +1,5 @@
 'use client'
 
-import { useState } from 'react'
-
 import { archiveSavingsGoal } from '@/app/actions/savings-goals'
 import { useFormAction } from '../hooks/useFormActions'
 import { Form, FormButton, FormError } from '@/components/Form'
@@ -9,8 +7,6 @@ import { Form, FormButton, FormError } from '@/components/Form'
 import styles from './SavingsGoals.module.scss'
 
 export default function ArchiveButton({ goal }) {
-	const [isPending, setIsPending] = useState(false)
-
 	const {
 		formAction: archiveAction,
 		isPending: isArchiving,
