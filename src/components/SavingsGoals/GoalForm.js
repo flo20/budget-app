@@ -8,6 +8,7 @@ import {
 } from '@/lib/constants/saving-goals'
 import { createSavingsGoal } from '@/app/actions/savings-goals'
 import { useModal } from '@/app/providers/GlobalProvider'
+import { useFormAction } from '../hooks/useFormActions'
 
 import {
 	Form,
@@ -17,9 +18,8 @@ import {
 	FormSelect,
 	FormActions,
 	FormButton,
+    FormError
 } from '@/components/Form'
-
-import styles from './SavingsGoals.module.scss'
 
 export default function GoalForm() {
 	const [selectedCategory, setSelectedCategory] = useState('general')
@@ -27,6 +27,11 @@ export default function GoalForm() {
 	const isCustomCategory = selectedCategory === CUSTOM_CATEGORY_OPTION
 
 	const { closeGoalModal } = useModal()
+
+    const { formAction, isPending, error } = useFormAction(
+			createSavingsGoal,
+			closeGoalModal,
+		)
 
 	return (
 		<>
@@ -36,7 +41,7 @@ export default function GoalForm() {
 				onClose={closeGoalModal}
 			/>
 
-			<Form action={createSavingsGoal}>
+			<Form action={formAction}>
 				<FormField
 					label="Name"
 					htmlFor="goal-name">
@@ -126,15 +131,22 @@ export default function GoalForm() {
 					/>
 				</FormField>
 
+				<FormError error={error} />
+
 				<FormActions>
 					<FormButton
 						type="button"
 						variant="secondary"
-						onClick={closeGoalModal}>
+						onClick={closeGoalModal}
+						disabled={isPending}>
 						Cancel
 					</FormButton>
 
-					<FormButton type="submit">Save Goal</FormButton>
+					<FormButton
+						type="submit"
+						disabled={isPending}>
+						{isPending ? 'Saving...' : 'Save Goal'}
+					</FormButton>
 				</FormActions>
 			</Form>
 		</>

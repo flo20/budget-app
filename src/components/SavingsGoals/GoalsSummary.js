@@ -2,17 +2,16 @@
 
 import { useState } from 'react'
 
-import { Plus, Check, Trash2, ChevronDown, ChevronUp } from 'lucide-react'
-
 import { formatCurrency } from '@/lib/utils/format'
-import { deleteSavedGoal } from '@/app/actions/savings-goals'
 import { getGoalIcon, getProgress } from '@/lib/constants/saving-goals'
 import { useModal, useMount } from '@/app/providers/GlobalProvider'
+import { Plus, Check, ChevronDown, ChevronUp } from 'lucide-react'
 
 import ContributeForm from './ContributeForm'
 import GoalForm from './GoalForm'
 import Modal from '../Modal/Modal'
 import ArchiveButton from './ArchiveButton'
+import DeleteGoalButton from './DeleteGoalButton'
 
 import styles from './SavingsGoals.module.scss'
 
@@ -26,14 +25,6 @@ export default function GoalsSummary({ goals }) {
 	const activeGoals = goals.filter((goal) => goal.status === 'active')
 	const completedGoals = goals.filter((goal) => goal.status === 'completed')
 
-	async function handleDelete(goal) {
-		const result = await deleteSavedGoal(goal.id)
-
-		if (!result?.success) {
-			console.error(result.error)
-			return
-		}
-	}
 	return (
 		<section
 			id="accounts"
@@ -123,13 +114,7 @@ export default function GoalsSummary({ goals }) {
 												onClick={() => setContributionGoalId(goal.id)}>
 												+ Contribute
 											</button>
-											<button
-												type="button"
-												className={styles.deleteButton}
-												onClick={() => handleDelete(goal)}
-												aria-label={`Delete ${goal.name}`}>
-												<Trash2 />
-											</button>
+											<DeleteGoalButton goal={goal} />
 										</>
 									)}
 								</div>

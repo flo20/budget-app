@@ -267,6 +267,10 @@
 		visibility 0.2s ease;
 }
 
+.contributionError {
+	grid-column: 1 / -1;
+}
+
 .goal:hover,
 .goal:focus-within {
 	.goalActions {

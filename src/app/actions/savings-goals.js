@@ -105,7 +105,7 @@ export async function createSavingsGoal(_previousState, formData) {
 	}
 }
 
-export async function contributeToSavingsGoal(formData) {
+export async function contributeToSavingsGoal(_previousState, formData) {
 	const { supabase, user } = await requireUser()
 
 	const goalId = formData.get('goalId')
@@ -182,8 +182,10 @@ export async function contributeToSavingsGoal(formData) {
 	}
 }
 
-export async function archiveSavingsGoal(goalId) {
+export async function archiveSavingsGoal(_previousState, formData) {
 	const { supabase, user } = await requireUser()
+    
+    const goalId = formData.get('goalId')
 
 	if (!goalId) {
 		return {
@@ -228,8 +230,10 @@ export async function archiveSavingsGoal(goalId) {
 	}
 }
 
-export async function deleteSavedGoal(goalId) {
+export async function deleteSavedGoal(_previousState, formData) {
 	const { supabase, user } = await requireUser()
+
+    const goalId = formData.get('goalId')
 
 	if (!goalId) {
 		return {

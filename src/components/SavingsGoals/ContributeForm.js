@@ -1,19 +1,25 @@
 'use client'
 
 import { useState } from 'react'
+import { useFormAction } from '../hooks/useFormActions';
 import { contributeToSavingsGoal } from '@/app/actions/savings-goals'
 import { X } from 'lucide-react'
 
-import { Form, FormField, FormInput, FormButton } from '@/components/Form'
+import { Form, FormField, FormInput, FormButton, FormError } from '@/components/Form'
 
 import styles from './SavingsGoals.module.scss'
 
 export default function ContributeForm({ goal, closeForm }) {
 	const [amount, setAmount] = useState('')
 
+    const { formAction, isPending, error } = useFormAction(
+			contributeToSavingsGoal,
+			closeForm,
+		)
+
 	return (
 		<Form
-			action={contributeToSavingsGoal}
+			action={formAction}
 			className={styles.contributionForm}>
 			<input
 				type="hidden"
@@ -41,16 +47,23 @@ export default function ContributeForm({ goal, closeForm }) {
 
 			<FormButton
 				type="submit"
-				className={styles.addContributionButton}>
-				Add
+				className={styles.addContributionButton}
+				disabled={isPending}>
+				{isPending ? 'Adding...' : 'Add'}
 			</FormButton>
+
 			<FormButton
 				type="button"
 				variant="secondary"
 				className={styles.cancelContributionButton}
-				onClick={closeForm}>
+				onClick={closeForm}
+				disabled={isPending}>
 				<X />
 			</FormButton>
+			<FormError
+				error={error}
+				className={styles.contributionError}
+			/>
 		</Form>
 	)
 }
