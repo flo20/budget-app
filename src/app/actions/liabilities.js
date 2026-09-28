@@ -5,7 +5,7 @@ import { revalidatePath } from 'next/cache'
 import { LIABILITY_TYPE_VALUES } from '../../lib/constants/liability-types'
 import { getOptionalNumber } from '@/lib/utils/number'
 
-export async function createLiability(formData) {
+export async function createLiability(_previousState, formData) {
 	const { supabase, user } = await requireUser()
 
 	// Names received from the form fields
@@ -14,25 +14,37 @@ export async function createLiability(formData) {
 	const currentBalance = Number(formData.get('currentBalance'))
 	const originalAmount = getOptionalNumber(formData, 'originalAmount')
 	const monthlyPayment = getOptionalNumber(formData, 'monthlyPayment')
-	const apr = getOptionalNumber(formData,'apr')
+	const apr = getOptionalNumber(formData, 'apr')
 
 	// Validate the required name.
 	if (!liabilityName) {
-		throw new Error('Enter a name for the liability.')
+		return {
+			success: false,
+			error: 'Enter a name for the liability',
+		}
 	}
 
 	if (liabilityName.length > 100) {
-		throw new Error('Liability name must be 100 characters or fewer.')
+		return {
+			success: false,
+			error: 'Liability name must be 100 characters or fewer.',
+		}
 	}
 
 	// Validate the selected liability type.
 	if (!LIABILITY_TYPE_VALUES.includes(liabilityType)) {
-		throw new Error('Select a valid liability type.')
+		return {
+			success: false,
+			error: 'Select a valid liability type.',
+		}
 	}
 
 	// The current outstanding balance is required.
 	if (!Number.isFinite(currentBalance) || currentBalance < 0) {
-		throw new Error('Enter a valid balance owed.')
+		return {
+			success: false,
+			error: 'Enter a valid balance owed.',
+		}
 	}
 
 	// The remaining fields are optional, but must be valid when provided.
@@ -40,23 +52,35 @@ export async function createLiability(formData) {
 		originalAmount !== null &&
 		(!Number.isFinite(originalAmount) || originalAmount <= 0)
 	) {
-		throw new Error('Enter a valid original amount.')
+		return {
+			success: false,
+			error: 'Enter a valid original amount.',
+		}
 	}
 
 	if (
 		monthlyPayment !== null &&
 		(!Number.isFinite(monthlyPayment) || monthlyPayment <= 0)
 	) {
-		throw new Error('Enter a valid monthly payment.')
+		return {
+			success: false,
+			error: 'Enter a valid monthly payment.',
+		}
 	}
 
 	if (apr !== null && (!Number.isFinite(apr) || apr < 0 || apr > 100)) {
-		throw new Error('APR must be between 0 and 100.')
+		return {
+			success: false,
+			error: 'APR must be between 0 and 100.',
+		}
 	}
 
 	// This check is appropriate only if balances cannot grow beyond their original amount in your product.
 	if (originalAmount !== null && currentBalance > originalAmount) {
-		throw new Error('The balance owed cannot exceed the original amount.')
+		return {
+			success: false,
+			error: 'The balance owed cannot exceed the original amount.',
+		}
 	}
 
 	const liability = {
@@ -64,9 +88,9 @@ export async function createLiability(formData) {
 		name: liabilityName,
 		liability_type: liabilityType,
 		current_balance: currentBalance,
-        original_amount: originalAmount,
+		original_amount: originalAmount,
 		monthly_payment: monthlyPayment,
-		apr,	
+		apr,
 	}
 
 	//Instructs the Supabase client to send an HTTP request to Supabase’s REST API.
@@ -74,7 +98,10 @@ export async function createLiability(formData) {
 
 	if (error) {
 		console.error('Unable to create liability:', error)
-		throw new Error('Unable to save the entry.')
+		return {
+			success: false,
+			error: 'Unable to save the entry.',
+		}
 	}
 
 	revalidatePath('/dashboard')
@@ -85,12 +112,14 @@ export async function createLiability(formData) {
 	}
 }
 
-
 export async function deleteLiability(liabilityId) {
 	const { supabase, user } = await requireUser()
 
 	if (!liabilityId) {
-		throw new Error('Saved goal ID is required.')
+		return {
+			success: false,
+			error: 'Liability ID is required.',
+		}
 	}
 
 	const { data, error } = await supabase
@@ -120,4 +149,3 @@ export async function deleteLiability(liabilityId) {
 		error: null,
 	}
 }
-

@@ -11,15 +11,24 @@ export async function createBudgetNotes(formData) {
 	const budgetMonth = formData.get('notebudgetMonth')
 
 	if (!content) {
-		throw new Error('Enter a note.')
+		return {
+			success: false,
+			error: 'Enter a note.',
+		}
 	}
 
 	if (content.length > 280) {
-		throw new Error('Budget notes cannot exceed 280 characters.')
+		return {
+			success: false,
+			error: 'Budget notes cannot exceed 280 characters.',
+		}
 	}
 
 	if (!isValidBudgetMonth(budgetMonth)) {
-		throw new Error('Invalid budget month.')
+		return {
+			success: false,
+			error: 'Invalid budget month.',
+		}
 	}
 
 	const { error } = await supabase.from('budget_notes').insert({
@@ -31,7 +40,10 @@ export async function createBudgetNotes(formData) {
 	if (error) {
 		console.error('Unable to create budget note:', error)
 
-		throw new Error('Unable to save the note.')
+		return {
+			success: false,
+			error: 'Unable to save the note.',
+		}
 	}
 
 	revalidatePath('/dashboard')
@@ -62,8 +74,10 @@ export async function toggleBudgetNote(formData) {
 
 	if (error) {
 		console.error('Unable to update budget note:', error)
-
-		throw new Error('Unable to update the note.')
+		return {
+			success: false,
+			error: 'Unable to update the note.',
+		}
 	}
 
 	revalidatePath('/dashboard')
@@ -127,11 +141,17 @@ export async function deleteBudgetNote(formData) {
 	const budgetMonth = formData.get('notebudgetMonth')
 
 	if (!noteId) {
-		throw new Error('Note ID is required.')
+		return {
+			success: false,
+			error: 'Note ID is required.',
+		}
 	}
 
 	if (!isValidBudgetMonth(budgetMonth)) {
-		throw new Error('Invalid budget month.')
+		return {
+			success: false,
+			error: 'Note ID is required.',
+		}
 	}
 
 	const { error } = await supabase
@@ -141,8 +161,10 @@ export async function deleteBudgetNote(formData) {
 
 	if (error) {
 		console.error('Unable to delete budget note:', error)
-
-		throw new Error('Unable to delete the note.')
+		return {
+			success: false,
+			error: 'Unable to delete the note.',
+		}
 	}
 
 	revalidatePath('/dashboard')

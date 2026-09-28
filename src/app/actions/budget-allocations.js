@@ -7,7 +7,7 @@ import { normalizeCategory } from '@/lib/utils/category'
 
 const normalizedExpenseCategories = EXPENSE_CATEGORIES.map(normalizeCategory)
 
-export async function setBudgetAllocation(previousState,formData) {
+export async function setBudgetAllocation(_previousState, formData) {
 	const { supabase, user } = await requireUser()
 
 	const selectedCategory = formData.get('category')?.trim()
@@ -17,24 +17,39 @@ export async function setBudgetAllocation(previousState,formData) {
 
 	// Make sure the user selected or entered a category.
 	if (!category) {
-		throw new Error('Select or enter an expense category.')
+		return {
+			success: false,
+			error: 'Select or enter an expense category.',
+		}
 	}
 
 	if (!/^[\p{L}\p{N} &'/-]+$/u.test(category)) {
-		throw new Error('Enter a valid category name.')
+		return {
+			success: false,
+			error: 'Enter a valid category name.',
+		}
 	}
 
 	// A standard category must exist in the list
 	if (!normalizedExpenseCategories.includes(category)) {
-		throw new Error('Select a valid expense category.')
+		return {
+			success: false,
+			error: 'Select a valid expense category.',
+		}
 	}
 
 	if (!Number.isFinite(monthlyLimit) || monthlyLimit <= 0) {
-		throw new Error('Enter a valid monthly limit.')
+		return {
+			success: false,
+			error: 'Enter a valid monthly limit.',
+		}
 	}
 
 	if (monthlyLimit > 9999999999.99) {
-		throw new Error('Monthly limit is too large.')
+		return {
+			success: false,
+			error: 'Monthly limit is too large.',
+		}
 	}
 
 	/*
@@ -42,7 +57,10 @@ export async function setBudgetAllocation(previousState,formData) {
 	 */
 
 	if (!budgetMonth || !/^\d{4}-(0[1-9]|1[0-2])-01$/.test(budgetMonth)) {
-		throw new Error('Select a valid budget month.')
+		return {
+			success: false,
+			error: 'Select a valid budget month.',
+		}
 	}
 
 	const { error } = await supabase.from('category_budgets').upsert(
@@ -70,7 +88,7 @@ export async function setBudgetAllocation(previousState,formData) {
 
 	return {
 		success: true,
-		message: 'Budget allocation saved.',
+		error: null,
 	}
 }
 
@@ -81,11 +99,17 @@ export async function updateCategoryBudget(formData) {
 	const monthlyLimit = Number(formData.get('monthlyLimit'))
 
 	if (!budgetId) {
-		throw new Error('Budget allocation ID is required.')
+		return {
+			success: false,
+			error: 'Budget allocation ID is required.',
+		}
 	}
 
 	if (!Number.isFinite(monthlyLimit) || monthlyLimit <= 0) {
-		throw new Error('Enter a valid monthly limit.')
+		return {
+			success: false,
+			error: 'Enter a valid monthly limit.',
+		}
 	}
 
 	const { error } = await supabase
@@ -99,7 +123,6 @@ export async function updateCategoryBudget(formData) {
 
 	if (error) {
 		console.error('Unable to update monthly limit:', error)
-
 		return {
 			success: false,
 			error: 'Unable to update monthly limit.',
@@ -118,7 +141,10 @@ export async function removeCategoryAllocation(budgetId) {
 	const { supabase, user } = await requireUser()
 
 	if (!budgetId) {
-		throw new Error('Budget allocation ID is required.')
+		return {
+			success: false,
+			error: 'Budget allocation ID is required.',
+		}
 	}
 
 	const { data, error } = await supabase

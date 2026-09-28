@@ -1,20 +1,14 @@
 'use client'
-
-import { useActionState, useEffect } from 'react'
+import { useFormAction } from '../hooks/useFormActions'
 
 import { setBudgetAllocation } from '@/app/actions/budget-allocations'
 import { getAvailableCategories } from '@/lib/constants/transaction-categories'
 
-import { FormInput, FormSelect, FormButton } from '@/components/Form'
+import { FormInput, FormSelect, FormError, FormButton } from '@/components/Form'
 
 import { Plus } from 'lucide-react'
 
 import styles from './BudgetAllocation.module.scss'
-
-const initialState = {
-	success: false,
-	error: null,
-}
 
 export default function AllocationForm({
 	summary,
@@ -26,21 +20,14 @@ export default function AllocationForm({
 	budgetMonthlyLimit,
 	limitInputRef,
 }) {
-	const [state, formAction, isPending] = useActionState(
+	const { formAction, isPending, error } = useFormAction(
 		setBudgetAllocation,
-		initialState,
+		onSuccess,
 	)
-
 	const availableCategories = getAvailableCategories(
 		summary.categories,
 		summary.unallocatedCategories,
 	)
-
-	useEffect(() => {
-		if (state.success) {
-			onSuccess()
-		}
-	}, [state.success, onSuccess])
 
 	return (
 		<form
@@ -102,10 +89,12 @@ export default function AllocationForm({
 
 			<FormButton
 				type="submit"
-				className={styles.setButton}>
+				className={styles.setButton}
+				disabled={isPending}>
 				<Plus />
 				<span>Set</span>
 			</FormButton>
+			<FormError error={error} />
 		</form>
 	)
 }

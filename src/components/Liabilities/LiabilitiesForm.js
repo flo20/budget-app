@@ -1,5 +1,6 @@
 'use client'
 
+import { useFormAction } from '../hooks/useFormActions'
 import { createLiability } from '@/app/actions/liabilities'
 import { LIABILITY_TYPES } from '@/lib/constants/liability-types'
 import { useModal } from '@/app/providers/GlobalProvider'
@@ -12,13 +13,19 @@ import {
 	FormSelect,
 	FormActions,
 	FormButton,
+	FormError,
 } from '@/components/Form'
 
 export default function LiabilitiesForm() {
 	const { closeLiabilityModal } = useModal()
 
+	const { formAction, isPending, error } = useFormAction(
+		createLiability,
+		closeLiabilityModal,
+	)
+
 	return (
-		<Form action={createLiability}>
+		<Form action={formAction}>
 			<FormHeader
 				title="Add Liability"
 				description="Track a debt, balance, or recurring liability."
@@ -117,16 +124,19 @@ export default function LiabilitiesForm() {
 					placeholder="0.00"
 				/>
 			</FormField>
-
+			<FormError error={error} />
 			<FormActions>
 				<FormButton
 					type="button"
 					variant="secondary"
-					onClick={closeLiabilityModal}>
+					onClick={closeLiabilityModal}
+					disabled={isPending}>
 					Cancel
 				</FormButton>
 
-				<FormButton type="submit">Save liability</FormButton>
+				<FormButton type="submit">
+					{isPending ? 'Saving...' : 'Save liability'}
+				</FormButton>
 			</FormActions>
 		</Form>
 	)

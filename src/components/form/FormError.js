@@ -1,3 +1,5 @@
+import styles from './Form.module.scss'
+
 export default function FormError({ error }) {
 	if (!error) return null
 
