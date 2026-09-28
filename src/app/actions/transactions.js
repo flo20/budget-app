@@ -88,4 +88,9 @@ export async function createTransactions(_previousState, formData) {
 	}
 
 	revalidatePath('/dashboard')
+
+    return {
+			success: true,
+			error:null,
+		}
 }

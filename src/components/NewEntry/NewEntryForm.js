@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 import { localDate } from '@/lib/utils/date'
 import { createTransactions } from '@/app/actions/transactions'
+import { useFormAction } from '../hooks/useFormActions'
 import {
 	EXPENSE_CATEGORIES,
 	INCOME_CATEGORIES,
@@ -18,6 +19,7 @@ import {
 	FormTextarea,
 	FormActions,
 	FormButton,
+	FormError,
 } from '@/components/Form'
 
 import styles from './NewEntryForm.module.scss'
@@ -26,14 +28,19 @@ export default function NewEntryForm({ closeModal }) {
 	const [entryType, setEntryType] = useState('expense')
 	const [transactionDate, setTransactionDate] = useState(() => localDate())
 	const [expenseType, setExpenseType] = useState('variable')
-    const [notes, setNotes] = useState('')
+	const [notes, setNotes] = useState('')
 
 	const isExpense = entryType === 'expense'
 
 	const categories = isExpense ? EXPENSE_CATEGORIES : INCOME_CATEGORIES
 
+	const { formAction, isPending, error } = useFormAction(
+		createTransactions,
+		closeModal,
+	)
+
 	return (
-		<Form action={createTransactions}>
+		<Form action={formAction}>
 			<FormHeader
 				title="New Ledger Entry"
 				description="Record an income or expense"
@@ -98,6 +105,7 @@ export default function NewEntryForm({ closeModal }) {
 				label="Category"
 				htmlFor="category">
 				<FormSelect
+					key={entryType}
 					id="category"
 					name="category"
 					defaultValue=""
@@ -179,16 +187,24 @@ export default function NewEntryForm({ closeModal }) {
 				<span className={styles.characterCount}>{notes.length}/280</span>
 			</FormField>
 
+            <FormError error={error} />
 			<FormActions>
 				<FormButton
 					type="button"
 					variant="secondary"
-					onClick={closeModal}>
+					onClick={closeModal}
+					disabled={isPending}>
 					Cancel
 				</FormButton>
 
-				<FormButton type="submit">
-					{isExpense ? 'Record Expense' : 'Record Income'}
+				<FormButton
+					type="submit"
+					disabled={isPending}>
+					{isPending
+						? 'Saving...'
+						: isExpense
+							? 'Record Expense'
+							: 'Record Income'}
 				</FormButton>
 			</FormActions>
 		</Form>
