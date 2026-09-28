@@ -3,7 +3,7 @@
 import { requireUser } from '@/lib/auth/require-user'
 import { revalidatePath } from 'next/cache'
 
-export async function createPinPayment(formData) {
+export async function createPinPayment(_previousState, formData) {
 	const { supabase, user } = await requireUser()
 
 	// Names received from the form fields
@@ -13,19 +13,31 @@ export async function createPinPayment(formData) {
 	const isRecurringMonthly = formData.has('isRecurringMonthly')
 
 	if (!label) {
-		throw new Error('A label is required.')
+		return {
+			success: false,
+			error: 'A label is required.',
+		}
 	}
 
 	if (!Number.isFinite(amount) || amount <= 0) {
-		throw new Error('Enter a valid amount.')
+		return {
+			success: false,
+			error: 'Enter a valid amount.',
+		}
 	}
 
 	if (!dueDate) {
-		throw new Error('Due date is required.')
+		return {
+			success: false,
+			error: 'Due date is required.',
+		}
 	}
 
 	if (!/^\d{4}-\d{2}-\d{2}$/.test(dueDate)) {
-		throw new Error('Enter a valid due date.')
+		return {
+			success: false,
+			error: 'Enter a valid due date.',
+		}
 	}
 
 	const payment = {
@@ -41,19 +53,30 @@ export async function createPinPayment(formData) {
 
 	if (error) {
 		console.error('Unable to create pinned payment:', error)
-		throw new Error('Unable to save the pinned payment.')
+		return {
+			success: false,
+			error: 'Unable to save the pinned payment.',
+		}
 	}
 
 	revalidatePath('/dashboard')
+
+	return {
+		success: true,
+		error: null,
+	}
 }
 
-export async function markPinnedPaymentPaid(formData) {
+export async function markPinnedPaymentPaid(_previousState, formData) {
 	const { supabase, user } = await requireUser()
 
 	const paymentId = formData.get('paymentId')
 
 	if (!paymentId) {
-		throw new Error('Payment ID is required.')
+		return {
+			success: false,
+			error: 'Payment ID is required.',
+		}
 	}
 
 	const { error } = await supabase
@@ -67,19 +90,30 @@ export async function markPinnedPaymentPaid(formData) {
 
 	if (error) {
 		console.error('Unable to mark pinned payment as paid:', error)
-		throw new Error('Unable to update the pinned payment.')
+		return {
+			success: false,
+			error: 'Unable to update the pinned payment.',
+		}
 	}
 
 	revalidatePath('/dashboard')
+
+	return {
+		success: true,
+		error: null,
+	}
 }
 
-export async function undoPinnedPaymentPaid(formData) {
+export async function undoPinnedPaymentPaid(_previousState, formData) {
 	const { supabase, user } = await requireUser()
 
 	const paymentId = formData.get('paymentId')
 
 	if (!paymentId) {
-		throw new Error('Payment ID is required.')
+		return {
+			success: false,
+			error: 'Payment ID is required.',
+		}
 	}
 
 	const { error } = await supabase
@@ -93,19 +127,30 @@ export async function undoPinnedPaymentPaid(formData) {
 
 	if (error) {
 		console.error('Unable to undo pinned payment:', error)
-		throw new Error('Unable to update the pinned payment.')
+		return {
+			success: false,
+			error: 'Unable to update the pinned payment.',
+		}
 	}
 
 	revalidatePath('/dashboard')
+
+	return {
+		success: true,
+		error: null,
+	}
 }
 
-export async function deletePinnedPayment(formData) {
+export async function deletePinnedPayment(_previousState, formData) {
 	const { supabase, user } = await requireUser()
 
 	const paymentId = formData.get('paymentId')
 
 	if (!paymentId) {
-		throw new Error('Payment ID is required.')
+		return {
+			success: false,
+			error: 'Payment ID is required.',
+		}
 	}
 
 	const { error } = await supabase
@@ -116,8 +161,16 @@ export async function deletePinnedPayment(formData) {
 
 	if (error) {
 		console.error('Unable to delete pinned payment:', error)
-		throw new Error('Unable to delete the pinned payment.')
+		return {
+			success: false,
+			error: 'Unable to delete the pinned payment.',
+		}
 	}
 
 	revalidatePath('/dashboard')
+
+	return {
+		success: true,
+		error: null,
+	}
 }

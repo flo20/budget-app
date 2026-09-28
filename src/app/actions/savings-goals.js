@@ -8,7 +8,7 @@ import {
 } from '../../lib/constants/saving-goals'
 import { normalizeCategory } from '@/lib/utils/category'
 
-export async function createSavingsGoal(formData) {
+export async function createSavingsGoal(_previousState, formData) {
 	const { supabase, user } = await requireUser()
 
 	// Names received from the form fields
@@ -27,30 +27,51 @@ export async function createSavingsGoal(formData) {
 
 	//Server side validation
 	if (!name) {
-		throw new Error('Enter a name for your savings goal.')
+		return {
+			success: false,
+			error: 'Enter a name for your savings goal.',
+		}
 	}
 
 	if (!Number.isFinite(targetAmount) || targetAmount <= 0) {
-		throw new Error('Enter a valid target amount.')
+		return {
+			success: false,
+			error: 'Enter a valid target amount.',
+		}
 	}
 
 	if (!Number.isFinite(savedAmount) || savedAmount < 0) {
-		throw new Error('Enter a valid saved amount.')
+		return {
+			success: false,
+			error: 'Enter a valid saved amount.',
+		}
 	}
 
 	if (!category) {
-		throw new Error('Select or enter a category.')
+		return {
+			success: false,
+			error: 'Select or enter a category.',
+		}
 	}
 
 	if (category.length > 50) {
-		throw new Error('Category must be 50 characters or fewer.')
+		return {
+			success: false,
+			error: 'Category must be 50 characters or fewer.',
+		}
 	}
 
 	if (!isCustomCategory && !SAVINGS_GOAL_CATEGORY_VALUES.includes(category)) {
-		throw new Error('Select a valid category.')
+		return {
+			success: false,
+			error: 'Select a valid category.',
+		}
 	}
 	if (dueDate && !/^\d{4}-\d{2}-\d{2}$/.test(dueDate)) {
-		throw new Error('Enter a valid due date.')
+		return {
+			success: false,
+			error: 'Enter a valid due date.',
+		}
 	}
 
 	const isCompleted = savedAmount >= targetAmount
@@ -70,7 +91,10 @@ export async function createSavingsGoal(formData) {
 
 	if (error) {
 		console.error('Unable to create savings goal:', error)
-		throw new Error('Unable to save the savings goal.')
+		return {
+			success: false,
+			error: 'Unable to save the savings goal.',
+		}
 	}
 
 	revalidatePath('/dashboard')
@@ -88,11 +112,17 @@ export async function contributeToSavingsGoal(formData) {
 	const contributionAmount = Number(formData.get('amount'))
 
 	if (!goalId) {
-		throw new Error('Savings goal ID is required.')
+		return {
+			success: false,
+			error: 'Savings goal ID is required.',
+		}
 	}
 
 	if (!Number.isFinite(contributionAmount) || contributionAmount <= 0) {
-		throw new Error('Enter a valid contribution amount.')
+		return {
+			success: false,
+			error: 'Enter a valid contribution amount.',
+		}
 	}
 
 	const { data: goal, error: goalError } = await supabase
@@ -104,11 +134,17 @@ export async function contributeToSavingsGoal(formData) {
 
 	if (goalError || !goal) {
 		console.error('Unable to retrieve savings goal:', goalError)
-		throw new Error('Savings goal could not be found.')
+		return {
+			success: false,
+			error: 'Savings goal could not be found.',
+		}
 	}
 
 	if (goal.status !== 'active') {
-		throw new Error('You can only contribute to an active goal.')
+		return {
+			success: false,
+			error: 'You can only contribute to an active goal.',
+		}
 	}
 
 	const currentSavedAmount = Number(goal.saved_amount)
@@ -132,7 +168,10 @@ export async function contributeToSavingsGoal(formData) {
 	if (updateError) {
 		console.error('Unable to update savings goal:', updateError)
 
-		throw new Error('Unable to add the contribution.')
+		return {
+			success: false,
+			error: 'Unable to add the contribution.',
+		}
 	}
 
 	revalidatePath('/dashboard')
@@ -193,7 +232,10 @@ export async function deleteSavedGoal(goalId) {
 	const { supabase, user } = await requireUser()
 
 	if (!goalId) {
-		throw new Error('Saved goal ID is required.')
+		return {
+			success: false,
+			error: 'Saved goal ID is required.',
+		}
 	}
 
 	const { data, error } = await supabase

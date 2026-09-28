@@ -11,7 +11,7 @@ export function useFormAction(action, onSuccess) {
 	const [state, formAction, isPending] = useActionState(action, initialState)
 
 	useEffect(() => {
-		if (state.success) {
+		if (state?.success) {
 			onSuccess?.(state)
 		}
 	}, [state, onSuccess])
@@ -20,6 +20,6 @@ export function useFormAction(action, onSuccess) {
 		state,
 		formAction,
 		isPending,
-		error: state?.error,
+		error: state?.error ?? null,
 	}
 }

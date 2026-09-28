@@ -3,7 +3,7 @@
 import { requireUser } from '@/lib/auth/require-user'
 import { revalidatePath } from 'next/cache'
 
-export async function createTransactions(formData) {
+export async function createTransactions(_previousState, formData) {
 	const { supabase, user } = await requireUser()
 
 	// Names received from the form fields
@@ -17,30 +17,48 @@ export async function createTransactions(formData) {
 
 	//Server side validation
 	if (!source) {
-		throw new Error('A merchant or income source is required.')
+		return {
+			success: false,
+			error: 'A merchant or income source is required.',
+		}
 	}
 
 	if (!Number.isFinite(amount) || amount <= 0) {
-		throw new Error('Enter a valid amount.')
+		return {
+			success: false,
+			error: 'Enter a valid amount.',
+		}
 	}
 
 	if (!['income', 'expense'].includes(transactionType)) {
-		throw new Error('Select income or expense.')
+		return {
+			success: false,
+			error: 'Select income or expense.',
+		}
 	}
 
 	if (!category) {
-		throw new Error('Category is required.')
+		return {
+			success: false,
+			error: 'Category is required.',
+		}
 	}
 
 	if (
 		transactionType === 'expense' &&
 		!['fixed', 'variable'].includes(expenseType)
 	) {
-		throw new Error('Select a fixed or variable expense.')
+		return {
+			success: false,
+			error: 'Select a fixed or variable expense.',
+		}
 	}
 
 	if (transactionDate && !/^\d{4}-\d{2}-\d{2}$/.test(transactionDate)) {
-		throw new Error('Enter a valid transaction date.')
+		return {
+			success: false,
+			error: 'Enter a valid transaction date.',
+		}
 	}
 
 	const transaction = {
@@ -58,13 +76,15 @@ export async function createTransactions(formData) {
 		...(transactionDate ? { transaction_date: transactionDate } : {}),
 	}
 
-
 	//Instructs the Supabase client to send an HTTP request to Supabase’s REST API.
 	const { error } = await supabase.from('transactions').insert(transaction)
 
 	if (error) {
 		console.error('Unable to create transaction:', error)
-		throw new Error('Unable to save the entry.')
+		return {
+			success: false,
+			error: 'Unable to save the entry.',
+		}
 	}
 
 	revalidatePath('/dashboard')
