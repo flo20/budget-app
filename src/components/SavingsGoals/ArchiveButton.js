@@ -23,10 +23,10 @@ export default function ArchiveButton({ goal }) {
 			<FormButton
 				type="submit"
 				className={styles.archiveButton}
-				disabled={isPending}>
+				disabled={isArchiving}>
 				{isArchiving ? 'Archiving...' : 'Archive'}
 			</FormButton>
-            <FormError error={archiveError}/>
+			<FormError error={archiveError} />
 		</Form>
 	)
 }

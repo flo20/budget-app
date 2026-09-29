@@ -6,7 +6,7 @@ import { PinIcon } from 'lucide-react'
 
 import Modal from '../Modal/Modal'
 import PinnedPaymentForm from './PinnedPaymentForm'
-import PinnedPaymentRow from './PinnedPaymenRow'
+import PinnedPaymentRow from './PinnedPaymentRow'
 
 import styles from './PinnedPayment.module.scss'
 
