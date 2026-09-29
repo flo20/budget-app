@@ -39,7 +39,7 @@
 .remainingTotal {
 	color: var(--text-primary);
 
-	font-size: clamp(2.2rem, 5vw, 1rem);
+	font-size: clamp(1.8rem, 3vw, 2.2rem);
 	font-weight: 400;
 	line-height: 1;
 	letter-spacing: -0.04em;
@@ -109,11 +109,6 @@
 	transition:
 		opacity 0.2s ease,
 		visibility 0.2s ease;
-}
-
-.removeAction {
-	right: 0;
-	bottom: 0;
 }
 
 .category {
@@ -638,39 +633,311 @@
 }
 
 // Media queries
-@media (max-width: 700px) {
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 640px) {
+	.container {
+		padding: 1.25rem;
+		border-radius: 12px;
+	}
+
+	/* -------------------------
+	   Summary
+	   ------------------------- */
+
+	.totalRow {
+		gap: 0.5rem 0.75rem;
+		margin-top: 0.9rem;
+	}
+
+	.remainingTotal {
+		font-size: clamp(1.8rem, 9vw, 2.2rem);
+	}
+
+	.totalContext {
+		width: 100%;
+
+		font-size: 0.85rem;
+		line-height: 1.45;
+	}
+
+	.description {
+		margin: 0.75rem 0 2rem;
+
+		font-size: 0.8rem;
+		line-height: 1.5;
+	}
+
+
+	/* -------------------------
+	   Categories
+	   ------------------------- */
+
+	.categoryList {
+		gap: 1.75rem;
+		margin-top: 0.75rem;
+	}
+
+	.categoryRow {
+		width: 100%;
+		min-width: 0;
+
+		/*
+		 * Mobile has no hover, so don't reserve layout
+		 * space for desktop hover controls.
+		 */
+		&:focus-within {
+			.categoryAmount {
+				visibility: visible;
+			}
+		}
+	}
+
+	.category {
+		width: 100%;
+		min-width: 0;
+	}
+
+	.categoryTop {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		align-items: center;
+
+		gap: 0.5rem 0.75rem;
+	}
+
+	.categoryName {
+		min-width: 0;
+		gap: 0.65rem;
+
+		svg {
+			width: 20px;
+			height: 20px;
+		}
+
+		h3 {
+			min-width: 0;
+
+			font-size: 0.9rem;
+			letter-spacing: 0.08em;
+
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+	}
+
+	.categoryAmount {
+		padding-right: 0;
+
+		font-size: 0.9rem;
+		white-space: nowrap;
+	}
+
+	.categoryTrack {
+		height: 7px;
+
+		margin-top: 0.75rem;
+	}
+
+	.categoryStatus {
+		margin-top: 0.55rem;
+
+		font-size: 0.72rem;
+		line-height: 1.4;
+	}
+
+
+	/* -------------------------
+	   Category actions
+	   ------------------------- */
+
+	/*
+	 * Hover doesn't work reliably on touch screens.
+	 * Make edit/remove controls available on mobile.
+	 */
+
+	.editButton {
+		position: static;
+
+		width: 36px;
+		height: 36px;
+
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+	}
+
+	.removeAction {
+		position: static;
+
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+	}
+
+	.categoryActions {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		gap: 0.5rem;
+
+		margin-top: 0.5rem;
+
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+	}
+
+
+	/* -------------------------
+	   Inline edit
+	   ------------------------- */
+
+	.editForm {
+		position: static;
+
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) 40px 40px;
+		align-items: center;
+
+		gap: 0.5rem;
+
+		width: 100%;
+
+		margin-top: 0.75rem;
+		padding: 0;
+
+		background: transparent;
+
+		input {
+			width: 100%;
+			min-width: 0;
+			height: 42px;
+
+			padding-inline: 0.75rem;
+
+			font-size: 1rem;
+		}
+
+		button {
+			width: 40px;
+			height: 40px;
+
+			flex-shrink: 0;
+		}
+	}
+
+
+	/* -------------------------
+	   Allocation manager
+	   ------------------------- */
+
+	.allocationManager {
+		margin-top: 2rem;
+		padding-top: 1.5rem;
+	}
+
+	.unallocated {
+		padding-bottom: 1.5rem;
+	}
+
 	.unallocatedHeader {
-		align-items: baseline;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+
+		gap: 0.3rem;
+
+		margin-bottom: 0.75rem;
+
+		> span {
+			white-space: normal;
+		}
 	}
 
 	.unallocatedRow {
-		gap: 1rem;
+		min-height: 52px;
+
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		align-items: center;
+
+		gap: 0.75rem;
 	}
 
 	.unallocatedInfo {
+		display: grid;
+		grid-template-columns: auto minmax(0, 1fr);
+		align-items: center;
+
 		gap: 0.6rem;
+
+		min-width: 0;
+	}
+
+	.unallocatedIcon {
+		grid-row: 1 / 3;
 	}
 
 	.unallocatedName {
-		font-size: 0.9rem;
+		min-width: 0;
+
+		font-size: 0.88rem;
+
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 
 	.unallocatedAmount {
-		font-size: 0.8rem;
+		grid-column: 2;
+
+		font-size: 0.76rem;
+		white-space: normal;
 	}
 
 	.allocateButton {
-		height: 30px;
+		height: 34px;
+
 		padding-inline: 0.7rem;
 
 		font-size: 0.68rem;
+
+		white-space: nowrap;
+	}
+
+
+	/* -------------------------
+	Add allocation
+	   ------------------------- */
+
+	.addAllocation {
+		padding-top: 1.5rem;
+
+		> p {
+			margin-bottom: 0.75rem;
+		}
 	}
 
 	.allocationForm {
-		grid-template-columns: 1fr;
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+
+		gap: 0.75rem;
+
+		width: 100%;
+	}
+
+	.allocationField {
+		width: 100%;
+		min-width: 0;
 	}
 
 	.setButton {
 		width: 100%;
+		min-height: 42px;
 	}
 }
