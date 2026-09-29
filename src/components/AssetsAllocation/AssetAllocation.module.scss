@@ -451,11 +451,17 @@
 	}
 }
 
-/* TABLET */
+/* =========================================================
+   TABLET
+   ========================================================= */
+
 @media (max-width: 900px) {
 	.allocationOverview {
-		grid-template-columns: 190px minmax(0, 1fr);
+		grid-template-columns: 165px minmax(0, 1fr);
+
 		gap: 1.5rem;
+
+		padding: 2rem;
 	}
 
 	.donut {
@@ -466,119 +472,241 @@
 		}
 	}
 
-    .allocationValue {
+	.allocationValue {
 		grid-template-columns: auto 36px;
 		gap: 0.5rem;
 	}
 }
 
-/* STACK ALLOCATION */
 
-@media (max-width: 700px) {
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 640px) {
 	.container {
-		padding: 1.5rem;
+		padding: 1.25rem;
+
+		border-radius: 12px;
 	}
 
-	.allocationOverview {
-		grid-template-columns: minmax(0, 1fr);
-		gap: 2rem;
-		margin-top: 2rem;
-		padding-bottom: 2rem;
-	}
+	/* -------------------------
+	   Header
+	   ------------------------- */
 
-	.allocationDetails {
-		width: 100%;
-	}
+	.header {
+		align-items: center;
+		gap: 0.75rem;
 
-	.allocationSummary {
-		justify-content: center;
-	}
+		h5 {
+			min-width: 0;
 
-    .allocationList {
-		width: 100%;
-	}
-
-	.donut {
-		width: 180px;
-        justify-self: center;
-	}
-}
-
-@media (max-width: 600px) {
-	.editAssetForm {
-		grid-template-columns: 1fr 1fr auto auto;
-	}
-
-	.editValue {
-		min-width: 0;
-	}
-}
-
-
-/* MOBILE */
-
-@media (max-width: 560px) {
-	.holdingsList {
-		li {
-			grid-template-columns: minmax(0, 1fr) auto;
-			align-items: start;
-			gap: 0.75rem;
+			font-size: 0.72rem;
+			letter-spacing: 0.12em;
 		}
 	}
 
-    .holdingInfo {
-		gap: 0.65rem;
-	}
+	.addButton {
+		height: 38px;
 
-    .holdingIcon {
-		width: 22px;
+		flex-shrink: 0;
 
-		font-size: 1rem;
-	}
+		padding-inline: 0.75rem;
 
-	.holdingRight {
-		display: grid;
-		grid-template-columns: auto auto;
-		align-items: center;
-		gap: 0.4rem;
-	}
-
-	.holdingActions {
-		gap: 0.1rem;
-	}
-
-	.editButton,
-	.deleteButton {
-		width: 28px;
-		height: 28px;
+		font-size: 0.66rem;
+		letter-spacing: 0.1em;
 
 		svg {
 			width: 16px;
 			height: 16px;
 		}
 	}
-}
 
 
-/* SMALL MOBILE */
+	/* -------------------------
+	   Allocation overview
+	   ------------------------- */
 
-@media (max-width: 480px) {
-	.container {
-		padding: 1.25rem;
+	.allocationOverview {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+
+		gap: 1.75rem;
+
+		width: 100%;
+		min-width: 0;
+
+		margin-top: 1.75rem;
+		padding: 1.25rem 0 1.75rem;
 	}
 
-	.header {
-		h2 {
-			font-size: 0.78rem;
-			letter-spacing: 0.14em;
+	.donut {
+		width: 150px;
+
+		justify-self: center;
+
+		&::after {
+			inset: 18px;
 		}
 	}
 
-	.addButton {
-		height: 40px;
-		padding-inline: 0.85rem;
+	.donutCenter {
+		gap: 0.3rem;
+
+		span {
+			font-size: 0.62rem;
+			letter-spacing: 0.12em;
+		}
+
+		strong {
+			font-size: 1.15rem;
+		}
+	}
+
+	.allocationDetails {
+		width: 100%;
+		min-width: 0;
+	}
+
+	.allocationSummary {
+		justify-content: center;
+
+		gap: 0.5rem;
+
+		margin-bottom: 1rem;
 
 		font-size: 0.68rem;
+		letter-spacing: 0.12em;
+
+		text-align: center;
+	}
+
+
+	/* -------------------------
+	   Allocation list
+	   ------------------------- */
+
+	.allocationList {
+		width: 100%;
+		gap: 0.85rem;
+
+		li {
+			grid-template-columns: minmax(0, 1fr) auto;
+
+			gap: 0.75rem;
+		}
+	}
+
+	.allocationName {
+		gap: 0.55rem;
+
+		font-size: 0.82rem;
+
+		> span:last-child {
+			min-width: 0;
+		}
+	}
+
+	.colorDot {
+		width: 8px;
+		height: 8px;
+	}
+
+	.allocationValue {
+		grid-template-columns: auto;
+		gap: 0.15rem;
+
+		text-align: right;
+
+		strong {
+			font-size: 0.82rem;
+		}
+
+		span {
+			font-size: 0.7rem;
+		}
+	}
+
+
+	/* -------------------------
+	Holdings
+	   ------------------------- */
+
+	.holdingsList {
+		width: 100%;
+
+		li {
+			grid-template-columns: minmax(0, 1fr) auto;
+
+			align-items: start;
+			gap: 0.75rem;
+
+			padding-block: 1rem;
+		}
+	}
+
+	.holdingInfo {
+		align-items: flex-start;
+		gap: 0.65rem;
+
+		min-width: 0;
+
+		> div {
+			min-width: 0;
+		}
+
+		strong {
+			font-size: 0.9rem;
+
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+		div > span {
+			font-size: 0.65rem;
+			letter-spacing: 0.1em;
+
+			white-space: normal;
+		}
+	}
+
+	.holdingIcon {
+		width: 24px;
+
+		font-size: 1.05rem;
+	}
+
+	.holdingRight {
+		display: grid;
+		grid-template-columns: auto auto;
+		align-items: center;
+
+		gap: 0.35rem;
+
+		flex-shrink: 0;
+	}
+
+	.holdingValue {
+		grid-column: 1 / -1;
+
+		font-size: 0.85rem;
+
+		text-align: right;
+	}
+
+	.holdingActions {
+		grid-column: 1 / -1;
+
+		justify-content: flex-end;
+
+		gap: 0.2rem;
+	}
+
+	.editButton,
+	.deleteButton {
+		width: 32px;
+		height: 32px;
 
 		svg {
 			width: 17px;
@@ -586,64 +714,66 @@
 		}
 	}
 
-	.allocationOverview {
-		gap: 1.75rem;
+
+	/* -------------------------
+	   Asset edit form
+	   ------------------------- */
+
+	.editAssetForm {
+		width: 100%;
+		min-width: 0;
+
+		display: grid;
+
+		/*
+		 * Every field gets the full row.
+		 * Actions get their own row.
+		 */
+		grid-template-columns: minmax(0, 1fr);
+
+		gap: 0.65rem;
+
+		padding-block: 0.5rem;
 	}
 
-	.donut {
-		width: 160px;
-
-        &::after {
-			inset: 19px;
-		}
+	.editAssetForm > * {
+		width: 100%;
+		min-width: 0;
 	}
 
-    .donutCenter {
-		strong {
-			font-size: 1.2rem;
-		}
+	.editValue {
+		width: 100%;
+		min-width: 0;
 	}
 
-	.allocationList {
-		gap: 0.85rem;
+	.editActions {
+		width: 100%;
 
-		li {
-			gap: 0.75rem;
-		}
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+
+		gap: 0.5rem;
 	}
 
-	.allocationValue {
-		grid-template-columns: auto 32px;
-		gap: 0.75rem;
+	.saveEditButton,
+	.cancelEditButton {
+		width: 40px;
+		height: 40px;
 	}
 
-    .allocationName {
-		gap: 0.6rem;
 
-		font-size: 0.85rem;
+	/* -------------------------
+	Empty state
+	   ------------------------- */
+
+	.emptyState {
+		margin-top: 1.5rem;
+		padding: 1.5rem 1rem;
 	}
 
-	.holdingsList {
-		li {
-			align-items: flex-start;
-			gap: 1rem;
-		}
-	}
-
-	.holdingInfo {
-		strong {
-			font-size: 0.0.85rem;
-		}
-
-        div > span {
-			font-size: 0.65rem;
-			letter-spacing: 0.1em;
-		}
-	}
-
-	.holdingValue {
-		font-size: 0.82rem;
+	.emptyTitle {
+		font-size: 0.9rem;
 	}
 }
-
 

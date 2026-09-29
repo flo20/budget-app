@@ -29,6 +29,7 @@ export function EditAssetRow({ holding, onCancel }) {
 					defaultValue={holding.name}
 					maxLength={100}
 					aria-label="Asset name"
+					placeholder="Asset name"
 					required
 				/>
 			</FormField>
@@ -55,6 +56,7 @@ export function EditAssetRow({ holding, onCancel }) {
 					step="0.01"
 					inputMode="decimal"
 					aria-label="Current value"
+                    placeholder="Current value"
 					required
 				/>
 			</FormField>
