@@ -52,8 +52,10 @@ export default function NavBar({ user }) {
 				<div className={styles.flex}>
 					<Link
 						href={isDashboardPage ? '/dashboard' : '/'}
-						className={styles.brand}>
-						<Logo />
+						className={styles.brand}
+						aria-label="Tally home">
+                            <div className={styles.logoWrapper}><Logo /></div>
+						
 					</Link>
 					{isDashboardPage ? (
 						<>
@@ -75,12 +77,14 @@ export default function NavBar({ user }) {
 							</ul>
 							<div className={styles.actions}>
 								<button
+                                    type="button"
 									onClick={openEntryModal}
 									className={styles.newEntryButton}
 									//id="modal-title"
 								>
-									<span>＋</span>
-									New Entry
+									<span className={styles.newEntryIcon}>＋</span>
+                                    <span className={styles.newEntryText}>New Entry</span>
+									
 								</button>
 								<div className={styles.actionDivider} />
 								<button
