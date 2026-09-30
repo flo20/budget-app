@@ -2,7 +2,6 @@
 	min-height:  calc(100svh - 200px);
     display: flex;
 	align-items: center;
-	justify-content: center;
 	background: var(--bg-primary);
 	color: var(--text-primary);
 
@@ -12,13 +11,14 @@
 }
 
 .inner {
-	margin: 0 auto;
+	width: 100%;
+	margin-inline: auto;
 	display: grid;
 	grid-template-columns: minmax(0, 1fr) minmax(420px, 0.95fr);
 	align-items: center;
 	gap: 96px;
 
-	padding-top: var(--page-padding-y);
+	padding-block: var(--page-padding-y);
 }
 .heroCopy,
 .previewCard {
@@ -289,7 +289,7 @@
 		grid-template-columns: 1fr 1fr;
 		gap: 48px;
 
-		padding: 80px 0;
+		padding-block: 5rem;
 	}
 
 	.title {
@@ -312,11 +312,10 @@
 
 @media (max-width: 900px) {
 	.hero {
-		min-height: 0;
-		padding-block: 4rem;
+		min-height: auto;
 	}
 
-	.heroContent {
+    .inner {
 		grid-template-columns: 1fr;
 		gap: 3rem;
 	}
@@ -336,9 +335,9 @@
 		width: min(100% - 32px, 600px);
 
 		grid-template-columns: 1fr;
-		gap: 56px;
+		gap: 3rem;
 
-		padding: 64px 0;
+		padding-block: 3.5rem 0;
 	}
 
 	.eyebrow {
@@ -379,7 +378,6 @@
 
 	.previewCard {
 		max-width: none;
-
 		padding: 22px;
 	}
 
@@ -399,7 +397,7 @@
 	.inner {
 		width: min(100% - 24px, 420px);
 
-		padding: 48px 0;
+		padding-block: 3rem ;
 	}
 
 	.title {
