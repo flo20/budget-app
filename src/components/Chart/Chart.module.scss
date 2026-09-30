@@ -1,7 +1,7 @@
 .container {
 	width: 100%;
 	overflow: hidden;
-    
+
 	background: var(--bg-primary);
 
 	border: 1px solid var(--border);
@@ -17,7 +17,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	gap:2rem;
+	gap: 2rem;
 
 	padding: 0 2rem;
 
@@ -26,15 +26,15 @@
 
 .title {
 	flex-shrink: 0;
-    gap: 2rem;
+	gap: 2rem;
 
-    color: var(--text-muted);
+	color: var(--text-muted);
 
-    font-size: 0.8rem;
+	font-size: 0.8rem;
 	font-weight: 500;
 	letter-spacing: 0.18em;
 	text-transform: uppercase;
-    strong {
+	strong {
 		color: var(--text-primary);
 		font-weight: 500;
 	}
@@ -83,7 +83,7 @@
 
 	&::after {
 		background: var(--accent-blue);
-        height: 2px;
+		height: 2px;
 	}
 }
 
@@ -161,12 +161,12 @@
 	display: grid;
 	grid-template-columns: minmax(0, 2fr) minmax(320px, 1fr);
 
-    min-height: 460px;
+	min-height: 460px;
 }
 
 .chartArea {
 	min-width: 0;
-    display: flex;
+	display: flex;
 	flex-direction: column;
 	padding: 2rem 2.25rem 1.75rem;
 }
@@ -206,7 +206,7 @@
 /* SIDE PANEL */
 
 .sidePanel {
-    min-width: 0;
+	min-width: 0;
 	padding: 2.25rem 2.5rem;
 	border-left: 1px solid var(--border);
 }
@@ -266,7 +266,7 @@
 	font-size: clamp(2rem, 2.8vw, 2.7rem);
 	font-weight: 500;
 	line-height: 1;
-    letter-spacing: -0.03em;
+	letter-spacing: -0.03em;
 }
 
 .trendValue {
@@ -344,7 +344,6 @@
 	}
 }
 
-
 @media (max-width: 1100px) {
 	.header {
 		gap: 1rem;
@@ -375,15 +374,18 @@
 	.tabsList {
 		width: 100%;
 
-		overflow-x: auto;
-		white-space: nowrap;
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+
+		overflow: visible;
 		flex: 0 0 auto;
 	}
 
 	.tabTrigger {
-		flex: 1;
+		width: 100%;
+		min-width: 0;
 
-		min-width: max-content;
+		padding-inline: 0.5rem;
 	}
 
 	.chartLayout {
@@ -408,7 +410,7 @@
 		letter-spacing: 0.07em;
 	}
 
-    .chartLayout {
+	.chartLayout {
 		grid-template-columns: 1fr;
 		min-height: 0;
 	}
@@ -430,11 +432,15 @@
 	}
 
 	.tabTrigger {
+        width: 100%;
+		min-width: 0;
 		min-height: 52px;
-		padding-inline: 1rem;
+		padding-inline: 0.25rem;
 
-		font-size: 0.68rem;
-		letter-spacing: 0.12em;
+		font-size: 0.62rem;
+		letter-spacing: 0.08em;
+        text-align: center;
+		white-space: nowrap;
 	}
 
 	.metrics {
@@ -487,14 +493,6 @@
 		&:last-child {
 			border-bottom: 0;
 		}
-	}
-
-	.tabsList {
-		justify-content: flex-start;
-	}
-
-	.tabTrigger {
-		flex: none;
 	}
 
 	.forecastValue {
