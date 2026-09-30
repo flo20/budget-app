@@ -13,7 +13,7 @@
 }
 
 .metric {
-    color: var(--text-primary);
+	color: var(--text-primary);
 
 	min-height: 100px;
 
@@ -63,8 +63,6 @@
 	color: var(--negative);
 }
 
-
-
 @media (max-width: 1000px) {
 	.container {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -86,14 +84,16 @@
 
 @media (max-width: 640px) {
 	.container {
-		grid-template-columns: 1fr;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
 
 	.metric {
-		min-height: 0;
-		padding: 1rem;
+		min-width: 0;
+		min-height: 110px;
 
-		border-right: 0;
+		padding: 1.25rem;
+
+		border-right: 1px solid var(--border);
 		border-bottom: 1px solid var(--border);
 
 		&:nth-child(2n) {
@@ -101,19 +101,28 @@
 		}
 
 		&:nth-last-child(-n + 2) {
-			border-bottom: 1px solid var(--border);
-		}
-
-		&:last-child {
 			border-bottom: 0;
 		}
 
+		p {
+			margin-bottom: 0.75rem;
+
+			font-size: 0.65rem;
+			letter-spacing: 0.12em;
+			line-height: 1.35;
+		}
+
 		strong {
-			font-size: clamp(2rem, 10vw, 2.5rem);
+			font-size: clamp(1.35rem, 6vw, 1.75rem);
+			line-height: 1.1;
+			letter-spacing: 0;
+
+			white-space: nowrap;
 		}
 	}
 
 	.breakdown {
 		white-space: normal;
 	}
+
 }
