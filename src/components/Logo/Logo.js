@@ -2,23 +2,23 @@ import Image from "next/image"
 
 export default function Logo() {
 	return (
-		<div>
+		<div className="tally-logo">
 			<Image
 				src="/logo-light.svg"
 				alt="Tally"
 				width={160}
-				height={20}
+				height={50}
 				priority
-				className="logo-light object-contain object-left h-auto w-[150px]"
+				className="logo-light"
 			/>
 
 			<Image
 				src="/logo-dark.svg"
 				alt="Tally"
 				width={90}
-				height={20}
+				height={50}
 				priority
-				className="logo-dark object-contain object-left h-auto w-[150px]"
+				className="logo-dark"
 			/>
 		</div>
 	)
