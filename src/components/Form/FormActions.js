@@ -1,5 +1,16 @@
 import styles from './Form.module.scss'
 
-export default function FormActions({ children, className = '' }) {
-	return <div className={`${styles.actions} ${className}`}>{children}</div>
+export default function FormActions({
+	children,
+	className = '',
+	variant = 'default',
+}) {
+	return (
+		<div
+			className={`${styles.actions} ${
+				variant === 'inline' ? styles.inlineActions : ''
+			}  ${className}`}>
+			{children}
+		</div>
+	)
 }

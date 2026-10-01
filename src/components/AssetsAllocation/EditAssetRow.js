@@ -56,25 +56,26 @@ export function EditAssetRow({ holding, onCancel }) {
 					step="0.01"
 					inputMode="decimal"
 					aria-label="Current value"
-                    placeholder="Current value"
+					placeholder="Current value"
 					required
 				/>
 			</FormField>
 
-			<FormActions className={styles.editActions}>
-				<FormButton
-					type="submit"
-					className={styles.saveEditButton}
-					aria-label={`Save changes to ${holding.name}`}>
-					<Check />
-				</FormButton>
-
+			<FormActions
+				variant="inline"
+				className={styles.editActions}>
 				<FormButton
 					type="button"
 					className={styles.cancelEditButton}
 					onClick={onCancel}
 					aria-label="Cancel editing">
 					<X />
+				</FormButton>
+				<FormButton
+					type="submit"
+					className={styles.saveEditButton}
+					aria-label={`Save changes to ${holding.name}`}>
+					<Check />
 				</FormButton>
 			</FormActions>
 		</Form>

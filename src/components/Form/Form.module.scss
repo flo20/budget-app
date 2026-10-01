@@ -270,6 +270,18 @@
 	}
 }
 
+.inlineActions {
+	position: static;
+
+	width: auto;
+
+	margin: 0;
+	padding: 0;
+
+	background: transparent;
+	border: 0;
+}
+
 @media (max-width: 640px) {
 	.form {
 		gap: 1rem;
@@ -352,5 +364,24 @@
 		height: 36px;
 
 		flex-basis: 36px;
+	}
+
+    .inlineActions {
+		position: static;
+		bottom: auto;
+
+		width: auto;
+
+		margin: 0;
+		padding: 0;
+
+		background: transparent;
+		border-top: 0;
+	}
+
+	.inlineActions button {
+		width: 40px;
+		min-width: 40px;
+		min-height: 40px;
 	}
 }
