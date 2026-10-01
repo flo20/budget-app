@@ -256,7 +256,8 @@
 
 	.total {
 		margin-top: 2rem;
-		font-size: clamp(2.5rem, 9vw, 3.25rem);
+			font-size: clamp(1.35rem, 6vw, 1.75rem);
+
 	}
 
 	.list {
@@ -291,7 +292,8 @@
 	}
 
 	.total {
-		font-size: 2.75rem;
+			font-size: clamp(1.35rem, 6vw, 1.75rem);
+
 	}
 
 	.icon {
