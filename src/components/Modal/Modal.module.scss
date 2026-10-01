@@ -41,49 +41,34 @@
 	-webkit-overflow-scrolling: touch;
 }
 
-
 /* =========================================================
 MOBILE
    ========================================================= */
 
 @media (max-width: 640px) {
 	.overlay {
-		align-items: flex-end;
+		align-items: center;
+		justify-content: center;
 
-		padding: 0;
+		padding: 1rem;
 
-		/*
-		 * Prevent the page underneath the modal from
-		 * visually competing with the bottom sheet.
-		 */
-		overflow: hidden;
+		overflow-y: auto;
 	}
 
 	.dialog {
 		width: 100%;
-		max-width: none;
+		max-width: 560px;
+		max-height: calc(100dvh - 2rem);
 
-		/*
-		 * Leave a small amount of the overlay visible
-		 * instead of covering the entire screen.
-		 */
-		max-height: calc(100dvh - 1rem);
+		margin: auto;
 
-		margin: 0;
+		padding: 1.5rem 1.25rem calc(1.5rem + env(safe-area-inset-bottom));
 
-		padding:
-			1.5rem
-			1.25rem
-			calc(1.5rem + env(safe-area-inset-bottom));
+		overflow-y: auto;
+		overscroll-behavior: contain;
+		-webkit-overflow-scrolling: touch;
 
-		border-right: 0;
-		border-bottom: 0;
-		border-left: 0;
-
-		border-radius: 1.25rem 1.25rem 0 0;
-
-		box-shadow:
-			0 -8px 30px rgb(0 0 0 / 18%),
-			0 -20px 50px rgb(0 0 0 / 12%);
+		border: 1px solid var(--border);
+		border-radius: 1.25rem;
 	}
 }

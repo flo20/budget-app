@@ -135,7 +135,7 @@ export default function LiabilitiesForm() {
 				</FormButton>
 
 				<FormButton type="submit">
-					{isPending ? 'Saving...' : 'Save liability'}
+					{isPending ? 'Saving...' : 'Save'}
 				</FormButton>
 			</FormActions>
 		</Form>
