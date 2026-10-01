@@ -334,6 +334,8 @@
 
 /* COMPLETED */
 
+/* COMPLETED */
+
 .completedSection {
 	margin-top: 3rem;
 	padding-top: 1.75rem;
@@ -343,15 +345,19 @@
 
 .completedHeader {
 	width: 100%;
+
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 0.5rem 0;
 	gap: 0.75rem;
-	background: transparent;
-	margin-bottom: 1rem;
 
+	margin-bottom: 1rem;
+	padding: 0.5rem 0;
+
+	background: transparent;
 	color: var(--text-muted);
+
+	border: 0;
 
 	font: inherit;
 	font-size: 0.72rem;
@@ -369,7 +375,6 @@
 	svg {
 		width: 16px;
 		height: 16px;
-
 		stroke-width: 1.8;
 	}
 
@@ -395,6 +400,7 @@
 	border-radius: 8px;
 
 	h3 {
+		min-width: 0;
 		margin: 0;
 
 		color: var(--text-primary);
@@ -417,7 +423,6 @@
 		color: var(--text-secondary);
 
 		font-size: 0.82rem;
-
 		white-space: nowrap;
 	}
 }
@@ -455,9 +460,8 @@
 		color: var(--accent-blue);
 	}
 }
-
 /* =========================================================
-   MOBILE
+MOBILE
    ========================================================= */
 
 @media (max-width: 640px) {
@@ -657,48 +661,85 @@
 
 	/* Completed */
 
-	.completedSection {
-		margin-top: 2rem;
-		padding-top: 1.5rem;
+/* Completed */
+
+.completedSection {
+	margin-top: 2rem;
+	padding-top: 1.5rem;
+}
+
+.completedHeader {
+	gap: 0.5rem;
+	margin-bottom: 0.75rem;
+
+	font-size: 0.68rem;
+	letter-spacing: 0.12em;
+}
+
+.completedList {
+	gap: 0.75rem;
+}
+
+.completedGoal {
+	grid-template-columns: 24px minmax(0, 1fr) auto;
+	grid-template-rows: auto auto;
+	align-items: center;
+
+	column-gap: 0.75rem;
+	row-gap: 0.3rem;
+
+	width: 100%;
+	min-width: 0;
+
+	padding: 1rem;
+
+	.completedIcon {
+		display: none;
 	}
 
-	.completedHeader {
-		gap: 0.5rem;
+	h3 {
+		grid-column: 2;
+		grid-row: 1;
 
-		font-size: 0.68rem;
-		letter-spacing: 0.12em;
+		min-width: 0;
+
+		font-size: 0.88rem;
+		line-height: 1.2;
 	}
 
-	.completedGoal {
-		display: grid;
-		grid-template-columns: 24px minmax(0, 1fr) auto;
-		gap: 0.65rem;
+	p {
+		grid-column: 2;
+		grid-row: 2;
 
-		padding: 0.85rem;
+		min-width: 0;
 
-		.completedIcon {
-			display: none;
-		}
+		font-size: 0.76rem;
+		line-height: 1.3;
 
-		h3 {
-			min-width: 0;
-
-			font-size: 0.88rem;
-		}
-
-		p {
-			grid-column: 2 / -1;
-
-			flex-wrap: wrap;
-
-			font-size: 0.76rem;
-
-			white-space: normal;
-		}
-
-		.archiveButton {
-			grid-column: 3;
-			grid-row: 1;
-		}
+		white-space: nowrap;
 	}
+}
+
+.completedCheck {
+	grid-column: 1;
+	grid-row: 1 / 3;
+
+	align-self: center;
+}
+
+.archiveButton {
+	grid-column: 3;
+	grid-row: 1 / 3;
+
+	align-self: center;
+
+	margin: 0;
+	padding: 0.5rem 0;
+
+	font-size: 0.65rem;
+	line-height: 1;
+	letter-spacing: 0.1em;
+
+	white-space: nowrap;
+}
 }
