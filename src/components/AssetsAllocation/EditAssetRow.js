@@ -1,4 +1,5 @@
 import { updateAsset } from '@/app/actions/assets'
+import { useFormAction } from '../hooks/useFormActions'
 import { Check, X } from 'lucide-react'
 import {
 	Form,
@@ -7,14 +8,16 @@ import {
 	FormSelect,
 	FormActions,
 	FormButton,
+	FormError,
 } from '@/components/Form'
 
 import styles from './AssetAllocation.module.scss'
 
 export function EditAssetRow({ holding, onCancel }) {
+	const { formAction, isPending, error } = useFormAction(updateAsset, onCancel)
 	return (
 		<Form
-			action={updateAsset}
+			action={formAction}
 			className={styles.editAssetForm}>
 			<input
 				type="hidden"
@@ -60,7 +63,7 @@ export function EditAssetRow({ holding, onCancel }) {
 					required
 				/>
 			</FormField>
-
+			<FormError error={error} />
 			<FormActions
 				variant="inline"
 				className={styles.editActions}>
@@ -68,13 +71,15 @@ export function EditAssetRow({ holding, onCancel }) {
 					type="button"
 					className={styles.cancelEditButton}
 					onClick={onCancel}
-					aria-label="Cancel editing">
+					aria-label="Cancel editing"
+					disabled={isPending}>
 					<X />
 				</FormButton>
 				<FormButton
 					type="submit"
 					className={styles.saveEditButton}
-					aria-label={`Save changes to ${holding.name}`}>
+					aria-label={`Save changes to ${holding.name}`}
+					disabled={isPending}>
 					<Check />
 				</FormButton>
 			</FormActions>
