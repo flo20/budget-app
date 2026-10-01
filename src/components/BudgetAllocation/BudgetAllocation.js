@@ -50,9 +50,8 @@ export default async function BudgetAllocation({ budgetMonth }) {
 							category={category}
 							formatCurrency={formatCurrency}
 						/>
+						<div className={styles.categoryActions}>
 							<EditCategoryBudgetLimit category={category} />
-
-						<div className={styles.removeAction}>
 							<RemoveAllocatedBudget category={category} />
 						</div>
 					</div>

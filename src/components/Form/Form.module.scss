@@ -66,7 +66,6 @@
 	svg {
 		width: 20px;
 		height: 20px;
-
 	}
 
 	&:hover {
@@ -108,7 +107,7 @@
 	width: 100%;
 	height: 52px;
 
-	padding: 0 1rem;
+	padding: 0 3rem 0 1rem;
 
 	background: var(--bg-primary);
 	color: var(--text-primary);
@@ -146,7 +145,35 @@
 }
 
 .select {
+	width: 100%;
+
+	appearance: none;
+	-webkit-appearance: none;
+
+	padding-right: 3rem;
+
 	cursor: pointer;
+}
+
+.selectWrapper {
+	position: relative;
+	width: 100%;
+	min-width: 0;
+}
+
+.selectIcon {
+	position: absolute;
+	top: 50%;
+	right: 1rem;
+
+	width: 18px;
+	height: 18px;
+
+	color: var(--text-primary);
+
+	transform: translateY(-50%);
+
+	pointer-events: none;
 }
 
 .textarea {
@@ -200,13 +227,13 @@
 .primary {
 	min-height: 52px;
 	padding-inline: 1.25rem;
-    font-size: 0.85rem;
+	font-size: 0.85rem;
 	font-weight: 500;
 	cursor: pointer;
 	// background: var(--button-bg);
 	// color: var(--primary-button-text);
 
-    background: var(--accent-blue);
+	background: var(--accent-blue);
 	color: var(--primary-button-text);
 
 	border-radius: 8px;
@@ -216,7 +243,7 @@
 	color: var(--text-primary);
 	background: transparent;
 
-    min-height: 52px;
+	min-height: 52px;
 
 	padding: 0 1.25rem;
 
@@ -233,7 +260,6 @@
 		background: var(--bg-secondary);
 	}
 }
-
 
 .danger {
 	background: transparent;
@@ -274,19 +300,23 @@
 	.textarea {
 		width: 100%;
 		min-width: 0;
-
-		/*
-		 * Keep this at 1rem on mobile.
-		 * It also avoids iOS Safari zooming into fields.
-		 */
 		font-size: 1rem;
 	}
 
-	.input,
+	.input {
+		min-height: 46px;
+		padding-inline: 0.85rem;
+	}
+
 	.select {
 		min-height: 46px;
 
-		padding-inline: 0.85rem;
+		padding-left: 0.85rem;
+		padding-right: 3rem;
+	}
+
+	.selectIcon {
+		right: 1rem;
 	}
 
 	.textarea {
@@ -304,10 +334,7 @@
 
 		margin-inline: -1.25rem;
 		margin-bottom: calc(-1.5rem - env(safe-area-inset-bottom));
-		padding:
-			1rem
-			1.25rem
-			calc(1rem + env(safe-area-inset-bottom));
+		padding: 1rem 1.25rem calc(1rem + env(safe-area-inset-bottom));
 
 		background: var(--surface);
 
@@ -320,7 +347,7 @@
 		min-height: 44px;
 	}
 
-    .closeButton {
+	.closeButton {
 		width: 36px;
 		height: 36px;
 
