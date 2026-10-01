@@ -4,6 +4,8 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 
+import { seedDemoData } from '@/lib/demo/seedDemoData'
+
 export async function signUp(formData) {
 	const email = formData.get('email')?.trim()
 	const password = formData.get('password')
@@ -65,23 +67,21 @@ export async function signIn(_previousState, formData) {
 export async function signInAsDemo() {
 	const supabase = await createClient()
 
-	const demoEmail = process.env.DEMO_EMAIL
-	const demoPassword = process.env.DEMO_PASSWORD
+	const { data, error } = await supabase.auth.signInAnonymously()
 
-	const { error } = await supabase.auth.signInWithPassword({
-		email: demoEmail,
-		password: demoPassword,
-	})
-
-	if (!demoEmail || !demoPassword) {
-		return {
-			error: 'The demo account is not configured.',
-		}
+if (error || !data.user) {
+	return {
+		error: error?.message ?? 'Unable to create demo session.',
 	}
+}
 
-	if (error) {
-		return { error: error.message }
+const seedResult = await seedDemoData(supabase)
+
+if (!seedResult.success) {
+	return {
+		error: seedResult.error ?? 'Unable to prepare the demo account.',
 	}
+}
 
 	revalidatePath('/dashboard', 'layout')
 	redirect('/dashboard')
