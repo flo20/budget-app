@@ -21,7 +21,7 @@ Next.js · React · TypeScript · Supabase · PostgreSQL · SCSS Modules · Tail
 
 ### Stay ahead of your finances
 
-![Tally landing page](./docs/images/tally-home.png)
+![Tally landing page](./docs/images/home-page.png)
 
 ### Financial overview and forecasting
 
@@ -53,7 +53,7 @@ Tally started as a frontend-focused project and grew into a full-stack applicati
 
 ### Frontend
 - Responsive interfaces with Next.js and React
-- Type-safe application development with TypeScript
+- Type-safe application development with Javascript
 - Reusable component architecture
 - Interactive financial charts and data visualisation
 - Forms, modals, navigation and application states
