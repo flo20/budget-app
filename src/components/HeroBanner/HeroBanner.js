@@ -5,6 +5,7 @@ import { signInAsDemo } from '@/app/actions/auth'
 import { ArrowRight, Check, ShieldCheck, Sparkles } from 'lucide-react'
 
 import styles from './HeroBanner.module.scss'
+import DemoLoginButton from '../Auth/DemoLoginButton'
 
 export default function HeroBanner() {
 	return (
@@ -13,7 +14,10 @@ export default function HeroBanner() {
 				<div className={styles.content}>
 					<p className={styles.eyebrow}>HOUSEHOLD FINANCE, IN FOCUS</p>
 
-					<h1 className={styles.title}>Stay ahead <br/>of your finances.</h1>
+					<h1 className={styles.title}>
+						Stay ahead <br />
+						of your finances.
+					</h1>
 
 					<p className={styles.description}>
 						Tally forecasts your cash flow, tracks every category against its
@@ -30,13 +34,14 @@ export default function HeroBanner() {
 								strokeWidth={1.8}
 							/>
 						</Link>
-						<form action={signInAsDemo}>
+						<DemoLoginButton />
+						{/* <form action={signInAsDemo}>
 							<button
 								type="submit"
 								className={`${styles.button} ${styles.secondaryButton}`}>
 								TRY DEMO ACCOUNT
 							</button>
-						</form>
+						</form> */}
 					</div>
 
 					<div className={styles.benefits}>
