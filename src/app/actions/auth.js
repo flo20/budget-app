@@ -67,16 +67,23 @@ export async function signIn(_previousState, formData) {
 export async function signInAsDemo() {
 	const supabase = await createClient()
 
+    console.time('demo: anonymous sign-in')
+
 	const { data, error } = await supabase.auth.signInAnonymously()
 
+    console.timeEnd('demo: anonymous sign-in')
+
 if (error || !data.user) {
+    console.error('Anonymous sign-in error:', error)
 	return {
 		error: error?.message ?? 'Unable to create demo session.',
 	}
 }
 
+console.time('demo: seed data')
 const seedResult = await seedDemoData(supabase)
 
+console.timeEnd('demo: seed data')
 if (!seedResult.success) {
 	return {
 		error: seedResult.error ?? 'Unable to prepare the demo account.',

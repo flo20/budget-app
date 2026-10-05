@@ -10,8 +10,15 @@ import {
 import Chart from './Chart'
 
 export default async function OutLook({ budgetMonth }) {
-	const { transactions, categoryBudgets, pinnedPayments } =
-		await getChartData(budgetMonth)
+    const { startDate, endDate } = getCashFlowDateRange(budgetMonth)
+	const [
+		{ transactions, categoryBudgets, pinnedPayments },
+		cashFlowTransactions,
+	] = await Promise.all([
+		getChartData(budgetMonth),
+		getTransactionsByDateRange(startDate, endDate),
+	])
+
 	const spendingPace = getSpendingPaceData({
 		transactions,
 		categoryBudgets,
@@ -19,11 +26,6 @@ export default async function OutLook({ budgetMonth }) {
 		budgetMonth,
 	})
 
-	const { startDate, endDate } = getCashFlowDateRange(budgetMonth)
-	const cashFlowTransactions = await getTransactionsByDateRange(
-		startDate,
-		endDate,
-	)
 	const cashFlow = getCashFlowData({
 		transactions: cashFlowTransactions,
 		endMonth: budgetMonth,

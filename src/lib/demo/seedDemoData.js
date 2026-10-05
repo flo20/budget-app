@@ -539,58 +539,41 @@ export async function seedDemoData(supabase) {
 	 */
 
 	try {
-		const { error: transactionsError } = await supabase
-			.from('transactions')
-			.insert(transactionData)
+		const [
+			{ error: transactionsError },
+			{ error: budgetsError },
+			{ error: assetsError },
+			{ error: liabilitiesError },
+			{ error: goalsError },
+			{ error: paymentsError },
+			{ error: notesError },
+		] = await Promise.all([
+			supabase.from('transactions').insert(transactionData),
 
-		if (transactionsError) {
-			throw transactionsError
-		}
+			supabase.from('category_budgets').insert(categoryBudgets),
 
-		const { error: budgetsError } = await supabase
-			.from('category_budgets')
-			.insert(categoryBudgets)
+			supabase.from('assets').insert(assets),
 
-		if (budgetsError) {
-			throw budgetsError
-		}
+			supabase.from('liabilities').insert(liabilities),
 
-		const { error: assetsError } = await supabase.from('assets').insert(assets)
+			supabase.from('savings_goals').insert(savingsGoals),
 
-		if (assetsError) {
-			throw assetsError
-		}
+			supabase.from('pinned_payments').insert(pinnedPayments),
 
-		const { error: liabilitiesError } = await supabase
-			.from('liabilities')
-			.insert(liabilities)
+			supabase.from('budget_notes').insert(budgetNotes),
+		])
 
-		if (liabilitiesError) {
-			throw liabilitiesError
-		}
+		const seedError =
+			transactionsError ||
+			budgetsError ||
+			assetsError ||
+			liabilitiesError ||
+			goalsError ||
+			paymentsError ||
+			notesError
 
-		const { error: goalsError } = await supabase
-			.from('savings_goals')
-			.insert(savingsGoals)
-
-		if (goalsError) {
-			throw goalsError
-		}
-
-		const { error: paymentsError } = await supabase
-			.from('pinned_payments')
-			.insert(pinnedPayments)
-
-		if (paymentsError) {
-			throw paymentsError
-		}
-
-		const { error: notesError } = await supabase
-			.from('budget_notes')
-			.insert(budgetNotes)
-
-		if (notesError) {
-			throw notesError
+		if (seedError) {
+			throw seedError
 		}
 
 		return {

@@ -17,7 +17,7 @@ function getInitials(source) {
 }
 
 export default async function LedgerStream({ budgetMonth }) {
-	const transactions = await getTransactions()
+	const transactions = await getTransactions(budgetMonth)
 
 	return (
 		<section
