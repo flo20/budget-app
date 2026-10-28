@@ -11,6 +11,7 @@ import styles from './NavBar.module.scss'
 
 export default function Profile({ user, handleLogout }) {
 	const isAnonymous = user?.is_anonymous
+
 	const profile = isAnonymous
 		? {
 				name: 'Demo Account',
@@ -18,9 +19,8 @@ export default function Profile({ user, handleLogout }) {
 				avatar: 'D',
 			}
 		: {
-				name: user?.user_metadata?.full_name,
 				email: user?.email,
-				avatar: user?.user_metadata?.avatar_url,
+				avatar: user?.email?.charAt(0).toUpperCase() ?? '?',
 			}
 
 	return (
