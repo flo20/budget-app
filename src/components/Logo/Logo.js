@@ -5,7 +5,7 @@ export default function Logo() {
 		<div className="tally-logo">
 			<Image
 				src="/logo-light.svg"
-				alt="Tally"
+				alt="Tally logo"
 				width={160}
 				height={50}
 				priority
@@ -14,7 +14,7 @@ export default function Logo() {
 
 			<Image
 				src="/logo-dark.svg"
-				alt="Tally"
+				alt="Tally logo"
 				width={90}
 				height={50}
 				priority
