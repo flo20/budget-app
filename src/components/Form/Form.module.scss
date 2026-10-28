@@ -324,6 +324,51 @@
 	border: 0;
 }
 
+
+.passwordWrapper {
+	position: relative;
+	width: 100%;
+}
+
+.passwordControl {
+	width: 100%;
+	padding-right: 3.5rem;
+}
+
+.passwordToggle {
+	position: absolute;
+	top: 50%;
+	right: 0.75rem;
+	transform: translateY(-50%);
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 36px;
+	height: 36px;
+	padding: 0;
+
+	background: transparent;
+	border: none;
+	border-radius: 6px;
+
+	color: var(--text-muted);
+	cursor: pointer;
+
+	transition: color 160ms ease;
+
+	&:hover {
+		color: var(--text-primary);
+	}
+
+	&:focus-visible {
+		outline: 2px solid var(--accent-blue);
+		outline-offset: 2px;
+	}
+}
+
+
 @media (max-width: 640px) {
 	.form {
 		gap: 1rem;
