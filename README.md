@@ -87,10 +87,13 @@ Tally is an evolving personal finance application. Version 2 will focus on impro
 ### Planned Features
 
 - [ ] **Custom categories** : Create and manage personalized income and expense categories.
+- [ ] **Pagination** : Allow pagination for longer ledger activity list.
 - [ ] **Recurring transactions** : Automatically generate scheduled income and expenses.
 - [ ] **Financial forecasting** : Project future cash flow based on historical spending and upcoming payments.
 - [ ] **Multi-currency support** : Track finances in different currencies with exchange-rate conversion.
 - [ ] **Account management** : Add profile settings, password updates, and account deletion.
+- [ ] **AI Financial Insights** — Generate personalised summaries of spending patterns, budget performance, and cash-flow trends.
+
 
 
 ### Engineering Improvements
