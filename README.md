@@ -86,11 +86,11 @@ Tally is an evolving personal finance application. Version 2 will focus on impro
 
 ### Planned Features
 
-- [ ] **Custom categories** — Create and manage personalized income and expense categories.
-- [ ] **Recurring transactions** — Automatically generate scheduled income and expenses.
-- [ ] **Financial forecasting** — Project future cash flow based on historical spending and upcoming payments.
-- [ ] **Multi-currency support** — Track finances in different currencies with exchange-rate conversion.
-- [ ] **Account management** — Add profile settings, password updates, and account deletion.
+- [ ] **Custom categories** : Create and manage personalized income and expense categories.
+- [ ] **Recurring transactions** : Automatically generate scheduled income and expenses.
+- [ ] **Financial forecasting** : Project future cash flow based on historical spending and upcoming payments.
+- [ ] **Multi-currency support** : Track finances in different currencies with exchange-rate conversion.
+- [ ] **Account management** : Add profile settings, password updates, and account deletion.
 
 
 ### Engineering Improvements
@@ -98,7 +98,6 @@ Tally is an evolving personal finance application. Version 2 will focus on impro
 - [ ] End-to-end test coverage.
 - [ ] Improve accessibility and keyboard navigation.
 - [ ] Strengthen form validation, error handling, and loading states.
-- [ ] Gradually migrate remaining JavaScript modules to TypeScript.
 
 
 > This roadmap reflects planned improvements and may evolve as Tally develops.
