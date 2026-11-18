@@ -34,6 +34,6 @@ jobs:
       - name: Run Claude Code
         uses: anthropics/claude-code-action@v1
         with:
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          # If you use a Pro/Max subscription token instead, swap the line above for:
-          # claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          # To bill the Anthropic API instead of a Pro/Max subscription, swap the line above for:
+          # anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
