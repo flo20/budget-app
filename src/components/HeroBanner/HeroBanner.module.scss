@@ -113,8 +113,12 @@
 	}
 }
 
+.demoForm {
+	min-width: 240px;
+}
+
 .secondaryButton {
-	min-width: 215px;
+	min-width: 240px;
 
 	background: var(--bg-secondary);
 	color: var(--text-primary);
@@ -301,7 +305,8 @@
 		align-items: stretch;
 	}
 
-	.button {
+	.button,
+	.demoForm {
 		width: 100%;
 	}
 

@@ -34,7 +34,7 @@ export default function HeroBanner() {
 								strokeWidth={1.8}
 							/>
 						</Link>
-						<DemoLoginButton />
+						<DemoLoginButton className={styles.demoForm} />
 						{/* <form action={signInAsDemo}>
 							<button
 								type="submit"
