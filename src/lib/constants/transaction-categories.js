@@ -6,7 +6,6 @@ export const EXPENSE_CATEGORIES = [
 	'Recreation',
 	'Healthcare',
 	'Service',
-	'Other',
 ]
 import {
 	House,
@@ -15,51 +14,45 @@ import {
 	Car,
 	Clapperboard,
 	WalletCards,
-    Hospital,
-    Toolbox, 
-    CirclePlus
+	Hospital,
+	Toolbox,
 } from 'lucide-react'
 
 export function getCategoryIcon(categoryName) {
-    const name = categoryName.toLowerCase()
+	const name = categoryName.toLowerCase()
 
-    if (name.includes('housing')) {
-        return <House aria-hidden="true" />
-    }
+	if (name.includes('housing')) {
+		return <House aria-hidden="true" />
+	}
 
-    if (name.includes('grocer')) {
-        return <ShoppingCart aria-hidden="true" />
-    }
+	if (name.includes('grocer')) {
+		return <ShoppingCart aria-hidden="true" />
+	}
 
-    if (name.includes('utilit')) {
-        return <Zap aria-hidden="true" />
-    }
+	if (name.includes('utilit')) {
+		return <Zap aria-hidden="true" />
+	}
 
-    if (name.includes('transport')) {
-        return <Car aria-hidden="true" />
-    }
+	if (name.includes('transport')) {
+		return <Car aria-hidden="true" />
+	}
 
-    if (name.includes('recreation')) {
-        return <Clapperboard aria-hidden="true" />
-    }
+	if (name.includes('recreation')) {
+		return <Clapperboard aria-hidden="true" />
+	}
 
-    if (name.includes('health')) {
-        return <Hospital aria-hidden="true" />
-    }
+	if (name.includes('health')) {
+		return <Hospital aria-hidden="true" />
+	}
 
-    if (name.includes('service')) {
-        return <Toolbox aria-hidden="true" />
-    }
+	if (name.includes('service')) {
+		return <Toolbox aria-hidden="true" />
+	}
 
-    if (name.includes('other')) {
-        return <CirclePlus aria-hidden="true" />
-    }
-
-    return <WalletCards aria-hidden="true" />
+	return <WalletCards aria-hidden="true" />
 }
 
-export const INCOME_CATEGORIES = ['Salary', 'Bonus', 'Freelance', 'Other']
-
+export const INCOME_CATEGORIES = ['Salary', 'Bonus', 'Freelance']
 
 export function getAvailableCategories(
 	allocatedCategories,

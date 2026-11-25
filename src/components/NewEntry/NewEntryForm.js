@@ -5,17 +5,15 @@ import { useState } from 'react'
 import { localDate } from '@/lib/utils/date'
 import { createTransactions } from '@/app/actions/transactions'
 import { useFormAction } from '../hooks/useFormActions'
-import {
-	EXPENSE_CATEGORIES,
-	INCOME_CATEGORIES,
-} from '@/lib/constants/transaction-categories'
+
+import CategorySelect from './CategorySelect'
+import CreateCategoryForm from './CreateCategoryForm'
 
 import {
 	Form,
 	FormHeader,
 	FormField,
 	FormInput,
-	FormSelect,
 	FormTextarea,
 	FormActions,
 	FormButton,
@@ -24,15 +22,40 @@ import {
 
 import styles from './NewEntryForm.module.scss'
 
-export default function NewEntryForm({ closeModal }) {
+export default function NewEntryForm({ closeModal, categories = [] }) {
 	const [entryType, setEntryType] = useState('expense')
 	const [transactionDate, setTransactionDate] = useState(() => localDate())
 	const [expenseType, setExpenseType] = useState('variable')
 	const [notes, setNotes] = useState('')
 
+	const [category, setCategory] = useState('')
+	const [createdCategories, setCreatedCategories] = useState([])
+	const [showCategoryForm, setShowCategoryForm] = useState(false)
+
 	const isExpense = entryType === 'expense'
 
-	const categories = isExpense ? EXPENSE_CATEGORIES : INCOME_CATEGORIES
+	const availableCategories = Array.from(
+		new Map(
+			[...categories, ...createdCategories].map((item) => [item.id, item]),
+		).values(),
+	)
+
+	const handleCreateCategory = () => {
+		setShowCategoryForm(true)
+	}
+
+	const handleCategoryCreated = (newCategory) => {
+		setCreatedCategories((previous) => [...previous, newCategory])
+
+		setCategory(newCategory.name)
+		setShowCategoryForm(false)
+	}
+
+	const handleEntryTypeChange = (type) => {
+		setEntryType(type)
+		setCategory('')
+		setShowCategoryForm(false)
+	}
 
 	const { formAction, isPending, error } = useFormAction(
 		createTransactions,
@@ -40,6 +63,7 @@ export default function NewEntryForm({ closeModal }) {
 	)
 
 	return (
+        <> 
 		<Form action={formAction}>
 			<FormHeader
 				title="New Ledger Entry"
@@ -60,7 +84,7 @@ export default function NewEntryForm({ closeModal }) {
 						isExpense ? styles.activeType : ''
 					}`}
 					aria-pressed={isExpense}
-					onClick={() => setEntryType('expense')}>
+					onClick={() => handleEntryTypeChange('expense')}>
 					EXPENSE
 				</button>
 
@@ -70,7 +94,7 @@ export default function NewEntryForm({ closeModal }) {
 						!isExpense ? styles.activeType : ''
 					}`}
 					aria-pressed={!isExpense}
-					onClick={() => setEntryType('income')}>
+					onClick={() => handleEntryTypeChange('income')}>
 					INCOME
 				</button>
 			</div>
@@ -104,26 +128,13 @@ export default function NewEntryForm({ closeModal }) {
 			<FormField
 				label="Category"
 				htmlFor="category">
-				<FormSelect
-					key={entryType}
-					id="category"
-					name="category"
-					defaultValue=""
-					required>
-					<option
-						value=""
-						disabled>
-						Select...
-					</option>
-
-					{categories.map((category) => (
-						<option
-							key={category}
-							value={category}>
-							{category}
-						</option>
-					))}
-				</FormSelect>
+				<CategorySelect
+					categories={availableCategories}
+					type={entryType}
+					value={category}
+					onChange={setCategory}
+					onCreateCategory={handleCreateCategory}
+				/>
 			</FormField>
 
 			{isExpense && (
@@ -187,7 +198,7 @@ export default function NewEntryForm({ closeModal }) {
 				<span className={styles.characterCount}>{notes.length}/280</span>
 			</FormField>
 
-            <FormError error={error} />
+			<FormError error={error} />
 			<FormActions>
 				<FormButton
 					type="button"
@@ -208,5 +219,13 @@ export default function NewEntryForm({ closeModal }) {
 				</FormButton>
 			</FormActions>
 		</Form>
+        {showCategoryForm && (
+			<CreateCategoryForm
+				type={entryType}
+				onCreated={handleCategoryCreated}
+				onCancel={() => setShowCategoryForm(false)}
+			/>
+		)}
+        </>
 	)
 }
