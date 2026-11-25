@@ -18,11 +18,11 @@ import Logo from '../Logo/Logo'
 
 import styles from './NavBar.module.scss'
 
-export default function NavBar({ user }) {
+export default function NavBar({ user, categories }) {
 	const [activeSection, setActiveSection] = useState('overview')
-    
+
 	const pathname = usePathname()
-    const isAuthPage = pathname === '/signin' || pathname === '/signup'
+	const isAuthPage = pathname === '/signin' || pathname === '/signup'
 	const isDashboardPage = pathname.startsWith('/dashboard')
 
 	const { theme, toggleTheme } = useTheme()
@@ -30,8 +30,6 @@ export default function NavBar({ user }) {
 	const { mounted, mountDoc } = useMount()
 
 	const router = useRouter()
-
-
 
 	async function handleLogout() {
 		const supabase = createClient()
@@ -54,8 +52,9 @@ export default function NavBar({ user }) {
 						href={isDashboardPage ? '/dashboard' : '/'}
 						className={styles.brand}
 						aria-label="Tally home">
-                            <div className={styles.logoWrapper}><Logo /></div>
-						
+						<div className={styles.logoWrapper}>
+							<Logo />
+						</div>
 					</Link>
 					{isDashboardPage ? (
 						<>
@@ -77,14 +76,13 @@ export default function NavBar({ user }) {
 							</ul>
 							<div className={styles.actions}>
 								<button
-                                    type="button"
+									type="button"
 									onClick={openEntryModal}
 									className={styles.newEntryButton}
 									//id="modal-title"
 								>
 									<span className={styles.newEntryIcon}>＋</span>
-                                    <span className={styles.newEntryText}>New Entry</span>
-									
+									<span className={styles.newEntryText}>New Entry</span>
 								</button>
 								<div className={styles.actionDivider} />
 								<button
@@ -144,7 +142,10 @@ export default function NavBar({ user }) {
 					showModal={showEntryModal}
 					closeModal={closeEntryModal}
 					mounted={mounted}>
-					<NewEntryForm closeModal={closeEntryModal} />
+					<NewEntryForm
+						closeModal={closeEntryModal}
+						categories={categories}
+					/>
 				</Modal>
 			)}
 		</>

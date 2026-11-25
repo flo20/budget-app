@@ -2,7 +2,7 @@
 import { useFormAction } from '../hooks/useFormActions'
 
 import { setBudgetAllocation } from '@/app/actions/budget-allocations'
-import { getAvailableCategories } from '@/lib/constants/transaction-categories'
+import { getAvailableCategories } from '@/lib/utils/categories'
 
 import { FormInput, FormSelect, FormError, FormButton } from '@/components/Form'
 

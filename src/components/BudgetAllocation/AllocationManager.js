@@ -2,7 +2,7 @@
 
 import { useCallback, useRef, useState, useEffect } from 'react'
 import { formatCurrency } from '@/lib/utils/format'
-import { getCategoryIcon } from '@/lib/constants/transaction-categories'
+import { getCategoryIcon } from '@/lib/utils/category-icons'
 
 import AllocationForm from './AllocationForm'
 

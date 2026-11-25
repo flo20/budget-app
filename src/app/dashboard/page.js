@@ -14,6 +14,7 @@ import OutLook from '@/components/Chart/Outlook'
 import { redirect } from 'next/navigation'
 import { requireUser } from '@/lib/auth/require-user'
 import { normalizeMonth, toBudgetMonth } from '@/lib/utils/month'
+import { getCategories } from '@/lib/queries/categories'
 
 import '@/app/globals.css'
 
@@ -23,13 +24,18 @@ export default async function DashBoard({ searchParams }) {
 	const params = await searchParams
 	const budgetMonth = toBudgetMonth(normalizeMonth(params?.month))
 
+    const categories = await getCategories()
+
 	if (!user) {
 		redirect('/signup')
 	}
 
 	return (
 		<main id="#dashboard">
-			<NavBar user={user} />
+			<NavBar
+				user={user}
+				categories={categories}
+			/>
 			<section className="pageContainer dashboardPage">
 				<SubNav budgetMonth={budgetMonth} />
 				<MonthlyPulse budgetMonth={budgetMonth} />
@@ -48,7 +54,7 @@ export default async function DashBoard({ searchParams }) {
 					</div>
 				</div>
 			</section>
-			<QuickEntryButton />
+			<QuickEntryButton categories={categories} />
 		</main>
 	)
 }

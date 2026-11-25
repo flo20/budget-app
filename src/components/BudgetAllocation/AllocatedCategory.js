@@ -1,5 +1,5 @@
 import { formatCurrency } from '@/lib/utils/format'
-import { getCategoryIcon } from '@/lib/constants/transaction-categories'
+import { getCategoryIcon } from '@/lib/utils/category-icons'
 
 import styles from './BudgetAllocation.module.scss'
 

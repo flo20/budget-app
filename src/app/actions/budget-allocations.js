@@ -2,42 +2,27 @@
 
 import { requireUser } from '@/lib/auth/require-user'
 import { revalidatePath } from 'next/cache'
-import { EXPENSE_CATEGORIES } from '@/lib/constants/transaction-categories'
 import { normalizeCategory } from '@/lib/utils/category'
 
-const normalizedExpenseCategories = EXPENSE_CATEGORIES.map(normalizeCategory)
+const MAX_MONTHLY_LIMIT = 9999999999.99
 
 export async function setBudgetAllocation(_previousState, formData) {
 	const { supabase, user } = await requireUser()
 
-	const selectedCategory = formData.get('category')?.trim()
+	const selectedCategory = String(formData.get('category') ?? '').trim()
 	const monthlyLimit = Number(formData.get('monthlyLimit'))
-	const budgetMonth = formData.get('allocationBudgetMonth')?.trim()
-	const category = normalizeCategory(selectedCategory ?? '')
+	const budgetMonth = String(formData.get('allocationBudgetMonth') ?? '').trim()
+	const category = normalizeCategory(selectedCategory)
 
 	// Make sure the user selected or entered a category.
 	if (!category) {
 		return {
 			success: false,
-			error: 'Select or enter an expense category.',
+			error: 'Select an expense category.',
 		}
 	}
 
-	if (!/^[\p{L}\p{N} &'/-]+$/u.test(category)) {
-		return {
-			success: false,
-			error: 'Enter a valid category name.',
-		}
-	}
-
-	// A standard category must exist in the list
-	if (!normalizedExpenseCategories.includes(category)) {
-		return {
-			success: false,
-			error: 'Select a valid expense category.',
-		}
-	}
-
+	// Validate monthly limit
 	if (!Number.isFinite(monthlyLimit) || monthlyLimit <= 0) {
 		return {
 			success: false,
@@ -45,28 +30,54 @@ export async function setBudgetAllocation(_previousState, formData) {
 		}
 	}
 
-	if (monthlyLimit > 9999999999.99) {
+	if (monthlyLimit > MAX_MONTHLY_LIMIT) {
 		return {
 			success: false,
 			error: 'Monthly limit is too large.',
 		}
 	}
 
-	/*
-	 * Store the first day of the selected month.
-	 */
-
-	if (!budgetMonth || !/^\d{4}-(0[1-9]|1[0-2])-01$/.test(budgetMonth)) {
+	// Validate budget month
+	if (!/^\d{4}-(0[1-9]|1[0-2])-01$/.test(budgetMonth)) {
 		return {
 			success: false,
 			error: 'Select a valid budget month.',
 		}
 	}
 
+	// Retrieve available expense categories
+	const { data: expenseCategories, error: categoryError } = await supabase
+		.from('categories')
+		.select('name')
+		.eq('type', 'expense')
+		.eq('is_active', true)
+
+	if (categoryError) {
+		console.error('Category lookup error:', categoryError)
+
+		return {
+			success: false,
+			error: 'Unable to validate category.',
+		}
+	}
+
+	// Verify that the selected category exists
+	const validCategory = expenseCategories.find(
+		(item) => normalizeCategory(item.name) === category,
+	)
+
+	if (!validCategory) {
+		return {
+			success: false,
+			error: 'Invalid expense category.',
+		}
+	}
+
+	// Save budget allocation
 	const { error } = await supabase.from('category_budgets').upsert(
 		{
 			user_id: user.id,
-			category,
+			category: normalizeCategory(validCategory.name),
 			monthly_limit: monthlyLimit,
 			budget_month: budgetMonth,
 			updated_at: new Date().toISOString(),
@@ -105,6 +116,13 @@ export async function updateCategoryBudget(formData) {
 		}
 	}
 
+	if (monthlyLimit > MAX_MONTHLY_LIMIT) {
+		return {
+			success: false,
+			error: 'Monthly limit is too large.',
+		}
+	}
+
 	if (!Number.isFinite(monthlyLimit) || monthlyLimit <= 0) {
 		return {
 			success: false,
@@ -112,7 +130,7 @@ export async function updateCategoryBudget(formData) {
 		}
 	}
 
-	const { error } = await supabase
+	const { data, error } = await supabase
 		.from('category_budgets')
 		.update({
 			monthly_limit: monthlyLimit,
@@ -120,12 +138,21 @@ export async function updateCategoryBudget(formData) {
 		})
 		.eq('id', budgetId)
 		.eq('user_id', user.id)
+		.select('id')
+		.maybeSingle()
 
 	if (error) {
 		console.error('Unable to update monthly limit:', error)
 		return {
 			success: false,
 			error: 'Unable to update monthly limit.',
+		}
+	}
+
+	if (!data) {
+		return {
+			success: false,
+			error: 'Budget allocation was not found.',
 		}
 	}
 
