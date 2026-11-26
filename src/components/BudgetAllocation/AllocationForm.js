@@ -1,17 +1,21 @@
 'use client'
+
+import { useState, useCallback } from 'react'
 import { useFormAction } from '../hooks/useFormActions'
 
 import { setBudgetAllocation } from '@/app/actions/budget-allocations'
-import { getAvailableCategories } from '@/lib/utils/categories'
 
-import { FormInput, FormSelect, FormError, FormButton } from '@/components/Form'
+import CategorySelect from '../NewEntry/CategorySelect';
+import CreateCategoryForm from '../NewEntry/CreateCategoryForm'
+
+import { FormInput, FormError, FormButton } from '@/components/Form'
 
 import { Plus } from 'lucide-react'
 
 import styles from './BudgetAllocation.module.scss'
 
 export default function AllocationForm({
-	summary,
+	availableCategories = [],
 	budgetMonth,
 	selectedCategory,
 	setSelectedCategory,
@@ -20,81 +24,109 @@ export default function AllocationForm({
 	budgetMonthlyLimit,
 	limitInputRef,
 }) {
+	const [showCategoryForm, setShowCategoryForm] = useState(false)
+	const [createdCategories, setCreatedCategories] = useState([])
+
+	const handleAllocationSuccess = useCallback(() => {
+		setCreatedCategories([])
+		onSuccess?.()
+	}, [onSuccess])
+
 	const { formAction, isPending, error } = useFormAction(
 		setBudgetAllocation,
-		onSuccess,
+		handleAllocationSuccess,
 	)
-	const availableCategories = getAvailableCategories(
-		summary.categories,
-		summary.unallocatedCategories,
+
+	const categories = Array.from(
+		new Map(
+			[...availableCategories, ...createdCategories].map((category) => [
+				category.id,
+				category,
+			]),
+		).values(),
+	)
+
+	const handleCategoryCreated = useCallback(
+		(newCategory) => {
+			setCreatedCategories((previous) => [
+				...previous.filter((category) => category.id !== newCategory.id),
+				newCategory,
+			])
+
+			setSelectedCategory(newCategory.name)
+			setShowCategoryForm(false)
+		},
+		[setSelectedCategory],
 	)
 
 	return (
-		<form
-			action={formAction}
-			className={styles.allocationForm}>
-			<input
-				type="hidden"
-				name="allocationBudgetMonth"
-				value={budgetMonth}
-			/>
-
-			<div className={styles.allocationField}>
-				<label
-					htmlFor="allocation-category"
-					className={styles.srOnly}>
-					Category
-				</label>
-
-				<FormSelect
-					id="allocation-category"
-					name="category"
-					value={selectedCategory ?? ''}
-					onChange={(event) => setSelectedCategory(event.target.value)}
-					required>
-					<option
-						value=""
-						disabled>
-						Category
-					</option>
-
-					{availableCategories.map((category) => (
-						<option
-							key={category}
-							value={category}>
-							{category}
-						</option>
-					))}
-				</FormSelect>
-			</div>
-			<div className={styles.allocationField}>
-				<label
-					htmlFor="monthly-limit"
-					className={styles.srOnly}>
-					Monthly limit
-				</label>
-				<FormInput
-					id="monthly-limit"
-					ref={limitInputRef}
-					name="monthlyLimit"
-					type="number"
-					value={budgetMonthlyLimit ?? ''}
-					onChange={(event) => setbudgetMonthlyLimit(event.target.value)}
-					min="0.01"
-					step="0.01"
-					placeholder="Monthly limit"
-					required
+		<>
+			<form
+				action={formAction}
+				className={styles.allocationForm}>
+				<input
+					type="hidden"
+					name="allocationBudgetMonth"
+					value={budgetMonth}
 				/>
-			</div>
 
-			<FormButton
-				type="submit"
-				className={styles.setButton}
-				disabled={isPending}>
-				<Plus />
-				<span>Set</span>
-			</FormButton>
-			<FormError error={error} />
-		</form>
+				<div className={styles.allocationField}>
+					<label
+						htmlFor="allocation-category"
+						className={styles.srOnly}>
+						Category
+					</label>
+
+					<CategorySelect
+						id="allocation-category"
+						placeholder="Category"
+						categories={categories}
+						type="expense"
+						value={selectedCategory}
+						onChange={setSelectedCategory}
+						onCreateCategory={() => setShowCategoryForm(true)}
+						disabled={isPending || showCategoryForm}
+					/>
+				</div>
+				<div className={styles.allocationField}>
+					<label
+						htmlFor="monthly-limit"
+						className={styles.srOnly}>
+						Monthly limit
+					</label>
+					<FormInput
+						id="monthly-limit"
+						ref={limitInputRef}
+						name="monthlyLimit"
+						type="number"
+						value={budgetMonthlyLimit ?? ''}
+						onChange={(event) => setbudgetMonthlyLimit(event.target.value)}
+						min="0.01"
+						step="0.01"
+						placeholder="Monthly limit"
+						required
+					/>
+				</div>
+
+				<FormButton
+					type="submit"
+					className={styles.setButton}
+					disabled={isPending || showCategoryForm || !selectedCategory}>
+					<Plus />
+					<span>{isPending ? 'Saving...' : 'Set'}</span>
+				</FormButton>
+				<FormError error={error} />
+			</form>
+
+			{showCategoryForm && (
+				<div className={styles.createCategoryContainer}>
+					<CreateCategoryForm
+						type="expense"
+						onCreated={handleCategoryCreated}
+						onCancel={() => setShowCategoryForm(false)}
+					/>
+				</div>
+			)}
+		</>
 	)
 }

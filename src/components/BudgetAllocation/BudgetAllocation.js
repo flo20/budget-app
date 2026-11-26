@@ -1,4 +1,6 @@
 import { getBudgetAllocations } from '@/lib/queries/budget-allocations'
+import { getCategories } from '@/lib/queries/categories'
+import { getAvailableCategories } from '@/lib/utils/categories'
 import { buildBudgetSummary } from '@/lib/budget/budget-summary'
 import { formatCurrency, formatMonth } from '@/lib/utils/format'
 
@@ -10,8 +12,16 @@ import RemoveAllocatedBudget from './RemoveAllocatedBudget'
 import styles from './BudgetAllocation.module.scss'
 
 export default async function BudgetAllocation({ budgetMonth }) {
-	const { budgets, transactions } = await getBudgetAllocations(budgetMonth)
+	const [{ budgets, transactions }, categories] = await Promise.all([
+		getBudgetAllocations(budgetMonth),
+		getCategories('expense'),
+	])
 	const summary = buildBudgetSummary(budgets, transactions)
+
+	const availableCategories = getAvailableCategories(
+		categories,
+		summary.categories,
+	)
 
 	return (
 		<section
@@ -61,6 +71,7 @@ export default async function BudgetAllocation({ budgetMonth }) {
 			<AllocationManager
 				summary={summary}
 				budgetMonth={budgetMonth}
+				availableCategories={availableCategories}
 				unallocatedCategories={summary.unallocatedCategories}
 				totalUnallocatedSpend={summary.totalUnallocatedSpend}
 			/>

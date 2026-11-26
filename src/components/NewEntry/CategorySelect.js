@@ -3,14 +3,17 @@
 import { FormSelect } from '@/components/Form'
 
 export default function CategorySelect({
-	categories,
+	categories = [],
 	type,
 	value,
 	onChange,
 	onCreateCategory,
+	id = 'category',
+	placeholder = 'Select category',
+	disabled = false,
 }) {
 	const availableCategories = categories.filter(
-		(category) => category.type === type
+		(category) => category.type === type,
 	)
 
 	const handleChange = (event) => {
@@ -26,14 +29,16 @@ export default function CategorySelect({
 
 	return (
 		<FormSelect
-			id="category"
+			id={id}
 			name="category"
-			value={value}
+			value={value ?? ''}
 			onChange={handleChange}
+			disabled={disabled}
 			required>
-
-			<option value="" disabled>
-				Select category
+			<option
+				value=""
+				disabled>
+				{placeholder}
 			</option>
 
 			{availableCategories.map((category) => (
@@ -44,9 +49,7 @@ export default function CategorySelect({
 				</option>
 			))}
 
-			<option value="__create__">
-				+ Create new category
-			</option>
+			<option value="__create__">+ Create new category</option>
 		</FormSelect>
 	)
 }
