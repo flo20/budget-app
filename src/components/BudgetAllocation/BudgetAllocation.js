@@ -3,6 +3,7 @@ import { getCategories } from '@/lib/queries/categories'
 import { getAvailableCategories } from '@/lib/utils/categories'
 import { buildBudgetSummary } from '@/lib/budget/budget-summary'
 import { formatCurrency, formatMonth } from '@/lib/utils/format'
+import { normalizeCategory } from '@/lib/utils/category'
 
 import AllocatedCategory from './AllocatedCategory'
 import AllocationManager from './AllocationManager'
@@ -22,6 +23,18 @@ export default async function BudgetAllocation({ budgetMonth }) {
 		categories,
 		summary.categories,
 	)
+
+	const categoryIconMap = new Map(
+		categories.map((category) => [
+			normalizeCategory(category.name),
+			category.icon,
+		]),
+	)
+
+	const allocatedCategories = summary.categories.map((category) => ({
+		...category,
+		icon: categoryIconMap.get(normalizeCategory(category.category)) ?? 'tag',
+	}))
 
 	return (
 		<section
@@ -52,7 +65,7 @@ export default async function BudgetAllocation({ budgetMonth }) {
 				</p>
 			</header>
 			<div className={styles.categoryList}>
-				{summary.categories.map((category) => (
+				{allocatedCategories.map((category) => (
 					<div
 						key={category.id}
 						className={styles.categoryRow}>

@@ -27,7 +27,7 @@ export default function AllocatedCategory({ category }) {
 			className={styles.category}>
 			<div className={styles.categoryTop}>
 				<div className={styles.categoryName}>
-					{getCategoryIcon(category.category)}
+					{getCategoryIcon(category.icon)}
 					<h3>{category.category}</h3>
 				</div>
 
