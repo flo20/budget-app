@@ -5,8 +5,8 @@ import { useFormAction } from '../hooks/useFormActions'
 
 import { setBudgetAllocation } from '@/app/actions/budget-allocations'
 
-import CategorySelect from '../NewEntry/CategorySelect';
-import CreateCategoryForm from '../NewEntry/CreateCategoryForm'
+import CategorySelect from '../NewEntry/Categories/CategorySelect'
+import CreateCategoryInline from '../NewEntry/Categories/CreateCategoryInline'
 
 import { FormInput, FormError, FormButton } from '@/components/Form'
 
@@ -120,7 +120,7 @@ export default function AllocationForm({
 
 			{showCategoryForm && (
 				<div className={styles.createCategoryContainer}>
-					<CreateCategoryForm
+					<CreateCategoryInline
 						type="expense"
 						onCreated={handleCategoryCreated}
 						onCancel={() => setShowCategoryForm(false)}

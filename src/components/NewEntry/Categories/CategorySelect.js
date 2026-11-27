@@ -16,6 +16,14 @@ export default function CategorySelect({
 		(category) => category.type === type,
 	)
 
+	const standardCategories = availableCategories.filter(
+		(category) => category.is_default,
+	)
+
+	const customCategories = availableCategories.filter(
+		(category) => !category.is_default,
+	)
+
 	const handleChange = (event) => {
 		const selected = event.target.value
 
@@ -41,13 +49,29 @@ export default function CategorySelect({
 				{placeholder}
 			</option>
 
-			{availableCategories.map((category) => (
-				<option
-					key={category.id}
-					value={category.name}>
-					{category.name}
-				</option>
-			))}
+			{standardCategories.length > 0 && (
+				<optgroup label="Standard categories">
+					{standardCategories.map((category) => (
+						<option
+							key={category.id}
+							value={category.name}>
+							{category.name}
+						</option>
+					))}
+				</optgroup>
+			)}
+
+			{customCategories.length > 0 && (
+				<optgroup label="Your categories">
+					{customCategories.map((category) => (
+						<option
+							key={category.id}
+							value={category.name}>
+							{category.name}
+						</option>
+					))}
+				</optgroup>
+			)}
 
 			<option value="__create__">+ Create new category</option>
 		</FormSelect>
